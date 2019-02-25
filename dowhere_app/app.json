@@ -1,0 +1,22 @@
+{
+  "pages": [
+    "pages/projectAll/projectAll",
+    "pages/login/login",
+    
+    "pages/productInfo/productInfo",
+    "pages/product/product",
+    "pages/department/department",
+    "pages/setPlan/setPlan",
+    "pages/registered/registered",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/setSchedule/setSchedule",
+    "pages/alterPassword/alterPassword"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  }
+}

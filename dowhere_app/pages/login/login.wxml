@@ -1,0 +1,25 @@
+<!--pages/login/login.wxml-->
+<!-- 登录 -->
+<view class="login">
+  <view class="logo">
+    <!-- logo图片 -->
+    logo图片
+  </view>
+  <view class="form">
+    <view class="set">
+      <view class="iconfont icon-yonghu"></view>
+      <input type="number" value="{{userName}}" bindinput="getUserName" />
+    </view>
+    <view class="set">
+      <view class="iconfont icon-mima"></view>
+      <input type="password" value="{{userPaw}}" bindinput="getUserPaw" />
+    </view>
+    <view class="set sub">
+      <view bindtap="submit">登录</view>
+    </view>
+    <view class="registered">
+      <text bindtap="alterPassword">忘记密码</text>
+      <text bindtap="registerd">注册</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,74 @@
+/* pages/projectAll/projectAll.wxss */
+.timeSel{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  width: 750rpx;
+  border: solid #333;
+  border-width: 1rpx 0 1rpx 0;
+}
+.timeSel view{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  height: 100rpx;
+  width: 375rpx;
+}
+/* 图表显示块 */
+.charts{
+  height: auto;
+}
+/* 图表样式 */
+#mychart-dom-multi-bar,
+#mychart-dom-multi-scatter{
+  width: 750rpx;
+  height: 500rpx;
+  display:block;
+}
+/* 项目显示部分 */
+.regionList,.regionItme{
+  width: 750rpx;
+  height: auto;
+  z-index: 9999;
+}
+.regionName{
+  width: 750rpx;
+  height:60rpx;
+  line-height:60rpx;
+}
+.regionName view{
+  float:left;
+  font-weight:600;
+  width:auto;
+  height:60rpx;
+  line-height:60rpx;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 33rpx;
+  color:#333;
+  font-size:35rpx;
+}
+/* 项目列表 */
+.projectList{
+  width:680rpx;
+  margin:0 33rpx;
+}
+/* 项目名称 */
+.projectList view{
+  width:auto;
+  height:45rpx;
+  line-height:45rpx;
+  padding:0 20rpx;
+  display:inline-block;
+  margin:20rpx;
+  background-color:#e5ecf2;
+  color:#999;
+  border-radius:10rpx;
+  font-size:30rpx;
+}
+.action{
+  background-color: #999;
+}

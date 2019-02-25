@@ -1,0 +1,21 @@
+<!--pages/setSchedule/setSchedule.wxml-->
+<!-- 输入进度 -->
+<view class="pageTitle">1号产品<text>></text>零件<text>></text>计划录入</view>
+<view class="setPlanform">
+  <label>计划录入：</label>
+  <input type="number" value="{{planData}}" placeholder="录入计划" bindinput="setPlanData" />
+</view>
+<view class="setPlanform">
+  <label>日期:</label>
+  <!-- <picker mode="date" value="{{dates}}" start="1978-01-01" end="2017-1-23" bindchange="bindPickerChange">   -->
+  <picker mode="date" value="{{dates}}" bindchange="bindPickerChange">  
+  <input type="number" value="{{dates}}" placeholder="选择日期" />
+  </picker>
+</view>
+<view class="setPlanform">
+  <label>备注：</label>
+  <textarea class="weui-textarea" value="{{remarks}}" placeholder="备注" style="height: 3.3em" bindinput="setRemarks" />
+</view>
+<view class="submit">
+  <view bindtap="submit">提交</view>
+</view>

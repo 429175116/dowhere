@@ -1,0 +1,49 @@
+<!--pages/projectAll/projectAll.wxml-->
+<!-- 数据汇总页，最高权限可查看 -->
+<view class="timeSel">
+  <view class="action" bindtap="yearData">全年计划与完成</view>
+  <view bindtap="monthData">当月计划与完成</view>
+</view>
+<view class="charts">
+  <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecPie }}"></ec-canvas>
+  <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+  <ec-canvas id="mychart-dom-multi-scatter" canvas-id="mychart-multi-scatter" ec="{{ ecScatter }}"></ec-canvas>
+</view>
+<view class="regionList">
+  <view class="regionItme">
+    <view class="regionName">
+      <view>一区</view>
+    </view>
+    <view class="projectList">
+      <view>项目1</view>
+      <view>项目12222</view>
+      <view>项目111</view>
+      <view>项目133</view>
+      <view>项目1</view>
+    </view>
+  </view>
+  <view class="regionItme">
+    <view class="regionName">
+      <view>一区</view>
+    </view>
+    <view class="projectList">
+      <view>项目1</view>
+      <view>项目12222</view>
+      <view>项目111</view>
+      <view>项目133</view>
+      <view>项目1</view>
+    </view>
+  </view>
+  <view class="regionItme">
+    <view class="regionName">
+      <view>一区</view>
+    </view>
+    <view class="projectList">
+      <view>项目1</view>
+      <view>项目12222</view>
+      <view>项目111</view>
+      <view>项目133</view>
+      <view>项目1</view>
+    </view>
+  </view>
+</view>

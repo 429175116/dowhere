@@ -1,0 +1,116 @@
+/**app.wxss**/
+@font-face {
+  font-family: 'iconfont';  /* project id 1055287 */
+  src: url('//at.alicdn.com/t/font_1055287_itq1vxen90i.eot');
+  src: url('//at.alicdn.com/t/font_1055287_itq1vxen90i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1055287_itq1vxen90i.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1055287_itq1vxen90i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1055287_itq1vxen90i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1055287_itq1vxen90i.svg#iconfont') format('svg');
+}
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size: 50rpx;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yonghu:before { content: "\e63e"; }
+.icon-mima:before { content: "\e602"; }
+
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/** 登陆，注册，忘记密码页面的样式--开始 */
+.login .logo{
+  width: 750rpx;
+  height: 300rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .set{
+  margin: auto;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .set view{
+  width: 70rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #333;
+  border-right: 0;
+  border-radius: 15rpx 0 0 15rpx;
+}
+.login .set input{
+  width:400rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #333;
+  border-left: 0;
+  border-radius: 0 15rpx 15rpx 0;
+}
+.login .sub{
+  margin-top: 50rpx;
+}
+.login .sub view{
+  width: 470rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #333;
+  border-radius: 15rpx;
+}
+.login .verification{
+  margin: auto;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .verification view{
+  width: 170rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #333;
+  border-radius: 0 15rpx 15rpx 0;
+  font-size: 20rpx;
+  color: #0066FF;
+}
+.login .verification input{
+  width: 300rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #333;
+  border-right: 0;
+  border-radius: 15rpx 0 0 15rpx;
+}
+.registered{
+  margin: auto;
+  width: 470rpx;
+  height: 50rpx;
+  font-size: 20rpx;
+  color: #0066FF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

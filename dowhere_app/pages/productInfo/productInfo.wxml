@@ -1,0 +1,144 @@
+<!--pages/productInfo/productInfo.wxml-->
+<!-- 产品详情 -->
+<view class="charts">
+  <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecPie }}"></ec-canvas>
+</view>
+<view class="charts">
+  <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+</view>
+<view class="listName">
+  <view>各月数据</view>
+</view>
+<view class="monthlyData">
+  <view class="table">
+    <view class="item">
+      <view class="month">1月</view>
+      <view class="monthChart hideMonthChart">
+        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+      </view>
+    </view>
+    <view class="item">
+      <view class="month">2月</view>
+      <view class="monthChart hideMonthChart">
+        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+      </view>
+    </view>
+    <view class="item">
+      <view class="month">3月</view>
+      <view class="monthChart hideMonthChart">
+        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+      </view>
+    </view>
+    <view class="item">
+      <view class="month">4月</view>
+      <view class="monthChart">
+        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+      </view>
+    </view>
+    <view class="item">
+      <view class="month">5月</view>
+      <view class="monthChart hideMonthChart">
+        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+      </view>
+    </view>
+    <view class="item">
+      <view class="month">6月</view>
+      <view class="monthChart hideMonthChart">
+        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="listName">
+  <view>一区</view>
+</view>
+<view class="listCon">
+  <view class="item title">
+    <view class="neme">产品名称</view>
+    <view class="neme">当月完成</view>
+    <view class="neme">当月未完</view>
+    <view class="neme">年度完成</view>
+    <view class="neme">年度未完</view>
+    <view class="neme">操作</view>
+  </view>
+  <view class="item">
+    <view>产品2</view>
+    <view>
+      <view class="complete" style="width:80%"></view>
+      800
+    </view>
+    <view>
+      <view class="undone" style="width:30%"></view>
+    </view>
+    <view>
+      <view class="complete" style="width:10%"></view>
+      8000
+    </view>
+    <view>
+      <view class="undone" style="width:40%"></view>
+    </view>
+    <view>
+      <view class="info">详情</view>
+    </view>
+  </view>
+  <view class="item">
+    <view>产品2</view>
+    <view>
+      <view class="complete" style="width:80%"></view>
+      800
+    </view>
+    <view>
+      <view class="undone" style="width:30%"></view>
+    </view>
+    <view>
+      <view class="complete" style="width:10%"></view>
+      8000
+    </view>
+    <view>
+      <view class="undone" style="width:40%"></view>
+    </view>
+    <view>
+      <view class="info">详情</view>
+    </view>
+  </view>
+  <view class="item">
+    <view>产品2</view>
+    <view>
+      <view class="complete" style="width:80%"></view>
+      800
+    </view>
+    <view>
+      <view class="undone" style="width:30%"></view>
+    </view>
+    <view>
+      <view class="complete" style="width:10%"></view>
+      8000
+    </view>
+    <view>
+      <view class="undone" style="width:40%"></view>
+    </view>
+    <view>
+      <view class="info">详情</view>
+    </view>
+  </view>
+  <view class="item">
+    <view>产品2</view>
+    <view>
+      <view class="complete" style="width:80%"></view>
+      800
+    </view>
+    <view>
+      <view class="undone" style="width:30%"></view>
+    </view>
+    <view>
+      <view class="complete" style="width:10%"></view>
+      8000
+    </view>
+    <view>
+      <view class="undone" style="width:40%"></view>
+    </view>
+    <view>
+      <view class="info">详情</view>
+    </view>
+  </view>
+</view>
