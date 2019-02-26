@@ -80,8 +80,6 @@
   background-color: #333 !important;
   position: relative !important;
   border-radius: 10rpx !important;
-  /* left: 100rpx;
-  top: 200rpx; */
   z-index: 99 !important;
 }
 .goPage{

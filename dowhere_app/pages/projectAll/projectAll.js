@@ -76,17 +76,44 @@ Page({
     // this.setData({
     //   userId: options.id
     // })
+    
     this.data.userId = '1'
     this.getProjectList()
+    this.monthData()
     // 获取权限之内的项目
   },
-
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  // onReady() {
+  //   this.quantityPie = this.selectComponent('#mychart-dom-bar');
+  //   this.planPie = this.selectComponent('#mychart-dom-bar');
+  //   this.planBar = this.selectComponent('#mychart-dom-bar');
+  // },
+  // <!-- 总数量-饼 -->
+  // <ec-canvas id="quantity-pie" canvas-id="quantity-pie" ec="{{ ecPie }}"></ec-canvas>
+  // <!-- 完成度-饼 -->
+  // <ec-canvas id="plan-pie" canvas-id="plan-pie" ec="{{ ecBar }}"></ec-canvas>
+  // <!-- 各个项目完成-柱 -->
+  // <ec-canvas id="plan-bar" canvas-id="plan-bar" ec="{{ ecScatter }}"></ec-canvas>
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
 
   },
+  // 数据展示时间切换
+  // 切换--年
+  yearData(){
+    // getBarOption(chartData)
+  },
+  // 切换--月
+  monthData(){
+    // getBarOption(chartData)
+  },
+
+  // 加载数据图表数据
+
   // 点击项目事件
   clickProject(e) {
     // 此处判断权限，如果包含产品和部门的权限则显示气泡框
@@ -189,6 +216,38 @@ function geTPieOption() {
   };
 }
 function getBarOption() {
+  let chartData = [
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50}
+  ]
+  // 产品名，计划，进度，剩余
+  let namelist = []
+  let planlist = []
+  let schedulelist = []
+  let remainderlist = []
+  let i = 0
+  for (i in chartData) {
+    namelist.push(chartData[i].name)
+    planlist.push(chartData[i].plan)
+    schedulelist.push(chartData[i].schedule)
+    remainderlist.push(chartData[i].remainder)
+  }
+  console.log(namelist)
+  console.log(planlist)
+  console.log(schedulelist)
+  console.log(remainderlist)
   return {
     color: ['#37a2da', '#32c5e9', '#67e0e3'],
     // 控制浮动框的显示
@@ -225,7 +284,7 @@ function getBarOption() {
       {
         type: 'category',
         axisTick: { show: false },
-        data: ['汽车之家', '今日头条', '百度贴吧', '一点资讯', '微信', '微博', '知乎', '知乎', '知乎', '知乎', '知乎', '知乎', '知乎', '知乎', '知乎'],
+        data: namelist,
         axisLine: {
           lineStyle: {
             color: '#999'
@@ -246,7 +305,7 @@ function getBarOption() {
             position: 'inside'
           }
         },
-        data: [300, 270, 340, 344, 300, 320, 310, 310, 310, 310, 310, 310, 310, 310, 310]
+        data: planlist
       },
       {
         name: '完成',
@@ -257,7 +316,7 @@ function getBarOption() {
             show: true
           }
         },
-        data: [120, 102, 141, 174, 190, 250, 220, 220, 220, 220, 220, 220, 220, 220, 220]
+        data: schedulelist
       },
       {
         name: '剩余',
@@ -269,7 +328,7 @@ function getBarOption() {
             position: 'left'
           }
         },
-        data: [-20, -32, -21, -34, -90, -130, -110, -110, -110, -110, -110, -110, -110, -110, -110]
+        data: remainderlist
       }
     ]
   };
