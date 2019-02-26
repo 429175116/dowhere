@@ -44,43 +44,16 @@ Page({
         return scatterChart;
       }
     },
-    userId: '',
+    userId: null,
     projectListData: [
       {"name": "一区", "project": [
-        {"projectName": "项目1","id": "1"},
-        {"projectName": "项目2","id": "1"},
-        {"projectName": "项目3","id": "1"},
-        {"projectName": "项目4","id": "1"},
-        {"projectName": "项目5","id": "1"},
-        {"projectName": "项目6","id": "1"},
-        {"projectName": "项目7","id": "1"}
-      ]},
-      {"name": "4区", "project": [
-        {"projectName": "项目1","id": "1"},
-        {"projectName": "项目2","id": "1"},
-        {"projectName": "项目3","id": "1"},
-        {"projectName": "项目4","id": "1"},
-        {"projectName": "项目5","id": "1"},
-        {"projectName": "项目6","id": "1"},
-        {"projectName": "项目7","id": "1"}
-      ]},
-      {"name": "5区", "project": [
-        {"projectName": "项目1","id": "1"},
-        {"projectName": "项目2","id": "1"},
-        {"projectName": "项目3","id": "1"},
-        {"projectName": "项目4","id": "1"},
-        {"projectName": "项目5","id": "1"},
-        {"projectName": "项目6","id": "1"},
-        {"projectName": "项目7","id": "1"}
-      ]},
-      {"name": "6区", "project": [
-        {"projectName": "项目1","id": "1"},
-        {"projectName": "项目2","id": "1"},
-        {"projectName": "项目3","id": "1"},
-        {"projectName": "项目4","id": "1"},
-        {"projectName": "项目5","id": "1"},
-        {"projectName": "项目6","id": "1"},
-        {"projectName": "项目7","id": "1"}
+        {"projectName": "项目1项目1项目1","id": "1"},
+        {"projectName": "项目1项目1","id": "2"},
+        {"projectName": "项目1项目1项目1项目1","id": "3"},
+        {"projectName": "项目4","id": "4"},
+        {"projectName": "项目1项目1","id": "5"},
+        {"projectName": "项目6","id": "6"},
+        {"projectName": "项目1项目1","id": "7"}
       ]},
       {"name": "7区", "project": [
         {"projectName": "项目1","id": "1"},
@@ -91,16 +64,19 @@ Page({
         {"projectName": "项目6","id": "1"},
         {"projectName": "项目7","id": "1"}
       ]}
-    ]
+    ],
+    selGoPage_x: 0,
+    selGoPage_y: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    this.setData({
-      userId: options.id
-    })
+  onLoad(options) {
+    // this.setData({
+    //   userId: options.id
+    // })
+    this.data.userId = '1'
     this.getProjectList()
     // 获取权限之内的项目
   },
@@ -108,11 +84,49 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow() {
 
   },
+  // 点击项目事件
+  clickProject(e) {
+    // 此处判断权限，如果包含产品和部门的权限则显示气泡框
+    // 如果只有一个权限则直接跳转只该权限对应的页面
+    // 查看部门
+    // this.goDepartment(e)
+    // 查看产品
+    this.goDepartment(e)
+    return ''
+    const query = wx.createSelectorQuery()
+    query.select('#the-id'+ e.currentTarget.dataset.id)
+    query.selectViewport().boundingClientRect()
+    // query.selectViewport().width()
+    query.exec(res => {
+      console.log('打印demo的元素的信息', res);
+      console.log(e.currentTarget.offsetLeft,res[0].width)
+      this.setData({
+        // selGoPage_x:res.width,
+        selGoPage_x: e.currentTarget.offsetLeft,
+        selGoPage_y: e.currentTarget.offsetTop + 30
+      })
+    })
+  },
+  // 产看部门
+  goDepartment(e) {
+    console.log(e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: `/pages/department/department?`
+    })
+  },
+  // 查看产品
+  goProduct(e) {
+    console.log(e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: `/pages/product/product?`
+    })
+  },
   getProjectList() {
-    this.data.userId
+    console.log(this.data.userId)
+    return ''
     wx.request({
       url: `${this.$parent.globalData.requestUrl}/api/logo`,
       method: 'POST',
