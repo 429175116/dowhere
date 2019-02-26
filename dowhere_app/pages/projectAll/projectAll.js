@@ -43,21 +43,66 @@ Page({
 
         return scatterChart;
       }
-    }
+    },
+    userId: '',
+    projectListData: [
+      {"name": "一区", "project": [
+        {"projectName": "项目1","id": "1"},
+        {"projectName": "项目2","id": "1"},
+        {"projectName": "项目3","id": "1"},
+        {"projectName": "项目4","id": "1"},
+        {"projectName": "项目5","id": "1"},
+        {"projectName": "项目6","id": "1"},
+        {"projectName": "项目7","id": "1"}
+      ]},
+      {"name": "4区", "project": [
+        {"projectName": "项目1","id": "1"},
+        {"projectName": "项目2","id": "1"},
+        {"projectName": "项目3","id": "1"},
+        {"projectName": "项目4","id": "1"},
+        {"projectName": "项目5","id": "1"},
+        {"projectName": "项目6","id": "1"},
+        {"projectName": "项目7","id": "1"}
+      ]},
+      {"name": "5区", "project": [
+        {"projectName": "项目1","id": "1"},
+        {"projectName": "项目2","id": "1"},
+        {"projectName": "项目3","id": "1"},
+        {"projectName": "项目4","id": "1"},
+        {"projectName": "项目5","id": "1"},
+        {"projectName": "项目6","id": "1"},
+        {"projectName": "项目7","id": "1"}
+      ]},
+      {"name": "6区", "project": [
+        {"projectName": "项目1","id": "1"},
+        {"projectName": "项目2","id": "1"},
+        {"projectName": "项目3","id": "1"},
+        {"projectName": "项目4","id": "1"},
+        {"projectName": "项目5","id": "1"},
+        {"projectName": "项目6","id": "1"},
+        {"projectName": "项目7","id": "1"}
+      ]},
+      {"name": "7区", "project": [
+        {"projectName": "项目1","id": "1"},
+        {"projectName": "项目2","id": "1"},
+        {"projectName": "项目3","id": "1"},
+        {"projectName": "项目4","id": "1"},
+        {"projectName": "项目5","id": "1"},
+        {"projectName": "项目6","id": "1"},
+        {"projectName": "项目7","id": "1"}
+      ]}
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      userId: options.id
+    })
+    this.getProjectList()
     // 获取权限之内的项目
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
   },
 
   /**
@@ -66,40 +111,27 @@ Page({
   onShow: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  getProjectList() {
+    this.data.userId
+    wx.request({
+      url: `${this.$parent.globalData.requestUrl}/api/logo`,
+      method: 'POST',
+      data: {
+        userName: this.userName,
+        userPaw: this.userPaw
+      },
+      success: data => {
+        if (data.data.success) {
+          // data = data.data.novels
+          this.$apply()
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.errmsg
+          })
+        }
+      }
+    })
   }
 })
 function geTPieOption() {
