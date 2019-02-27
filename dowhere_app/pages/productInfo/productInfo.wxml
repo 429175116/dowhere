@@ -2,7 +2,7 @@
 <!-- 产品详情 -->
 <view class="charts">
   <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
-  <ec-canvas id="plan-bar" canvas-id="plan-bar"></ec-canvas>
+  <ec-canvas id="plan-bar" canvas-id="plan-bar" style="height:{{planBarHeight}}rpx"></ec-canvas>
 </view>
 <view class="listName">
   <view>各月数据</view>
@@ -12,8 +12,8 @@
     <block wx:for="{{monthList}}" wx:for-item="item" index="index">
       <view class="item" data-month="{{item.month}}" bindtap="selMonth">
         <view class="month">{{item.monthName}}</view>
-        <view class="monthChart {{time==item.month?'':'hideMonthChart'}}">
-          <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar" ec="{{ ec }}"></ec-canvas>
+        <view class="monthChart {{time==item.month?'':'hideMonthChart'}}" style="height:{{monthPlanBarHeight}}rpx">
+          <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar" ec="{{ ec }}" style="height:{{monthPlanBarHeight}}rpx"></ec-canvas>
         </view>
       </view>
     </block>

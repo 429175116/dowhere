@@ -9,7 +9,9 @@ Page({
   data: {
     listData: [],
     time: '',
-    monthList:[]
+    monthList:[],
+    monthPlanBarHeight: 0,
+    planBarHeight: 0
   },
 
   /**
@@ -31,9 +33,11 @@ Page({
    */
   onReady() {
     this.planPie = this.selectComponent('#plan-pie');
-    this.planBar = this.selectComponent('#plan-bar');
-    this.monthPlanBar = this.selectComponent('#monthPlan-bar');
+    // this.planBar = this.selectComponent('#plan-bar');
+    // this.monthPlanBar = this.selectComponent('#monthPlan-bar');
     this.init()
+    this.setOptionPlanBar()
+    this.setOptionMonthPlanBar()
   },
   goPlan(e) {
     // 进入计划页
@@ -56,18 +60,19 @@ Page({
     this.setData({
       time: e.currentTarget.dataset.month
     })
-    this.monthPlanBar = this.selectComponent('#monthPlan-bar');
-    this.monthPlanBar.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
-      });
-      setOptionMonthPlanBar(chart, this.data.time);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
+    this.setOptionMonthPlanBar()
+    // this.monthPlanBar = this.selectComponent('#monthPlan-bar');
+    // this.monthPlanBar.init((canvas, width, height) => {
+    //   // 获取组件的 canvas、width、height 后的回调函数
+    //   // 在这里初始化图表
+    //   const chart = echarts.init(canvas, null, {
+    //     width: width,
+    //     height: height
+    //   });
+    //   setOptionMonthPlanBar(chart, this.data.time);
+    //   // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+    //   return chart;
+    // });
   },
   /**
    * 生命周期函数--监听页面显示
@@ -122,28 +127,172 @@ Page({
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
+    // this.planBar.init((canvas, width, height) => {
+    //   // 获取组件的 canvas、width、height 后的回调函数
+    //   // 在这里初始化图表
+    //   const chart = echarts.init(canvas, null, {
+    //     width: width,
+    //     height: height
+    //   });
+    //   setOptionPlanBar(chart);
+    //   // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+    //   return chart;
+    // });
+    // this.monthPlanBar.init((canvas, width, height) => {
+    //   // 获取组件的 canvas、width、height 后的回调函数
+    //   // 在这里初始化图表
+    //   const chart = echarts.init(canvas, null, {
+    //     width: width,
+    //     height: height
+    //   });
+    //   setOptionMonthPlanBar(chart, time);
+    //   // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+    //   return chart;
+    // });
+  },
+  setOptionPlanBar() {
+    let chartData = [
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50}
+    ]
+    let namelist = []
+    let planlist = []
+    let schedulelist = []
+    let remainderlist = []
+    let i = 0;
+    for (i in chartData) {
+      namelist.push(chartData[i].name)
+      planlist.push(chartData[i].plan)
+      schedulelist.push(chartData[i].schedule)
+      remainderlist.push(chartData[i].schedule - chartData[i].plan)
+    }
+    let data = new Object();
+    data.namelist = namelist;
+    data.planlist = planlist;
+    data.schedulelist = schedulelist;
+    data.remainderlist = remainderlist;
+    // 计算图表显示高度
+    this.setData({
+      monthPlanBarHeight: 100 * chartData.length
+    })
+    this.planBar = this.selectComponent('#monthPlan-bar');
     this.planBar.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
       const chart = echarts.init(canvas, null, {
         width: width,
         height: height
       });
-      setOptionPlanBar(chart);
+      app.barShow(data, chart)
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
-    this.monthPlanBar.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
+    // 图表渲染
+    
+    // wx.request({
+    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+    //   method: 'POST',
+    //   data: {
+    //     userName: this.userName,
+    //     userPaw: this.userPaw
+    //   },
+    //   success: data => {
+    //     if (data.data.success) {
+    //       // data = data.data.novels
+          
+    //     } else {
+    //       wx.showModal({
+    //         title: '',
+    //         content: data.data.errmsg
+    //       })
+    //     }
+    //   }
+    // })
+  },
+  setOptionMonthPlanBar() {
+    if (this.data.time == "month") {
+      //加载月份数据---此处修改参数
+      
+    } else {
+      // 加载年份数据---此处修改参数
+    }
+    let chartData = [
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50}
+    ]
+    let namelist = []
+    let planlist = []
+    let schedulelist = []
+    let remainderlist = []
+    let i = 0;
+    for (i in chartData) {
+      namelist.push(chartData[i].name)
+      planlist.push(chartData[i].plan)
+      schedulelist.push(chartData[i].schedule)
+      remainderlist.push(chartData[i].schedule - chartData[i].plan)
+    }
+    let data = new Object();
+    data.namelist = namelist;
+    data.planlist = planlist;
+    data.schedulelist = schedulelist;
+    data.remainderlist = remainderlist;
+    // 计算图表显示高度
+    this.setData({
+      planBarHeight: 100 * chartData.length
+    })
+    this.planBar = this.selectComponent('#plan-bar');
+    this.planBar.init((canvas, width, height) => {
       const chart = echarts.init(canvas, null, {
         width: width,
         height: height
       });
-      setOptionMonthPlanBar(chart, time);
+      app.barShow(data, chart)
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
+    // 图表渲染
+    
+    // wx.request({
+    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+    //   method: 'POST',
+    //   data: {
+    //     userName: this.userName,
+    //     userPaw: this.userPaw
+    //   },
+    //   success: data => {
+    //     if (data.data.success) {
+    //       // data = data.data.novels
+          
+    //     } else {
+    //       wx.showModal({
+    //         title: '',
+    //         content: data.data.errmsg
+    //       })
+    //     }
+    //   }
+    // })
   }
 })
 // 获取月份列表
