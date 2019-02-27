@@ -104,6 +104,10 @@ Page({
     //   })
     //   return ''
     // }
+    wx.redirectTo({
+      url: `/pages/projectAll/projectAll?`
+    })
+    return ''
     wx.request({
       url: `${this.$parent.globalData.requestUrl}/api/logo`,
       method: 'POST',
