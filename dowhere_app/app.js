@@ -35,5 +35,122 @@ App({
   },
   globalData: {
     userId: null
+  },
+  pieShow(data, chart) {
+    const option = {
+      backgroundColor: "#ffffff",
+      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      series: [{
+        label: {
+          normal: {
+            fontSize: 14
+          }
+        },
+        type: 'pie',
+        center: ['50%', '50%'],
+        radius: [0, '80%'],
+        data: data,
+        itemStyle: {
+          emphasis: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 2, 2, 0.3)'
+          }
+        }
+      }]
+    };
+    chart.setOption(option);
+  },
+  barShow(data, chart) {
+    // 产品名，计划，进度，剩余
+    let namelist = data.namelist
+    let planlist = data.planlist
+    let schedulelist = data.schedulelist
+    let remainderlist = data.remainderlist
+    const option = {
+      color: ['#37a2da', '#32c5e9', '#67e0e3'],
+      // 控制浮动框的显示
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+      },
+      legend: {
+        data: ['计划', '完成', '剩余']
+      },
+      grid: {
+        left: 20,
+        right: 20,
+        bottom: 15,
+        top: 40,
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          axisLabel: {
+            color: '#666'
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'category',
+          axisTick: { show: false },
+          data: namelist,
+          axisLine: {
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          axisLabel: {
+            color: '#666'
+          }
+        }
+      ],
+      series: [
+        {
+          name: '计划',
+          type: 'bar',
+          label: {
+            normal: {
+              show: true,
+              position: 'inside'
+            }
+          },
+          data: planlist
+        },
+        {
+          name: '完成',
+          type: 'bar',
+          stack: '总量',
+          label: {
+            normal: {
+              show: true
+            }
+          },
+          data: schedulelist
+        },
+        {
+          name: '剩余',
+          type: 'bar',
+          stack: '总量',
+          label: {
+            normal: {
+              show: true,
+              position: 'left'
+            }
+          },
+          data: remainderlist
+        }
+      ]
+    };
+    chart.setOption(option);
   }
 })

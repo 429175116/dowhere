@@ -12,16 +12,12 @@
   <view bindtap="monthData">当月计划与完成</view>
 </view>
 <view class="charts">
-  <!-- <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecPie }}"></ec-canvas>
-  <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
-  <ec-canvas id="mychart-dom-multi-scatter" canvas-id="mychart-multi-scatter" ec="{{ ecScatter }}"></ec-canvas> -->
-
   <!-- 总数量-饼 -->
-  <ec-canvas id="quantity-pie" canvas-id="quantity-pie" ec="{{ ecQuantityPie }}"></ec-canvas>
+  <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
   <!-- 完成度-饼 -->
-  <ec-canvas id="plan-pie" canvas-id="plan-pie" ec="{{ ecPlanPie }}"></ec-canvas>
+  <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
   <!-- 各个项目完成-柱 -->
-  <ec-canvas id="plan-bar" canvas-id="plan-bar" ec="{{ ecPlanBar }}"></ec-canvas>
+  <ec-canvas id="plan-bar" canvas-id="plan-bar"></ec-canvas>
 </view>
 <!-- 项目列表展示 -->
 <view class="regionList">

@@ -1,10 +1,11 @@
 /* pages/department/department.wxss */
 /* 图表显示块 */
 .charts{
-    height: 800rpx;
+    height: auto;
   }
   /* 图表样式 */
-  #mychart-dom-multi-ba{
+  #plan-bar,
+  #plan-pie{
     width: 750rpx;
     height: 500rpx;
     display:block;
