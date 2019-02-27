@@ -8,29 +8,21 @@ Page({
    */
   data: {
     listData: [],
-    time: '3',
-    monthList:[
-      {"monthName": "1月", "month": "1"},
-      {"monthName": "2月", "month": "2"},
-      {"monthName": "3月", "month": "3"},
-      {"monthName": "4月", "month": "4"},
-      {"monthName": "5月", "month": "5"},
-      {"monthName": "6月", "month": "6"},
-      {"monthName": "7月", "month": "7"},
-      {"monthName": "8月", "month": "8"},
-      {"monthName": "9月", "month": "9"},
-      {"monthName": "10月", "month": "10"},
-      {"monthName": "11月", "month": "11"},
-      {"monthName": "12月", "month": "12"}
-    ]
+    time: '',
+    monthList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    var date = new Date();
+    let month = date.getMonth()
     this.setData({
-      listData: getListData()
+      listData: getListData(),
+      // 获取当前时间，用于月份显示，只显示已经存在的月份
+      monthList: getMonthList(),
+      time: month + 1
     })
   },
 
@@ -56,6 +48,26 @@ Page({
     wx.navigateTo({
       url: `/pages/setSchedule/setSchedule?id=${id}`
     })
+  },
+  selMonth(e) {
+    if (this.data.time === e.currentTarget.dataset.month) {
+      return ''
+    }
+    this.setData({
+      time: e.currentTarget.dataset.month
+    })
+    this.monthPlanBar = this.selectComponent('#monthPlan-bar');
+    this.monthPlanBar.init((canvas, width, height) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      setOptionMonthPlanBar(chart, this.data.time);
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
   },
   /**
    * 生命周期函数--监听页面显示
@@ -106,7 +118,7 @@ Page({
         width: width,
         height: height
       });
-      setOptionPlanPie(chart, time);
+      setOptionPlanPie(chart);
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
@@ -117,7 +129,7 @@ Page({
         width: width,
         height: height
       });
-      setOptionPlanBar(chart, time);
+      setOptionPlanBar(chart);
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
@@ -134,6 +146,19 @@ Page({
     });
   }
 })
+// 获取月份列表
+function getMonthList() {
+  // 获取当前时间，用于月份显示，只显示已经存在的月份
+  //获取当前月份(0-11,0代表1月)
+  var date = new Date();
+  let month = date.getMonth()
+  let i = 0;
+  let monthList = []
+  for (let i = 0;i <= month; i++ ) {
+    monthList.push({"monthName": `${i+1}月`, "month": i+1}) 
+  }
+  return monthList
+}
 // 加载列表，数据展示
 function getListData() {
   // name--产品名

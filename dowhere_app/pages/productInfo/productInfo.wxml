@@ -10,10 +10,10 @@
 <view class="monthlyData">
   <view class="table">
     <block wx:for="{{monthList}}" wx:for-item="item" index="index">
-      <view class="item">
+      <view class="item" data-month="{{item.month}}" bindtap="selMonth">
         <view class="month">{{item.monthName}}</view>
         <view class="monthChart {{time==item.month?'':'hideMonthChart'}}">
-          <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar"></ec-canvas>
+          <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar" ec="{{ ec }}"></ec-canvas>
         </view>
       </view>
     </block>

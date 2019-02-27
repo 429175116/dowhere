@@ -102,6 +102,7 @@
   align-items: center;
   justify-content: center;
   width: 710rpx;
+  min-height: 60rpx;
 }
 .month{
   width: 100rpx;
@@ -118,6 +119,8 @@
   justify-content: center; */
 }
 .hideMonthChart{
-  height: auto !important;
+  width: 600rpx;
+  height:  60rpx !important;
 }
+
     
