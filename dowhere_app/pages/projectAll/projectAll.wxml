@@ -17,7 +17,7 @@
   <!-- 完成度-饼 -->
   <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
   <!-- 各个项目完成-柱 -->
-  <ec-canvas id="plan-bar" canvas-id="plan-bar"></ec-canvas>
+  <ec-canvas id="plan-bar" style="height:{{planBarHeight}}rpx" canvas-id="plan-bar"></ec-canvas>
 </view>
 <!-- 项目列表展示 -->
 <view class="regionList">
