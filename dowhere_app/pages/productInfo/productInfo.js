@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    listData: [],
     time: '3',
     monthList:[
       {"monthName": "1月", "month": "1"},
@@ -28,7 +29,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      listData: getListData()
+    })
   },
 
   /**
@@ -40,7 +43,20 @@ Page({
     this.monthPlanBar = this.selectComponent('#monthPlan-bar');
     this.init()
   },
-
+  goPlan(e) {
+    // 进入计划页
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/setPlan/setPlan?id=${id}`
+    })
+  },
+  goSchedule(e) {
+    // 进入进度录入页
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/setSchedule/setSchedule?id=${id}`
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -118,6 +134,45 @@ Page({
     });
   }
 })
+// 加载列表，数据展示
+function getListData() {
+  // name--产品名
+  // id--产品ID
+  // yearPlan--年计划
+  // yearSchedule--年进度
+  // monthPlan--月计划
+  // monthSchedule--月进度
+  let data = [
+    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50}
+  ]
+  return data
+  // wx.request({
+  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+  //   method: 'POST',
+  //   data: {
+  //     userName: this.userName,
+  //     userPaw: this.userPaw
+  //   },
+  //   success: data => {
+  //     if (data.data.success) {
+  //       // data = data.data.novels
+        
+  //     } else {
+  //       wx.showModal({
+  //         title: '',
+  //         content: data.data.errmsg
+  //       })
+  //     }
+  //   }
+  // })
+}
 // 计划完成度--饼
 function setOptionPlanPie(chart) {
   let data = [

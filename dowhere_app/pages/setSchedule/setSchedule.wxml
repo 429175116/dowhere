@@ -1,9 +1,9 @@
 <!--pages/setSchedule/setSchedule.wxml-->
 <!-- 输入进度 -->
-<view class="pageTitle">1号产品<text>></text>零件<text>></text>计划录入</view>
+<view class="pageTitle">1号产品<text>></text>零件<text>></text>进度录入</view>
 <view class="setPlanform">
-  <label>计划录入：</label>
-  <input type="number" value="{{planData}}" placeholder="录入计划" bindinput="setPlanData" />
+  <label>进度录入：</label>
+  <input type="number" value="{{planData}}" placeholder="录入进度" bindinput="setPlanData" />
 </view>
 <view class="setPlanform">
   <label>日期:</label>

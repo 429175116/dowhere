@@ -80,10 +80,10 @@ App({
         data: ['计划', '完成', '剩余']
       },
       grid: {
-        left: 20,
-        right: 20,
-        bottom: 15,
-        top: 40,
+        left: 10,
+        right: 10,
+        bottom: 10,
+        top: 30,
         containLabel: true
       },
       xAxis: [

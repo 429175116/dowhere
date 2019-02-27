@@ -5,9 +5,13 @@
 }
 /* 图表样式 */
 #plan-pie,
-#plan-bar,
-#monthPlan-bar{
+#plan-bar{
   width: 750rpx;
+  height: 500rpx;
+  display:block;
+}
+#monthPlan-bar{
+  width: 600rpx;
   height: 500rpx;
   display:block;
 }
@@ -64,9 +68,10 @@
   border-bottom: 1rpx solid #333;
 }
 .item .info {
-  width: 80rpx !important;
+  width: 60rpx !important;
   height: 40rpx !important;
   background-color: #0099FF;
+  font-size: 20rpx !important;
   border: 0 !important;
   color: #fff;
   border-radius: 5rpx;
