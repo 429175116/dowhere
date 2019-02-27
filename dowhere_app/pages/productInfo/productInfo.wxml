@@ -1,52 +1,23 @@
 <!--pages/productInfo/productInfo.wxml-->
 <!-- 产品详情 -->
 <view class="charts">
-  <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecPie }}"></ec-canvas>
-</view>
-<view class="charts">
-  <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+  <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
+  <ec-canvas id="plan-bar" canvas-id="plan-bar"></ec-canvas>
 </view>
 <view class="listName">
   <view>各月数据</view>
 </view>
 <view class="monthlyData">
   <view class="table">
-    <view class="item">
-      <view class="month">1月</view>
-      <view class="monthChart hideMonthChart">
-        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
+    <block wx:for="{{monthList}}" wx:for-item="item" index="index">
+      <!-- {"monthName": "1月", "month": "1"}, -->
+      <view class="item">
+        <view class="month">{{item.monthName}}</view>
+        <view class="monthChart {{time==item.month?'':'hideMonthChart'}}">
+          <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar"></ec-canvas>
+        </view>
       </view>
-    </view>
-    <view class="item">
-      <view class="month">2月</view>
-      <view class="monthChart hideMonthChart">
-        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
-      </view>
-    </view>
-    <view class="item">
-      <view class="month">3月</view>
-      <view class="monthChart hideMonthChart">
-        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
-      </view>
-    </view>
-    <view class="item">
-      <view class="month">4月</view>
-      <view class="monthChart">
-        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
-      </view>
-    </view>
-    <view class="item">
-      <view class="month">5月</view>
-      <view class="monthChart hideMonthChart">
-        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
-      </view>
-    </view>
-    <view class="item">
-      <view class="month">6月</view>
-      <view class="monthChart hideMonthChart">
-        <ec-canvas id="mychart-dom-multi-bar" canvas-id="mychart-multi-bar" ec="{{ ecBar }}"></ec-canvas>
-      </view>
-    </view>
+    </block>
   </view>
 </view>
 <view class="listName">

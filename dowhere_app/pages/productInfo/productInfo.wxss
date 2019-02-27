@@ -1,10 +1,12 @@
 /* pages/productInfo/productInfo.wxss */
 /* 图表显示块 */
 .charts{
-  height: 600rpx;
+  height: auto;
 }
 /* 图表样式 */
-#mychart-dom-multi-ba{
+#plan-pie,
+#plan-bar,
+#monthPlan-bar{
   width: 750rpx;
   height: 500rpx;
   display:block;
@@ -105,7 +107,7 @@
 }
 .monthChart{
   width: 600rpx;
-  height: 800rpx;
+  height: 500rpx;
   /* display: flex;
   align-items: center;
   justify-content: center; */

@@ -1,35 +1,27 @@
 // pages/productInfo/productInfo.js
 import * as echarts from '../../ec-canvas/echarts';
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ecBar: {
-      onInit: function (canvas, width, height) {
-        const barChart = echarts.init(canvas, null, {
-          width: width,
-          height: height
-        });
-        canvas.setChart(barChart);
-        barChart.setOption(getBarOption());
-
-        return barChart;
-      }
-    },
-    ecPie: {
-      onInit: function (canvas, width, height) {
-        const scatterChart = echarts.init(canvas, null, {
-          width: width,
-          height: height
-        });
-        canvas.setChart(scatterChart);
-        scatterChart.setOption(geTPieOption());
-
-        return scatterChart;
-      }
-    }
+    time: '3',
+    monthList:[
+      {"monthName": "1月", "month": "1"},
+      {"monthName": "2月", "month": "2"},
+      {"monthName": "3月", "month": "3"},
+      {"monthName": "4月", "month": "4"},
+      {"monthName": "5月", "month": "5"},
+      {"monthName": "6月", "month": "6"},
+      {"monthName": "7月", "month": "7"},
+      {"monthName": "8月", "month": "8"},
+      {"monthName": "9月", "month": "9"},
+      {"monthName": "10月", "month": "10"},
+      {"monthName": "11月", "month": "11"},
+      {"monthName": "12月", "month": "12"}
+    ]
   },
 
   /**
@@ -43,7 +35,10 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.planPie = this.selectComponent('#plan-pie');
+    this.planBar = this.selectComponent('#plan-bar');
+    this.monthPlanBar = this.selectComponent('#monthPlan-bar');
+    this.init()
   },
 
   /**
@@ -86,131 +81,182 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  init(time) {
+    this.planPie.init((canvas, width, height) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      setOptionPlanPie(chart, time);
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+    this.planBar.init((canvas, width, height) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      setOptionPlanBar(chart, time);
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+    this.monthPlanBar.init((canvas, width, height) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      setOptionMonthPlanBar(chart, time);
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
   }
 })
-function getBarOption() {
-  return {
-    color: ['#37a2da', '#32c5e9', '#67e0e3'],
-    // 控制浮动框的显示
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-      }
-    },
-    legend: {
-      data: ['计划', '完成', '剩余']
-    },
-    grid: {
-      left: 20,
-      right: 20,
-      bottom: 15,
-      top: 40,
-      containLabel: true
-    },
-    xAxis: [
-      {
-        type: 'value',
-        axisLine: {
-          lineStyle: {
-            color: '#999'
-          }
-        },
-        axisLabel: {
-          color: '#666'
-        }
-      }
-    ],
-    yAxis: [
-      {
-        type: 'category',
-        axisTick: { show: false },
-        data: ['汽车之家', '今日头条', '百度贴吧', '一点资讯', '微信', '微博', '知乎', '知乎', '知乎', '知乎', '知乎', '知乎', '知乎', '知乎', '知乎'],
-        axisLine: {
-          lineStyle: {
-            color: '#999'
-          }
-        },
-        axisLabel: {
-          color: '#666'
-        }
-      }
-    ],
-    series: [
-      {
-        name: '计划',
-        type: 'bar',
-        label: {
-          normal: {
-            show: true,
-            position: 'inside'
-          }
-        },
-        data: [300, 270, 340, 344, 300, 320, 310, 310, 310, 310, 310, 310, 310, 310, 310]
-      },
-      {
-        name: '完成',
-        type: 'bar',
-        stack: '总量',
-        label: {
-          normal: {
-            show: true
-          }
-        },
-        data: [120, 102, 141, 174, 190, 250, 220, 220, 220, 220, 220, 220, 220, 220, 220]
-      },
-      {
-        name: '剩余',
-        type: 'bar',
-        stack: '总量',
-        label: {
-          normal: {
-            show: true,
-            position: 'left'
-          }
-        },
-        data: [-20, -32, -21, -34, -90, -130, -110, -110, -110, -110, -110, -110, -110, -110, -110]
-      }
-    ]
-  };
+// 计划完成度--饼
+function setOptionPlanPie(chart) {
+  let data = [
+    {"name": "产品1", "value": 100},
+    {"name": "产品2", "value": 30},
+    {"name": "产品3", "value": 80},
+  ]
+  // 图表渲染
+  app.pieShow(data, chart)
+  // wx.request({
+  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+  //   method: 'POST',
+  //   data: {
+  //     userName: this.userName,
+  //     userPaw: this.userPaw
+  //   },
+  //   success: data => {
+  //     if (data.data.success) {
+  //       // data = data.data.novels
+        
+  //     } else {
+  //       wx.showModal({
+  //         title: '',
+  //         content: data.data.errmsg
+  //       })
+  //     }
+  //   }
+  // })
 }
-function geTPieOption() {
-  return {
-    backgroundColor: "#ffffff",
-    color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
-    series: [{
-      label: {
-        normal: {
-          fontSize: 14
-        }
-      },
-      type: 'pie',
-      center: ['50%', '50%'],
-      radius: [0, '60%'],
-      data: [{
-        value: 55,
-        name: '北京55'
-      }, {
-        value: 20,
-        name: '武汉'
-      }, {
-        value: 10,
-        name: '杭州'
-      }, {
-        value: 20,
-        name: '广州'
-      }, {
-        value: 38,
-        name: '上海'
-      },
-      ],
-      itemStyle: {
-        emphasis: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 2, 2, 0.3)'
-        }
-      }
-    }]
-  };
+
+// 完成数据详情--柱
+function setOptionPlanBar(chart) {
+  let chartData = [
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50}
+  ]
+  let namelist = []
+  let planlist = []
+  let schedulelist = []
+  let remainderlist = []
+  let i = 0;
+  for (i in chartData) {
+    namelist.push(chartData[i].name)
+    planlist.push(chartData[i].plan)
+    schedulelist.push(chartData[i].schedule)
+    remainderlist.push(chartData[i].remainder)
+  }
+  let data = new Object();
+  data.namelist = namelist;
+  data.planlist = planlist;
+  data.schedulelist = schedulelist;
+  data.remainderlist = remainderlist;
+  // 图表渲染
+  app.barShow(data, chart)
+  // wx.request({
+  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+  //   method: 'POST',
+  //   data: {
+  //     userName: this.userName,
+  //     userPaw: this.userPaw
+  //   },
+  //   success: data => {
+  //     if (data.data.success) {
+  //       // data = data.data.novels
+        
+  //     } else {
+  //       wx.showModal({
+  //         title: '',
+  //         content: data.data.errmsg
+  //       })
+  //     }
+  //   }
+  // })
+}
+// 完成数据详情--月份--柱
+function setOptionMonthPlanBar(chart) {
+  let chartData = [
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
+    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50}
+  ]
+  let namelist = []
+  let planlist = []
+  let schedulelist = []
+  let remainderlist = []
+  let i = 0;
+  for (i in chartData) {
+    namelist.push(chartData[i].name)
+    planlist.push(chartData[i].plan)
+    schedulelist.push(chartData[i].schedule)
+    remainderlist.push(chartData[i].remainder)
+  }
+  let data = new Object();
+  data.namelist = namelist;
+  data.planlist = planlist;
+  data.schedulelist = schedulelist;
+  data.remainderlist = remainderlist;
+  // 图表渲染
+  app.barShow(data, chart)
+  // wx.request({
+  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+  //   method: 'POST',
+  //   data: {
+  //     userName: this.userName,
+  //     userPaw: this.userPaw
+  //   },
+  //   success: data => {
+  //     if (data.data.success) {
+  //       // data = data.data.novels
+        
+  //     } else {
+  //       wx.showModal({
+  //         title: '',
+  //         content: data.data.errmsg
+  //       })
+  //     }
+  //   }
+  // })
 }
