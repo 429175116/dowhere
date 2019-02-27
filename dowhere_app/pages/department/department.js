@@ -119,10 +119,6 @@ function getListData() {
     {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50}
   ]
   return data
-  // let i = 0
-  // for () {
-
-  // }
   // wx.request({
   //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
   //   method: 'POST',

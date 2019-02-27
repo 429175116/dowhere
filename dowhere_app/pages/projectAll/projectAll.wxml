@@ -3,8 +3,8 @@
 <view class="selGoPage" style="left:{{selGoPage_x}}px;top:{{selGoPage_y}}px;">
   <view class="arrow"></view>
   <view class="goPage">
-    <view>产品</view>
-    <view>部门</view>
+    <view bindtap="goProduct">产品</view>
+    <view bindtap="goDepartment">部门</view>
   </view>
 </view>
 <view class="timeSel">

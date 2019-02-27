@@ -1,7 +1,161 @@
 // // pages/projectAll/projectAll.js
 import * as echarts from '../../ec-canvas/echarts';
-
 const app = getApp();
+Page({
+  onReady() {
+    // 获取组件
+    this.quantityPie = this.selectComponent('#quantity-pie');
+    this.planPie = this.selectComponent('#plan-pie');
+    this.planBar = this.selectComponent('#plan-bar');
+    this.init(this.data.time)
+  },
+
+  data: {
+    userId: null,
+    projectListData: [
+      {"name": "一区", "project": [
+        {"projectName": "项目1项目1项目1","id": "1"},
+        {"projectName": "项目1项目1","id": "2"},
+        {"projectName": "项目1项目1项目1项目1","id": "3"},
+        {"projectName": "项目4","id": "4"},
+        {"projectName": "项目1项目1","id": "5"},
+        {"projectName": "项目6","id": "6"},
+        {"projectName": "项目1项目1","id": "7"}
+      ]},
+      {"name": "7区", "project": [
+        {"projectName": "项目1","id": "1"},
+        {"projectName": "项目2","id": "1"},
+        {"projectName": "项目3","id": "1"},
+        {"projectName": "项目4","id": "1"},
+        {"projectName": "项目5","id": "1"},
+        {"projectName": "项目6","id": "1"},
+        {"projectName": "项目7","id": "1"}
+      ]}
+    ],
+    time: 'month'
+  },
+  onShow() {
+
+  },
+  // 数据展示时间切换
+  // 切换--年
+  yearData(){
+    if (this.data.time === "month") {
+      this.data.time = "year"
+    } else {
+      return ''
+    }
+    this.init(this.data.time)
+  },
+  // 切换--月
+  monthData(){
+    if (this.data.time === "year") {
+      this.data.time = "month"
+    } else {
+      return ''
+    }
+    this.init(this.data.time)
+  },
+
+  // 加载数据图表数据
+
+  // 点击项目事件
+  clickProject(e) {
+    // 此处判断权限，如果包含产品和部门的权限则显示气泡框
+    // 如果只有一个权限则直接跳转只该权限对应的页面
+    // 查看部门
+    // this.goDepartment(e)
+    // 查看产品
+    this.goDepartment(e)
+    return ''
+    const query = wx.createSelectorQuery()
+    query.select('#the-id'+ e.currentTarget.dataset.id)
+    query.selectViewport().boundingClientRect()
+    // query.selectViewport().width()
+    query.exec(res => {
+      console.log('打印demo的元素的信息', res);
+      console.log(e.currentTarget.offsetLeft,res[0].width)
+      this.setData({
+        // selGoPage_x:res.width,
+        selGoPage_x: e.currentTarget.offsetLeft,
+        selGoPage_y: e.currentTarget.offsetTop + 30
+      })
+    })
+  },
+  // 产看部门
+  goDepartment(e) {
+    // console.log(e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: `/pages/department/department?`
+    })
+  },
+  // 查看产品
+  goProduct(e) {
+    // console.log(e.currentTarget.dataset.id)
+    wx.navigateTo({
+      url: `/pages/product/product?`
+    })
+  },
+  getProjectList() {
+    console.log(this.data.userId)
+    return ''
+    wx.request({
+      url: `${this.$parent.globalData.requestUrl}/api/logo`,
+      method: 'POST',
+      data: {
+        userName: this.userName,
+        userPaw: this.userPaw
+      },
+      success: data => {
+        if (data.data.success) {
+          // data = data.data.novels
+          this.$apply()
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.errmsg
+          })
+        }
+      }
+    })
+  },
+  // 点击按钮后初始化图表
+  init(time) {
+    this.quantityPie.init((canvas, width, height) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      setOptionQuantityPie(chart, time);
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+    this.planPie.init((canvas, width, height) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      setOptionPlanPie(chart, time);
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+    this.planBar.init((canvas, width, height) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      setOptionPlanBar(chart, time);
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+  }
+});
 
 
 // 计划完成度--饼
@@ -136,159 +290,3 @@ function setOptionPlanBar(chart, time) {
   //   }
   // })
 }
-
-Page({
-  onReady() {
-    // 获取组件
-    this.quantityPie = this.selectComponent('#quantity-pie');
-    this.planPie = this.selectComponent('#plan-pie');
-    this.planBar = this.selectComponent('#plan-bar');
-    this.init(this.data.time)
-  },
-
-  data: {
-    userId: null,
-    projectListData: [
-      {"name": "一区", "project": [
-        {"projectName": "项目1项目1项目1","id": "1"},
-        {"projectName": "项目1项目1","id": "2"},
-        {"projectName": "项目1项目1项目1项目1","id": "3"},
-        {"projectName": "项目4","id": "4"},
-        {"projectName": "项目1项目1","id": "5"},
-        {"projectName": "项目6","id": "6"},
-        {"projectName": "项目1项目1","id": "7"}
-      ]},
-      {"name": "7区", "project": [
-        {"projectName": "项目1","id": "1"},
-        {"projectName": "项目2","id": "1"},
-        {"projectName": "项目3","id": "1"},
-        {"projectName": "项目4","id": "1"},
-        {"projectName": "项目5","id": "1"},
-        {"projectName": "项目6","id": "1"},
-        {"projectName": "项目7","id": "1"}
-      ]}
-    ],
-    time: 'month'
-  },
-  onShow() {
-
-  },
-  // 数据展示时间切换
-  // 切换--年
-  yearData(){
-    if (this.data.time === "month") {
-      this.data.time = "year"
-    } else {
-      return ''
-    }
-    this.init(this.data.time)
-  },
-  // 切换--月
-  monthData(){
-    if (this.data.time === "year") {
-      this.data.time = "month"
-    } else {
-      return ''
-    }
-    this.init(this.data.time)
-  },
-
-  // 加载数据图表数据
-
-  // 点击项目事件
-  clickProject(e) {
-    // 此处判断权限，如果包含产品和部门的权限则显示气泡框
-    // 如果只有一个权限则直接跳转只该权限对应的页面
-    // 查看部门
-    // this.goDepartment(e)
-    // 查看产品
-    this.goDepartment(e)
-    return ''
-    const query = wx.createSelectorQuery()
-    query.select('#the-id'+ e.currentTarget.dataset.id)
-    query.selectViewport().boundingClientRect()
-    // query.selectViewport().width()
-    query.exec(res => {
-      console.log('打印demo的元素的信息', res);
-      console.log(e.currentTarget.offsetLeft,res[0].width)
-      this.setData({
-        // selGoPage_x:res.width,
-        selGoPage_x: e.currentTarget.offsetLeft,
-        selGoPage_y: e.currentTarget.offsetTop + 30
-      })
-    })
-  },
-  // 产看部门
-  goDepartment(e) {
-    console.log(e.currentTarget.dataset.id)
-    wx.navigateTo({
-      url: `/pages/department/department?`
-    })
-  },
-  // 查看产品
-  goProduct(e) {
-    console.log(e.currentTarget.dataset.id)
-    wx.navigateTo({
-      url: `/pages/product/product?`
-    })
-  },
-  getProjectList() {
-    console.log(this.data.userId)
-    return ''
-    wx.request({
-      url: `${this.$parent.globalData.requestUrl}/api/logo`,
-      method: 'POST',
-      data: {
-        userName: this.userName,
-        userPaw: this.userPaw
-      },
-      success: data => {
-        if (data.data.success) {
-          // data = data.data.novels
-          this.$apply()
-        } else {
-          wx.showModal({
-            title: '',
-            content: data.data.errmsg
-          })
-        }
-      }
-    })
-  },
-  // 点击按钮后初始化图表
-  init(time) {
-    this.quantityPie.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
-      });
-      setOptionQuantityPie(chart, time);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-    this.planPie.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
-      });
-      setOptionPlanPie(chart, time);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-    this.planBar.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
-      });
-      setOptionPlanBar(chart, time);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-  }
-});
