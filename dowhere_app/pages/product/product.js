@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listData: []
+    listData: [],
+    planBarHeight: 0
   },
 
   /**
@@ -24,8 +25,9 @@ Page({
    */
   onReady() {
     this.planPie = this.selectComponent('#plan-pie');
-    this.planBar = this.selectComponent('#plan-bar');
+    // this.planBar = this.selectComponent('#plan-bar');
     this.init()
+    this.setOptionPlanBar()
   },
   goProdcutInfo(e) {
     let id = e.currentTarget.dataset.id
@@ -88,17 +90,92 @@ Page({
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
+    // this.planBar.init((canvas, width, height) => {
+    //   // 获取组件的 canvas、width、height 后的回调函数
+    //   // 在这里初始化图表
+    //   const chart = echarts.init(canvas, null, {
+    //     width: width,
+    //     height: height
+    //   });
+    //   setOptionPlanBar(chart, time);
+    //   // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+    //   return chart;
+    // });
+  },
+  setOptionPlanBar() {
+    if (this.data.time == "month") {
+      //加载月份数据---此处修改参数
+      
+    } else {
+      // 加载年份数据---此处修改参数
+    }
+    let chartData = [
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "产品1", "plan": 100, "schedule": 50}
+    ]
+    let namelist = []
+    let planlist = []
+    let schedulelist = []
+    let remainderlist = []
+    let i = 0;
+    for (i in chartData) {
+      namelist.push(chartData[i].name)
+      planlist.push(chartData[i].plan)
+      schedulelist.push(chartData[i].schedule)
+      remainderlist.push(chartData[i].schedule - chartData[i].plan)
+    }
+    let data = new Object();
+    data.namelist = namelist;
+    data.planlist = planlist;
+    data.schedulelist = schedulelist;
+    data.remainderlist = remainderlist;
+    // 计算图表显示高度
+    this.setData({
+      planBarHeight: 100 * chartData.length
+    })
+    this.planBar = this.selectComponent('#plan-bar');
     this.planBar.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
       const chart = echarts.init(canvas, null, {
         width: width,
         height: height
       });
-      setOptionPlanBar(chart, time);
+      app.barShow(data, chart)
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
+    // 图表渲染
+    
+    // wx.request({
+    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+    //   method: 'POST',
+    //   data: {
+    //     userName: this.userName,
+    //     userPaw: this.userPaw
+    //   },
+    //   success: data => {
+    //     if (data.data.success) {
+    //       // data = data.data.novels
+          
+    //     } else {
+    //       wx.showModal({
+    //         title: '',
+    //         content: data.data.errmsg
+    //       })
+    //     }
+    //   }
+    // })
   }
 })
 // 加载列表，数据展示
@@ -170,59 +247,61 @@ function setOptionPlanPie(chart) {
   // })
 }
 
-// 完成数据详情--柱
-function setOptionPlanBar(chart) {
-  let chartData = [
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50}
-  ]
-  let namelist = []
-  let planlist = []
-  let schedulelist = []
-  let remainderlist = []
-  let i = 0;
-  for (i in chartData) {
-    namelist.push(chartData[i].name)
-    planlist.push(chartData[i].plan)
-    schedulelist.push(chartData[i].schedule)
-    remainderlist.push(chartData[i].schedule - chartData[i].plan)
-  }
-  let data = new Object();
-  data.namelist = namelist;
-  data.planlist = planlist;
-  data.schedulelist = schedulelist;
-  data.remainderlist = remainderlist;
-  // 图表渲染
-  app.barShow(data, chart)
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
+
+// 无用代码
+// // 完成数据详情--柱
+// function setOptionPlanBar(chart) {
+//   let chartData = [
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50}
+//   ]
+//   let namelist = []
+//   let planlist = []
+//   let schedulelist = []
+//   let remainderlist = []
+//   let i = 0;
+//   for (i in chartData) {
+//     namelist.push(chartData[i].name)
+//     planlist.push(chartData[i].plan)
+//     schedulelist.push(chartData[i].schedule)
+//     remainderlist.push(chartData[i].schedule - chartData[i].plan)
+//   }
+//   let data = new Object();
+//   data.namelist = namelist;
+//   data.planlist = planlist;
+//   data.schedulelist = schedulelist;
+//   data.remainderlist = remainderlist;
+//   // 图表渲染
+//   app.barShow(data, chart)
+//   // wx.request({
+//   //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+//   //   method: 'POST',
+//   //   data: {
+//   //     userName: this.userName,
+//   //     userPaw: this.userPaw
+//   //   },
+//   //   success: data => {
+//   //     if (data.data.success) {
+//   //       // data = data.data.novels
         
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
-}
+//   //     } else {
+//   //       wx.showModal({
+//   //         title: '',
+//   //         content: data.data.errmsg
+//   //       })
+//   //     }
+//   //   }
+//   // })
+// }
