@@ -237,20 +237,20 @@ function setOptionPlanBar(chart, time) {
     // 加载年份数据---此处修改参数
   }
   let chartData = [
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50},
-    {"name": "产品1", "plan": 100, "schedule": 50, "remainder": -50}
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 50}
   ]
   let namelist = []
   let planlist = []
@@ -261,7 +261,7 @@ function setOptionPlanBar(chart, time) {
     namelist.push(chartData[i].name)
     planlist.push(chartData[i].plan)
     schedulelist.push(chartData[i].schedule)
-    remainderlist.push(chartData[i].remainder)
+    remainderlist.push(chartData[i].schedule - chartData[i].plan)
   }
   let data = new Object();
   data.namelist = namelist;
