@@ -45,6 +45,9 @@ App({
           normal: {
             fontSize: 14,
             formatter:'{b}\n({d}%)'
+            // textStyle: {
+            //   fontSize: 30
+            // }
           }
         },
         type: 'pie',
@@ -58,6 +61,13 @@ App({
             shadowOffsetX: 0,
             shadowColor: 'rgba(0, 2, 2, 0.3)'
           }
+          // normal:{
+          //   label:{
+          //     textStyle:{
+          //       fontSize: 30
+          //     }
+          //   }
+          // }
         }
       }]
     };
@@ -124,7 +134,10 @@ App({
           label: {
             normal: {
               // show: true,
-              position: 'inside'
+              position: 'inside',
+              textStyle: {
+                fontSize: 30
+              }
             }
           },
           //此处写入图表展示的数据--计划

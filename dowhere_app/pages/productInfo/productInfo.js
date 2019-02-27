@@ -185,9 +185,9 @@ Page({
     data.remainderlist = remainderlist;
     // 计算图表显示高度
     this.setData({
-      monthPlanBarHeight: 100 * chartData.length
+      planBarHeight: 100 * chartData.length
     })
-    this.planBar = this.selectComponent('#monthPlan-bar');
+    this.planBar = this.selectComponent('#plan-bar');
     this.planBar.init((canvas, width, height) => {
       const chart = echarts.init(canvas, null, {
         width: width,
@@ -220,12 +220,6 @@ Page({
     // })
   },
   setOptionMonthPlanBar() {
-    if (this.data.time == "month") {
-      //加载月份数据---此处修改参数
-      
-    } else {
-      // 加载年份数据---此处修改参数
-    }
     let chartData = [
       {"name": "产品1", "plan": 100, "schedule": 50},
       {"name": "产品1", "plan": 100, "schedule": 50},
@@ -260,10 +254,10 @@ Page({
     data.remainderlist = remainderlist;
     // 计算图表显示高度
     this.setData({
-      planBarHeight: 100 * chartData.length
+      monthPlanBarHeight: 100 * chartData.length
     })
-    this.planBar = this.selectComponent('#plan-bar');
-    this.planBar.init((canvas, width, height) => {
+    this.monthPlanBar = this.selectComponent('#monthPlan-bar');
+    this.monthPlanBar.init((canvas, width, height) => {
       const chart = echarts.init(canvas, null, {
         width: width,
         height: height

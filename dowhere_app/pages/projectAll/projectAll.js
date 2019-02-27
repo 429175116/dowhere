@@ -59,6 +59,7 @@ Page({
       return ''
     }
     this.init(this.data.time)
+    this.setOptionPlanBar()
   },
   // 切换--月
   monthData(){
@@ -70,6 +71,7 @@ Page({
       return ''
     }
     this.init(this.data.time)
+    this.setOptionPlanBar()
   },
 
   // 加载数据图表数据
