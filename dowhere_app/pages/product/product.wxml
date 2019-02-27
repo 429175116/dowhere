@@ -33,7 +33,7 @@
       <view class="undone" style="width:40%"></view>
     </view>
     <view>
-      <view class="info">详情</view>
+      <view class="info" bindtap="goProdcutInfo">详情</view>
     </view>
   </view>
 </view>

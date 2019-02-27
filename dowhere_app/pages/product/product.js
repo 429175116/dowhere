@@ -25,6 +25,12 @@ Page({
     this.planBar = this.selectComponent('#plan-bar');
     this.init()
   },
+  goProdcutInfo(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/productInfo/productInfo?id=${id}`
+    })
+  },
 
   /**
    * 生命周期函数--监听页面显示
