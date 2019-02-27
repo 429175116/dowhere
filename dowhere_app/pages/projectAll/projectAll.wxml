@@ -8,8 +8,8 @@
   </view>
 </view>
 <view class="timeSel">
-  <view bindtap="yearData" class="action" >全年计划与完成</view>
-  <view bindtap="monthData">当月计划与完成</view>
+  <view bindtap="monthData" class="{{time=='month'?'action':''}}">当月计划与完成</view>
+  <view bindtap="yearData" class="{{time=='year'?'action':''}}">全年计划与完成</view>
 </view>
 <view class="charts">
   <!-- 总数量-饼 -->

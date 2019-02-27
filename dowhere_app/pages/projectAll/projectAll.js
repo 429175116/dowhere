@@ -2,17 +2,17 @@
 import * as echarts from '../../ec-canvas/echarts';
 const app = getApp();
 Page({
-  onReady() {
-    // 获取组件
-    this.quantityPie = this.selectComponent('#quantity-pie');
-    this.planPie = this.selectComponent('#plan-pie');
-    this.planBar = this.selectComponent('#plan-bar');
-    this.init(this.data.time)
-  },
-
   data: {
     userId: null,
-    projectListData: [
+    projectListData: [],
+    time: 'month'
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    // 此处加载项目及区域数据
+    let projectListData = [
       {"name": "一区", "project": [
         {"projectName": "项目1项目1项目1","id": "1"},
         {"projectName": "项目1项目1","id": "2"},
@@ -31,17 +31,28 @@ Page({
         {"projectName": "项目6","id": "1"},
         {"projectName": "项目7","id": "1"}
       ]}
-    ],
-    time: 'month'
+    ]
+    this.setData({
+      projectListData: projectListData
+    })
   },
   onShow() {
 
+  },
+  onReady() {
+    // 获取组件
+    this.quantityPie = this.selectComponent('#quantity-pie');
+    this.planPie = this.selectComponent('#plan-pie');
+    this.planBar = this.selectComponent('#plan-bar');
+    this.init(this.data.time)
   },
   // 数据展示时间切换
   // 切换--年
   yearData(){
     if (this.data.time === "month") {
-      this.data.time = "year"
+      this.setData({
+        time: "year"
+      })
     } else {
       return ''
     }
@@ -50,7 +61,9 @@ Page({
   // 切换--月
   monthData(){
     if (this.data.time === "year") {
-      this.data.time = "month"
+      this.setData({
+        time: "month"
+      })
     } else {
       return ''
     }
