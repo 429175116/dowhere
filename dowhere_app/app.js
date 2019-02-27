@@ -43,12 +43,14 @@ App({
       series: [{
         label: {
           normal: {
-            fontSize: 14
+            fontSize: 14,
+            formatter:'{b}\n({d}%)'
           }
         },
         type: 'pie',
         center: ['50%', '50%'],
         radius: [0, '80%'],
+        //此处写入图表展示的数据
         data: data,
         itemStyle: {
           emphasis: {
@@ -103,6 +105,7 @@ App({
         {
           type: 'category',
           axisTick: { show: false },
+          //此处写入图表展示的数据--名称
           data: namelist,
           axisLine: {
             lineStyle: {
@@ -120,10 +123,11 @@ App({
           type: 'bar',
           label: {
             normal: {
-              show: true,
+              // show: true,
               position: 'inside'
             }
           },
+          //此处写入图表展示的数据--计划
           data: planlist
         },
         {
@@ -132,9 +136,10 @@ App({
           stack: '总量',
           label: {
             normal: {
-              show: true
+              // show: true
             }
           },
+          //此处写入图表展示的数据--进度
           data: schedulelist
         },
         {
@@ -143,10 +148,11 @@ App({
           stack: '总量',
           label: {
             normal: {
-              show: true,
+              // show: true,
               position: 'left'
             }
           },
+          //此处写入图表展示的数据--剩余
           data: remainderlist
         }
       ]

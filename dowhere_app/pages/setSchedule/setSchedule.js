@@ -20,9 +20,6 @@ Page({
     this.setData({
       userId: app.globalData.userId
     })
-    // this.setData({
-    //   dates: e.detail.value
-    // })
   },
   setPlanData(e) {
     // 获取计划

@@ -10,7 +10,6 @@
 <view class="monthlyData">
   <view class="table">
     <block wx:for="{{monthList}}" wx:for-item="item" index="index">
-      <!-- {"monthName": "1月", "month": "1"}, -->
       <view class="item">
         <view class="month">{{item.monthName}}</view>
         <view class="monthChart {{time==item.month?'':'hideMonthChart'}}">

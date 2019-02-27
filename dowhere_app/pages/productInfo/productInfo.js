@@ -206,20 +206,20 @@ function setOptionPlanPie(chart) {
 // 完成数据详情--柱
 function setOptionPlanBar(chart) {
   let chartData = [
+    {"name": "产品1", "plan": 100, "schedule": 60},
     {"name": "产品1", "plan": 100, "schedule": 50},
     {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 90},
     {"name": "产品1", "plan": 100, "schedule": 50},
     {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 80},
     {"name": "产品1", "plan": 100, "schedule": 50},
     {"name": "产品1", "plan": 100, "schedule": 50},
+    {"name": "产品1", "plan": 100, "schedule": 70},
     {"name": "产品1", "plan": 100, "schedule": 50},
     {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50}
+    {"name": "产品1", "plan": 100, "schedule": 20},
+    {"name": "产品1", "plan": 100, "schedule": 30}
   ]
   let namelist = []
   let planlist = []

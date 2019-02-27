@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/productInfo/productInfo",
     "pages/projectAll/projectAll",
+    "pages/productInfo/productInfo",
     
     
     "pages/login/login",
