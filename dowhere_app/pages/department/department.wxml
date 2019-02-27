@@ -16,24 +16,29 @@
     <view class="neme">年度未完</view>
     <view class="neme">操作</view>
   </view>
-  <view class="item">
-    <view>产品2</view>
-    <view>
-      <view class="complete" style="width:80%"></view>
-      800
+  <block wx:for="{{listData}}" wx:for-item="item" index="index">
+    <view class="item">
+      <view>{{item.name}}</view>
+      <view>
+        <view class="complete" style="width:{{(item.yearSchedule/item.yearPlan)*100}}%"></view>
+        {{item.yearSchedule}}
+      </view>
+      <view>
+        <view class="undone" style="width:{{((item.yearPlan-item.yearSchedule)/item.yearPlan)*100}}%"></view>
+        {{item.yearPlan - item.yearSchedule}}
+      </view>
+      <view>
+        <view class="complete" style="width:{{(item.monthSchedule/item.monthPlan)*100}}%"></view>
+        {{item.monthSchedule}}
+      </view>
+      <view>
+        <view class="undone" style="width:{{((item.monthPlan-item.monthSchedule)/item.monthPlan)*100}}%"></view>
+        {{item.monthPlan - item.monthSchedule}}
+      </view>
+      <view>
+        <view class="info" data-id="{{item.id}}" bindtap="goProdcutInfo">详情</view>
+      </view>
     </view>
-    <view>
-      <view class="undone" style="width:30%"></view>
-    </view>
-    <view>
-      <view class="complete" style="width:10%"></view>
-      8000
-    </view>
-    <view>
-      <view class="undone" style="width:40%"></view>
-    </view>
-    <view>
-      <view class="info" bindtap="goProdcutInfo">详情</view>
-    </view>
-  </view>
+  </block>
+  
 </view>
