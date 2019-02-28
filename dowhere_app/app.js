@@ -38,6 +38,14 @@ App({
   },
   pieShow(data, chart) {
     const option = {
+      title:{
+        text: "饼状图",
+        subtext: "假的",
+        x: "center",
+        textStyle: {
+          fontSize: 20
+        },
+      },
       backgroundColor: "#ffffff",
       color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
       series: [{
@@ -51,8 +59,8 @@ App({
           }
         },
         type: 'pie',
-        center: ['50%', '50%'],
-        radius: [0, '80%'],
+        center: ['50%', '60%'],
+        radius: [0, '70%'],
         //此处写入图表展示的数据
         data: data,
         itemStyle: {
@@ -80,6 +88,14 @@ App({
     let schedulelist = data.schedulelist
     let remainderlist = data.remainderlist
     const option = {
+      title:{
+        text: "柱状图",
+        subtext: "假的",
+        x: "center",
+        textStyle: {
+          fontSize: 20
+        },
+      },
       color: ['#37a2da', '#32c5e9', '#67e0e3'],
       // 控制浮动框的显示
       tooltip: {
@@ -89,13 +105,14 @@ App({
         }
       },
       legend: {
+        top: 60,
         data: ['计划', '完成', '剩余']
       },
       grid: {
         left: 10,
         right: 10,
         bottom: 10,
-        top: 30,
+        top: 90,
         containLabel: true
       },
       xAxis: [
@@ -107,7 +124,8 @@ App({
             }
           },
           axisLabel: {
-            color: '#666'
+            color: '#666',
+            fontSize: 14
           }
         }
       ],
@@ -123,7 +141,8 @@ App({
             }
           },
           axisLabel: {
-            color: '#666'
+            color: '#666',
+            fontSize: 14
           }
         }
       ],
@@ -133,11 +152,8 @@ App({
           type: 'bar',
           label: {
             normal: {
-              // show: true,
-              position: 'inside',
-              textStyle: {
-                fontSize: 30
-              }
+              show: true,
+              position: 'inside'
             }
           },
           //此处写入图表展示的数据--计划

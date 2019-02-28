@@ -261,6 +261,16 @@ function setOptionPlanPie(chart, time) {
   let data = [
     {"name": "产品1", "value": 100},
     {"name": "产品2", "value": 30},
+    {"name": "产品1", "value": 100},
+    {"name": "产品2", "value": 30},
+    {"name": "产品1", "value": 100},
+    {"name": "产品2", "value": 30},
+    {"name": "产品1", "value": 100},
+    {"name": "产品2", "value": 30},
+    {"name": "产品1", "value": 100},
+    {"name": "产品2", "value": 30},
+    {"name": "产品1", "value": 100},
+    {"name": "产品2", "value": 30},
     {"name": "产品3", "value": 80},
   ]
   // 图表渲染
