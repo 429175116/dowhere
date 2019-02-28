@@ -12,6 +12,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    this.setData({
+      userId: app.globalData.userId
+    })
+    console.log(this.data.userId)
     // 此处加载项目及区域数据 
     let projectListData = [
       {"name": "一区", "project": [
@@ -80,11 +84,13 @@ Page({
   clickProject(e) {
     // 此处判断权限，如果包含产品和部门的权限则显示气泡框
     // 如果只有一个权限则直接跳转只该权限对应的页面
+    
+    // 此处可处理为只查看产品，不用留有进入部门的入口 ？？？
     // 查看部门
     // this.goDepartment(e)
     // 查看产品
-    this.goDepartment(e)
-    return ''
+    // this.goDepartment(e)
+    // return ''
     const query = wx.createSelectorQuery()
     query.select('#the-id'+ e.currentTarget.dataset.id)
     query.selectViewport().boundingClientRect()
@@ -101,16 +107,14 @@ Page({
   },
   // 产看部门
   goDepartment(e) {
-    // console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
-      url: `/pages/department/department?`
+      url: `/pages/department/department?projectid=${e.currentTarget.dataset.id}`
     })
   },
   // 查看产品
   goProduct(e) {
-    // console.log(e.currentTarget.dataset.id)
     wx.navigateTo({
-      url: `/pages/product/product?`
+      url: `/pages/product/product??projectid=${e.currentTarget.dataset.id}`
     })
   },
   getProjectList() {

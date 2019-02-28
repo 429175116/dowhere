@@ -11,7 +11,9 @@ Page({
     time: '',
     monthList:[],
     monthPlanBarHeight: 0,
-    planBarHeight: 0
+    planBarHeight: 0,
+    productId: '',
+    mark: ''
   },
 
   /**
@@ -21,10 +23,15 @@ Page({
     var date = new Date();
     let month = date.getMonth()
     this.setData({
+      // 产品ID
+      productId: options.id,
+      // 获取全部零件或部分零件标记{part：部分；all：全部}
+      mark: options.getTypt,
       listData: getListData(),
       // 获取当前时间，用于月份显示，只显示已经存在的月份
       monthList: getMonthList(),
       time: month + 1
+      
     })
   },
 

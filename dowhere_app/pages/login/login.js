@@ -104,6 +104,9 @@ Page({
     //   })
     //   return ''
     // }
+    
+    // 全局变量 存储用户信息
+    getApp().globalData.userId = 10;
     wx.redirectTo({
       url: `/pages/projectAll/projectAll?`
     })
