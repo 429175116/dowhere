@@ -37,10 +37,12 @@ App({
     userId: null
   },
   pieShow(data, chart) {
+    let chartName = data.chartName
+    data = data.chartData
     const option = {
       title:{
-        text: "饼状图",
-        subtext: "假的",
+        text: chartName,
+        // subtext: chartSubtext,
         x: "center",
         textStyle: {
           fontSize: 20
@@ -59,7 +61,7 @@ App({
           }
         },
         type: 'pie',
-        center: ['50%', '60%'],
+        center: ['50%', '50%'],
         radius: [0, '70%'],
         //此处写入图表展示的数据
         data: data,
@@ -87,10 +89,12 @@ App({
     let planlist = data.planlist
     let schedulelist = data.schedulelist
     let remainderlist = data.remainderlist
+    let chartName = data.chartName
+    // let chartSubtext = data.chartSubtext
     const option = {
       title:{
-        text: "柱状图",
-        subtext: "假的",
+        text: chartName,
+        // subtext: "副标题",
         x: "center",
         textStyle: {
           fontSize: 20
@@ -105,14 +109,14 @@ App({
         }
       },
       legend: {
-        top: 60,
+        top: 40,
         data: ['计划', '完成', '剩余']
       },
       grid: {
         left: 10,
         right: 10,
         bottom: 10,
-        top: 90,
+        top: 70,
         containLabel: true
       },
       xAxis: [
@@ -152,7 +156,7 @@ App({
           type: 'bar',
           label: {
             normal: {
-              show: true,
+              // show: true,
               position: 'inside'
             }
           },

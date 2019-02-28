@@ -175,7 +175,6 @@ Page({
   setOptionPlanBar() {
     if (this.data.time == "month") {
       //加载月份数据---此处修改参数
-      
     } else {
       // 加载年份数据---此处修改参数
     }
@@ -211,6 +210,7 @@ Page({
     data.planlist = planlist;
     data.schedulelist = schedulelist;
     data.remainderlist = remainderlist;
+    data.chartName = '各区进度';
     // 计算图表显示高度
     this.setData({
       planBarHeight: 100 * chartData.length
@@ -254,11 +254,10 @@ Page({
 function setOptionPlanPie(chart, time) {
   if (time == "month") {
     //加载月份数据---此处修改参数
-    
   } else {
     // 加载年份数据---此处修改参数
   }
-  let data = [
+  let chartData = [
     {"name": "产品1", "value": 100},
     {"name": "产品2", "value": 30},
     {"name": "产品1", "value": 100},
@@ -273,6 +272,9 @@ function setOptionPlanPie(chart, time) {
     {"name": "产品2", "value": 30},
     {"name": "产品3", "value": 80},
   ]
+  let data = new Object();
+  data.chartData = chartData;
+  data.chartName = '完成情况';
   // 图表渲染
   app.pieShow(data, chart)
   // wx.request({
@@ -299,15 +301,17 @@ function setOptionPlanPie(chart, time) {
 function setOptionQuantityPie(chart, time) {
   if (time == "month") {
     //加载月份数据---此处修改参数
-    
   } else {
     // 加载年份数据---此处修改参数
   }
-  let data = [
+  let chartData = [
     {"name": "产品1", "value": 100},
     {"name": "产品2", "value": 30},
     {"name": "产品3", "value": 80},
   ]
+  let data = new Object();
+  data.chartData = chartData;
+  data.chartName = '总产值';
   // 图表渲染
   app.pieShow(data, chart)
   // wx.request({

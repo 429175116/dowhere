@@ -183,6 +183,7 @@ Page({
     data.planlist = planlist;
     data.schedulelist = schedulelist;
     data.remainderlist = remainderlist;
+    data.chartName = '各零件进度';
     // 计算图表显示高度
     this.setData({
       planBarHeight: 100 * chartData.length
@@ -252,6 +253,7 @@ Page({
     data.planlist = planlist;
     data.schedulelist = schedulelist;
     data.remainderlist = remainderlist;
+    data.chartName = `${this.data.time}月进度`;
     // 计算图表显示高度
     this.setData({
       monthPlanBarHeight: 100 * chartData.length
@@ -343,11 +345,14 @@ function getListData() {
 }
 // 计划完成度--饼
 function setOptionPlanPie(chart) {
-  let data = [
+  let chartData = [
     {"name": "产品1", "value": 100},
     {"name": "产品2", "value": 30},
     {"name": "产品3", "value": 80},
   ]
+  let data = new Object();
+  data.chartData = chartData;
+  data.chartName = '完成情况';
   // 图表渲染
   app.pieShow(data, chart)
   // wx.request({
@@ -371,115 +376,119 @@ function setOptionPlanPie(chart) {
   // })
 }
 
-// 完成数据详情--柱
-function setOptionPlanBar(chart) {
-  let chartData = [
-    {"name": "产品1", "plan": 100, "schedule": 60},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 90},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 80},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 70},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 20},
-    {"name": "产品1", "plan": 100, "schedule": 30}
-  ]
-  let namelist = []
-  let planlist = []
-  let schedulelist = []
-  let remainderlist = []
-  let i = 0;
-  for (i in chartData) {
-    namelist.push(chartData[i].name)
-    planlist.push(chartData[i].plan)
-    schedulelist.push(chartData[i].schedule)
-    remainderlist.push(chartData[i].schedule - chartData[i].plan)
-  }
-  let data = new Object();
-  data.namelist = namelist;
-  data.planlist = planlist;
-  data.schedulelist = schedulelist;
-  data.remainderlist = remainderlist;
-  // 图表渲染
-  app.barShow(data, chart)
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
+
+// 无用代码
+// // 完成数据详情--柱
+// function setOptionPlanBar(chart) {
+//   let chartData = [
+//     {"name": "产品1", "plan": 100, "schedule": 60},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 90},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 80},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 70},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 20},
+//     {"name": "产品1", "plan": 100, "schedule": 30}
+//   ]
+//   let namelist = []
+//   let planlist = []
+//   let schedulelist = []
+//   let remainderlist = []
+//   let i = 0;
+//   for (i in chartData) {
+//     namelist.push(chartData[i].name)
+//     planlist.push(chartData[i].plan)
+//     schedulelist.push(chartData[i].schedule)
+//     remainderlist.push(chartData[i].schedule - chartData[i].plan)
+//   }
+//   let data = new Object();
+//   data.namelist = namelist;
+//   data.planlist = planlist;
+//   data.schedulelist = schedulelist;
+//   data.remainderlist = remainderlist;
+//   data.chartName = '各区进度';
+//   // 图表渲染
+//   app.barShow(data, chart)
+//   // wx.request({
+//   //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+//   //   method: 'POST',
+//   //   data: {
+//   //     userName: this.userName,
+//   //     userPaw: this.userPaw
+//   //   },
+//   //   success: data => {
+//   //     if (data.data.success) {
+//   //       // data = data.data.novels
         
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
-}
-// 完成数据详情--月份--柱
-function setOptionMonthPlanBar(chart) {
-  let chartData = [
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50},
-    {"name": "产品1", "plan": 100, "schedule": 50}
-  ]
-  let namelist = []
-  let planlist = []
-  let schedulelist = []
-  let remainderlist = []
-  let i = 0;
-  for (i in chartData) {
-    namelist.push(chartData[i].name)
-    planlist.push(chartData[i].plan)
-    schedulelist.push(chartData[i].schedule)
-    remainderlist.push(chartData[i].schedule - chartData[i].plan)
-  }
-  let data = new Object();
-  data.namelist = namelist;
-  data.planlist = planlist;
-  data.schedulelist = schedulelist;
-  data.remainderlist = remainderlist;
-  // 图表渲染
-  app.barShow(data, chart)
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
+//   //     } else {
+//   //       wx.showModal({
+//   //         title: '',
+//   //         content: data.data.errmsg
+//   //       })
+//   //     }
+//   //   }
+//   // })
+// }
+// // 完成数据详情--月份--柱
+// function setOptionMonthPlanBar(chart) {
+//   let chartData = [
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50},
+//     {"name": "产品1", "plan": 100, "schedule": 50}
+//   ]
+//   let namelist = []
+//   let planlist = []
+//   let schedulelist = []
+//   let remainderlist = []
+//   let i = 0;
+//   for (i in chartData) {
+//     namelist.push(chartData[i].name)
+//     planlist.push(chartData[i].plan)
+//     schedulelist.push(chartData[i].schedule)
+//     remainderlist.push(chartData[i].schedule - chartData[i].plan)
+//   }
+//   let data = new Object();
+//   data.namelist = namelist;
+//   data.planlist = planlist;
+//   data.schedulelist = schedulelist;
+//   data.remainderlist = remainderlist;
+//   data.chartName = '各区进度';
+//   // 图表渲染
+//   app.barShow(data, chart)
+//   // wx.request({
+//   //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+//   //   method: 'POST',
+//   //   data: {
+//   //     userName: this.userName,
+//   //     userPaw: this.userPaw
+//   //   },
+//   //   success: data => {
+//   //     if (data.data.success) {
+//   //       // data = data.data.novels
         
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
-}
+//   //     } else {
+//   //       wx.showModal({
+//   //         title: '',
+//   //         content: data.data.errmsg
+//   //       })
+//   //     }
+//   //   }
+//   // })
+// }
