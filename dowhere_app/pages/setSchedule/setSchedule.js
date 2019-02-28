@@ -9,7 +9,11 @@ Page({
     planData: '',
     dates: '',
     remarks: '',
-    userId: ''
+    userId: '',
+    componentsId: '',
+    componentsName: '',
+    productId: '',
+    productName: ''
   },
 
   /**
@@ -18,7 +22,11 @@ Page({
   onLoad(options) {
     app.globalData.userId = 10
     this.setData({
-      userId: app.globalData.userId
+      userId: app.globalData.userId,
+      componentsId: options.componentsid,
+      componentsName: options.componentsname,
+      productId: options.productid,
+      productName: options.productname
     })
   },
   setPlanData(e) {

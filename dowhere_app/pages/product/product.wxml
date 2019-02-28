@@ -36,7 +36,7 @@
         {{item.monthPlan - item.monthSchedule}}
       </view>
       <view>
-        <view class="info" data-id="{{item.id}}" bindtap="goProdcutInfo">详情</view>
+        <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goProdcutInfo">详情</view>
       </view>
     </view>
   </block>

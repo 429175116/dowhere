@@ -30,8 +30,10 @@ Page({
     this.setOptionPlanBar()
   },
   goProdcutInfo(e) {
+    let id = e.currentTarget.dataset.id
+    let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/productInfo/productInfo?id=${e.currentTarget.dataset.id}&getTypt=all`
+      url: `/pages/productInfo/productInfo?prodcutid=${id}&prodcutname=${name}&getTypt=all`
     })
   },
 

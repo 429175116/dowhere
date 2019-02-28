@@ -9,16 +9,26 @@ Page({
     planData: '',
     dates: '',
     remarks: '',
-    userId: ''
+    userId: '',
+    componentsId: '',
+    componentsName: '',
+    productId: '',
+    productName: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+
     app.globalData.userId = 10
     this.setData({
-      userId: app.globalData.userId
+      userId: app.globalData.userId,
+      componentsId: options.componentsid,
+      componentsName: options.componentsname,
+      productId: options.productid,
+      productName: options.productname
+
     })
     // this.setData({
     //   dates: e.detail.value

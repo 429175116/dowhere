@@ -51,8 +51,8 @@
         {{item.monthPlan - item.monthSchedule}}
       </view>
       <view>
-        <view class="info" data-id="{{item.id}}" bindtap="goPlan">计划</view>
-        <view class="info" data-id="{{item.id}}" bindtap="goSchedule">进度</view>
+        <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goPlan">计划</view>
+        <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goSchedule">进度</view>
       </view>
     </view>
   </block>

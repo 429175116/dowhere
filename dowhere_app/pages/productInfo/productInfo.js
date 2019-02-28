@@ -13,6 +13,7 @@ Page({
     monthPlanBarHeight: 0,
     planBarHeight: 0,
     productId: '',
+    productName: '',
     mark: ''
   },
 
@@ -24,7 +25,9 @@ Page({
     let month = date.getMonth()
     this.setData({
       // 产品ID
-      productId: options.id,
+      productId: options.prodcutid,
+      // 产品ID
+      productName: options.prodcutname,
       // 获取全部零件或部分零件标记{part：部分；all：全部}
       mark: options.getTypt,
       listData: getListData(),
@@ -49,15 +52,17 @@ Page({
   goPlan(e) {
     // 进入计划页
     let id = e.currentTarget.dataset.id
+    let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/setPlan/setPlan?id=${id}`
+      url: `/pages/setPlan/setPlan?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
     })
   },
   goSchedule(e) {
     // 进入进度录入页
     let id = e.currentTarget.dataset.id
+    let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/setSchedule/setSchedule?id=${id}`
+      url: `/pages/setSchedule/setSchedule?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
     })
   },
   selMonth(e) {
@@ -159,20 +164,20 @@ Page({
   },
   setOptionPlanBar() {
     let chartData = [
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50}
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50}
     ]
     let namelist = []
     let planlist = []
@@ -229,20 +234,20 @@ Page({
   },
   setOptionMonthPlanBar() {
     let chartData = [
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50}
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50},
+      {"name": "零件1", "plan": 100, "schedule": 50}
     ]
     let namelist = []
     let planlist = []
@@ -320,14 +325,14 @@ function getListData() {
   // monthPlan--月计划
   // monthSchedule--月进度
   let data = [
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50}
+    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
+    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50}
   ]
   return data
   // wx.request({
@@ -353,9 +358,9 @@ function getListData() {
 // 计划完成度--饼
 function setOptionPlanPie(chart) {
   let chartData = [
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
-    {"name": "产品3", "value": 80},
+    {"name": "零件1", "value": 100},
+    {"name": "零件2", "value": 30},
+    {"name": "零件3", "value": 80},
   ]
   let data = new Object();
   data.chartData = chartData;
@@ -388,20 +393,20 @@ function setOptionPlanPie(chart) {
 // // 完成数据详情--柱
 // function setOptionPlanBar(chart) {
 //   let chartData = [
-//     {"name": "产品1", "plan": 100, "schedule": 60},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 90},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 80},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 70},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 20},
-//     {"name": "产品1", "plan": 100, "schedule": 30}
+//     {"name": "零件1", "plan": 100, "schedule": 60},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 90},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 80},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 70},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 20},
+//     {"name": "零件1", "plan": 100, "schedule": 30}
 //   ]
 //   let namelist = []
 //   let planlist = []
@@ -445,20 +450,20 @@ function setOptionPlanPie(chart) {
 // // 完成数据详情--月份--柱
 // function setOptionMonthPlanBar(chart) {
 //   let chartData = [
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50}
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50},
+//     {"name": "零件1", "plan": 100, "schedule": 50}
 //   ]
 //   let namelist = []
 //   let planlist = []
