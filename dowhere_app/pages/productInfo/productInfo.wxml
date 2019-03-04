@@ -1,5 +1,21 @@
 <!--pages/productInfo/productInfo.wxml-->
 <!-- 产品详情 -->
+<view class="productInfoTable">
+  <view class="item">
+    <view class="name">名称</view>
+    <view class="con">
+      <image class="img" src="../../img/logo.jpg" />
+    </view>
+  </view>
+  <view class="item">
+    <view class="name">名称</view>
+    <view class="con">描述描述描述描述</view>
+  </view>
+  <view class="item">
+    <view class="name">名称</view>
+    <view class="con">描述描述描述描述</view>
+  </view>
+</view>
 <view class="charts">
   <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
   <ec-canvas id="plan-bar" canvas-id="plan-bar" style="height:{{planBarHeight}}rpx"></ec-canvas>
