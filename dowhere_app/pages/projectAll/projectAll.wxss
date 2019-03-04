@@ -5,8 +5,6 @@
   justify-content: center;
   height: 100rpx;
   width: 750rpx;
-  border: solid #333;
-  border-width: 1rpx 0 1rpx 0;
 }
 
 .timeSel view{
@@ -16,9 +14,11 @@
   font-size: 30rpx;
   height: 100rpx;
   width: 375rpx;
+  background-color: #eee;
 }
 .action{
-  background-color: #999;
+  background-color: #0099FF !important;
+  color: #fff;
 }
 /* 图表显示块 */
 .charts{

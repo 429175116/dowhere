@@ -49,7 +49,7 @@ App({
         },
       },
       backgroundColor: "#ffffff",
-      color: ["#37A2DA", "#32C5E9", "#67E0E3", "#91F2DE", "#FFDB5C", "#FF9F7F"],
+      color: ["#37A2DA", "#f46240", "#facb1e", "#99df20", "#2d7de7", "#FFDB5C", "#FF9F7F"],
       series: [{
         label: {
           normal: {
@@ -100,7 +100,8 @@ App({
           fontSize: 20
         },
       },
-      color: ['#37a2da', '#32c5e9', '#67e0e3'],
+      // color: ['#37a2da', '#32c5e9', '#67e0e3'],
+      color: ['#2d7de7', '#3cb6ff', '#49d3ff'],
       // 控制浮动框的显示
       tooltip: {
         trigger: 'axis',

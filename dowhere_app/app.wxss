@@ -163,3 +163,56 @@
   width: 507rpx;
   border-left: 1rpx solid #333;
 }
+
+
+  
+.listName{
+  width: 750rpx;
+  height:60rpx;
+  line-height:60rpx;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.listName view{
+  float:left;
+  font-weight:600;
+  width:auto;
+  height:60rpx;
+  line-height:60rpx;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 20rpx;
+  color:#333;
+  font-size:35rpx;
+}
+.listCon{
+  /* border: 1rpx solid #333; */
+  height: auto;
+}
+.listCon .title{
+  background-color: #707070;
+  color: #fff;
+}
+.listCon .item {
+  /* border: 1rpx solid #333; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20rpx;
+  width: 710rpx;
+}
+.listCon .item view{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  width: 117rpx;
+  height: 60rpx;
+  border: 1rpx solid #333;
+  border-right: 0;
+  border-bottom: 0;
+  position: relative;
+  font-size: 20rpx;
+}
