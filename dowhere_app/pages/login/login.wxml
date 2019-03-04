@@ -8,12 +8,12 @@
   <view class="form">
     <view class="set">
       <view class="iconfont icon-yonghu"></view>
-      <input type="number" name="tel" value="{{userName}}" bindinput="getUserName" />
+      <input type="number" placeholder="请输入用户名" name="tel" value="{{userName}}" bindinput="getUserName" />
       <view class="iconfont icon-close rightIcon"></view>
     </view>
     <view class="set">
       <view class="iconfont icon-mima"></view>
-      <input type="password" name="name" value="{{userPaw}}" bindinput="getUserPaw" />
+      <input type="password" placeholder="请输入密码" name="name" value="{{userPaw}}" bindinput="getUserPaw" />
       <view class="iconfont icon-biyan rightIcon"></view>
     </view>
     <view class="set sub">

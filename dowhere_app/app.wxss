@@ -71,6 +71,8 @@
 .login .set input{
   width: 330rpx;
   height: 80rpx;
+  font-size: 30rpx;
+  color: #333;
   display: flex;
   align-items: center;
   justify-content: center;
