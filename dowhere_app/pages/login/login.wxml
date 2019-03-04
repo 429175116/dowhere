@@ -8,11 +8,11 @@
   <view class="form">
     <view class="set">
       <view class="iconfont icon-yonghu"></view>
-      <input type="number" value="{{userName}}" bindinput="getUserName" />
+      <input type="number" name="tel" value="{{userName}}" bindinput="getUserName" />
     </view>
     <view class="set">
       <view class="iconfont icon-mima"></view>
-      <input type="password" value="{{userPaw}}" bindinput="getUserPaw" />
+      <input type="password" name="name" value="{{userPaw}}" bindinput="getUserPaw" />
     </view>
     <view class="set sub">
       <view bindtap="submit">登录</view>

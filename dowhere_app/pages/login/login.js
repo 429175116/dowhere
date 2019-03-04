@@ -1,5 +1,6 @@
 // pages/login/login.js
 // const check = require('../../utils/chaeck.js')
+import WxValidate from '../../utils/WxValidate'
 
 Page({
 
@@ -55,7 +56,41 @@ Page({
     //   })
     //   return ''
     // }
-    
+    /**
+     * 4-2(配置规则)
+     */
+    const rules = {
+      name: {
+        required: true,
+        rangelength: [2, 4]
+      },
+      tel: {
+        required: true,
+        tel: true,
+      },
+    }
+    // 验证字段的提示信息，若不传则调用默认的信息
+    const messages = {
+      name: {
+        required: '请输入姓名',
+        rangelength: '请输入2~4个汉字个汉字'
+      },
+      tel: {
+        required: '请输入11位手机号码',
+        tel: '请输入正确的手机号码',
+      },
+      idcard: {
+        required: '请输入身份证号码',
+        idcard: '请输入正确的身份证号码',
+      },
+      regcode: {
+        required: '请输入验证码',
+        minlength: '请输入正确的验证码'
+      },
+    }
+    // 创建实例对象
+    this.WxValidate = new WxValidate(rules, messages)
+
     // 全局变量 存储用户信息
     getApp().globalData.userId = 10;
     wx.redirectTo({
