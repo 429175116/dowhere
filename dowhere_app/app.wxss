@@ -1,12 +1,12 @@
 /**app.wxss**/
 @font-face {
   font-family: 'iconfont';  /* project id 1055287 */
-  src: url('//at.alicdn.com/t/font_1055287_itq1vxen90i.eot');
-  src: url('//at.alicdn.com/t/font_1055287_itq1vxen90i.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1055287_itq1vxen90i.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1055287_itq1vxen90i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1055287_itq1vxen90i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1055287_itq1vxen90i.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1055287_r5gyocvnw2.eot');
+  src: url('//at.alicdn.com/t/font_1055287_r5gyocvnw2.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1055287_r5gyocvnw2.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1055287_r5gyocvnw2.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1055287_r5gyocvnw2.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1055287_r5gyocvnw2.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family:"iconfont" !important;
@@ -17,7 +17,10 @@
 }
 
 .icon-yonghu:before { content: "\e63e"; }
-.icon-mima:before { content: "\e602"; }
+.icon-mima:before { content: "\e626"; }
+.icon-yanzheng:before { content: "\e60b"; }
+.icon-close:before { content: "\e612"; }
+.icon-biyan:before { content: "\e611"; }
 
 
 .container {
@@ -36,6 +39,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom:100rpx;
 }
 .login .logo .img{
   width: 300rpx;
@@ -57,19 +61,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1rpx solid #333;
+  border-bottom: 1rpx solid #78ac47;
   border-right: 0;
-  border-radius: 15rpx 0 0 15rpx;
+  color: #78ac47;
+}
+.login .set .rightIcon{
+  color: #cbcbcb;
 }
 .login .set input{
-  width:400rpx;
+  width: 330rpx;
   height: 80rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1rpx solid #333;
-  border-left: 0;
-  border-radius: 0 15rpx 15rpx 0;
+  border-bottom: 1rpx solid #78ac47;
 }
 .login .sub{
   margin-top: 50rpx;
@@ -80,8 +85,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1rpx solid #333;
-  border-radius: 15rpx;
+  border: 1rpx solid #78ac47;
+  border-radius: 40rpx;
+  color: #fff;
+  background-color: #78ac47;
 }
 .login .verification{
   margin: auto;
@@ -90,36 +97,53 @@
   align-items: center;
   justify-content: center;
 }
-.login .verification view{
-  width: 170rpx;
+.login .verification .iconfont,
+.login .verification .getCode{
   height: 80rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1rpx solid #333;
-  border-radius: 0 15rpx 15rpx 0;
+  border-bottom: 1rpx solid #78ac47;
+}
+.login .verification .getCode{
+  width: 170rpx;
+}
+.login .verification .getCode view{
+  width: 170rpx;
+  height: 60rpx;
+  color: #2c4e0a;
+  background-color: #e5f1dc;
   font-size: 20rpx;
-  color: #0066FF;
+  margin-bottom: 10rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .verification .iconfont{
+  width: 70rpx;
+  color: #78ac47;
 }
 .login .verification input{
-  width: 300rpx;
+  width: 230rpx;
   height: 80rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1rpx solid #333;
-  border-right: 0;
-  border-radius: 15rpx 0 0 15rpx;
+  border-bottom: 1rpx solid #78ac47;
 }
 .registered{
   margin: auto;
   width: 470rpx;
   height: 50rpx;
   font-size: 20rpx;
-  color: #0066FF;
+  color: #78ac47;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.registered .alter {
+  color: #9f9f9f;
 }
 
 
