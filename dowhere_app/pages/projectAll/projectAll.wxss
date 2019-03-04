@@ -17,7 +17,7 @@
   background-color: #eee;
 }
 .action{
-  background-color: #0099FF !important;
+  background-color: #78ac47 !important;
   color: #fff;
 }
 /* 图表显示块 */
@@ -63,15 +63,16 @@
 }
 /* 项目名称 */
 .projectList view{
-  width:auto;
-  height:45rpx;
-  line-height:45rpx;
+  width: auto;
+  height: 60rpx;
+  line-height: 60rpx;
   padding:0 20rpx;
   display:inline-block;
   margin:20rpx;
-  background-color:#e5ecf2;
-  color:#999;
-  border-radius:10rpx;
+  /* background-color:#e5ecf2; */
+  color:#444;
+  border: 1rpx solid #78ac47;
+  border-radius:30rpx;
   font-size:30rpx;
 }
 /* 选自进入项目或产品 */

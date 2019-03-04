@@ -16,32 +16,13 @@
   display:block;
 }
 
-.listCon .item view:last-of-type{
-  border-right: 1rpx solid #333;
-}
-.listCon .item:last-of-type view{
-  border-bottom: 1rpx solid #333;
-}
 .item .info {
   width: 60rpx !important;
   height: 40rpx !important;
-  background-color: #0099FF;
   font-size: 20rpx !important;
   border: 0 !important;
   color: #fff;
   border-radius: 5rpx;
-}
-.complete, .undone{
-  position: absolute !important;
-  left: 0;
-  z-index: -10;
-  border: 0 !important;
-}
-.complete{
-  background-color: #32c5e9;
-}
-.undone{
-  background-color: #67e0e3;
 }
 
 .monthlyData{
