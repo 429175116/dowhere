@@ -7,23 +7,31 @@ page{
     margin: 0 20rpx;
     font-size: 30rpx;
     margin-bottom: 50rpx;
+    color: #333;
   }
   .pageTitle text{
     width: 40rpx;
+    color: #333;
   }
   .setPlanform{
     width: 710rpx;
     margin: 0 20rpx;
     font-size: 30rpx;
+    margin-bottom: 20rpx;
   }
   .setPlanform label {
     margin: 10rpx 0;
+    font-size: 25rpx;
+    font-weight: 600;
   }
   
   input,textarea{
-    border: 1rpx solid #999;
+    border: 1rpx solid #acacac;
     width: 710rpx;
+    height: 65rpx;
     margin: 10rpx 0;
+    color: #333;
+    border-radius: 10rpx;
   }
   .submit{
     display: flex;
@@ -32,12 +40,16 @@ page{
     width: 710rpx;
     margin: 0 20rpx;
     font-size: 30rpx;
+    margin-top: 50rpx;
   }
   .submit view {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 300rpx;
-    height: 100rpx;
-    border: 1rpx solid #999;
+    width: 700rpx;
+    height: 90rpx;
+    background-color: #78ac47;
+    border-radius: 45rpx;
+    color: #fff;
+    font-size: 35rpx;
   }
