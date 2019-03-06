@@ -1,76 +1,81 @@
 // pages/alterPassword/alterPassword.js
+import check from '../../utils/check'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userName: '',
+    userPaw: '',
+    userPaw2: '',
+    verificationCode: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad(options) {
+    // 创建校验用的示例对象
+    this.check = new check()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage() {
 
   },
   getVerificationCode() {
-    // if (this.check.isPhone(this.userName)) {
-    //   wx.showModal({
-    //     title: '',
-    //     content: '请输入正确的手机号'
-    //   })
-    //   return ''
-    // }
+    if (this.check.isPhone(this.data.userName)) {
+      wx.showModal({
+        title: '',
+        content: '请输入正确的手机号'
+      })
+      return ''
+    }
     // 获取验证码
     console.log('获取验证码')
   },
@@ -96,20 +101,20 @@ Page({
   },
   submit() {
     // console.log('提交')
-    // if (this.check.isNull(this.userName) || this.check.isNull(this.userPaw) || this.check.isNull(this.userPaw2) || this.check.isNull(this.verificationCode)) {
-    //   wx.showModal({
-    //     title: '',
-    //     content: '请输入注册信息'
-    //   })
-    //   return ''
-    // }
-    // if (this.userPaw !== this.userPaw2) {
-    //   wx.showModal({
-    //     title: '',
-    //     content: '两次输入的密码不同'
-    //   })
-    //   return ''
-    // }
+    if (this.check.isNull(this.data.userName) || this.check.isNull(this.data.userPaw) || this.check.isNull(this.data.userPaw2) || this.check.isNull(this.data.verificationCode)) {
+      wx.showModal({
+        title: '',
+        content: '请输入注册信息'
+      })
+      return ''
+    }
+    if (this.data.userPaw !== this.data.userPaw2) {
+      wx.showModal({
+        title: '',
+        content: '两次输入的密码不同'
+      })
+      return ''
+    }
     wx.request({
       url: `${this.$parent.globalData.requestUrl}/api/logo`,
       method: 'POST',
