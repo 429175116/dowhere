@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/setSchedule/setSchedule",
     "pages/setPlan/setPlan",
-    "pages/login/login",
     "pages/productInfo/productInfo",
     "pages/projectAll/projectAll",
     "pages/product/product",
