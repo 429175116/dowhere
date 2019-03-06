@@ -5,6 +5,7 @@
     <!-- logo图片 -->
     <image class="img" src="../../img/logo.jpg" />
   </view>
+  <!-- ∑™ -->
   <view class="form">
     <view class="set">
       <view class="iconfont icon-yonghu"></view>
