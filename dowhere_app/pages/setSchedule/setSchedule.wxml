@@ -9,7 +9,7 @@
   <label>日期:</label>
   <!-- <picker mode="date" value="{{dates}}" start="1978-01-01" end="2017-1-23" bindchange="bindPickerChange">   -->
   <picker mode="date" value="{{dates}}" bindchange="bindPickerChange">  
-  <input type="number" value="{{dates}}" placeholder="选择日期" />
+  <input type="number" value="{{dates}}" disabled="disabled" placeholder="选择日期" />
   </picker>
 </view>
 <view class="setPlanform">

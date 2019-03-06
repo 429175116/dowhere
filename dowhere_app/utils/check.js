@@ -62,6 +62,24 @@ class check{
       return true
     }
   }
+  // 是否为整数
+  isInt(num) {
+    var reg = /^\d+$/
+    if (reg.test(num)) {
+      return false
+    } else {
+      return true
+    }
+  }
+  // 是否为时间格式
+  isDate(date) {
+    var reg = /^(\d{4})-(\d{2})-(\d{2})$/
+    if (reg.test(date)) {
+      return false
+    } else {
+      return true
+    }
+  }
   // 判断是否为url地址
   isUrl(str) {
     var rex = /^(http|https){1}:\/\/[^\s]+$/

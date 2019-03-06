@@ -1,17 +1,16 @@
 {
   "pages": [
+    "pages/setSchedule/setSchedule",
+    "pages/setPlan/setPlan",
     "pages/login/login",
     "pages/productInfo/productInfo",
-    
-    
     "pages/projectAll/projectAll",
     "pages/product/product",
     "pages/department/department",
-    "pages/setPlan/setPlan",
+    
     "pages/registered/registered",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/setSchedule/setSchedule",
     "pages/alterPassword/alterPassword"
   ],
   "window": {

@@ -1,4 +1,5 @@
 // pages/setSchedule/setSchedule.js
+import check from '../../utils/check'
 var app = getApp()
 Page({
 
@@ -20,6 +21,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    // 创建校验用的示例对象
+    this.check = new check()
     app.globalData.userId = 10
     this.setData({
       userId: app.globalData.userId,
@@ -51,7 +54,21 @@ Page({
     console.log(this.data.remarks+'====')
   },
   submit(){
-    console.log(this.data.remarks+'计划')
+    if (this.check.isInt(this.data.planData)) {
+      wx.showModal({
+        title: '',
+        content: '请输入计划'
+      })
+      return ''
+    }
+    if (this.check.isDate(this.data.dates)) {
+      wx.showModal({
+        title: '',
+        content: '请选择时间'
+      })
+      return ''
+    }
+    console.log(this.data.planData+'计划')
     console.log(this.data.dates+ '时间')
     console.log(this.data.remarks+'备注')
     console.log(this.data.userId)
