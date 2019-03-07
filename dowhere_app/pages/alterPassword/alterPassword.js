@@ -10,7 +10,11 @@ Page({
     userName: '',
     userPaw: '',
     userPaw2: '',
-    verificationCode: ''
+    verificationCode: '',
+    passwordInputType: 'password',
+    passwordIcon: 'zhengyan',
+    passwordInputType2: 'password',
+    passwordIcon2: 'zhengyan'
   },
 
   /**
@@ -99,6 +103,37 @@ Page({
     this.setData({
       verificationCode: e.detail.value
     })
+  },
+  delUserName() {
+    this.setData({
+      userName: ''
+    })
+  },
+  showPassword() {
+    if (this.data.passwordInputType == 'password') {
+      this.setData({
+        passwordInputType: 'text',
+        passwordIcon: 'biyan'
+      })
+    } else {
+      this.setData({
+        passwordInputType: 'password',
+        passwordIcon: 'zhengyan'
+      })
+    }
+  },
+  showPassword2() {
+    if (this.data.passwordInputType2 == 'password') {
+      this.setData({
+        passwordInputType2: 'text',
+        passwordIcon2: 'biyan'
+      })
+    } else {
+      this.setData({
+        passwordInputType2: 'password',
+        passwordIcon2: 'zhengyan'
+      })
+    }
   },
   submit() {
     // console.log('提交')

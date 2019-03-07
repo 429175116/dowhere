@@ -9,17 +9,17 @@
     <view class="set">
       <view class="iconfont icon-yonghu"></view>
       <input type="number" placeholder="请输入用户名(电话)" value="{{userName}}" bindinput="getUserName" />
-      <view class="iconfont icon-close rightIcon"></view>
+      <view class="iconfont icon-close rightIcon" bindtap="delUserName"></view>
     </view>
     <view class="set">
       <view class="iconfont icon-mima"></view>
-      <input type="password" placeholder="请输入密码" value="{{userPaw}}" bindinput="getUserPaw" />
-      <view class="iconfont icon-biyan rightIcon"></view>
+      <input type="{{passwordInputType}}" placeholder="请输入密码" value="{{userPaw}}" bindinput="getUserPaw" />
+      <view class="iconfont icon-{{passwordIcon}} rightIcon" bindtap="showPassword"></view>
     </view>
     <view class="set">
       <view class="iconfont icon-mima"></view>
-      <input type="password" placeholder="确认密码" value="{{userPaw2}}" bindinput="getUserPaw2" />
-      <view class="iconfont icon-biyan rightIcon"></view>
+      <input type="{{passwordInputType2}}" placeholder="确认密码" value="{{userPaw2}}" bindinput="getUserPaw2" />
+      <view class="iconfont icon-{{passwordIcon2}} rightIcon" bindtap="showPassword2"></view>
     </view>
     <view class="verification">
       <view class="iconfont icon-yanzheng"></view>

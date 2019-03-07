@@ -8,7 +8,9 @@ Page({
    */
   data: {
     userName: '18700458359',
-    userPaw: '123'
+    userPaw: '123',
+    passwordInputType: 'password',
+    passwordIcon: 'zhengyan'
   },
 
   /**
@@ -42,6 +44,24 @@ Page({
     this.setData({
       userPaw: e.detail.value
     })
+  },
+  delUserName() {
+    this.setData({
+      userName: ''
+    })
+  },
+  showPassword() {
+    if (this.data.passwordInputType == 'password') {
+      this.setData({
+        passwordInputType: 'text',
+        passwordIcon: 'biyan'
+      })
+    } else {
+      this.setData({
+        passwordInputType: 'password',
+        passwordIcon: 'zhengyan'
+      })
+    }
   },
   submit() {
     if (this.check.isPhone(this.data.userName)) {
