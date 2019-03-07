@@ -1,5 +1,6 @@
 // pages/registered/registered.js
 import check from '../../utils/check'
+const app = getApp()
 Page({
 
   /**
@@ -122,21 +123,27 @@ Page({
       })
       return ''
     }
+    if (this.check.isNull(this.data.verificationCode)) {
+      wx.showModal({
+        title: '',
+        content: '请输入验证码'
+      })
+      return ''
+    }
+    
+    return
     wx.request({
       url: `${app.globalData.requestUrl}/api/login`,
       method: 'POST',
       data: {
         mobile: this.data.userName,
-        password: this.data.userPaw
+        password: this.data.userPaw,
+        code: this.data.verificationCode
       },
       success: data => {
         if (data.code !== '0') {
-          // 登陆信息存入本地
-          this.setUserLoginInfo(this.data.userName, this.data.userPaw)
-          // 根据不同的用户权限进入不同的页面
-          wx.redirectTo({
-            url: `/pages/projectAll/projectAll?`
-          })
+          // 返回登录页
+          wx.navigateBack()
         } else {
           wx.showModal({
             title: '',
