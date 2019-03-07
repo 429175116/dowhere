@@ -1,5 +1,5 @@
-<!--pages/productInfo/productInfo.wxml-->
-<!-- 产品详情 -->
+<!--pages/components/components.wxml-->
+<!-- 零件详情 -->
 <view class="productInfoTable">
   <view class="item productTitle">
     <view class="name">名称</view>
@@ -67,8 +67,10 @@
         {{item.monthPlan - item.monthSchedule}}
       </view>
       <view>
-        <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goComponents">详情</view>
+        <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goPlan">计划</view>
+        <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goSchedule">进度</view>
       </view>
     </view>
   </block>
 </view>
+

@@ -1,4 +1,4 @@
-// pages/productInfo/productInfo.js
+// pages/components/components.js
 import * as echarts from '../../ec-canvas/echarts';
 const app = getApp();
 Page({
@@ -9,7 +9,7 @@ Page({
   data: {
     listData: [],
     time: '',
-    monthList:[],
+    monthList: [],
     monthPlanBarHeight: 0,
     planBarHeight: 0,
     productId: '',
@@ -34,7 +34,7 @@ Page({
       // 获取当前时间，用于月份显示，只显示已经存在的月份
       monthList: getMonthList(),
       time: month + 1
-      
+
     })
   },
 
@@ -49,11 +49,20 @@ Page({
     this.setOptionPlanBar()
     this.setOptionMonthPlanBar()
   },
-  goComponents(e) {
+  goPlan(e) {
+    // 进入计划页
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/components/components?prodcutid=${id}&prodcutname=${name}&getTypt=all`
+      url: `/pages/setPlan/setPlan?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
+    })
+  },
+  goSchedule(e) {
+    // 进入进度录入页
+    let id = e.currentTarget.dataset.id
+    let name = e.currentTarget.dataset.name
+    wx.navigateTo({
+      url: `/pages/setSchedule/setSchedule?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
     })
   },
   selMonth(e) {
@@ -155,20 +164,20 @@ Page({
   },
   setOptionPlanBar() {
     let chartData = [
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50}
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 }
     ]
     let namelist = []
     let planlist = []
@@ -202,7 +211,7 @@ Page({
       return chart;
     });
     // 图表渲染
-    
+
     // wx.request({
     //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
     //   method: 'POST',
@@ -213,7 +222,7 @@ Page({
     //   success: data => {
     //     if (data.data.success) {
     //       // data = data.data.novels
-          
+
     //     } else {
     //       wx.showModal({
     //         title: '',
@@ -225,20 +234,20 @@ Page({
   },
   setOptionMonthPlanBar() {
     let chartData = [
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50}
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 }
     ]
     let namelist = []
     let planlist = []
@@ -272,7 +281,7 @@ Page({
       return chart;
     });
     // 图表渲染
-    
+
     // wx.request({
     //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
     //   method: 'POST',
@@ -283,7 +292,7 @@ Page({
     //   success: data => {
     //     if (data.data.success) {
     //       // data = data.data.novels
-          
+
     //     } else {
     //       wx.showModal({
     //         title: '',
@@ -302,8 +311,8 @@ function getMonthList() {
   let month = date.getMonth()
   let i = 0;
   let monthList = []
-  for (let i = 0;i <= month; i++ ) {
-    monthList.push({"monthName": `${i+1}月`, "month": i+1}) 
+  for (let i = 0; i <= month; i++) {
+    monthList.push({ "monthName": `${i + 1}月`, "month": i + 1 })
   }
   return monthList
 }
@@ -316,14 +325,14 @@ function getListData() {
   // monthPlan--月计划
   // monthSchedule--月进度
   let data = [
-    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50}
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 }
   ]
   return data
   // wx.request({
@@ -336,7 +345,7 @@ function getListData() {
   //   success: data => {
   //     if (data.data.success) {
   //       // data = data.data.novels
-        
+
   //     } else {
   //       wx.showModal({
   //         title: '',
@@ -349,9 +358,9 @@ function getListData() {
 // 计划完成度--饼
 function setOptionPlanPie(chart) {
   let chartData = [
-    {"name": "零件1", "value": 100},
-    {"name": "零件2", "value": 30},
-    {"name": "零件3", "value": 80},
+    { "name": "零件1", "value": 100 },
+    { "name": "零件2", "value": 30 },
+    { "name": "零件3", "value": 80 },
   ]
   let data = new Object();
   data.chartData = chartData;
@@ -368,7 +377,7 @@ function setOptionPlanPie(chart) {
   //   success: data => {
   //     if (data.data.success) {
   //       // data = data.data.novels
-        
+
   //     } else {
   //       wx.showModal({
   //         title: '',
@@ -428,7 +437,7 @@ function setOptionPlanPie(chart) {
 //   //   success: data => {
 //   //     if (data.data.success) {
 //   //       // data = data.data.novels
-        
+
 //   //     } else {
 //   //       wx.showModal({
 //   //         title: '',
@@ -485,7 +494,7 @@ function setOptionPlanPie(chart) {
 //   //   success: data => {
 //   //     if (data.data.success) {
 //   //       // data = data.data.novels
-        
+
 //   //     } else {
 //   //       wx.showModal({
 //   //         title: '',

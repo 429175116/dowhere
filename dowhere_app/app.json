@@ -7,11 +7,12 @@
     "pages/projectAll/projectAll",
     "pages/product/product",
     "pages/department/department",
-    
     "pages/registered/registered",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/alterPassword/alterPassword"
+    "pages/alterPassword/alterPassword",
+    "pages/components/components",
+    "pages/departmentList/departmentList"
   ],
   "window": {
     "backgroundTextStyle": "light",

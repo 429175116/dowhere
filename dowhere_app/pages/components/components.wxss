@@ -1,0 +1,62 @@
+/* pages/components/components.wxss */
+/* 图表显示块 */
+.charts{
+  height: auto;
+}
+/* 图表样式 */
+#plan-pie,
+#plan-bar{
+  width: 750rpx;
+  height: 500rpx;
+  display:block;
+}
+#monthPlan-bar{
+  width: 600rpx;
+  height: 500rpx;
+  display:block;
+}
+
+.item .info {
+  width: 60rpx !important;
+  height: 40rpx !important;
+  font-size: 20rpx !important;
+  border: 0 !important;
+  color: #fff;
+  border-radius: 5rpx;
+}
+
+.monthlyData{
+  width: 750rpx;
+  height: auto;
+}
+.monthlyData .table{
+  width: 710rpx;
+  margin: 0 20rpx;
+}
+.monthlyData .table .item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 710rpx;
+  min-height: 60rpx;
+}
+.month{
+  width: 100rpx;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.monthChart{
+  width: 600rpx;
+  height: 500rpx;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+.hideMonthChart{
+  width: 600rpx;
+  height:  60rpx !important;
+}
+
+    
