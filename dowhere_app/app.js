@@ -34,7 +34,9 @@ App({
     })
   },
   globalData: {
-    userId: null
+    userId: null,
+    requestUrl: 'http://192.168.1.125' //线下
+    // requestUrl: 'http://192.168.1.125/' //线上
   },
   pieShow(data, chart) {
     let chartName = data.chartName

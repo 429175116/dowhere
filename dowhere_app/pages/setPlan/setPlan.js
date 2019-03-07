@@ -1,6 +1,6 @@
 // pages/setPlan/setPlan.js
 import check from '../../utils/check'
-var app = getApp()
+const app = getApp()
 Page({
 
   /**

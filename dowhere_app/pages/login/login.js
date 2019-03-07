@@ -1,14 +1,14 @@
 // pages/login/login.js
 import check from '../../utils/check'
-
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userName: '',
-    userPaw: ''
+    userName: '18700458359',
+    userPaw: '123'
   },
 
   /**
@@ -17,6 +17,8 @@ Page({
   onLoad(options) {
     // 创建校验用的示例对象
     this.check = new check()
+
+    this.getUserLoginInfo()
   },
   // 忘记密码
   alterPassword() {
@@ -56,40 +58,58 @@ Page({
       })
       return ''
     }
-    // 全局变量 存储用户信息
-    getApp().globalData.userId = 10;
-    wx.redirectTo({
-      url: `/pages/projectAll/projectAll?`
-    })
-    return ''
     wx.request({
-      url: `${this.$parent.globalData.requestUrl}/api/logo`,
+      url: `${app.globalData.requestUrl}/api/login`,
       method: 'POST',
       data: {
-        userName: this.data.userName,
-        userPaw: this.data.userPaw
+        mobile: this.data.userName,
+        password: this.data.userPaw
       },
       success: data => {
-        if (data.data.success) {
-          // data = data.data.novels
-          // this.searchBook = data.data
+        if (data.code !== '0') {
+          // 登陆信息存入本地
+          this.setUserLoginInfo(this.data.userName, this.data.userPaw)
           // 根据不同的用户权限进入不同的页面
           wx.redirectTo({
-            // url: `/pages/commodity/commodity?id=${id}`
-            url: `/pages/registered/registered?`
+            url: `/pages/projectAll/projectAll?`
           })
           // 全局变量 存储用户信息
-          getApp().globalData.userId = 10;
-          this.$apply()
+          app.globalData.userId = 10;
+          // this.$apply()
         } else {
           wx.showModal({
             title: '',
-            content: data.data.errmsg
+            content: data.msg
           })
         }
       }
     })
     // 
+  },
+  getUserLoginInfo() {
+    wx.getStorage({
+      key: 'userLoginInfo',
+      success: res => {
+        console.log(res)
+        if (res.data) {
+          let loginInfo = res.data
+          loginInfo = loginInfo.split(',------,')
+
+          this.setData({
+            userName: loginInfo[0],
+            userPaw: loginInfo[1]
+          })
+          // console.log(res)
+          this.submit()
+          // return `${name},------,${password}`
+        } else {
+          
+        }
+      }
+    })
+  },
+  setUserLoginInfo(name, password) {
+    wx.setStorageSync('userLoginInfo', `${name},------,${password}`)
   }
 
 })

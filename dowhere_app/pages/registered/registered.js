@@ -101,10 +101,17 @@ Page({
   },
   submit() {
     // console.log('提交')
-    if (this.check.isNull(this.data.userName) || this.check.isNull(this.data.userPaw) || this.check.isNull(this.data.userPaw2) || this.check.isNull(this.data.verificationCode)) {
+    if (this.check.isPhone(this.data.userName)) {
       wx.showModal({
         title: '',
-        content: '请输入注册信息'
+        content: '请输入正确的账号'
+      })
+      return ''
+    }
+    if (this.check.isNull(this.data.userPaw)) {
+      wx.showModal({
+        title: '',
+        content: '请输入密码'
       })
       return ''
     }
@@ -116,22 +123,24 @@ Page({
       return ''
     }
     wx.request({
-      url: `${this.$parent.globalData.requestUrl}/api/logo`,
+      url: `${app.globalData.requestUrl}/api/login`,
       method: 'POST',
       data: {
-        userName: this.data.userName,
-        userPaw: this.data.userPaw
+        mobile: this.data.userName,
+        password: this.data.userPaw
       },
       success: data => {
-        if (data.data.success) {
-          // data = data.data.novels
-          // this.searchBook = data.data
-          this.$redirect(`/pages/registered`)
-          this.$apply()
+        if (data.code !== '0') {
+          // 登陆信息存入本地
+          this.setUserLoginInfo(this.data.userName, this.data.userPaw)
+          // 根据不同的用户权限进入不同的页面
+          wx.redirectTo({
+            url: `/pages/projectAll/projectAll?`
+          })
         } else {
           wx.showModal({
             title: '',
-            content: data.data.errmsg
+            content: data.msg
           })
         }
       }
