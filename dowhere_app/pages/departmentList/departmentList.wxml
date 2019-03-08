@@ -1,2 +1,9 @@
 <!--pages/departmentList/departmentList.wxml-->
-<text>pages/departmentList/departmentList.wxml</text>
+<view class="departmentList">
+    <block wx:for="{{listData}}" wx:for-item="item" index="index">
+        <view class="item" data-id="{{item.id}}" bindtap="goDepartment">
+            <view class="name">{{item.name}}</view>
+            <view class="go" data-id="{{item.id}}">进入</view>
+        </view>
+    </block>
+</view>

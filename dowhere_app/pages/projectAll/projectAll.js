@@ -108,13 +108,13 @@ Page({
   // 产看部门
   goDepartment(e) {
     wx.navigateTo({
-      url: `/pages/department/department?projectid=${e.currentTarget.dataset.id}`
+      url: `/pages/departmentList/departmentList?projectid=${e.currentTarget.dataset.id}`
     })
   },
   // 查看产品
   goProduct(e) {
     wx.navigateTo({
-      url: `/pages/product/product??projectid=${e.currentTarget.dataset.id}`
+      url: `/pages/product/product?projectid=${e.currentTarget.dataset.id}`
     })
   },
   getProjectList() {

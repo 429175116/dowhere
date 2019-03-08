@@ -78,6 +78,10 @@ Page({
       })
       return ''
     }
+    wx.redirectTo({
+      url: `/pages/projectAll/projectAll?`
+    })
+    return
     wx.request({
       url: `${app.globalData.requestUrl}/api/login`,
       method: 'POST',

@@ -11,8 +11,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/alterPassword/alterPassword",
-    "pages/components/components",
-    "pages/departmentList/departmentList"
+    "pages/departmentList/departmentList",
+    "pages/components/components"
   ],
   "window": {
     "backgroundTextStyle": "light",
