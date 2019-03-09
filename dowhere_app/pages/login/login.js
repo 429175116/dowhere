@@ -78,6 +78,13 @@ Page({
       })
       return ''
     }
+    if (this.data.userPaw.length < 6 || this.data.userPaw.length > 15) {
+      wx.showModal({
+        title: '',
+        content: '密码长度为6-15位'
+      })
+      return ''
+    }
     wx.redirectTo({
       url: `/pages/projectAll/projectAll?`
     })
