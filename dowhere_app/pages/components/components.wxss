@@ -17,17 +17,21 @@
 }
 
 .item .info {
-  width: 60rpx !important;
-  height: 40rpx !important;
+  width: 100rpx !important;
+  height: 60rpx !important;
   font-size: 20rpx !important;
   border: 0 !important;
   color: #fff;
   border-radius: 5rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .monthlyData{
   width: 750rpx;
   height: auto;
+  margin-bottom: 100rpx;
 }
 .monthlyData .table{
   width: 710rpx;
@@ -57,6 +61,14 @@
 .hideMonthChart{
   width: 600rpx;
   height:  60rpx !important;
+}
+.monthChart .selData{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.hideMonthChart view{
+  display: none !important;
 }
 
     

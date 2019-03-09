@@ -194,5 +194,88 @@ App({
       ]
     };
     chart.setOption(option);
+  },
+  monthBarShow(data, chart) {
+    // 产品名，计划，进度，剩余
+    let namelist = data.namelist
+    // let planlist = data.planlist
+    let schedulelist = data.schedulelist
+    let chartName = data.chartName
+    // let chartSubtext = data.chartSubtext
+    const option = {
+      title:{
+        text: chartName,
+        x: "center",
+        textStyle: {
+          fontSize: 20
+        },
+      },
+      // color: ['#37a2da', '#32c5e9', '#67e0e3'],
+      color: ['#78ac47', '#a7dd54', '#b2ca47'],
+      // 控制浮动框的显示
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+      },
+      // legend: {
+      //   top: 40,
+      //   data: ['计划']
+      // },
+      grid: {
+        left: 10,
+        right: 10,
+        bottom: 10,
+        top: 70,
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          axisLabel: {
+            color: '#666',
+            fontSize: 14
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'category',
+          axisTick: { show: false },
+          //此处写入图表展示的数据--名称
+          data: namelist,
+          axisLine: {
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          axisLabel: {
+            color: '#666',
+            fontSize: 14
+          }
+        }
+      ],
+      series: [
+        {
+          name: '完成',
+          type: 'bar',
+          stack: '总量',
+          label: {
+            normal: {
+              // show: true
+            }
+          },
+          //此处写入图表展示的数据--进度
+          data: schedulelist
+        }
+      ]
+    };
+    chart.setOption(option);
   }
 })

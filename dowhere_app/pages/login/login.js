@@ -8,7 +8,7 @@ Page({
    */
   data: {
     userName: '18700458359',
-    userPaw: '123',
+    userPaw: '123456',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
   },

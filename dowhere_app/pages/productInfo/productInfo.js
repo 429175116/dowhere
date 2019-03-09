@@ -225,37 +225,24 @@ Page({
   },
   setOptionMonthPlanBar() {
     let chartData = [
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50},
-      {"name": "零件1", "plan": 100, "schedule": 50}
+      { "name": "计划", "schedule": 100 },
+      { "name": "累积", "schedule": 80 },
+      { "name": "1号", "schedule": 20 },
+      { "name": "2号", "schedule": 20 },
+      { "name": "3号", "schedule": 20 },
+      { "name": "4号", "schedule": 20 },
     ]
     let namelist = []
-    let planlist = []
     let schedulelist = []
     let remainderlist = []
     let i = 0;
     for (i in chartData) {
       namelist.push(chartData[i].name)
-      planlist.push(chartData[i].plan)
       schedulelist.push(chartData[i].schedule)
-      remainderlist.push(chartData[i].schedule - chartData[i].plan)
     }
     let data = new Object();
     data.namelist = namelist;
-    data.planlist = planlist;
     data.schedulelist = schedulelist;
-    data.remainderlist = remainderlist;
     data.chartName = `${this.data.time}月进度`;
     // 计算图表显示高度
     this.setData({
@@ -267,12 +254,12 @@ Page({
         width: width,
         height: height
       });
-      app.barShow(data, chart)
+      app.monthBarShow(data, chart)
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
     // 图表渲染
-    
+
     // wx.request({
     //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
     //   method: 'POST',
@@ -283,7 +270,7 @@ Page({
     //   success: data => {
     //     if (data.data.success) {
     //       // data = data.data.novels
-          
+
     //     } else {
     //       wx.showModal({
     //         title: '',
@@ -349,9 +336,8 @@ function getListData() {
 // 计划完成度--饼
 function setOptionPlanPie(chart) {
   let chartData = [
-    {"name": "零件1", "value": 100},
-    {"name": "零件2", "value": 30},
-    {"name": "零件3", "value": 80},
+    {"name": "完成", "value": 100},
+    {"name": "剩余", "value": 30}
   ]
   let data = new Object();
   data.chartData = chartData;

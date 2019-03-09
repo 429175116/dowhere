@@ -29,13 +29,18 @@
       <view class="item" data-month="{{item.month}}" bindtap="selMonth">
         <view class="month">{{item.monthName}}</view>
         <view class="monthChart {{time==item.month?'':'hideMonthChart'}}" style="height:{{monthPlanBarHeight}}rpx">
-          <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar" ec="{{ ec }}" style="height:{{monthPlanBarHeight}}rpx"></ec-canvas>
+          <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar" ec="{{ ec }}" style="height:{{monthPlanBarHeight-100}}rpx"></ec-canvas>
+          <view class="selData">
+            <view class="info" bindtap="goPlan">计划</view>
+            <view class="info" bindtap="goSchedule">进度</view>
+          </view>
         </view>
+        
       </view>
     </block>
   </view>
 </view>
-<view class="listName">
+<!-- <view class="listName">
   <view>一区</view>
 </view>
 <view class="listCon">
@@ -72,5 +77,5 @@
       </view>
     </view>
   </block>
-</view>
+</view> -->
 
