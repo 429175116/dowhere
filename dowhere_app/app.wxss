@@ -256,10 +256,10 @@
   border: 0 !important;
 }
 .undone{
-  background-color:#a7dd54;
+  background-color:#F56041;
 }
 .complete{
-  background-color:#78ac47;
+  background-color:#78AA47;
 }
 
 .item .info{
