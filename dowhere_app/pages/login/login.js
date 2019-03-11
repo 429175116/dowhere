@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458359',
+    userName: '18700458351',
     userPaw: '123456',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
@@ -85,8 +85,23 @@ Page({
       })
       return ''
     }
+    let gourl = ''
+    if (this.data.userName == '18700458351') {
+      // 最高权限，一级权限---产品,设备
+      gourl = '/pages/projectAll/projectAll?lv=1'
+    } else if (this.data.userName == '18700458352') {
+      // 一级权限--仅有产品
+      gourl = '/pages/projectAll/projectAll?lv=2'
+    } else if (this.data.userName == '18700458353') {
+      // 一级权限--仅有部门
+      gourl = '/pages/projectAll/projectAll?lv=3'
+    } else if (this.data.userName == '18700458354') {
+      // 二级权限--输入
+      gourl = '/pages/projectAll/projectAll?lv=4'
+    }
+    console.log(gourl)
     wx.redirectTo({
-      url: `/pages/projectAll/projectAll?`
+      url: gourl
     })
     return
     wx.request({

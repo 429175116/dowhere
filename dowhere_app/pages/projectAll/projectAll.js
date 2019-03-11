@@ -6,13 +6,16 @@ Page({
     userId: null,
     projectListData: [],
     time: 'month',
-    planBarHeight: 0
+    planBarHeight: 0,
+    lv: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    
     this.setData({
+      lv: options.lv,
       userId: app.globalData.userId
     })
     console.log(this.data.userId)
@@ -80,7 +83,7 @@ Page({
   // 查看产品列表页
   goProduct(e) {
     wx.navigateTo({
-      url: `/pages/product/product?projectid=${e.currentTarget.dataset.id}`
+      url: `/pages/product/product?projectid=${e.currentTarget.dataset.id}&lv=${this.data.lv}`
     })
   },
   getProjectList() {
@@ -108,28 +111,34 @@ Page({
   },
   // 点击按钮后初始化图表
   init(time) {
-    this.quantityPie.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
+    // if (this.data.lv == "1" || this.data.lv == "3") {
+      this.quantityPie.init((canvas, width, height) => {
+        // 获取组件的 canvas、width、height 后的回调函数
+        // 在这里初始化图表
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height
+        });
+        setOptionQuantityPie(chart, time);
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
       });
-      setOptionQuantityPie(chart, time);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-    this.planPie.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
+    // }
+    
+    // if (this.data.lv == "1" || this.data.lv == "2") {
+      this.planPie.init((canvas, width, height) => {
+        // 获取组件的 canvas、width、height 后的回调函数
+        // 在这里初始化图表
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height
+        });
+        setOptionPlanPie(chart, time);
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
       });
-      setOptionPlanPie(chart, time);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
+    // }
+    
     // this.planBar.init((canvas, width, height) => {
     //   // 获取组件的 canvas、width、height 后的回调函数
     //   // 在这里初始化图表
@@ -182,8 +191,14 @@ Page({
     data.remainderlist = remainderlist;
     data.chartName = '各区进度';
     // 计算图表显示高度
+    let k = 100
+    if (chartData.length < 10) {
+      k = 150
+    } else if (chartData.length < 5) {
+      k = 200
+    }
     this.setData({
-      planBarHeight: 100 * chartData.length
+      planBarHeight: k * chartData.length
     })
     this.planBar = this.selectComponent('#plan-bar');
     this.planBar.init((canvas, width, height) => {

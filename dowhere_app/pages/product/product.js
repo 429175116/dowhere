@@ -25,6 +25,7 @@ Page({
     //   projectListData: projectListData
     // })
     this.setData({
+      lv: options.lv,
       projectListData: projectListData,
       listData: getListData()
     })
@@ -45,6 +46,11 @@ Page({
     let name = e.currentTarget.dataset.name
     wx.navigateTo({
       url: `/pages/productInfo/productInfo?prodcutid=${id}&prodcutname=${name}&getTypt=all`
+    })
+  },
+  goProduct() {
+    wx.navigateTo({
+      url: `/pages/department/department`
     })
   },
 
@@ -91,57 +97,63 @@ Page({
   },
   // 点击按钮后初始化图表
   init(time) {
-    this.planPie.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
+    if (this.data.lv == "1" || this.data.lv == "3") {
+      this.planPie.init((canvas, width, height) => {
+        // 获取组件的 canvas、width、height 后的回调函数
+        // 在这里初始化图表
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height
+        });
+        setOptionPlanPie(chart, time);
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
       });
-      setOptionPlanPie(chart, time);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-    this.quantityPie.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
+    }
+    
+    if (this.data.lv == "1" || this.data.lv == "2") {
+      this.quantityPie.init((canvas, width, height) => {
+        // 获取组件的 canvas、width、height 后的回调函数
+        // 在这里初始化图表
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height
+        });
+        setQuantityPie(chart, time);
+        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+        return chart;
       });
-      setQuantityPie(chart, time);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-    // this.planBar.init((canvas, width, height) => {
-    //   // 获取组件的 canvas、width、height 后的回调函数
-    //   // 在这里初始化图表
-    //   const chart = echarts.init(canvas, null, {
-    //     width: width,
-    //     height: height
-    //   });
-    //   setOptionPlanBar(chart, time);
-    //   // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-    //   return chart;
-    // });
+    }
   },
   setOptionPlanBar() {
-    let chartData = [
-      {"name": "加一", "plan": 100, "schedule": 50},
-      {"name": "加二", "plan": 100, "schedule": 50},
-      {"name": "加三", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50}
-    ]
+    let chartData = []
+    if(this.data.lv == '1') {
+      chartData = [
+        {"name": "产品1", "plan": 100, "schedule": 50},
+        {"name": "产品1", "plan": 100, "schedule": 50},
+        {"name": "产品1", "plan": 100, "schedule": 50},
+        {"name": "产品1", "plan": 100, "schedule": 50},
+        {"name": "产品1", "plan": 100, "schedule": 50},
+        {"name": "加一", "plan": 100, "schedule": 50},
+        {"name": "加二", "plan": 100, "schedule": 50},
+        {"name": "加三", "plan": 100, "schedule": 50}
+      ]
+    } else if (this.data.lv == '2') {
+      chartData = [
+        {"name": "产品1", "plan": 100, "schedule": 50},
+        {"name": "产品1", "plan": 100, "schedule": 50},
+        {"name": "产品1", "plan": 100, "schedule": 50},
+        {"name": "产品1", "plan": 100, "schedule": 50},
+        {"name": "产品1", "plan": 100, "schedule": 50}
+      ]
+    } else if (this.data.lv == '3') {
+      chartData = [
+        {"name": "加一", "plan": 100, "schedule": 50},
+        {"name": "加二", "plan": 100, "schedule": 50},
+        {"name": "加三", "plan": 100, "schedule": 50}
+      ]
+    }
+    
     let namelist = []
     let planlist = []
     let schedulelist = []
@@ -160,8 +172,14 @@ Page({
     data.remainderlist = remainderlist;
     data.chartName = '产品进度';
     // 计算图表显示高度
+    let k = 100
+    if (chartData.length < 10) {
+      k = 150
+    } else if (chartData.length < 5) {
+      k = 200
+    }
     this.setData({
-      planBarHeight: 100 * chartData.length
+      planBarHeight: k * chartData.length
     })
     this.planBar = this.selectComponent('#plan-bar');
     this.planBar.init((canvas, width, height) => {

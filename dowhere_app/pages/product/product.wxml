@@ -1,19 +1,25 @@
 <!--pages/product/product.wxml-->
-<view class="projectList">
+<view class="projectList" wx:if="{{lv=='1' || lv=='3'}}">
   <block wx:for="{{projectListData}}" wx:for-item="itemSon">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goProduct">{{itemSon.projectName}}</view>
   </block>
 </view>
 <!-- 产品列表 -->
 <view class="charts">
-  <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
-  <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
+  <view wx:if="{{lv=='1' || lv=='3'}}">
+    <!-- 各部门完成情况 -->
+    <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
+  </view>
+  <view wx:if="{{lv=='1' || lv=='2'}}">
+    <!-- 完成未完情况 -->
+    <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
+  </view>
   <ec-canvas id="plan-bar" canvas-id="plan-bar" style="height:{{planBarHeight}}rpx"></ec-canvas>
 </view>
-<view class="listName">
+<view class="listName" wx:if="{{lv=='1' || lv=='2'}}">
   <view>产品列表</view>
 </view>
-<view class="listCon">
+<view class="listCon" wx:if="{{lv=='1' || lv=='2'}}">
   <view class="item title">
     <view class="neme">产品名称</view>
     <view class="neme">当月完成</view>
