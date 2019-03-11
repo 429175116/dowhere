@@ -1,12 +1,12 @@
 <!--pages/projectAll/projectAll.wxml-->
 <!-- 数据汇总页，最高权限可查看 -->
-<view class="selGoPage" style="left:{{selGoPage_x}}px;top:{{selGoPage_y}}px;">
+<!-- <view class="selGoPage" style="left:{{selGoPage_x}}px;top:{{selGoPage_y}}px;">
   <view class="arrow"></view>
   <view class="goPage">
     <view bindtap="goProduct">产品</view>
     <view bindtap="goDepartment">部门</view>
   </view>
-</view>
+</view> -->
 <view class="timeSel">
   <view bindtap="monthData" class="{{time=='month'?'action':''}}">当月计划与完成</view>
   <view bindtap="yearData" class="{{time=='year'?'action':''}}">全年计划与完成</view>
@@ -28,7 +28,7 @@
       </view>
       <view class="projectList">
         <block wx:for="{{item.project}}" wx:for-item="itemSon">
-          <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="clickProject">{{itemSon.projectName}}</view>
+          <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goProduct">{{itemSon.projectName}}</view>
         </block>
       </view>
     </view>

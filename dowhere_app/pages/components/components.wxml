@@ -32,7 +32,7 @@
           <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar" ec="{{ ec }}" style="height:{{monthPlanBarHeight-100}}rpx"></ec-canvas>
           <view class="selData">
             <view class="info" bindtap="goPlan">计划</view>
-            <view class="info" bindtap="goSchedule">进度</view>
+            <view class="info" bindtap="goSchedule">完成</view>
           </view>
         </view>
         

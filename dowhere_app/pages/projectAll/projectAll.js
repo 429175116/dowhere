@@ -19,9 +19,9 @@ Page({
     // 此处加载项目及区域数据 
     let projectListData = [
       {"name": "一区", "project": [
-        {"projectName": "项目1项目1项目1","id": "1"},
-        {"projectName": "项目1项目1","id": "2"},
-        {"projectName": "项目1项目1项目1项目1","id": "3"},
+        {"projectName": "生产","id": "1"},
+        {"projectName": "技术","id": "2"},
+        {"projectName": "质量","id": "3"},
         {"projectName": "项目4","id": "4"},
         {"projectName": "项目1项目1","id": "5"},
         {"projectName": "项目6","id": "6"},
@@ -77,41 +77,7 @@ Page({
     this.init(this.data.time)
     this.setOptionPlanBar()
   },
-
-  // 加载数据图表数据
-
-  // 点击项目事件
-  clickProject(e) {
-    // 此处判断权限，如果包含产品和部门的权限则显示气泡框
-    // 如果只有一个权限则直接跳转只该权限对应的页面
-    
-    // 此处可处理为只查看产品，不用留有进入部门的入口 ？？？
-    // 查看部门
-    // this.goDepartment(e)
-    // 查看产品
-    // this.goDepartment(e)
-    // return ''
-    const query = wx.createSelectorQuery()
-    query.select('#the-id'+ e.currentTarget.dataset.id)
-    query.selectViewport().boundingClientRect()
-    // query.selectViewport().width()
-    query.exec(res => {
-      console.log('打印demo的元素的信息', res);
-      console.log(e.currentTarget.offsetLeft,res[0].width)
-      this.setData({
-        // selGoPage_x:res.width,
-        selGoPage_x: e.currentTarget.offsetLeft,
-        selGoPage_y: e.currentTarget.offsetTop + 30
-      })
-    })
-  },
-  // 产看部门
-  goDepartment(e) {
-    wx.navigateTo({
-      url: `/pages/departmentList/departmentList?projectid=${e.currentTarget.dataset.id}`
-    })
-  },
-  // 查看产品
+  // 查看产品列表页
   goProduct(e) {
     wx.navigateTo({
       url: `/pages/product/product?projectid=${e.currentTarget.dataset.id}`

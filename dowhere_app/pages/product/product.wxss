@@ -5,6 +5,7 @@
 }
 /* 图表样式 */
 #plan-pie,
+#quantity-pie,
 #plan-bar{
   width: 750rpx;
   height: 500rpx;
@@ -17,5 +18,25 @@
   border: 0 !important;
   color: #fff;
   border-radius: 5rpx;
+}
+
+/* 项目列表 */
+.projectList{
+  width:680rpx;
+  margin:0 33rpx;
+}
+/* 项目名称 */
+.projectList view{
+  width: auto;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding:0 20rpx;
+  display:inline-block;
+  margin:20rpx;
+  /* background-color:#e5ecf2; */
+  color:#444;
+  border: 1rpx solid #78ac47;
+  border-radius:30rpx;
+  font-size:30rpx;
 }
   

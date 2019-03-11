@@ -8,14 +8,24 @@ Page({
    */
   data: {
     listData: [],
-    planBarHeight: 0
+    planBarHeight: 0,
+    projectListData: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    let projectListData = [
+      {"projectName": "加一","id": "1"},
+      {"projectName": "加二","id": "2"},
+      {"projectName": "加三","id": "3"}
+    ]
+    // this.setData({
+    //   projectListData: projectListData
+    // })
     this.setData({
+      projectListData: projectListData,
       listData: getListData()
     })
   },
@@ -24,6 +34,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
+    this.quantityPie = this.selectComponent('#quantity-pie');
     this.planPie = this.selectComponent('#plan-pie');
     // this.planBar = this.selectComponent('#plan-bar');
     this.init()
@@ -91,6 +102,17 @@ Page({
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
+    this.quantityPie.init((canvas, width, height) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      setQuantityPie(chart, time);
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
     // this.planBar.init((canvas, width, height) => {
     //   // 获取组件的 canvas、width、height 后的回调函数
     //   // 在这里初始化图表
@@ -105,9 +127,9 @@ Page({
   },
   setOptionPlanBar() {
     let chartData = [
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
+      {"name": "加一", "plan": 100, "schedule": 50},
+      {"name": "加二", "plan": 100, "schedule": 50},
+      {"name": "加三", "plan": 100, "schedule": 50},
       {"name": "产品1", "plan": 100, "schedule": 50},
       {"name": "产品1", "plan": 100, "schedule": 50},
       {"name": "产品1", "plan": 100, "schedule": 50},
@@ -216,9 +238,9 @@ function getListData() {
 // 计划完成度--饼
 function setOptionPlanPie(chart) {
   let chartData = [
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
-    {"name": "产品3", "value": 80},
+    {"name": "加一", "value": 100},
+    {"name": "加二", "value": 30},
+    {"name": "加三", "value": 80},
   ]
   let data = new Object();
   data.chartData = chartData;
@@ -245,6 +267,38 @@ function setOptionPlanPie(chart) {
   //   }
   // })
 }
+// 部门完成--饼
+function setQuantityPie(chart) {
+  let chartData = [
+    {"name": "完成", "value": 100},
+    {"name": "剩余", "value": 30}
+  ]
+  let data = new Object();
+  data.chartData = chartData;
+  data.chartName = '完成情况';
+  // 图表渲染
+  app.pieShow(data, chart)
+  // wx.request({
+  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+  //   method: 'POST',
+  //   data: {
+  //     userName: this.userName,
+  //     userPaw: this.userPaw
+  //   },
+  //   success: data => {
+  //     if (data.data.success) {
+  //       // data = data.data.novels
+        
+  //     } else {
+  //       wx.showModal({
+  //         title: '',
+  //         content: data.data.errmsg
+  //       })
+  //     }
+  //   }
+  // })
+}
+
 
 
 // 无用代码
