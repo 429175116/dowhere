@@ -169,9 +169,9 @@ Page({
       {"name": "产品1", "plan": 100, "schedule": 50},
       {"name": "产品1", "plan": 100, "schedule": 50},
       {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50}
+      {"name": "质量", "plan": 100, "schedule": 50},
+      {"name": "技术", "plan": 100, "schedule": 50},
+      {"name": "生产", "plan": 100, "schedule": 50}
     ]
     let namelist = []
     let planlist = []
@@ -243,19 +243,19 @@ function setOptionPlanPie(chart, time) {
     // 加载年份数据---此处修改参数
   }
   let chartData = [
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
-    {"name": "产品3", "value": 80},
+    {"name": "项目1", "value": 100},
+    {"name": "项目2", "value": 30},
+    {"name": "项目3", "value": 100},
+    {"name": "项目4", "value": 30},
+    {"name": "项目5", "value": 100},
+    {"name": "项目6", "value": 30},
+    {"name": "项目7", "value": 100},
+    {"name": "项目8", "value": 30},
+    {"name": "项目9", "value": 100},
+    {"name": "项目11", "value": 30},
+    {"name": "项目12", "value": 100},
+    {"name": "项目13", "value": 30},
+    {"name": "项目14", "value": 80}
   ]
   let data = new Object();
   data.chartData = chartData;
@@ -290,8 +290,8 @@ function setOptionQuantityPie(chart, time) {
     // 加载年份数据---此处修改参数
   }
   let chartData = [
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
+    {"name": "项目1", "value": 100},
+    {"name": "项目1", "value": 30},
     {"name": "产品3", "value": 80},
   ]
   let data = new Object();

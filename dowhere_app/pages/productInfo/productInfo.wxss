@@ -16,14 +16,6 @@
   display:block;
 }
 
-.item .info {
-  width: 60rpx !important;
-  height: 40rpx !important;
-  font-size: 20rpx !important;
-  border: 0 !important;
-  color: #fff;
-  border-radius: 5rpx;
-}
 
 .monthlyData{
   width: 750rpx;
@@ -58,5 +50,19 @@
   width: 600rpx;
   height:  60rpx !important;
 }
-
+.listCon .item view {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20rpx;
+  width:177rpx;
+  height:60rpx;
+  border:1rpx solid #ccc;
+  border-right:0;
+  border-bottom:0;
+  position:relative;
+  font-size:20rpx;
+  
+  }
+  
     

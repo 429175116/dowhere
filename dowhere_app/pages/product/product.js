@@ -262,7 +262,7 @@ function setOptionPlanPie(chart) {
   ]
   let data = new Object();
   data.chartData = chartData;
-  data.chartName = '完成情况';
+  data.chartName = '各部门完成情况';
   // 图表渲染
   app.pieShow(data, chart)
   // wx.request({

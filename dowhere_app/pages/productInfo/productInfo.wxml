@@ -3,17 +3,21 @@
 <view class="productInfoTable">
   <view class="item productTitle">
     <view class="name">名称</view>
-    <view class="con">1好</view>
+    <view class="con">一号零件</view>
   </view>
   <view class="item">
-    <view class="name">名称</view>
+    <view class="name">图像</view>
     <view class="con">
       <image class="img" src="../../img/logo.jpg" />
     </view>
   </view>
   <view class="item">
-    <view class="name">名称</view>
-    <view class="con">描述描述描述描述</view>
+    <view class="name">特性1</view>
+    <view class="con">特性信息</view>
+  </view>
+  <view class="item">
+    <view class="name">特性2</view>
+    <view class="con">特性信息</view>
   </view>
 </view>
 <view class="charts">
