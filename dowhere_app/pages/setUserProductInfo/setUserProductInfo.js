@@ -1,4 +1,4 @@
-// pages/components/components.js
+// pages/setUserProductInfo/setUserProductInfo.js
 import * as echarts from '../../ec-canvas/echarts';
 const app = getApp();
 Page({
@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // listData: [],
+    listData: [],
     time: '',
     monthList: [],
     monthPlanBarHeight: 0,
@@ -30,7 +30,7 @@ Page({
       productName: options.prodcutname,
       // 获取全部零件或部分零件标记{part：部分；all：全部}
       mark: options.getTypt,
-      // listData: getListData(),
+      listData: getListData(),
       // 获取当前时间，用于月份显示，只显示已经存在的月份
       monthList: getMonthList(),
       time: month + 1
@@ -49,20 +49,11 @@ Page({
     this.setOptionPlanBar()
     this.setOptionMonthPlanBar()
   },
-  goPlan(e) {
-    // 进入计划页
+  goComponents(e) {
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/setPlan/setPlan?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
-    })
-  },
-  goSchedule(e) {
-    // 进入进度录入页
-    let id = e.currentTarget.dataset.id
-    let name = e.currentTarget.dataset.name
-    wx.navigateTo({
-      url: `/pages/setSchedule/setSchedule?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
+      url: `/pages/components/components?prodcutid=${id}&prodcutname=${name}&getTypt=all`
     })
   },
   selMonth(e) {
@@ -164,8 +155,19 @@ Page({
   },
   setOptionPlanBar() {
     let chartData = [
-      // { "name": "零件1", "plan": 100, "schedule": 50 },
-      // { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
+      { "name": "零件1", "plan": 100, "schedule": 50 },
       { "name": "零件1", "plan": 100, "schedule": 50 }
     ]
     let namelist = []
@@ -187,8 +189,7 @@ Page({
     data.chartName = '各零件进度';
     // 计算图表显示高度
     this.setData({
-      // planBarHeight: 100 * chartData.length
-      planBarHeight: 400
+      planBarHeight: 100 * chartData.length
     })
     this.planBar = this.selectComponent('#plan-bar');
     this.planBar.init((canvas, width, height) => {
@@ -244,14 +245,8 @@ Page({
     data.schedulelist = schedulelist;
     data.chartName = `${this.data.time}月进度`;
     // 计算图表显示高度
-    let k = 100
-    if (chartData.length < 10) {
-      k = 150
-    } else if (chartData.length < 5) {
-      k = 200
-    }
     this.setData({
-      monthPlanBarHeight: k * chartData.length + 100
+      monthPlanBarHeight: 100 * chartData.length
     })
     this.monthPlanBar = this.selectComponent('#monthPlan-bar');
     this.monthPlanBar.init((canvas, width, height) => {
@@ -299,45 +294,45 @@ function getMonthList() {
   }
   return monthList
 }
-// // 加载列表，数据展示
-// function getListData() {
-//   // name--产品名
-//   // id--产品ID
-//   // yearPlan--年计划
-//   // yearSchedule--年进度
-//   // monthPlan--月计划
-//   // monthSchedule--月进度
-//   let data = [
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 }
-//   ]
-//   return data
-//   // wx.request({
-//   //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-//   //   method: 'POST',
-//   //   data: {
-//   //     userName: this.userName,
-//   //     userPaw: this.userPaw
-//   //   },
-//   //   success: data => {
-//   //     if (data.data.success) {
-//   //       // data = data.data.novels
+// 加载列表，数据展示
+function getListData() {
+  // name--产品名
+  // id--产品ID
+  // yearPlan--年计划
+  // yearSchedule--年进度
+  // monthPlan--月计划
+  // monthSchedule--月进度
+  let data = [
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 }
+  ]
+  return data
+  // wx.request({
+  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+  //   method: 'POST',
+  //   data: {
+  //     userName: this.userName,
+  //     userPaw: this.userPaw
+  //   },
+  //   success: data => {
+  //     if (data.data.success) {
+  //       // data = data.data.novels
 
-//   //     } else {
-//   //       wx.showModal({
-//   //         title: '',
-//   //         content: data.data.errmsg
-//   //       })
-//   //     }
-//   //   }
-//   // })
-// }
+  //     } else {
+  //       wx.showModal({
+  //         title: '',
+  //         content: data.data.errmsg
+  //       })
+  //     }
+  //   }
+  // })
+}
 // 计划完成度--饼
 function setOptionPlanPie(chart) {
   let chartData = [

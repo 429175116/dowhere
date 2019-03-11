@@ -97,7 +97,7 @@ Page({
       gourl = '/pages/projectAll/projectAll?lv=3'
     } else if (this.data.userName == '18700458354') {
       // 二级权限--输入
-      gourl = '/pages/projectAll/projectAll?lv=4'
+      gourl = '/pages/setUserLv/setUserLv?lv=4'
     }
     console.log(gourl)
     wx.redirectTo({

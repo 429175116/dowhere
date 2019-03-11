@@ -1,4 +1,24 @@
 //app.js
+
+// "pages/login/login", 登陆
+// "pages/registered/registered", 注册
+// "pages/alterPassword/alterPassword", 重置密码
+
+
+// "pages/projectAll/projectAll",  最高权限,二级权限首页
+// "pages/product/product",  产品列表
+// "pages/productInfo/productInfo",  产品详情-零件列表
+// "pages/department/department",  部门-产品列表
+// "pages/departmentList/departmentList",  部门-产品列表
+
+
+
+// "pages/setUserLv/setUserLv"  用户权限--可输入用户--首页--产品列表
+// "pages/setUserProductInfo/setUserProductInfo"用户权限--可输入用户--产品详情--零件列表
+// "pages/components/components",  零件详情
+// "pages/setSchedule/setSchedule",  输入进度
+// "pages/setPlan/setPlan",  输入计划
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -190,6 +210,103 @@ App({
           },
           //此处写入图表展示的数据--剩余
           data: remainderlist
+        }
+      ]
+    };
+    chart.setOption(option);
+  },
+  setUserBarShow(data, chart) {
+    // 产品名，计划，进度，剩余
+    let namelist = data.namelist
+    let planlist = data.planlist
+    let schedulelist = data.schedulelist
+    let remainderlist = data.remainderlist
+    let chartName = data.chartName
+    // let chartSubtext = data.chartSubtext
+    const option = {
+      title:{
+        text: chartName,
+        // subtext: "副标题",
+        x: "center",
+        textStyle: {
+          fontSize: 20
+        },
+      },
+      // color: ['#37a2da', '#32c5e9', '#67e0e3'],
+      color: ['#78ac47', '#a7dd54', '#b2ca47'],
+      // 控制浮动框的显示
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+      },
+      legend: {
+        top: 40,
+        data: ['计划', '完成']
+      },
+      grid: {
+        left: 10,
+        right: 10,
+        bottom: 10,
+        top: 70,
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'value',
+          axisLine: {
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          axisLabel: {
+            color: '#666',
+            fontSize: 14
+          }
+        }
+      ],
+      yAxis: [
+        {
+          type: 'category',
+          axisTick: { show: false },
+          //此处写入图表展示的数据--名称
+          data: namelist,
+          axisLine: {
+            lineStyle: {
+              color: '#999'
+            }
+          },
+          axisLabel: {
+            color: '#666',
+            fontSize: 14
+          }
+        }
+      ],
+      series: [
+        {
+          name: '计划',
+          type: 'bar',
+          label: {
+            normal: {
+              // show: true,
+              position: 'inside'
+            }
+          },
+          //此处写入图表展示的数据--计划
+          data: planlist
+        },
+        {
+          name: '完成',
+          type: 'bar',
+          stack: '总量',
+          label: {
+            normal: {
+              // show: true
+            }
+          },
+          //此处写入图表展示的数据--进度
+          data: schedulelist
         }
       ]
     };
