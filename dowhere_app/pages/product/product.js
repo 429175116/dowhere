@@ -9,6 +9,7 @@ Page({
   data: {
     listData: [],
     planBarHeight: 0,
+    time: 'month',
     projectListData: []
   },
 
@@ -53,7 +54,31 @@ Page({
       url: `/pages/department/department`
     })
   },
-
+    // 数据展示时间切换
+  // 切换--年
+  yearData(){
+    if (this.data.time === "month") {
+      this.setData({
+        time: "year"
+      })
+    } else {
+      return ''
+    }
+    this.init(this.data.time)
+    this.setOptionPlanBar()
+  },
+  // 切换--月
+  monthData(){
+    if (this.data.time === "year") {
+      this.setData({
+        time: "month"
+      })
+    } else {
+      return ''
+    }
+    this.init(this.data.time)
+    this.setOptionPlanBar()
+  },
   /**
    * 生命周期函数--监听页面显示
    */

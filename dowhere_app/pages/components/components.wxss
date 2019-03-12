@@ -50,6 +50,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #ED8C24;
+  color: #fff;
 }
 .monthChart{
   width: 600rpx;
@@ -70,5 +72,15 @@
 .hideMonthChart view{
   display: none !important;
 }
-
+.remarks{
+  width: 100%;
+  height: auto;
+}
+.remarks view{
+  width: 100%;
+  height: auto;
+  font-size: 25rpx;
+  counter-reset: #999;
+  margin-top: 20rpx;
+}
     

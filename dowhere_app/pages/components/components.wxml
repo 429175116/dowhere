@@ -26,16 +26,24 @@
 <view class="monthlyData">
   <view class="table">
     <block wx:for="{{monthList}}" wx:for-item="item" index="index">
-      <view class="item" data-month="{{item.month}}" bindtap="selMonth">
-        <view class="month">{{item.monthName}}</view>
+      <view class="item">
+        <view class="month" data-month="{{item.month}}" bindtap="selMonth">{{item.monthName}}</view>
         <view class="monthChart {{time==item.month?'':'hideMonthChart'}}" style="height:{{monthPlanBarHeight}}rpx">
           <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar" ec="{{ ec }}" style="height:{{monthPlanBarHeight-100}}rpx"></ec-canvas>
           <view class="selData">
             <view class="info" bindtap="goPlan">计划</view>
             <view class="info" bindtap="goSchedule">完成</view>
           </view>
+          <view class="remarks">
+            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
+            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
+            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
+            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
+            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
+            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
+            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
+          </view>
         </view>
-        
       </view>
     </block>
   </view>

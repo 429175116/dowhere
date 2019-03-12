@@ -1,4 +1,8 @@
 <!--pages/product/product.wxml-->
+<view class="timeSel">
+  <view bindtap="monthData" class="{{time=='month'?'action':''}}">当月计划与完成</view>
+  <view bindtap="yearData" class="{{time=='year'?'action':''}}">全年计划与完成</view>
+</view>
 <view class="projectList" wx:if="{{lv=='1' || lv=='3'}}">
   <block wx:for="{{projectListData}}" wx:for-item="itemSon">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goProduct">{{itemSon.projectName}}</view>
