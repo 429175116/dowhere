@@ -18,7 +18,6 @@
 </view>
 <view class="charts">
   <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
-  <ec-canvas id="plan-bar" canvas-id="plan-bar" style="height:{{planBarHeight}}rpx"></ec-canvas>
 </view>
 <view class="listName">
   <view>各月数据</view>

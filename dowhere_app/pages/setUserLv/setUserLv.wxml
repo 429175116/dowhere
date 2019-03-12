@@ -1,5 +1,9 @@
 <!--pages/setUserLv/setUserLv.wxml-->
 <!-- 部门 -->
+<view class="img">
+  部门图标
+  <image src="../../img/logo.jpg" />
+</view>
 <view class="listCons">
   <block wx:for="{{listData}}" wx:for-item="item" index="index">
     <view class="items" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goProdcutInfo">

@@ -6,8 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listData: [],
-    planBarHeight: 0
+    listData: []
   },
   onLoad(options) {
     this.setData({
