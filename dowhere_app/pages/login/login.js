@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458355',
+    userName: '18700458359',
     userPaw: '123456',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
@@ -85,28 +85,28 @@ Page({
       })
       return ''
     }
-    let gourl = ''
-    if (this.data.userName == '18700458351') {
-      // 最高权限，一级权限---产品,设备
-      gourl = '/pages/projectAll/projectAll?lv=1'
-    } else if (this.data.userName == '18700458352') {
-      // 一级权限--仅有产品
-      gourl = '/pages/projectAll/projectAll?lv=2'
-    } else if (this.data.userName == '18700458353') {
-      // 一级权限--仅有部门
-      gourl = '/pages/projectAll/projectAll?lv=3'
-    } else if (this.data.userName == '18700458354') {
-      // 二级权限--输入
-      gourl = '/pages/setUserLv/setUserLv?lv=4'
-    } else if (this.data.userName == '18700458355') {
-      // 二级权限
-      gourl = '/pages/oneLvHome/oneLvHome?lv=5'
-    }
-    console.log(gourl)
-    wx.redirectTo({
-      url: gourl
-    })
-    return
+    // let gourl = ''
+    // if (this.data.userName == '18700458351') {
+    //   // 最高权限，一级权限---产品,设备
+    //   gourl = '/pages/projectAll/projectAll?lv=1'
+    // } else if (this.data.userName == '18700458352') {
+    //   // 一级权限--仅有产品
+    //   gourl = '/pages/projectAll/projectAll?lv=2'
+    // } else if (this.data.userName == '18700458353') {
+    //   // 一级权限--仅有部门
+    //   gourl = '/pages/projectAll/projectAll?lv=3'
+    // } else if (this.data.userName == '18700458354') {
+    //   // 二级权限--输入
+    //   gourl = '/pages/setUserLv/setUserLv?lv=4'
+    // } else if (this.data.userName == '18700458355') {
+    //   // 二级权限
+    //   gourl = '/pages/oneLvHome/oneLvHome?lv=5'
+    // }
+    // console.log(gourl)
+    // wx.redirectTo({
+    //   url: gourl
+    // })
+    // return
     wx.request({
       url: `${app.globalData.requestUrl}/api/login`,
       method: 'POST',
@@ -115,45 +115,50 @@ Page({
         password: this.data.userPaw
       },
       success: data => {
-        if (data.code == 1) {
-          data = data.data
-          // 全局变量 存储用户信息
+        console.log(data)
+        if (data.statusCode == 200) {
+          // id 用户ID
+          // mobile 登陆账号
+          // password 密码
+          // power  权限
+          // role_id 角色(3-一级，2-二级，1-三级，4-客户）
+          // role_nature 角色权限（产品和部门-- 1-产品，2-部门，3-产品，部门，0-不处理）
+          // status 用户是否删除被
+          // username 用户名
+          data = data.data.data
           // 用户ID
-          app.globalData.userId = data.role_id
-          // 用户权限  123为查看用户  4-可输入进度及计划用户
-          app.globalData.userPermission = data.role_nature
+          app.globalData.userId = data.id
+          // 用户角色
+          app.globalData.roleId = data.role_id
+          // 用户权限
+          app.globalData.roleNature = data.role_nature
           // 登陆信息存入本地
           // this.setUserLoginInfo(this.data.userName, this.data.userPaw)
-
-          
-          // let gourl = ''
-          // switch(data.role_nature){
-          //   case 1:
-          //     gourl = '/pages/projectAll/projectAll?lv=1'
-          //     break;
-          //   case 2:
-          //     执行代码块 2
-          //     break;
-          //   default:
-              
-          //   }
-          // if (this.data.userName == '18700458351') {
-          //   // 最高权限，一级权限---产品,设备
-          //   gourl = '/pages/projectAll/projectAll?lv=1'
-          // } else if (this.data.userName == '18700458352') {
-          //   // 一级权限--仅有产品
-          //   gourl = '/pages/projectAll/projectAll?lv=2'
-          // } else if (this.data.userName == '18700458353') {
-          //   // 一级权限--仅有部门
-          //   gourl = '/pages/projectAll/projectAll?lv=3'
-          // } else if (this.data.userName == '18700458354') {
-          //   // 二级权限--输入
-          //   gourl = '/pages/setUserLv/setUserLv?lv=4'
-          // }
-          // 根据不同的用户权限进入不同的页面
-          // wx.redirectTo({
-          //   url: gourl
-          // })
+          let gourl = ''
+          console.log(data.role_id)
+          switch(data.role_id){
+            case 1:
+              gourl = '/pages/projectAll/projectAll'
+              break;
+            case 2:
+              gourl = '/pages/projectAll/projectAll'
+              break;
+            case 3:
+              gourl = '/pages/oneLvHome/oneLvHome'
+              break;
+            case 4:
+              gourl = '/pages/setUserLv/setUserLv'
+              break;
+            default:
+              // wx.showModal({
+              //   title: '',
+              //   content: '用户未分配权限'
+              // })
+              // break;
+            }
+          wx.redirectTo({
+            url: gourl
+          })
         } else {
           wx.showModal({
             title: '',
