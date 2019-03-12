@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458351',
+    userName: '18700458355',
     userPaw: '123456',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
@@ -98,6 +98,9 @@ Page({
     } else if (this.data.userName == '18700458354') {
       // 二级权限--输入
       gourl = '/pages/setUserLv/setUserLv?lv=4'
+    } else if (this.data.userName == '18700458355') {
+      // 二级权限
+      gourl = '/pages/oneLvHome/oneLvHome?lv=5'
     }
     console.log(gourl)
     wx.redirectTo({

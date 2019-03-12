@@ -14,7 +14,10 @@
     "pages/departmentList/departmentList",
     "pages/components/components",
     "pages/setUserLv/setUserLv",
-    "pages/setUserProductInfo/setUserProductInfo"
+    "pages/setUserProductInfo/setUserProductInfo",
+    "pages/oneLvHome/oneLvHome",
+    "pages/oneLvSon1/oneLvSon1",
+    "pages/oneLvSon2/oneLvSon2"
   ],
   "window": {
     "backgroundTextStyle": "light",

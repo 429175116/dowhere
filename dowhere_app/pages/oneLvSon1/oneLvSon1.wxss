@@ -1,0 +1,9 @@
+/* pages/oneLvSon1/oneLvSon1.wxss */
+.item .info {
+    width: 60rpx !important;
+    height: 40rpx !important;
+    font-size: 20rpx !important;
+    border: 0 !important;
+    color: #fff;
+    border-radius: 5rpx;
+  }
