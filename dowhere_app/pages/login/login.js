@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458351',
+    userName: '18700458359',
     userPaw: '123456',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
@@ -112,16 +112,45 @@ Page({
         password: this.data.userPaw
       },
       success: data => {
-        if (data.code !== '0') {
-          // 登陆信息存入本地
-          this.setUserLoginInfo(this.data.userName, this.data.userPaw)
-          // 根据不同的用户权限进入不同的页面
-          wx.redirectTo({
-            url: `/pages/projectAll/projectAll?`
-          })
+        if (data.code == 1) {
+          data = data.data
           // 全局变量 存储用户信息
-          app.globalData.userId = 10;
-          // this.$apply()
+          // 用户ID
+          app.globalData.userId = data.role_id
+          // 用户权限  123为查看用户  4-可输入进度及计划用户
+          app.globalData.userPermission = data.role_nature
+          // 登陆信息存入本地
+          // this.setUserLoginInfo(this.data.userName, this.data.userPaw)
+
+          
+          // let gourl = ''
+          // switch(data.role_nature){
+          //   case 1:
+          //     gourl = '/pages/projectAll/projectAll?lv=1'
+          //     break;
+          //   case 2:
+          //     执行代码块 2
+          //     break;
+          //   default:
+              
+          //   }
+          // if (this.data.userName == '18700458351') {
+          //   // 最高权限，一级权限---产品,设备
+          //   gourl = '/pages/projectAll/projectAll?lv=1'
+          // } else if (this.data.userName == '18700458352') {
+          //   // 一级权限--仅有产品
+          //   gourl = '/pages/projectAll/projectAll?lv=2'
+          // } else if (this.data.userName == '18700458353') {
+          //   // 一级权限--仅有部门
+          //   gourl = '/pages/projectAll/projectAll?lv=3'
+          // } else if (this.data.userName == '18700458354') {
+          //   // 二级权限--输入
+          //   gourl = '/pages/setUserLv/setUserLv?lv=4'
+          // }
+          // 根据不同的用户权限进入不同的页面
+          // wx.redirectTo({
+          //   url: gourl
+          // })
         } else {
           wx.showModal({
             title: '',

@@ -1,21 +1,21 @@
 /* pages/setUserLv/setUserLv.wxss */
-/* 图表显示块 */
-.charts{
-    height: auto;
-  }
-  /* 图表样式 */
-  #plan-bar,
-  #plan-pie{
-    width: 750rpx;
-    height: 500rpx;
-    display:block;
-  }
-
-  .item .info {
-    width: 80rpx !important;
-    height: 40rpx !important;
-    border: 0 !important;
-    color: #fff;
-    border-radius: 5rpx;
-  }
-    
+/* .listCons{
+  width: 710rpx;
+  padding: 20rpx;
+  height: auto;
+} */
+.items{
+  /* display: inline-block !important; */
+  float: left;
+  /* width: 200rpx !important; */
+  height: 80rpx !important;
+  border-radius: 20rpx !important;
+  /* border: 1rpx solid red !important; */
+  margin: 20rpx;
+  padding: 10rpx;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  

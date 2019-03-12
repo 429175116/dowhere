@@ -1,5 +1,4 @@
 <!--pages/setUserProductInfo/setUserProductInfo.wxml-->
-<!--pages/productInfo/productInfo.wxml-->
 <!-- 产品详情 -->
 <view class="productInfoTable">
   <view class="item productTitle">
