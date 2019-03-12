@@ -21,7 +21,7 @@ Page({
       productId: options.prodcutid,
       // 产品ID
       productName: options.prodcutname,
-      listData: getListData()
+      listData: this.getListData()
     })
   },
   goComponents(e) {
@@ -30,45 +30,46 @@ Page({
     wx.navigateTo({
       url: `/pages/components/components?prodcutid=${id}&prodcutname=${name}&getTypt=all`
     })
+  },
+  // 加载列表，数据展示
+  getListData() {
+    // name--产品名
+    // id--产品ID
+    // yearPlan--年计划
+    // yearSchedule--年进度
+    // monthPlan--月计划
+    // monthSchedule--月进度
+    let data = [
+      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
+      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 }
+    ]
+    return data
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/parts_list`,
+      method: 'POST',
+      data: {
+        sid: this.userName,
+        uid: this.userPaw
+      },
+      success: data => {
+        if (data.data.success) {
+          
+
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.errmsg
+          })
+        }
+      }
+    })
   }
 })
 
-// 加载列表，数据展示
-function getListData() {
-  // name--产品名
-  // id--产品ID
-  // yearPlan--年计划
-  // yearSchedule--年进度
-  // monthPlan--月计划
-  // monthSchedule--月进度
-  let data = [
-    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-    { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 }
-  ]
-  return data
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
 
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
-}

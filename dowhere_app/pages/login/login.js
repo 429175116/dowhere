@@ -182,9 +182,7 @@ Page({
             userName: loginInfo[0],
             userPaw: loginInfo[1]
           })
-          // console.log(res)
           this.submit()
-          // return `${name},------,${password}`
         } else {
           
         }

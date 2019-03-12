@@ -30,7 +30,6 @@ Page({
       productName: options.prodcutname,
       // 获取全部零件或部分零件标记{part：部分；all：全部}
       mark: options.getTypt,
-      // listData: getListData(),
       // 获取当前时间，用于月份显示，只显示已经存在的月份
       monthList: getMonthList(),
       time: month + 1
@@ -120,7 +119,7 @@ Page({
         width: width,
         height: height
       });
-      setOptionPlanPie(chart);
+      this.setOptionPlanPie(chart);
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
@@ -187,6 +186,37 @@ Page({
     //     }
     //   }
     // })
+  },
+  // 计划完成度--饼
+  setOptionPlanPie(chart) {
+    let chartData = [
+      { "name": "完成", "value": 100 },
+      { "name": "剩余", "value": 30 }
+    ]
+    let data = new Object();
+    data.chartData = chartData;
+    data.chartName = '完成情况';
+    // 图表渲染
+    app.pieShow(data, chart)
+    // wx.request({
+    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
+    //   method: 'POST',
+    //   data: {
+    //     userName: this.userName,
+    //     userPaw: this.userPaw
+    //   },
+    //   success: data => {
+    //     if (data.data.success) {
+    //       // data = data.data.novels
+
+    //     } else {
+    //       wx.showModal({
+    //         title: '',
+    //         content: data.data.errmsg
+    //       })
+    //     }
+    //   }
+    // })
   }
 })
 // 获取月份列表
@@ -201,74 +231,4 @@ function getMonthList() {
     monthList.push({ "monthName": `${i + 1}月`, "month": i + 1 })
   }
   return monthList
-}
-// // 加载列表，数据展示
-// function getListData() {
-//   // name--产品名
-//   // id--产品ID
-//   // yearPlan--年计划
-//   // yearSchedule--年进度
-//   // monthPlan--月计划
-//   // monthSchedule--月进度
-//   let data = [
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 }
-//   ]
-//   return data
-//   // wx.request({
-//   //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-//   //   method: 'POST',
-//   //   data: {
-//   //     userName: this.userName,
-//   //     userPaw: this.userPaw
-//   //   },
-//   //   success: data => {
-//   //     if (data.data.success) {
-//   //       // data = data.data.novels
-
-//   //     } else {
-//   //       wx.showModal({
-//   //         title: '',
-//   //         content: data.data.errmsg
-//   //       })
-//   //     }
-//   //   }
-//   // })
-// }
-// 计划完成度--饼
-function setOptionPlanPie(chart) {
-  let chartData = [
-    { "name": "完成", "value": 100 },
-    { "name": "剩余", "value": 30 }
-  ]
-  let data = new Object();
-  data.chartData = chartData;
-  data.chartName = '完成情况';
-  // 图表渲染
-  app.pieShow(data, chart)
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
-
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
 }
