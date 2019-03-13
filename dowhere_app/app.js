@@ -54,7 +54,7 @@ App({
     })
   },
   globalData: {
-    userId: null,
+    userInfo: null,
     requestUrl: 'http://192.168.1.127' //线下
     // requestUrl: 'http://192.168.1.125/' //线上
   },

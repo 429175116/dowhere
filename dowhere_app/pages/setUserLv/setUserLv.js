@@ -34,20 +34,30 @@ Page({
     ]
     return data
     wx.request({
-      url: `${this.$parent.globalData.requestUrl}/api/parts_list`,
+      url: `${app.globalData.requestUrl}/api/goods`,
       method: 'POST',
       data: {
-        sid: app.globalData.userId,
-        uid: app.globalData.userId
+        role_id: app.globalData.userInfo.role_id,
+        uid: app.globalData.userInfo.id
       },
       success: data => {
-        if (data.data.success) {
-          // data = data.data.novels
-
+        if (data.data.code == 1) {
+          data = data.data.data
+          data = [
+            {"name": "产品1产品1", "id": "1"},
+            {"name": "产品1", "id": "1"},
+            {"name": "产品1", "id": "1"},
+            {"name": "产品1", "id": "1"},
+            {"name": "产品1产品1产品1", "id": "1"},
+            {"name": "产品1", "id": "1"},
+            {"name": "产品1", "id": "1"},
+            {"name": "产品1", "id": "1"}
+          ]
+          return data
         } else {
           wx.showModal({
             title: '',
-            content: data.data.errmsg
+            content: data.data.msg
           })
         }
       }

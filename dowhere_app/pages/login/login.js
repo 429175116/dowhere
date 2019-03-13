@@ -116,7 +116,7 @@ Page({
       },
       success: data => {
         console.log(data)
-        if (data.statusCode == 200) {
+        if (data.data.code == 1) {
           // id 用户ID
           // mobile 登陆账号
           // password 密码
@@ -127,11 +127,7 @@ Page({
           // username 用户名
           data = data.data.data
           // 用户ID
-          app.globalData.userId = data.id
-          // 用户角色
-          app.globalData.roleId = data.role_id
-          // 用户权限
-          app.globalData.roleNature = data.role_nature
+          app.globalData.userInfo = data
           // 登陆信息存入本地
           // this.setUserLoginInfo(this.data.userName, this.data.userPaw)
           let gourl = ''
