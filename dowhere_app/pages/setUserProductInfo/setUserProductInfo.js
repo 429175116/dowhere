@@ -1,5 +1,5 @@
 // pages/setUserProductInfo/setUserProductInfo.js
-import * as echarts from '../../ec-canvas/echarts';
+// 输入用户（客户）零件列表
 const app = getApp();
 Page({
 
@@ -17,11 +17,11 @@ Page({
     var date = new Date();
     let month = date.getMonth()
     this.setData({
-      // 产品ID
-      productId: options.prodcutid,
-      // 产品ID
-      productName: options.prodcutname,
-      listData: this.getListData()
+      // // 产品ID
+      // productId: options.prodcutid,
+      // // 产品ID
+      // productName: options.prodcutname,
+      listData: this.getListData(options.prodcutid)
     })
   },
   goComponents(e) {
@@ -32,7 +32,7 @@ Page({
     })
   },
   // 加载列表，数据展示
-  getListData() {
+  getListData(id) {
     // name--产品名
     // id--产品ID
     // yearPlan--年计划
@@ -54,8 +54,8 @@ Page({
       url: `${app.globalData.requestUrl}/api/parts_list`,
       method: 'POST',
       data: {
-        sid: this.userName,
-        uid: this.userPaw
+        sid: id,
+        uid: app.globalData.userInfo.id
       },
       success: data => {
         if (data.data.success) {

@@ -1,4 +1,5 @@
 // pages/setUserLv/setUserLv.js
+// 输入用户（客户）产品列表
 const app = getApp();
 Page({
 
@@ -17,7 +18,7 @@ Page({
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/setUserProductInfo/setUserProductInfo?prodcutid=${id}&prodcutname=${name}&getTypt=part`
+      url: `/pages/setUserProductInfo/setUserProductInfo?prodcutid=${id}&prodcutname=${name}`
     })
   },
   // 加载列表，数据展示
