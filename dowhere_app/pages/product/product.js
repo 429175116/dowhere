@@ -46,12 +46,12 @@ Page({
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/productInfo/productInfo?prodcutid=${id}&prodcutname=${name}&getTypt=all`
+      url: `/pages/oneLvHome/oneLvHome?prodcutid=${id}&prodcutname=${name}&getTypt=all`
     })
   },
   goProduct() {
     wx.navigateTo({
-      url: `/pages/department/department`
+      url: `/pages/oneLvHome/oneLvHome`
     })
   },
     // 数据展示时间切换

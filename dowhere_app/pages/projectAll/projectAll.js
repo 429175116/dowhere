@@ -158,17 +158,17 @@ Page({
       // 加载年份数据---此处修改参数
     }
     let chartData = [
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
+      // {"name": "产品1", "plan": 100, "schedule": 50},
       {"name": "质量", "plan": 100, "schedule": 50},
       {"name": "技术", "plan": 100, "schedule": 50},
       {"name": "生产", "plan": 100, "schedule": 50}

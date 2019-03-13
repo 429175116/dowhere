@@ -20,10 +20,10 @@
   </view>
   <ec-canvas id="plan-bar" canvas-id="plan-bar" style="height:{{planBarHeight}}rpx"></ec-canvas>
 </view>
-<view class="listName" wx:if="{{lv=='1' || lv=='2'}}">
+<!-- <view class="listName" wx:if="{{lv=='1' || lv=='2'}}">
   <view>产品列表</view>
-</view>
-<view class="listCon" wx:if="{{lv=='1' || lv=='2'}}">
+</view> -->
+<!-- <view class="listCon" wx:if="{{lv=='1' || lv=='2'}}">
   <view class="item title">
     <view class="neme">产品名称</view>
     <view class="neme">当月完成</view>
@@ -56,4 +56,4 @@
       </view>
     </view>
   </block>
-</view>
+</view> -->
