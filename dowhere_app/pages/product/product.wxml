@@ -3,57 +3,20 @@
   <view bindtap="monthData" class="{{time=='month'?'action':''}}">当月计划与完成</view>
   <view bindtap="yearData" class="{{time=='year'?'action':''}}">全年计划与完成</view>
 </view>
-<view class="projectList" wx:if="{{lv=='1' || lv=='3'}}">
+<view class="projectList">
   <block wx:for="{{projectListData}}" wx:for-item="itemSon">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goProduct">{{itemSon.projectName}}</view>
   </block>
 </view>
 <!-- 产品列表 -->
 <view class="charts">
-  <view wx:if="{{lv=='1' || lv=='3'}}">
+  <view>
     <!-- 各部门完成情况 -->
     <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
   </view>
-  <view wx:if="{{lv=='1' || lv=='2'}}">
+  <view>
     <!-- 完成未完情况 -->
     <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
   </view>
   <ec-canvas id="plan-bar" canvas-id="plan-bar" style="height:{{planBarHeight}}rpx"></ec-canvas>
 </view>
-<!-- <view class="listName" wx:if="{{lv=='1' || lv=='2'}}">
-  <view>产品列表</view>
-</view> -->
-<!-- <view class="listCon" wx:if="{{lv=='1' || lv=='2'}}">
-  <view class="item title">
-    <view class="neme">产品名称</view>
-    <view class="neme">当月完成</view>
-    <view class="neme">当月未完</view>
-    <view class="neme">年度完成</view>
-    <view class="neme">年度未完</view>
-    <view class="neme">操作</view>
-  </view>
-  <block wx:for="{{listData}}" wx:for-item="item" index="index">
-    <view class="item">
-      <view>{{item.name}}</view>
-      <view>
-        <view class="complete" style="width:{{(item.yearSchedule/item.yearPlan)*100}}%"></view>
-        {{item.yearSchedule}}
-      </view>
-      <view>
-        <view class="undone" style="width:{{((item.yearPlan-item.yearSchedule)/item.yearPlan)*100}}%"></view>
-        {{item.yearPlan - item.yearSchedule}}
-      </view>
-      <view>
-        <view class="complete" style="width:{{(item.monthSchedule/item.monthPlan)*100}}%"></view>
-        {{item.monthSchedule}}
-      </view>
-      <view>
-        <view class="undone" style="width:{{((item.monthPlan-item.monthSchedule)/item.monthPlan)*100}}%"></view>
-        {{item.monthPlan - item.monthSchedule}}
-      </view>
-      <view>
-        <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goProdcutInfo">详情</view>
-      </view>
-    </view>
-  </block>
-</view> -->

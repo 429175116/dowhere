@@ -42,13 +42,6 @@ Page({
     this.init()
     this.setOptionPlanBar()
   },
-  goProdcutInfo(e) {
-    let id = e.currentTarget.dataset.id
-    let name = e.currentTarget.dataset.name
-    wx.navigateTo({
-      url: `/pages/oneLvHome/oneLvHome?prodcutid=${id}&prodcutname=${name}&getTypt=all`
-    })
-  },
   goProduct() {
     wx.navigateTo({
       url: `/pages/oneLvHome/oneLvHome`
@@ -122,7 +115,7 @@ Page({
   },
   // 点击按钮后初始化图表
   init(time) {
-    if (this.data.lv == "1" || this.data.lv == "3") {
+    // if (this.data.lv == "1" || this.data.lv == "3") {
       this.planPie.init((canvas, width, height) => {
         // 获取组件的 canvas、width、height 后的回调函数
         // 在这里初始化图表
@@ -134,9 +127,9 @@ Page({
         // 注意这里一定要返回 chart 实例，否则会影响事件处理等
         return chart;
       });
-    }
+    // }
     
-    if (this.data.lv == "1" || this.data.lv == "2") {
+    // if (this.data.lv == "1" || this.data.lv == "2") {
       this.quantityPie.init((canvas, width, height) => {
         // 获取组件的 canvas、width、height 后的回调函数
         // 在这里初始化图表
@@ -148,36 +141,14 @@ Page({
         // 注意这里一定要返回 chart 实例，否则会影响事件处理等
         return chart;
       });
-    }
+    // }
   },
   setOptionPlanBar() {
-    let chartData = []
-    if(this.data.lv == '1') {
-      chartData = [
-        {"name": "产品1", "plan": 100, "schedule": 50},
-        {"name": "产品1", "plan": 100, "schedule": 50},
-        {"name": "产品1", "plan": 100, "schedule": 50},
-        {"name": "产品1", "plan": 100, "schedule": 50},
-        {"name": "产品1", "plan": 100, "schedule": 50},
-        {"name": "加一", "plan": 100, "schedule": 50},
-        {"name": "加二", "plan": 100, "schedule": 50},
-        {"name": "加三", "plan": 100, "schedule": 50}
-      ]
-    } else if (this.data.lv == '2') {
-      chartData = [
-        {"name": "产品1", "plan": 100, "schedule": 50},
-        {"name": "产品1", "plan": 100, "schedule": 50},
-        {"name": "产品1", "plan": 100, "schedule": 50},
-        {"name": "产品1", "plan": 100, "schedule": 50},
-        {"name": "产品1", "plan": 100, "schedule": 50}
-      ]
-    } else if (this.data.lv == '3') {
-      chartData = [
-        {"name": "加一", "plan": 100, "schedule": 50},
-        {"name": "加二", "plan": 100, "schedule": 50},
-        {"name": "加三", "plan": 100, "schedule": 50}
-      ]
-    }
+    let chartData = [
+      {"name": "加一", "plan": 100, "schedule": 50},
+      {"name": "加二", "plan": 100, "schedule": 50},
+      {"name": "加三", "plan": 100, "schedule": 50}
+    ]
     
     let namelist = []
     let planlist = []
