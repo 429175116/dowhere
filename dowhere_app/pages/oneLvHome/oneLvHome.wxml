@@ -11,11 +11,6 @@
   <!-- 总数量-饼 -->
   <view>
       <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
-      <view class="quantityList">
-        <block wx:for="{{chartDatass}}" wx:for-item="itemSon">
-          <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
-        </block>
-      </view>
   </view>
   <view>
       <!-- 计划及完成-柱 -->
@@ -25,5 +20,10 @@
     <!-- 各个项目完成-柱 -->
     <ec-canvas id="plan-bar" style="height:{{planBarHeight}}rpx" canvas-id="plan-bar"></ec-canvas>
   </view>
+</view>
+<view class="quantityList">
+  <block wx:for="{{chartDatass}}" wx:for-item="itemSon">
+    <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
+  </block>
 </view>
 

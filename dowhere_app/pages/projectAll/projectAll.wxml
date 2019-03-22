@@ -7,6 +7,10 @@
     <view bindtap="goDepartment">部门</view>
   </view>
 </view> -->
+<view class="img">
+  门店图标
+  <image src="../../img/logo.jpg" />
+</view>
 <view class="timeSel">
   <view bindtap="monthData" class="{{time=='month'?'action':''}}">当月计划与完成</view>
   <view bindtap="yearData" class="{{time=='year'?'action':''}}">全年计划与完成</view>

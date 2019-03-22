@@ -1,4 +1,8 @@
 /* pages/projectAll/projectAll.wxss */
+.img image{
+  width: 750rpx;
+  height: 300rpx;
+}
 .timeSel{
   display: flex;
   align-items: center;
