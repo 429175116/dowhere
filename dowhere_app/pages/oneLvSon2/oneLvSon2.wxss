@@ -9,11 +9,15 @@
     width: 750rpx;
     height: 500rpx;
     display:block;
+    border-bottom: 1rpx solid #999;
+    padding: 20rpx 0;
   }
   #monthPlan-bar{
     width: 600rpx;
     height: 500rpx;
     display:block;
+    border-bottom: 1rpx solid #999;
+    padding: 20rpx 0;
   }
   
   .item .info {

@@ -30,3 +30,21 @@
     <view>账号末尾为'4'--权限包含为可输入计划,进度用户</view>
   </view>
 </view>
+<!-- "pages/login/login",
+    "pages/setSchedule/setSchedule",
+    "pages/setPlan/setPlan",
+    "pages/productInfo/productInfo",
+    "pages/projectAll/projectAll",
+    "pages/product/product",
+    "pages/department/department",
+    "pages/registered/registered",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/alterPassword/alterPassword",
+    "pages/departmentList/departmentList",
+    "pages/components/components",
+    "pages/setUserLv/setUserLv",
+    "pages/setUserProductInfo/setUserProductInfo",
+    "pages/oneLvHome/oneLvHome",
+    "pages/oneLvSon1/oneLvSon1",
+    "pages/oneLvSon2/oneLvSon2" -->
