@@ -36,8 +36,8 @@
     width: 750rpx;
     height: 500rpx;
     display:block;
-    border-bottom: 1rpx solid #999;
-    Spadding: 20rpx 0;
+    border-bottom: 5rpx solid #999;
+    padding: 20rpx 0;
   }
   .quantityList{
     width: 710rpx;

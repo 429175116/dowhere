@@ -149,16 +149,19 @@ Page({
     let namelist = []
     let planlist = []
     let schedulelist = []
+    let remainderlist = []
     let i = 0;
     for (i in chartData) {
       namelist.push(chartData[i].name)
       planlist.push(chartData[i].plan)
       schedulelist.push(chartData[i].schedule)
+      remainderlist.push(chartData[i].schedule - chartData[i].plan)
     }
     let data = new Object();
     data.namelist = namelist;
     data.planlist = planlist;
     data.schedulelist = schedulelist;
+    data.remainderlist = remainderlist;
     data.chartName = '各产品计划及完成';
     // 计算图表显示高度
     let k = 100
@@ -176,7 +179,7 @@ Page({
         width: width,
         height: height
       });
-      app.setUserBarShow(data, chart)
+      app.barShow(data, chart)
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
@@ -214,16 +217,19 @@ Page({
     let namelist = []
     let planlist = []
     let schedulelist = []
+    let remainderlist = []
     let i = 0;
     for (i in chartData) {
       namelist.push(chartData[i].name)
       planlist.push(chartData[i].plan)
       schedulelist.push(chartData[i].schedule)
+      remainderlist.push(chartData[i].schedule - chartData[i].plan)
     }
     let data = new Object();
     data.namelist = namelist;
     data.planlist = planlist;
     data.schedulelist = schedulelist;
+    data.remainderlist = remainderlist;
     data.chartName = '完成情况';
     // 计算图表显示高度
     this.setData({
@@ -235,7 +241,7 @@ Page({
         width: width,
         height: height
       });
-      app.setUserBarShow(data, chart)
+      app.barShow(data, chart)
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
