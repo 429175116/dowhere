@@ -7,7 +7,8 @@ Page({
     projectListData: [],
     time: 'month',
     planBarHeight: 0,
-    lv: ''
+    lv: '',
+    annotationList: []
   },
   /**
    * 生命周期函数--监听页面加载
@@ -43,6 +44,28 @@ Page({
     this.setData({
       projectListData: projectListData
     })
+    
+    this.getAnnotation()
+  },
+  // 获取缓存在本地的批注信息
+  getAnnotation() {
+    wx.getStorage({
+      key: 'annotation',
+      success: res => {
+        console.log(res)
+        if (res.data) {
+          let annotationList = res.data
+          this.setData({
+            annotationList: annotationList
+          })
+        } else {
+          
+        }
+      }
+    })
+  },
+  setAnnotation(name, password) {
+    wx.setStorageSync('annotation', ['1111111111111111111', '22222222222222222', '333333333333333333'])
   },
   onShow() {
 
