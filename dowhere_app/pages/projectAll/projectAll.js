@@ -8,7 +8,7 @@ Page({
     time: 'month',
     planBarHeight: 0,
     lv: '',
-    annotationList: []
+    annotationInfo: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -54,19 +54,28 @@ Page({
       success: res => {
         console.log(res)
         if (res.data) {
-          let annotationList = res.data
+          // let annotationInfo = res.data
           this.setData({
-            annotationList: annotationList
+            annotationInfo: res.data
           })
-        } else {
-          
         }
       }
     })
   },
-  setAnnotation(name, password) {
-    wx.setStorageSync('annotation', ['1111111111111111111', '22222222222222222', '333333333333333333'])
+  setAnnotation(annotationList) {
+    wx.setStorageSync('annotation', annotationList)
+    this.getAnnotation()
   },
+  setInputAnnotation(e) {
+    // 获取输入的批注的信息
+    this.setData({
+      annotationInfo: e.detail.value
+    })
+  },
+  upDataAnnotation() {
+    this.setAnnotation(this.data.annotationInfo)
+  },
+
   onShow() {
 
   },

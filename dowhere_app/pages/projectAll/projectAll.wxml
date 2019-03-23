@@ -39,15 +39,22 @@
   </block>
 </view>
 <view class="annotation">
-  <view class="list">
-    <view>1批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注</view>
-    <view>2批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注</view>
-    <view>3批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注</view>
-    <view>4批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注批注</view>
-  </view>
+  <!-- <view class="list">
+    <block wx:for="{{annotationList}}" index="index" wx:for-item="item">
+      <view class="annotationItem">
+        <view class="con">{{index + 1 + '.' + item}}</view>
+        <view class="operate">
+          <view bindtap="delAnnotation" data-index="{{index}}">
+            <icon class="iconfont icon-shanchu" />
+            删除
+          </view>
+        </view>
+      </view>
+    </block>
+  </view> -->
   <view class="name">批注:</view>
-  <textarea></textarea> 
+  <textarea bindinput="setInputAnnotation" value="{{annotationInfo}}"></textarea> 
   <view class="sub">
-    <view>提交</view>
+    <view bindtap="upDataAnnotation">提交</view>
   </view>
 </view>
