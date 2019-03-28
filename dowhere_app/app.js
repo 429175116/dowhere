@@ -70,6 +70,11 @@ App({
           fontSize: 20
         },
       },
+      // 显示的提示信息
+      tooltip : {
+        trigger: 'item',
+        formatter: "{b}\n{c} ({d}%)"
+      },
       backgroundColor: "#ffffff",
       color: ["#78ac47", "#37A2DA", "#f46240", "#facb1e", "#99df20", "#2d7de7", "#FFDB5C", "#FF9F7F"],
       series: [{
