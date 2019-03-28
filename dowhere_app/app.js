@@ -73,7 +73,12 @@ App({
       // 显示的提示信息
       tooltip : {
         trigger: 'item',
-        formatter: "{b}\n{c} ({d}%)"
+        formatter: "    {b}    \n    {c} ({d}%)    ",
+        backgroundColor: 'rgba(255,0,0,0.7)',
+        textStyle: {
+          fontSize: '16px',
+          color: '#000'  // 设置文本颜色 默认#FFF
+        }
       },
       backgroundColor: "#ffffff",
       color: ["#78ac47", "#37A2DA", "#f46240", "#facb1e", "#99df20", "#2d7de7", "#FFDB5C", "#FF9F7F"],
@@ -81,7 +86,7 @@ App({
         label: {
           normal: {
             fontSize: 14,
-            formatter:'{b}\n({d}%)'
+            formatter:'{b}'
             // textStyle: {
             //   fontSize: 30
             // }
@@ -134,6 +139,11 @@ App({
         trigger: 'axis',
         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
           type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        },
+        backgroundColor: 'rgba(255,0,0,0.7)',
+        textStyle: {
+          fontSize: '16px',
+          color: '#000'  // 设置文本颜色 默认#FFF
         }
       },
       legend: {
@@ -244,6 +254,11 @@ App({
         trigger: 'axis',
         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
           type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        },
+        backgroundColor: 'rgba(255,0,0,0.7)',
+        textStyle: {
+          fontSize: '16px',
+          color: '#000'  // 设置文本颜色 默认#FFF
         }
       },
       legend: {
@@ -339,6 +354,11 @@ App({
         trigger: 'axis',
         axisPointer: {            // 坐标轴指示器，坐标轴触发有效
           type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        },
+        backgroundColor: 'rgba(255,0,0,0.7)',
+        textStyle: {
+          fontSize: '16px',
+          color: '#000'  // 设置文本颜色 默认#FFF
         }
       },
       // legend: {
