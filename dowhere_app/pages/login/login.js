@@ -100,7 +100,6 @@ Page({
         password: this.data.userPaw
       },
       success: data => {
-        console.log(data)
         if (data.data.code == 1) {
           // id 用户ID
           // mobile 登陆账号
@@ -116,7 +115,6 @@ Page({
           // 登陆信息存入本地
           // this.setUserLoginInfo(this.data.userName, this.data.userPaw)
           let gourl = ''
-          console.log(data.role_id)
           switch(data.role_id){
             case 1:
               // 最高权限，三级级权限---产品,设备

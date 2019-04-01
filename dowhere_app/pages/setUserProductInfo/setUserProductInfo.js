@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: null,
     listData: []
   },
 
@@ -14,17 +15,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options.prodcutid)
-    console.log(options.prodcutname)
     var date = new Date();
     let month = date.getMonth()
     this.setData({
-      // // 产品ID
-      productId: options.prodcutid,
-      // // 产品ID
-      productName: options.prodcutname,
-      // listData: this.getListData(options.prodcutid)
+      userInfo: app.globalData.userInfo
     })
+    // this.setData({
+    //   // 产品ID
+    //   productId: options.prodcutid,
+    //   // 产品ID
+    //   productName: options.prodcutname
+    // })
+    this.getListData(options.prodcutid)
   },
   goComponents(e) {
     let id = e.currentTarget.dataset.id
@@ -41,28 +43,21 @@ Page({
     // yearSchedule--年进度
     // monthPlan--月计划
     // monthSchedule--月进度
-    let data = [
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 }
-    ]
-    return data
     wx.request({
-      url: `${app.globalData.requestUrl}/api/parts_list`,
+      url: `${app.globalData.requestUrl}/api/client_parts_list`,
       method: 'POST',
       data: {
-        sid: id,
-        uid: app.globalData.userInfo.id
+        type: 1,
+        uid: app.globalData.userInfo.id,
+        goods_id: id
       },
       success: data => {
+        console.log(data)
         if (data.data.success) {
-          
-
+          // data = data.data.data
+          this.setData({
+            listData: data.data.data
+          })
         } else {
           wx.showModal({
             title: '',

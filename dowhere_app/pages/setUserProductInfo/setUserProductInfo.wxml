@@ -2,7 +2,11 @@
 <view class="listName">
   <view>零件列表</view>
 </view>
-<view class="listCon">
+<view class="noneCar" wx:if="{{listData.length === 0}}">
+  <view class="iconfont icon-kong"></view>
+  <view>暂无数据</view>
+</view>
+<view class="listCon" wx:if="{{listData.length > 0}}">
   <view class="item title">
     <view class="neme">产品名称</view>
     <view class="neme">当月计划</view>

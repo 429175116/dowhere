@@ -1,12 +1,12 @@
 /**app.wxss**/
 @font-face {
   font-family: 'iconfont';  /* project id 1055287 */
-  src: url('//at.alicdn.com/t/font_1055287_nwhhfj3wc3.eot');
-  src: url('//at.alicdn.com/t/font_1055287_nwhhfj3wc3.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1055287_nwhhfj3wc3.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1055287_nwhhfj3wc3.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1055287_nwhhfj3wc3.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1055287_nwhhfj3wc3.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1055287_fmgee9rx1rb.eot');
+  src: url('//at.alicdn.com/t/font_1055287_fmgee9rx1rb.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1055287_fmgee9rx1rb.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1055287_fmgee9rx1rb.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1055287_fmgee9rx1rb.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1055287_fmgee9rx1rb.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family:"iconfont" !important;
@@ -26,6 +26,7 @@
 .icon-shanchu:before { content: "\e622"; } /* 删除 */
 .icon-bianji:before { content: "\e62b"; } /* 编辑 */
 .icon-jiantou:before { content: "\e623"; } /* 箭头 */
+.icon-kong:before { content: "\e708"; } /* 空盒子 */
 
 
 .container {
@@ -310,4 +311,16 @@
   align-items: center;
   justify-content: center;
   font-size: 25rpx;
+}
+.noneCar{
+  margin-top: 300rpx;
+}
+.noneCar view{
+  font-size: 33rpx;
+  text-align: center;
+  color: #959595;
+}
+.noneCar .iconfont{
+  font-size: 140rpx;
+  text-align: center;
 }
