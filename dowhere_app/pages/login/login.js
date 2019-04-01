@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458351',
-    userPaw: '123456',
+    userName: '18700458354',
+    userPaw: '123',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
   },
@@ -78,32 +78,20 @@ Page({
       })
       return ''
     }
-    if (this.data.userPaw.length < 6 || this.data.userPaw.length > 15) {
-      wx.showModal({
-        title: '',
-        content: '密码长度为6-15位'
-      })
-      return ''
-    }
-    let gourl = ''
-    if (this.data.userName == '18700458351') {
-      // 最高权限，一级权限---产品,设备
-      gourl = '/pages/projectAll/projectAll?lv=1'
-    } else if (this.data.userName == '18700458352') {
-      // 一级权限--仅有产品
-      gourl = '/pages/product/product?lv=2'
-    } else if (this.data.userName == '18700458354') {
-      // 输入
-      gourl = '/pages/setUserLv/setUserLv?lv=4'
-    } else if (this.data.userName == '18700458355') {
-      // 二级权限
-      gourl = '/pages/oneLvHome/oneLvHome?lv=5'
-    }
-    console.log(gourl)
-    wx.redirectTo({
-      url: gourl
-    })
-    return
+    // if (this.data.userPaw.length < 6 || this.data.userPaw.length > 15) {
+    //   wx.showModal({
+    //     title: '',
+    //     content: '密码长度为6-15位'
+    //   })
+    //   return ''
+    // }
+    // let gourl = ''
+    
+    // console.log(gourl)
+    // wx.redirectTo({
+    //   url: gourl
+    // })
+    // return
     wx.request({
       url: `${app.globalData.requestUrl}/api/login`,
       method: 'POST',
@@ -131,15 +119,19 @@ Page({
           console.log(data.role_id)
           switch(data.role_id){
             case 1:
+              // 最高权限，三级级权限---产品,设备
               gourl = '/pages/projectAll/projectAll'
               break;
             case 2:
-              gourl = '/pages/projectAll/projectAll'
+              // 二级权限--仅有产品
+              gourl = '/pages/product/product'
               break;
             case 3:
+              // 一级权限
               gourl = '/pages/oneLvHome/oneLvHome'
               break;
             case 4:
+              // 输入用户（客户）权限
               gourl = '/pages/setUserLv/setUserLv'
               break;
             default:
@@ -155,7 +147,7 @@ Page({
         } else {
           wx.showModal({
             title: '',
-            content: data.msg
+            content: data.data.msg
           })
         }
       }

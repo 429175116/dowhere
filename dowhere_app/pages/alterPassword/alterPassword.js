@@ -175,7 +175,7 @@ Page({
     
     return
     wx.request({
-      url: `${app.globalData.requestUrl}/api/login`,
+      url: `${app.globalData.requestUrl}/api/new_password`,
       method: 'POST',
       data: {
         mobile: this.data.userName,
@@ -184,12 +184,16 @@ Page({
       },
       success: data => {
         if (data.code !== '0') {
+          wx.showModal({
+            title: '',
+            content: '修改成功'
+          })
           // 返回登录页
           wx.navigateBack()
         } else {
           wx.showModal({
             title: '',
-            content: data.msg
+            content: data.data.msg
           })
         }
       }

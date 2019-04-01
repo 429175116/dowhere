@@ -7,13 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listData: []
+    listData: [],
+    userInfo: null
   },
   onLoad(options) {
     this.setData({
-      listData: this.getListData()
+      userInfo: app.globalData.userInfo
     })
-    
+    this.getListData()
   },
   
   goProdcutInfo(e) {
@@ -25,40 +26,21 @@ Page({
   },
   // 加载列表，数据展示
   getListData() {
-    let data = [
-      {"name": "产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1产品1", "id": "1"},
-      {"name": "产品1产品1产品1产品1产品1产品1产品1", "id": "1"},
-      {"name": "产品1", "id": "1"},
-      {"name": "产品1产品1产品1", "id": "1"},
-      {"name": "产品1产品1产品1", "id": "1"},
-      {"name": "产品1", "id": "1"},
-      {"name": "产品1产品1产品1", "id": "1"},
-      {"name": "产品1", "id": "1"}
-    ]
-    // 根据name值的长度排序
-    let data1 = this.sortData(data)
-    return data1
+    // 获取该用户权限下的设备列表
     wx.request({
-      url: `${app.globalData.requestUrl}/api/goods`,
+      url: `${app.globalData.requestUrl}/api/index`,
       method: 'POST',
       data: {
-        role_id: app.globalData.userInfo.role_id,
+        type: 2,
         uid: app.globalData.userInfo.id
       },
       success: data => {
         if (data.data.code == 1) {
           data = data.data.data
-          data = [
-            {"name": "产品1产品1", "id": "1"},
-            {"name": "产品1", "id": "1"},
-            {"name": "产品1", "id": "1"},
-            {"name": "产品1", "id": "1"},
-            {"name": "产品1产品1产品1", "id": "1"},
-            {"name": "产品1", "id": "1"},
-            {"name": "产品1", "id": "1"},
-            {"name": "产品1", "id": "1"}
-          ]
-          return data
+          let data1 = this.sortData(data)
+          this.setData({
+            listData: data1
+          })
         } else {
           wx.showModal({
             title: '',
@@ -71,7 +53,7 @@ Page({
   sortData(data) {
     // 根据name值的长度排序
     data.sort(function(a,b){
-      return a['name'].length < b['name'].length;
+      return a['goods_name'].length < b['goods_name'].length;
     })
     return data
   }

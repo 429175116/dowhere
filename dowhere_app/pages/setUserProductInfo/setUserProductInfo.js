@@ -14,14 +14,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    console.log(options.prodcutid)
+    console.log(options.prodcutname)
     var date = new Date();
     let month = date.getMonth()
     this.setData({
       // // 产品ID
-      // productId: options.prodcutid,
+      productId: options.prodcutid,
       // // 产品ID
-      // productName: options.prodcutname,
-      listData: this.getListData(options.prodcutid)
+      productName: options.prodcutname,
+      // listData: this.getListData(options.prodcutid)
     })
   },
   goComponents(e) {
