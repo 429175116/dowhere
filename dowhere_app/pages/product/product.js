@@ -10,7 +10,8 @@ Page({
     listData: [],
     planBarHeight: 0,
     time: 'month',
-    projectListData: []
+    projectListData: [],
+    annotationInfo: ''
   },
 
   /**
@@ -30,8 +31,37 @@ Page({
       projectListData: projectListData,
       listData: getListData()
     })
+    // 获取批注内容
+    this.getAnnotation()
   },
-
+  // 获取缓存在本地的批注信息
+  getAnnotation() {
+    wx.getStorage({
+      key: 'annotation',
+      success: res => {
+        console.log(res)
+        if (res.data) {
+          // let annotationInfo = res.data
+          this.setData({
+            annotationInfo: res.data
+          })
+        }
+      }
+    })
+  },
+  setAnnotation(annotationList) {
+    wx.setStorageSync('annotation', annotationList)
+    this.getAnnotation()
+  },
+  setInputAnnotation(e) {
+    // 获取输入的批注的信息
+    this.setData({
+      annotationInfo: e.detail.value
+    })
+  },
+  upDataAnnotation() {
+    this.setAnnotation(this.data.annotationInfo)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

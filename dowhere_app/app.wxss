@@ -282,12 +282,15 @@
   padding: 20rpx;
   height: auto;
 }
-.annotation name{
+.annotation .name{
   font-size: 30rpx;
 }
 .annotation textarea{
   width: 100%;
   border: 1rpx solid #ccc;
+  font-size: 30rpx;
+  color: #444;
+  line-height: 40rpx;
 }
 .annotation .sub{
   width: 100%;

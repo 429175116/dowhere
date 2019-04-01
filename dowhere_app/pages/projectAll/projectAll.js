@@ -44,7 +44,7 @@ Page({
     this.setData({
       projectListData: projectListData
     })
-    
+    // 获取批注内容
     this.getAnnotation()
   },
   // 获取缓存在本地的批注信息

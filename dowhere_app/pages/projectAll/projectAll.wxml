@@ -39,19 +39,6 @@
   </block>
 </view>
 <view class="annotation">
-  <!-- <view class="list">
-    <block wx:for="{{annotationList}}" index="index" wx:for-item="item">
-      <view class="annotationItem">
-        <view class="con">{{index + 1 + '.' + item}}</view>
-        <view class="operate">
-          <view bindtap="delAnnotation" data-index="{{index}}">
-            <icon class="iconfont icon-shanchu" />
-            删除
-          </view>
-        </view>
-      </view>
-    </block>
-  </view> -->
   <view class="name">批注:</view>
   <textarea bindinput="setInputAnnotation" value="{{annotationInfo}}"></textarea> 
   <view class="sub">

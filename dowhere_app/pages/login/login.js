@@ -93,7 +93,7 @@ Page({
       // 一级权限--仅有产品
       gourl = '/pages/product/product?lv=2'
     } else if (this.data.userName == '18700458354') {
-      // 二级权限--输入
+      // 输入
       gourl = '/pages/setUserLv/setUserLv?lv=4'
     } else if (this.data.userName == '18700458355') {
       // 二级权限

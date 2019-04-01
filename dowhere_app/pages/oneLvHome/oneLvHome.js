@@ -14,7 +14,8 @@ Page({
       {"name": "产品1", "id": "1", "value": 100},
       {"name": "产品2", "id": "1", "value": 30},
       {"name": "产品3", "id": "1", "value": 80},
-    ]
+    ],
+    annotationInfo: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -25,6 +26,35 @@ Page({
       lv: options.lv,
       userId: app.globalData.userId
     })
+    this.getAnnotation()
+  },
+  // 获取缓存在本地的批注信息
+  getAnnotation() {
+    wx.getStorage({
+      key: 'annotation',
+      success: res => {
+        console.log(res)
+        if (res.data) {
+          // let annotationInfo = res.data
+          this.setData({
+            annotationInfo: res.data
+          })
+        }
+      }
+    })
+  },
+  setAnnotation(annotationList) {
+    wx.setStorageSync('annotation', annotationList)
+    this.getAnnotation()
+  },
+  setInputAnnotation(e) {
+    // 获取输入的批注的信息
+    this.setData({
+      annotationInfo: e.detail.value
+    })
+  },
+  upDataAnnotation() {
+    this.setAnnotation(this.data.annotationInfo)
   },
   onReady() {
     // 获取组件
