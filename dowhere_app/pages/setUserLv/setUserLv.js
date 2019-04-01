@@ -26,16 +26,19 @@ Page({
   // 加载列表，数据展示
   getListData() {
     let data = [
-      {"name": "产品1产品1", "id": "1"},
-      {"name": "产品1", "id": "1"},
-      {"name": "产品1", "id": "1"},
+     
+      {"name": "产品1产品1产品1产品1产品1产品1产品1", "id": "1"},
       {"name": "产品1", "id": "1"},
       {"name": "产品1产品1产品1", "id": "1"},
+      {"name": "产品1产品1产品1", "id": "1"},
       {"name": "产品1", "id": "1"},
-      {"name": "产品1", "id": "1"},
+      {"name": "产品1产品1产品1", "id": "1"},
       {"name": "产品1", "id": "1"}
     ]
-    return data
+    // 根据name值的长度排序
+    let data1 = this.sortData(data)
+    console.log(data1)
+    return data1
     wx.request({
       url: `${app.globalData.requestUrl}/api/goods`,
       method: 'POST',
@@ -65,6 +68,12 @@ Page({
         }
       }
     })
+  },
+  sortData(data) {
+    // 根据name值的长度排序
+    data.sort(function(a,b){
+      return a['name'].length < b['name'].length;
+    })
+    return data
   }
 })
-

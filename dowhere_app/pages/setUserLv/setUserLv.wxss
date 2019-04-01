@@ -2,7 +2,7 @@
 .items{
   float: left;
   /* display: inline-block; */
-  height: 80rpx !important;
+  height: auto !important;
   border-radius: 20rpx !important;
   margin: 20rpx;
   padding: 10rpx;
@@ -12,6 +12,10 @@
   justify-content: center;
   font-size: 30rpx;
   color: #fff;
+  min-width: 310rpx;
+}
+.maxWidth{
+  width: 680rpx;
 }
 .img image{
   width: 750rpx;
