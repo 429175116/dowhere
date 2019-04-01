@@ -13,6 +13,9 @@
   font-size: 30rpx;
   color: #fff;
   min-width: 310rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .maxWidth{
   width: 680rpx;
