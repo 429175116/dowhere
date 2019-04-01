@@ -13,7 +13,9 @@ Page({
     this.setData({
       listData: this.getListData()
     })
+    
   },
+  
   goProdcutInfo(e) {
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name

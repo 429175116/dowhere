@@ -49,7 +49,7 @@
             <view class="info" bindtap="goPlan">计划</view>
             <view class="info" bindtap="goSchedule">完成</view>
           </view>
-          <view class="remarks">
+          <!-- <view class="remarks">
             <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
             <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
             <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
@@ -57,10 +57,17 @@
             <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
             <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
             <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
-          </view>
+          </view> -->
         </view>
       </view>
     </block>
+  </view>
+</view>
+<view class="annotation">
+  <view class="name">批注:</view>
+  <textarea bindinput="setInputAnnotation" value="{{annotationInfo}}"></textarea> 
+  <view class="sub">
+    <view bindtap="upDataAnnotation">提交</view>
   </view>
 </view>
 <!-- <view class="listName">

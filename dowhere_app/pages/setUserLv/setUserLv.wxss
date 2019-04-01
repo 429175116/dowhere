@@ -1,6 +1,7 @@
 /* pages/setUserLv/setUserLv.wxss */
 .items{
   float: left;
+  /* display: inline-block; */
   height: 80rpx !important;
   border-radius: 20rpx !important;
   margin: 20rpx;
