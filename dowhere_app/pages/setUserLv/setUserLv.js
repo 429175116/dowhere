@@ -37,7 +37,6 @@ Page({
     ]
     // 根据name值的长度排序
     let data1 = this.sortData(data)
-    console.log(data1)
     return data1
     wx.request({
       url: `${app.globalData.requestUrl}/api/goods`,
