@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // listData: [],
+    userInfo: null,
     time: '',
     monthList: [],
     monthPlanBarHeight: 0,
@@ -16,7 +16,10 @@ Page({
     productName: '',
     mark: '',
     annotationInfo: '',
-    partsInfo: null
+    partsInfo: null,
+    planNumber: 0,
+    planBout: 0,
+    fulfilBout: 0
   },
 
   /**
@@ -26,6 +29,7 @@ Page({
     var date = new Date();
     let month = date.getMonth()
     this.setData({
+      userInfo: app.globalData.userInfo,
       // 产品ID
       productId: options.prodcutid,
       // 产品ID
@@ -50,8 +54,15 @@ Page({
       },
       success: data => {
         if (data.data.code === '1') {
+          data = data.data.data
           this.setData({
-            partsInfo: data.data.data
+            partsInfo: data,
+            // 获取全年数量数据
+            planNumber: data.plan_number,
+            // 获取全年计划批次数据
+            planBout: data.plan_bout,
+            // 获取全年完成批次数据
+            fulfilBout: data.fulfil_bout
           })
         } else {
           wx.showModal({
@@ -62,6 +73,83 @@ Page({
       }
     })
   },
+  getPlanNumber(e) {
+    // 获取全年数量数据
+    this.setData({
+      planNumber: e.detail.value
+    })
+  },
+  getPlanBout(e) {
+    // 获取全年计划批次数据
+    this.setData({
+      planBout: e.detail.value
+    })
+  },
+  getFulfilBout(e) {
+    // 获取全年完成批次数据
+    this.setData({
+      fulfilBout: e.detail.value
+    })
+  },
+  getPartsData(e) {
+    // 请求数据拼装
+    let type = e.currentTarget.dataset.type
+    var serverUrl = ''
+    let setData = {
+      "uid": this.data.userInfo.id,
+      "type": 1,
+      "parts_id": this.data.productId
+    }
+    switch(type){
+      case 'planNumber':
+        // 全年计划数量
+        setData['plan_number'] = this.data.planNumber
+        serverUrl = 'plan_number'
+        break;
+      case 'planBout':
+        // 全年计划批次
+        setData['plan_bout'] = this.data.planBout
+        serverUrl = 'plan_bout'
+        break;
+      case 'fulfilBout':
+        // 全年完成批次
+        setData['fulfil_bout'] = this.data.fulfilBout
+        setData['type'] = 2
+        serverUrl = 'fulfil_bout'
+        break;
+      default:
+        // wx.showModal({
+        //   title: '',
+        //   content: '用户未分配权限'
+        // })
+        break;
+    }
+    // 数据提交（请求数据，请求接口）
+    this.setPartsData(setData, serverUrl)
+  },
+  setPartsData(setData, serverUrl) {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/${serverUrl}`,
+      method: 'POST',
+      data: setData,
+      success: data => {
+        if (data.data.code === '1') {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
+          })
+          // 获取零件的基本信息--信息刷新
+          this.gitPartsInfo(setData.parts_id)
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
+          })
+        }
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

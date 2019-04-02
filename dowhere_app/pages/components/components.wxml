@@ -17,15 +17,24 @@
   </view>
   <view class="item">
     <view class="name">全年计划数量</view>
-    <view class="con"><input type="text" value="{{partsInfo.plan_number}}" /> <button>确定</button></view>
+    <view class="con">
+      <input type="text" value="{{partsInfo.plan_number}}" bindinput="getPlanNumber" />
+      <button data-type="planNumber" bindtap="getPartsData">确定</button>
+    </view>
   </view>
   <view class="item">
     <view class="name">全年计划批次</view>
-    <view class="con"><input type="text" value="{{partsInfo.plan_bout}}" /> <button>确定</button></view>
+    <view class="con">
+      <input type="text" value="{{partsInfo.plan_bout}}" bindinput="getPlanBout" />
+      <button data-type="planBout" bindtap="getPartsData">确定</button>
+    </view>
   </view>
   <view class="item">
     <view class="name">全年完成批次</view>
-    <view class="con"><input type="text" value="{{partsInfo.fulfil_bout}}" /> <button>确定</button></view>
+    <view class="con">
+      <input type="text" value="{{partsInfo.fulfil_bout}}" bindinput="getFulfilBout" />
+      <button data-type="fulfilBout" bindtap="getPartsData">确定</button>
+    </view>
   </view>
   <view class="item">
     <view class="name">全年剩余批次</view>

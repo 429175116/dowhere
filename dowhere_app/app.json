@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/login/login",
     "pages/setSchedule/setSchedule",
     "pages/setPlan/setPlan",

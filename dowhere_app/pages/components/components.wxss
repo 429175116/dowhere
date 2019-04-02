@@ -85,4 +85,6 @@
   counter-reset: #999;
   margin-top: 20rpx;
 }
-    
+.con input{
+  text-align: center;
+}
