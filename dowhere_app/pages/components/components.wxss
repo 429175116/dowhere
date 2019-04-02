@@ -58,10 +58,7 @@
 }
 .monthChart{
   width: 600rpx;
-  height: 500rpx;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
+  height: auto;
 }
 .hideMonthChart{
   width: 600rpx;

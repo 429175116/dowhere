@@ -206,6 +206,8 @@ Page({
     //   return ''
     // }
     this.setData({
+      // 初始化图表容器高度
+      monthPlanBarHeight: 'auto',
       time: e.currentTarget.dataset.month
     })
     this.HistogramData(this.data.productId)
