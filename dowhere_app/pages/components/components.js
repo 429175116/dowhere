@@ -180,9 +180,10 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    this.setOptionMonthPlanBar()
     // 获取零件的全年完成情况--饼图
     this.getOptionPlanPie(this.data.productId)
+    // 显示柱状图
+    this.HistogramData(this.data.productId)
   },
   goPlan(e) {
     // 进入计划页
@@ -201,11 +202,44 @@ Page({
     })
   },
   selMonth(e) {
-    if (this.data.time === e.currentTarget.dataset.month) {
-      return ''
-    }
+    // if (this.data.time === e.currentTarget.dataset.month) {
+    //   return ''
+    // }
     this.setData({
       time: e.currentTarget.dataset.month
+    })
+    this.HistogramData(this.data.productId)
+  },
+  HistogramData(id) {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/Histogram`,
+      method: 'POST',
+      data: {
+        parts_id: id,
+        month: this.data.time
+      },
+      success: data => {
+        if (data.data.code === '1') {
+          let day = data.data.data2
+          let chartData = [
+            { "name": "计划", "schedule": data.data.data1 },
+            { "name": "累积", "schedule": 0 }
+          ]
+          let addUp = 0
+          let i = 0
+          for (i in day) {
+            chartData[1]['schedule'] += day[i].num
+            chartData.push({ "name": `${day[i].day}号`, "schedule": day[i].num })
+          }
+          // 各月完成--柱
+          this.setOptionMonthPlanBar(chartData)
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
+          })
+        }
+      }
     })
     this.setOptionMonthPlanBar()
   },
@@ -251,14 +285,6 @@ Page({
 
   },
   setOptionMonthPlanBar(chartData) {
-    chartData = [
-      { "name": "计划", "schedule": 100 },
-      { "name": "累积", "schedule": 80 },
-      { "name": "1号", "schedule": 20 },
-      { "name": "2号", "schedule": 20 },
-      { "name": "3号", "schedule": 20 },
-      { "name": "4号", "schedule": 20 },
-    ]
     let namelist = []
     let schedulelist = []
     let remainderlist = []
@@ -296,7 +322,7 @@ Page({
   setOptionPlanPie(chartData) {
     let data = new Object();
     data.chartData = chartData;
-    data.chartName = '完成情况';
+    data.chartName = '全年完成情况';
     // 图表渲染
     this.planPie = this.selectComponent('#plan-pie');
     this.planPie.init((canvas, width, height) => {

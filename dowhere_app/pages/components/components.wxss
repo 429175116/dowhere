@@ -14,7 +14,8 @@
 }
 #monthPlan-bar{
   width: 600rpx;
-  height: 500rpx;
+  /* height: 500rpx; */
+  height: auto;
   display:block;
 }
 
