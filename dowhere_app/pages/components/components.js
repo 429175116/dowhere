@@ -57,11 +57,11 @@ Page({
           data = data.data.data
           this.setData({
             partsInfo: data,
-            // 获取全年数量数据
+            // 获取全年数量数据--初始化
             planNumber: data.plan_number,
-            // 获取全年计划批次数据
+            // 获取全年计划批次数据--初始化
             planBout: data.plan_bout,
-            // 获取全年完成批次数据
+            // 获取全年完成批次数据--初始化
             fulfilBout: data.fulfil_bout
           })
         } else {
@@ -149,14 +149,40 @@ Page({
       }
     })
   },
-
+  // 获取零件的全年完成情况--饼图
+  getOptionPlanPie(id) {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/circle`,
+      method: 'POST',
+      data: {
+        parts_id: id
+      },
+      success: data => {
+        if (data.data.code === '1') {
+          data = data.data.data
+          let remaining = data.plan_number - data.year_fulfil
+          let chartData = [
+            { "name": "完成", "value": data.year_fulfil },
+            { "name": "剩余", "value": remaining }
+          ]
+          // 计划完成度--饼
+          this.setOptionPlanPie(chartData)
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    this.planPie = this.selectComponent('#plan-pie');
-    this.init()
     this.setOptionMonthPlanBar()
+    // 获取零件的全年完成情况--饼图
+    this.getOptionPlanPie(this.data.productId)
   },
   goPlan(e) {
     // 进入计划页
@@ -224,21 +250,8 @@ Page({
   onShareAppMessage() {
 
   },
-  init(time) {
-    this.planPie.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
-      });
-      this.setOptionPlanPie(chart);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-  },
-  setOptionMonthPlanBar() {
-    let chartData = [
+  setOptionMonthPlanBar(chartData) {
+    chartData = [
       { "name": "计划", "schedule": 100 },
       { "name": "累积", "schedule": 80 },
       { "name": "1号", "schedule": 20 },
@@ -278,58 +291,23 @@ Page({
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
-    // 图表渲染
-
-    // wx.request({
-    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-    //   method: 'POST',
-    //   data: {
-    //     userName: this.userName,
-    //     userPaw: this.userPaw
-    //   },
-    //   success: data => {
-    //     if (data.data.success) {
-    //       // data = data.data.novels
-
-    //     } else {
-    //       wx.showModal({
-    //         title: '',
-    //         content: data.data.errmsg
-    //       })
-    //     }
-    //   }
-    // })
   },
   // 计划完成度--饼
-  setOptionPlanPie(chart) {
-    let chartData = [
-      { "name": "完成", "value": 100 },
-      { "name": "剩余", "value": 30 }
-    ]
+  setOptionPlanPie(chartData) {
     let data = new Object();
     data.chartData = chartData;
     data.chartName = '完成情况';
     // 图表渲染
-    app.pieShow(data, chart)
-    // wx.request({
-    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-    //   method: 'POST',
-    //   data: {
-    //     userName: this.userName,
-    //     userPaw: this.userPaw
-    //   },
-    //   success: data => {
-    //     if (data.data.success) {
-    //       // data = data.data.novels
-
-    //     } else {
-    //       wx.showModal({
-    //         title: '',
-    //         content: data.data.errmsg
-    //       })
-    //     }
-    //   }
-    // })
+    this.planPie = this.selectComponent('#plan-pie');
+    this.planPie.init((canvas, width, height) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      app.pieShow(data, chart)
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
   },
   // 获取缓存在本地的批注信息
   getAnnotation() {
