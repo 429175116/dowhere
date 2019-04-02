@@ -12,8 +12,9 @@ Page({
     monthList: [],
     monthPlanBarHeight: 0,
     planBarHeight: 0,
-    productId: '',
-    productName: '',
+    componentsId: '',
+    componentsName: '',
+    prodcutname: '',
     mark: '',
     annotationInfo: '',
     partsInfo: null,
@@ -26,14 +27,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    console.log(options)
     var date = new Date();
     let month = date.getMonth()
     this.setData({
       userInfo: app.globalData.userInfo,
-      // 产品ID
-      productId: options.prodcutid,
-      // 产品ID
-      productName: options.prodcutname,
+      // 零件ID
+      componentsId: options.componentsid,
+      // 零件名称
+      componentsName: options.componentsname,
+      // 产品名称
+      prodcutname: options.prodcutname,
       // 获取全部零件或部分零件标记{part：部分；all：全部}
       mark: options.getTypt,
       // 获取当前时间，用于月份显示，只显示已经存在的月份
@@ -43,7 +47,7 @@ Page({
     // 获取本地存储的批注信息
     this.getAnnotation()
     // 获取零件的基本信息
-    this.gitPartsInfo(options.prodcutid)
+    this.gitPartsInfo(options.componentsid)
   },
   gitPartsInfo(id) {
     wx.request({
@@ -98,7 +102,7 @@ Page({
     let setData = {
       "uid": this.data.userInfo.id,
       "type": 1,
-      "parts_id": this.data.productId
+      "parts_id": this.data.componentsId
     }
     switch(type){
       case 'planNumber':
@@ -181,24 +185,20 @@ Page({
    */
   onReady() {
     // 获取零件的全年完成情况--饼图
-    this.getOptionPlanPie(this.data.productId)
+    this.getOptionPlanPie(this.data.componentsId)
     // 显示柱状图
-    this.HistogramData(this.data.productId)
+    this.HistogramData(this.data.componentsId)
   },
   goPlan(e) {
     // 进入计划页
-    let id = e.currentTarget.dataset.id
-    let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/setPlan/setPlan?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
+      url: `/pages/setPlan/setPlan?componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
     })
   },
   goSchedule(e) {
     // 进入进度录入页
-    let id = e.currentTarget.dataset.id
-    let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/setSchedule/setSchedule?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
+      url: `/pages/setSchedule/setSchedule?componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
     })
   },
   selMonth(e) {
@@ -210,7 +210,7 @@ Page({
       monthPlanBarHeight: 'auto',
       time: e.currentTarget.dataset.month
     })
-    this.HistogramData(this.data.productId)
+    this.HistogramData(this.data.componentsId)
   },
   HistogramData(id) {
     wx.request({

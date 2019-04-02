@@ -8,7 +8,8 @@ Page({
    */
   data: {
     userInfo: null,
-    listData: []
+    listData: [],
+    prodcutInfo: ''
   },
 
   /**
@@ -18,6 +19,7 @@ Page({
     var date = new Date();
     let month = date.getMonth()
     this.setData({
+      prodcutInfo: options,
       userInfo: app.globalData.userInfo
     })
     this.getListData(options.prodcutid)
@@ -26,7 +28,7 @@ Page({
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/components/components?prodcutid=${id}&prodcutname=${name}&getTypt=all`
+      url: `/pages/components/components?componentsid=${id}&componentsname=${name}&prodcutname=${this.data.prodcutInfo.prodcutname}`
     })
   },
   // 加载列表，数据展示

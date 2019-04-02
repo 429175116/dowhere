@@ -13,7 +13,6 @@ Page({
     userId: '',
     componentsId: '',
     componentsName: '',
-    productId: '',
     productName: ''
   },
 
@@ -28,8 +27,7 @@ Page({
       userId: app.globalData.userId,
       componentsId: options.componentsid,
       componentsName: options.componentsname,
-      productId: options.productid,
-      productName: options.productname
+      productName: options.prodcutname
     })
   },
   setPlanData(e) {
