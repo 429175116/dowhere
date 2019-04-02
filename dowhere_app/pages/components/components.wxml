@@ -3,33 +3,33 @@
 <view class="productInfoTable">
   <view class="item productTitle">
     <view class="name">名称</view>
-    <view class="con">1好</view>
+    <view class="con">{{partsInfo.name}}</view>
   </view>
   <view class="item">
-    <view class="name">名称</view>
+    <view class="name">图形</view>
     <view class="con">
-      <image class="img" src="../../img/logo.jpg" />
+      <image class="img" src="{{partsInfo.img}}" />
     </view>
   </view>
   <view class="item">
-    <view class="name">名称</view>
-    <view class="con">描述描述描述描述</view>
+    <view class="name">特性</view>
+    <view class="con">{{partsInfo.trait}}</view>
   </view>
   <view class="item">
     <view class="name">全年计划数量</view>
-    <view class="con"><input type="text" /> <button>确定</button></view>
+    <view class="con"><input type="text" value="{{partsInfo.plan_number}}" /> <button>确定</button></view>
   </view>
   <view class="item">
     <view class="name">全年计划批次</view>
-    <view class="con"><input type="text" /> <button>确定</button></view>
+    <view class="con"><input type="text" value="{{partsInfo.plan_bout}}" /> <button>确定</button></view>
   </view>
   <view class="item">
     <view class="name">全年完成批次</view>
-    <view class="con"><input type="text" /> <button>确定</button></view>
+    <view class="con"><input type="text" value="{{partsInfo.fulfil_bout}}" /> <button>确定</button></view>
   </view>
   <view class="item">
     <view class="name">全年剩余批次</view>
-    <view class="con">213</view>
+    <view class="con">{{partsInfo.plan_bout - partsInfo.fulfil_bout}}</view>
   </view>
 </view>
 <view class="charts">
@@ -49,15 +49,6 @@
             <view class="info" bindtap="goPlan">计划</view>
             <view class="info" bindtap="goSchedule">完成</view>
           </view>
-          <!-- <view class="remarks">
-            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
-            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
-            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
-            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
-            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
-            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
-            <view>1.备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</view>
-          </view> -->
         </view>
       </view>
     </block>
@@ -70,42 +61,3 @@
     <view bindtap="upDataAnnotation">提交</view>
   </view>
 </view>
-<!-- <view class="listName">
-  <view>一区</view>
-</view>
-<view class="listCon">
-  <view class="item title">
-    <view class="neme">产品名称</view>
-    <view class="neme">当月完成</view>
-    <view class="neme">当月未完</view>
-    <view class="neme">年度完成</view>
-    <view class="neme">年度未完</view>
-    <view class="neme">操作</view>
-  </view>
-  <block wx:for="{{listData}}" wx:for-item="item" index="index">
-    <view class="item">
-      <view>{{item.name}}</view>
-      <view>
-        <view class="complete" style="width:{{(item.yearSchedule/item.yearPlan)*100}}%"></view>
-        {{item.yearSchedule}}
-      </view>
-      <view>
-        <view class="undone" style="width:{{((item.yearPlan-item.yearSchedule)/item.yearPlan)*100}}%"></view>
-        {{item.yearPlan - item.yearSchedule}}
-      </view>
-      <view>
-        <view class="complete" style="width:{{(item.monthSchedule/item.monthPlan)*100}}%"></view>
-        {{item.monthSchedule}}
-      </view>
-      <view>
-        <view class="undone" style="width:{{((item.monthPlan-item.monthSchedule)/item.monthPlan)*100}}%"></view>
-        {{item.monthPlan - item.monthSchedule}}
-      </view>
-      <view>
-        <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goPlan">计划</view>
-        <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goSchedule">进度</view>
-      </view>
-    </view>
-  </block>
-</view> -->
-

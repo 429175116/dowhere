@@ -20,12 +20,6 @@ Page({
     this.setData({
       userInfo: app.globalData.userInfo
     })
-    // this.setData({
-    //   // 产品ID
-    //   productId: options.prodcutid,
-    //   // 产品ID
-    //   productName: options.prodcutname
-    // })
     this.getListData(options.prodcutid)
   },
   goComponents(e) {

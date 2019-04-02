@@ -15,7 +15,8 @@ Page({
     productId: '',
     productName: '',
     mark: '',
-    annotationInfo: ''
+    annotationInfo: '',
+    partsInfo: null
   },
 
   /**
@@ -34,37 +35,32 @@ Page({
       // 获取当前时间，用于月份显示，只显示已经存在的月份
       monthList: getMonthList(),
       time: month + 1
-
     })
+    // 获取本地存储的批注信息
     this.getAnnotation()
+    // 获取零件的基本信息
+    this.gitPartsInfo(options.prodcutid)
   },
-  // 获取缓存在本地的批注信息
-  getAnnotation() {
-    wx.getStorage({
-      key: 'annotation',
-      success: res => {
-        console.log(res)
-        if (res.data) {
-          // let annotationInfo = res.data
+  gitPartsInfo(id) {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/parts`,
+      method: 'POST',
+      data: {
+        parts_id: id
+      },
+      success: data => {
+        if (data.data.code === '1') {
           this.setData({
-            annotationInfo: res.data
+            partsInfo: data.data.data
+          })
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.errmsg
           })
         }
       }
     })
-  },
-  setAnnotation(annotationList) {
-    wx.setStorageSync('annotation', annotationList)
-    this.getAnnotation()
-  },
-  setInputAnnotation(e) {
-    // 获取输入的批注的信息
-    this.setData({
-      annotationInfo: e.detail.value
-    })
-  },
-  upDataAnnotation() {
-    this.setAnnotation(this.data.annotationInfo)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -246,7 +242,35 @@ Page({
     //     }
     //   }
     // })
-  }
+  },
+  // 获取缓存在本地的批注信息
+  getAnnotation() {
+    wx.getStorage({
+      key: 'annotation',
+      success: res => {
+        console.log(res)
+        if (res.data) {
+          // let annotationInfo = res.data
+          this.setData({
+            annotationInfo: res.data
+          })
+        }
+      }
+    })
+  },
+  setAnnotation(annotationList) {
+    wx.setStorageSync('annotation', annotationList)
+    this.getAnnotation()
+  },
+  setInputAnnotation(e) {
+    // 获取输入的批注的信息
+    this.setData({
+      annotationInfo: e.detail.value
+    })
+  },
+  upDataAnnotation() {
+    this.setAnnotation(this.data.annotationInfo)
+  },
 })
 // 获取月份列表
 function getMonthList() {
