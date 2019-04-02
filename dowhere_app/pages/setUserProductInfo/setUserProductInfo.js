@@ -53,11 +53,11 @@ Page({
       },
       success: data => {
         console.log(data)
-        if (data.data.success) {
-          // data = data.data.data
+        if (data.data.code === '1') {
           this.setData({
             listData: data.data.data
           })
+          console.log(this.data.listData)
         } else {
           wx.showModal({
             title: '',
