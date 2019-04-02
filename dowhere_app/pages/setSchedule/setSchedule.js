@@ -9,8 +9,7 @@ Page({
   data: {
     planData: '',
     dates: '',
-    remarks: '',
-    userId: '',
+    userInfo: '',
     componentsId: '',
     componentsName: '',
     productName: ''
@@ -24,7 +23,7 @@ Page({
     this.check = new check()
     app.globalData.userId = 10
     this.setData({
-      userId: app.globalData.userId,
+      userInfo: app.globalData.userInfo,
       componentsId: options.componentsid,
       componentsName: options.componentsname,
       productName: options.prodcutname
@@ -35,7 +34,6 @@ Page({
     this.setData({
       planData: e.detail.value
     })
-    console.log(this.data.remarks+'====')
   },
   bindPickerChange: function (e) {
     // 获取时间
@@ -43,13 +41,6 @@ Page({
     this.setData({
       dates: e.detail.value
     })
-  },
-  setRemarks(e) {
-    // 获取备注
-    this.setData({
-      remarks: e.detail.value
-    })
-    console.log(this.data.remarks+'====')
   },
   submit(){
     if (this.check.isInt(this.data.planData)) {
@@ -66,29 +57,29 @@ Page({
       })
       return ''
     }
-    console.log(this.data.planData+'计划')
-    console.log(this.data.dates+ '时间')
-    console.log(this.data.remarks+'备注')
-    console.log(this.data.userId)
-    return
     wx.request({
-      url: `${this.$parent.globalData.requestUrl}/api/logo`,
+      url: `${app.globalData.requestUrl}/api/month_fulfil`,
       method: 'POST',
       data: {
-        userName: this.userName,
-        userPaw: this.userPaw
+        uid: this.data.userInfo.id,
+        month: this.data.dates,
+        num: this.data.planData,
+        type: 2,
+        parts_id: this.data.componentsId
       },
       success: data => {
-        if (data.data.success) {
-          // data = data.data.novels
-          // this.searchBook = data.data
-          // 根据不同的用户权限进入不同的页面
-          this.$redirect(`/pages/registered`)
-          this.$apply()
+        if (data.data.code == 1) {
+          wx.showModal({
+            title: '',
+            content: '进度录入成功'
+          })
+          wx.navigateBack({
+            delta: 1
+          })
         } else {
           wx.showModal({
             title: '',
-            content: data.data.errmsg
+            content: data.data.msg
           })
         }
       }
