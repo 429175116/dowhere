@@ -58,6 +58,13 @@ App({
     requestUrl: 'http://192.168.1.161' //线下
     // requestUrl: 'http://192.168.1.125/' //线上
   },
+  // 生成固定范围内的随机数
+  RandomNumBoth(Min,Max){
+    var Range = Max - Min;
+    var Rand = Math.random();
+    var num = Min + Math.round(Rand * Range); //四舍五入
+    return num;
+  },
   pieShow(data, chart) {
     let chartName = data.chartName
     data = data.chartData

@@ -53,6 +53,9 @@ Page({
           // 随机生产两位随机数，增加在数据前面--虚拟数据
           // is_k--1 显示随机数
           // is_k--0 不显示随机数
+          // 生成随机数函数
+          let a = app.RandomNumBoth(10,100)
+          console.log(a)
           this.setData({
             listData: data.data.data
           })
