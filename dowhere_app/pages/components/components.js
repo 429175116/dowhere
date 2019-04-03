@@ -18,6 +18,7 @@ Page({
     mark: '',
     annotationInfo: '',
     partsInfo: null,
+    randomNum: '' // 随机数
     // planNumber: 0,
     // planBout: 0,
     // fulfilBout: 0
@@ -59,6 +60,13 @@ Page({
       success: data => {
         if (data.data.code === '1') {
           data = data.data.data
+          if (data.is_k) {
+            let randomNum = app.RandomNumBoth(10,100)
+            this.setData({
+              randomNum: randomNum,
+            })
+          }
+          
           this.setData({
             partsInfo: data,
             // // 获取全年数量数据--初始化

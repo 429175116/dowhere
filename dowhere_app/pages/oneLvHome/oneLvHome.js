@@ -31,14 +31,22 @@ Page({
     this.getAnnotation()
   },
   getinfo() {
+    let data = {"uid": this.data.userInfo.id}
+    let serverUrl = ''
+    if (this.data.userInfo.role_id == 3) {
+      // 产品权限
+      data["type"] = 2
+      data["time"] = 1
+      serverUrl = "one"
+    } else if (this.data.userInfo.role_id == 4) {
+      // 部门权限
+      data["time"] = 1
+      serverUrl = "one_branch"
+    }
     wx.request({
-      url: `${app.globalData.requestUrl}/api/one`,
+      url: `${app.globalData.requestUrl}/api/${serverUrl}`,
       method: 'POST',
-      data: {
-        uid: this.data.userInfo.id,
-        type: 2,
-        time: this.data.time,
-      },
+      data: data,
       success: data => {
         console.log(data)
         if (data.data.code == 1) {

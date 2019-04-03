@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458351',
+    userName: '18700458353',
     userPaw: '123',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
@@ -118,19 +118,19 @@ Page({
               gourl = '/pages/product/product'
               break;
             case 5:
-              // 二级权限--仅有产品
+              // 二级--产品--权限
               gourl = '/pages/product/product'
               break;
             case 4:
-              // 一级权限
+              // 一级--部门--权限
               gourl = '/pages/oneLvHome/oneLvHome'
               break;
             case 3:
-              // 一级权限
+              // 一级--产品--权限
               gourl = '/pages/oneLvHome/oneLvHome'
               break;
             case 2:
-              // 输入用户（客户）权限
+              // 特殊用户--权限
               gourl = '/pages/setUserLv/setUserLv'
               break;
             case 1:
