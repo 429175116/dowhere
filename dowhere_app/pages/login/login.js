@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458354',
+    userName: '18700458353',
     userPaw: '123',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
@@ -85,13 +85,6 @@ Page({
     //   })
     //   return ''
     // }
-    // let gourl = ''
-    
-    // console.log(gourl)
-    // wx.redirectTo({
-    //   url: gourl
-    // })
-    // return
     wx.request({
       url: `${app.globalData.requestUrl}/api/login`,
       method: 'POST',

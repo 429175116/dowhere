@@ -4,7 +4,7 @@ import * as echarts from '../../ec-canvas/echarts';
 const app = getApp();
 Page({
   data: {
-    userId: null,
+    userInfo: null,
     projectListData: [],
     time: 'month',
     planBarHeight: 0,
@@ -24,37 +24,33 @@ Page({
     
     this.setData({
       lv: options.lv,
-      userId: app.globalData.userId
+      userInfo: app.globalData.userInfo
     })
+    this.getinfo()
+    // 获取批注信息
     this.getAnnotation()
   },
-  // 获取缓存在本地的批注信息
-  getAnnotation() {
-    wx.getStorage({
-      key: 'annotation',
-      success: res => {
-        console.log(res)
-        if (res.data) {
-          // let annotationInfo = res.data
-          this.setData({
-            annotationInfo: res.data
+  getinfo() {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/one`,
+      method: 'POST',
+      data: {
+        uid: this.data.userInfo.id,
+        type: 2,
+        time: this.data.time,
+      },
+      success: data => {
+        console.log(data)
+        if (data.data.code == 1) {
+          
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
           })
         }
       }
     })
-  },
-  setAnnotation(annotationList) {
-    wx.setStorageSync('annotation', annotationList)
-    this.getAnnotation()
-  },
-  setInputAnnotation(e) {
-    // 获取输入的批注的信息
-    this.setData({
-      annotationInfo: e.detail.value
-    })
-  },
-  upDataAnnotation() {
-    this.setAnnotation(this.data.annotationInfo)
   },
   onReady() {
     // 获取组件
@@ -296,6 +292,34 @@ Page({
     //     }
     //   }
     // })
+  },
+  // 获取缓存在本地的批注信息
+  getAnnotation() {
+    wx.getStorage({
+      key: 'annotation',
+      success: res => {
+        console.log(res)
+        if (res.data) {
+          // let annotationInfo = res.data
+          this.setData({
+            annotationInfo: res.data
+          })
+        }
+      }
+    })
+  },
+  setAnnotation(annotationList) {
+    wx.setStorageSync('annotation', annotationList)
+    this.getAnnotation()
+  },
+  setInputAnnotation(e) {
+    // 获取输入的批注的信息
+    this.setData({
+      annotationInfo: e.detail.value
+    })
+  },
+  upDataAnnotation() {
+    this.setAnnotation(this.data.annotationInfo)
   }
 });
 
