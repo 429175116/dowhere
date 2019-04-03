@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458353',
+    userName: '18700458351',
     userPaw: '123',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
@@ -109,19 +109,31 @@ Page({
           // this.setUserLoginInfo(this.data.userName, this.data.userPaw)
           let gourl = ''
           switch(data.role_id){
-            case 1:
+            case 7:
               // 最高权限，三级级权限---产品,设备
               gourl = '/pages/projectAll/projectAll'
               break;
-            case 2:
+            case 6:
               // 二级权限--仅有产品
               gourl = '/pages/product/product'
+              break;
+            case 5:
+              // 二级权限--仅有产品
+              gourl = '/pages/product/product'
+              break;
+            case 4:
+              // 一级权限
+              gourl = '/pages/oneLvHome/oneLvHome'
               break;
             case 3:
               // 一级权限
               gourl = '/pages/oneLvHome/oneLvHome'
               break;
-            case 4:
+            case 2:
+              // 输入用户（客户）权限
+              gourl = '/pages/setUserLv/setUserLv'
+              break;
+            case 1:
               // 输入用户（客户）权限
               gourl = '/pages/setUserLv/setUserLv'
               break;
