@@ -18,9 +18,9 @@ Page({
     mark: '',
     annotationInfo: '',
     partsInfo: null,
-    planNumber: 0,
-    planBout: 0,
-    fulfilBout: 0
+    // planNumber: 0,
+    // planBout: 0,
+    // fulfilBout: 0
   },
 
   /**
@@ -61,12 +61,12 @@ Page({
           data = data.data.data
           this.setData({
             partsInfo: data,
-            // 获取全年数量数据--初始化
-            planNumber: data.plan_number,
-            // 获取全年计划批次数据--初始化
-            planBout: data.plan_bout,
-            // 获取全年完成批次数据--初始化
-            fulfilBout: data.fulfil_bout
+            // // 获取全年数量数据--初始化
+            // planNumber: data.plan_number,
+            // // 获取全年计划批次数据--初始化
+            // planBout: data.plan_bout,
+            // // 获取全年完成批次数据--初始化
+            // fulfilBout: data.fulfil_bout
           })
         } else {
           wx.showModal({
@@ -101,24 +101,22 @@ Page({
     var serverUrl = ''
     let setData = {
       "uid": this.data.userInfo.id,
-      "type": 1,
       "parts_id": this.data.componentsId
     }
     switch(type){
       case 'planNumber':
         // 全年计划数量
-        setData['plan_number'] = this.data.planNumber
+        setData['year_plan_num'] = this.data.partsInfo.year_plan_num
         serverUrl = 'plan_number'
         break;
       case 'planBout':
         // 全年计划批次
-        setData['plan_bout'] = this.data.planBout
+        setData['year_plan_bout'] = this.data.partsInfo.year_plan_bout
         serverUrl = 'plan_bout'
         break;
       case 'fulfilBout':
         // 全年完成批次
-        setData['fulfil_bout'] = this.data.fulfilBout
-        setData['type'] = 2
+        setData['year_fulfil_bout'] = this.data.partsInfo.year_fulfil_bout
         serverUrl = 'fulfil_bout'
         break;
       default:
@@ -164,11 +162,12 @@ Page({
       success: data => {
         if (data.data.code === '1') {
           data = data.data.data
-          let remaining = data.plan_number - data.year_fulfil
+          let remaining = parseInt(data.year_plan_num) - parseInt(data.year_fulfil)
           let chartData = [
-            { "name": "完成", "value": data.year_fulfil },
+            { "name": "完成", "value": parseInt(data.year_fulfil) },
             { "name": "剩余", "value": remaining }
           ]
+          console.log(chartData)
           // 计划完成度--饼
           this.setOptionPlanPie(chartData)
         } else {

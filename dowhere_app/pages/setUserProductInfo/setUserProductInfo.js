@@ -43,13 +43,16 @@ Page({
       url: `${app.globalData.requestUrl}/api/client_parts_list`,
       method: 'POST',
       data: {
-        type: 1,
+        branch_id: app.globalData.userInfo.branch_id,
         uid: app.globalData.userInfo.id,
         goods_id: id
       },
       success: data => {
         console.log(data)
         if (data.data.code === '1') {
+          // 随机生产两位随机数，增加在数据前面--虚拟数据
+          // is_k--1 显示随机数
+          // is_k--0 不显示随机数
           this.setData({
             listData: data.data.data
           })

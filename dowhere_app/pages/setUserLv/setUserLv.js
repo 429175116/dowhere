@@ -31,10 +31,11 @@ Page({
       url: `${app.globalData.requestUrl}/api/index`,
       method: 'POST',
       data: {
-        type: 2,
+        branch_id: app.globalData.userInfo.branch_id,
         uid: app.globalData.userInfo.id
       },
       success: data => {
+        console.log(data)
         if (data.data.code == 1) {
           data = data.data.data
           let data1 = this.sortData(data)

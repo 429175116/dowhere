@@ -13,32 +13,32 @@
   </view>
   <view class="item">
     <view class="name">特性</view>
-    <view class="con">{{partsInfo.trait}}</view>
+    <view class="con">{{partsInfo.feature}}</view>
   </view>
   <view class="item">
     <view class="name">全年计划数量</view>
     <view class="con">
-      <input type="text" value="{{partsInfo.plan_number}}" bindinput="getPlanNumber" />
+      <input type="text" value="{{partsInfo.year_plan_num}}" bindinput="getPlanNumber" />
       <button data-type="planNumber" bindtap="getPartsData">确定</button>
     </view>
   </view>
   <view class="item">
     <view class="name">全年计划批次</view>
     <view class="con">
-      <input type="text" value="{{partsInfo.plan_bout}}" bindinput="getPlanBout" />
+      <input type="text" value="{{partsInfo.year_plan_bout}}" bindinput="getPlanBout" />
       <button data-type="planBout" bindtap="getPartsData">确定</button>
     </view>
   </view>
   <view class="item">
     <view class="name">全年完成批次</view>
     <view class="con">
-      <input type="text" value="{{partsInfo.fulfil_bout}}" bindinput="getFulfilBout" />
+      <input type="text" value="{{partsInfo.year_fulfil_bout}}" bindinput="getFulfilBout" />
       <button data-type="fulfilBout" bindtap="getPartsData">确定</button>
     </view>
   </view>
   <view class="item">
     <view class="name">全年剩余批次</view>
-    <view class="con">{{partsInfo.plan_bout - partsInfo.fulfil_bout}}</view>
+    <view class="con">{{partsInfo.year_plan_bout - partsInfo.year_fulfil_bout}}</view>
   </view>
 </view>
 <view class="charts">
