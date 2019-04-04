@@ -18,10 +18,14 @@ Page({
     mark: '',
     annotationInfo: '',
     partsInfo: null,
-    randomNum: '' // 随机数
-    // planNumber: 0,
-    // planBout: 0,
-    // fulfilBout: 0
+    randomNum: '',
+    randomNum1: '', // 随机数
+    randomNum2: '', // 随机数
+    randomNum3: '', // 随机数
+    randomNum4: '', // 随机数
+    planNumber: 0,
+    planBout: 0,
+    fulfilBout: 0
   },
 
   /**
@@ -64,17 +68,21 @@ Page({
             let randomNum = app.RandomNumBoth(10,100)
             this.setData({
               randomNum: randomNum,
+              randomNum1: randomNum,
+              randomNum2: randomNum,
+              randomNum3: randomNum,
+              randomNum4: randomNum
             })
           }
           
           this.setData({
             partsInfo: data,
-            // // 获取全年数量数据--初始化
-            // planNumber: data.plan_number,
-            // // 获取全年计划批次数据--初始化
-            // planBout: data.plan_bout,
-            // // 获取全年完成批次数据--初始化
-            // fulfilBout: data.fulfil_bout
+            // 获取全年数量数据--初始化
+            planNumber: data.year_plan_num,
+            // 获取全年计划批次数据--初始化
+            planBout: data.year_plan_bout,
+            // 获取全年完成批次数据--初始化
+            fulfilBout: data.year_fulfil_bout
           })
         } else {
           wx.showModal({
@@ -103,6 +111,21 @@ Page({
       fulfilBout: e.detail.value
     })
   },
+  delPlanNumberData() {
+    this.setData({
+      randomNum1: ''
+    })
+  },
+  delPlanBoutData() {
+    this.setData({
+      randomNum2: ''
+    })
+  },
+  delFulfilBoutData() {
+    this.setData({
+      randomNum3: ''
+    })
+  },
   getPartsData(e) {
     // 请求数据拼装
     let type = e.currentTarget.dataset.type
@@ -114,17 +137,17 @@ Page({
     switch(type){
       case 'planNumber':
         // 全年计划数量
-        setData['year_plan_num'] = this.data.partsInfo.year_plan_num
+        setData['year_plan_num'] = this.data.planNumber
         serverUrl = 'plan_number'
         break;
       case 'planBout':
         // 全年计划批次
-        setData['year_plan_bout'] = this.data.partsInfo.year_plan_bout
+        setData['year_plan_bout'] = this.data.planBout
         serverUrl = 'plan_bout'
         break;
       case 'fulfilBout':
         // 全年完成批次
-        setData['year_fulfil_bout'] = this.data.partsInfo.year_fulfil_bout
+        setData['year_fulfil_bout'] = this.data.fulfilBout
         serverUrl = 'fulfil_bout'
         break;
       default:

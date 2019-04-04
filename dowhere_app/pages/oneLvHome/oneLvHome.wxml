@@ -4,8 +4,8 @@
   <image src="../../img/logo.jpg" />
 </view>
 <view class="timeSel">
-  <view bindtap="monthData" class="{{time=='month'?'action':''}}">当月计划与完成</view>
-  <view bindtap="yearData" class="{{time=='year'?'action':''}}">全年计划与完成</view>
+  <view bindtap="timeSel" class="{{time=='1'?'action':''}}">当月计划与完成</view>
+  <view bindtap="timeSel" class="{{time=='2'?'action':''}}">全年计划与完成</view>
 </view>
 <view class="charts">
   <!-- 总数量-饼 -->
@@ -22,8 +22,23 @@
   </view>
 </view>
 <view class="quantityList">
-  <block wx:for="{{chartDatass}}" wx:for-item="itemSon">
+  <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '3'}}">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
+  </block>
+  <!-- <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '4'}}">
+    <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
+  </block> -->
+  <block wx:for="{{projectListData}}" wx:for-item="item" wx:if="{{userInfo.role_id == '4'}}">
+    <view class="regionItme">
+      <view class="regionName">
+        <view>{{item.name}}</view>
+      </view>
+      <view class="projectList">
+        <block wx:for="{{item.project}}" wx:for-item="itemSon">
+          <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
+        </block>
+      </view>
+    </view>
   </block>
 </view>
 <view class="annotation">

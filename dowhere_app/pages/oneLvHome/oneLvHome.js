@@ -6,7 +6,7 @@ Page({
   data: {
     userInfo: null,
     projectListData: [],
-    time: 'month',
+    time: '1',
     planBarHeight: 0,
     planBarHeight2: 0,
     lv: '',
@@ -31,16 +31,19 @@ Page({
     this.getAnnotation()
   },
   getinfo() {
-    let data = {"uid": this.data.userInfo.id}
     let serverUrl = ''
+    let month = new Date().getMonth() + 1
+    // time--1--月份
+    // time--2--全年
+    let data = {"uid": this.data.userInfo.id, "month": month, "time": this.data.time}
     if (this.data.userInfo.role_id == 3) {
       // 产品权限
-      data["type"] = 2
-      data["time"] = 1
+      // data["time"] = this.data.time
+      
       serverUrl = "one"
     } else if (this.data.userInfo.role_id == 4) {
       // 部门权限
-      data["time"] = 1
+      // data["time"] = this.data.time
       serverUrl = "one_branch"
     }
     wx.request({
@@ -50,7 +53,9 @@ Page({
       success: data => {
         console.log(data)
         if (data.data.code == 1) {
-          
+          this.setData({
+            projectListData: data.data.data
+          })
         } else {
           wx.showModal({
             title: '',
@@ -70,36 +75,27 @@ Page({
     this.setOptionPlanPie()
   },
   // 数据展示时间切换
-  // 切换--年
-  yearData(){
-    if (this.data.time === "month") {
+  // 年--月--切换
+  timeSel(){
+    if (this.data.time === "1") {
       this.setData({
-        time: "year"
+        time: "2"
       })
     } else {
-      return ''
-    }
-    this.init(this.data.time)
-    this.setOptionPlanBar()
-    this.setOptionPlanPie()
-  },
-  // 切换--月
-  monthData(){
-    if (this.data.time === "year") {
       this.setData({
-        time: "month"
+        time: "1"
       })
-    } else {
-      return ''
     }
-    this.init(this.data.time)
-    this.setOptionPlanBar()
-    this.setOptionPlanPie()
+    // this.init(this.data.time)
+    // this.setOptionPlanBar()
+    // this.setOptionPlanPie()
+    this.getinfo()
   },
   // 查看产品列表页
   goComponentsList(e) {
+    let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/oneLvSon1/oneLvSon1`
+      url: `/pages/oneLvSon1/oneLvSon1?prodcutid=${id}`
     })
   },
   getProjectList() {

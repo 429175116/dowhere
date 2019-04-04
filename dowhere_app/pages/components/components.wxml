@@ -18,27 +18,27 @@
   <view class="item">
     <view class="name">全年计划数量</view>
     <view class="con">
-      <input type="text" value="{{randomNum + '' + partsInfo.year_plan_num}}" bindinput="getPlanNumber" />
+      <input type="text" value="{{planNumber + '' + randomNum1}}" bindtap="delPlanNumberData" bindinput="getPlanNumber" />
       <button data-type="planNumber" bindtap="getPartsData">确定</button>
     </view>
   </view>
   <view class="item">
     <view class="name">全年计划批次</view>
     <view class="con">
-      <input type="text" value="{{randomNum + '' + partsInfo.year_plan_bout}}" bindinput="getPlanBout" />
+      <input type="text" value="{{planBout + '' + randomNum2}}" bindtap="delPlanBoutData" bindinput="getPlanBout" />
       <button data-type="planBout" bindtap="getPartsData">确定</button>
     </view>
   </view>
   <view class="item">
     <view class="name">全年完成批次</view>
     <view class="con">
-      <input type="text" value="{{randomNum + '' + partsInfo.year_fulfil_bout}}" bindinput="getFulfilBout" />
+      <input type="text" value="{{fulfilBout + '' + randomNum3}}" bindtap="delFulfilBoutData" bindinput="getFulfilBout" />
       <button data-type="fulfilBout" bindtap="getPartsData">确定</button>
     </view>
   </view>
   <view class="item">
     <view class="name">全年剩余批次</view>
-    <view class="con">{{randomNum + '' + partsInfo.year_plan_bout - partsInfo.year_fulfil_bout}}</view>
+    <view class="con">{{planBout - fulfilBout + '' + randomNum4}}</view>
   </view>
 </view>
 <view class="charts">
