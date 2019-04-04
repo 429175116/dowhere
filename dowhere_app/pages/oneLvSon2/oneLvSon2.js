@@ -34,10 +34,12 @@ Page({
       // 获取当前时间，用于月份显示，只显示已经存在的月份
       monthList: getMonthList(),
       time: month + 1
-
     })
   },
+  // 获取零件详情信息
+  getPartsInfo() {
 
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -45,22 +47,6 @@ Page({
     this.planPie = this.selectComponent('#plan-pie');
     this.init()
     this.setOptionMonthPlanBar()
-  },
-  goPlan(e) {
-    // 进入计划页
-    let id = e.currentTarget.dataset.id
-    let name = e.currentTarget.dataset.name
-    wx.navigateTo({
-      url: `/pages/setPlan/setPlan?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
-    })
-  },
-  goSchedule(e) {
-    // 进入进度录入页
-    let id = e.currentTarget.dataset.id
-    let name = e.currentTarget.dataset.name
-    wx.navigateTo({
-      url: `/pages/setSchedule/setSchedule?componentsid=${id}&componentsname=${name}&productid=${this.data.productId}&productname=${this.data.productName}`
-    })
   },
   selMonth(e) {
     if (this.data.time === e.currentTarget.dataset.month) {

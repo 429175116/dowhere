@@ -31,6 +31,15 @@ Page({
     this.getAnnotation()
   },
   getinfo() {
+    let chartDatass = [
+      {"name": "产品1", "id": "1", "value": 100},
+      {"name": "产品2", "id": "1", "value": 30},
+      {"name": "产品3", "id": "1", "value": 80},
+    ]
+    this.setData({
+      projectListData: chartDatass
+    })
+    // return ''
     let serverUrl = ''
     let month = new Date().getMonth() + 1
     // time--1--月份
@@ -38,12 +47,9 @@ Page({
     let data = {"uid": this.data.userInfo.id, "month": month, "time": this.data.time}
     if (this.data.userInfo.role_id == 3) {
       // 产品权限
-      // data["time"] = this.data.time
-      
       serverUrl = "one"
     } else if (this.data.userInfo.role_id == 4) {
       // 部门权限
-      // data["time"] = this.data.time
       serverUrl = "one_branch"
     }
     wx.request({

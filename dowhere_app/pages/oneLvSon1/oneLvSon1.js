@@ -31,6 +31,7 @@ Page({
     })
   },
   getListData(id) {
+    console.log(id)
     let data = [
       { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
       { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
@@ -46,7 +47,7 @@ Page({
     })
     return ''
     wx.request({
-      url: `${app.globalData.requestUrl}/api/${serverUrl}`,
+      url: `${app.globalData.requestUrl}/api/parts_list`,
       method: 'POST',
       data: {
         uid: this.userInfo.id,
