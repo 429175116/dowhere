@@ -31,7 +31,7 @@ Page({
   setPlanData(e) {
     // 获取计划
     this.setData({
-      planData: e.detail.value
+      planData: parseInt(e.detail.value)
     })
   },
   bindPickerChange: function (e) {
@@ -56,15 +56,19 @@ Page({
       })
       return ''
     }
+    let time = this.data.dates
+    let maonth = time.split('-')[1]
+    let createTime = new Date(time.replace(/-/g,"/")).getTime()/1000
     wx.request({
       url: `${app.globalData.requestUrl}/api/month_plan`,
       method: 'POST',
       data: {
         uid: this.data.userInfo.id,
-        month: this.data.dates,
+        month: parseInt(maonth),
         num: this.data.planData,
         type: 1,
-        parts_id: this.data.componentsId
+        parts_id: parseInt(this.data.componentsId),
+        createTime: createTime
       },
       success: data => {
         if (data.data.code == 1) {
