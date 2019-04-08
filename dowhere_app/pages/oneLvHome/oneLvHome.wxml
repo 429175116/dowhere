@@ -22,13 +22,13 @@
   </view>
 </view>
 <view class="quantityList">
-  <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '4'}}">
+  <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '3'}}">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
   </block>
   <!-- <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '4'}}">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
   </block> -->
-  <block wx:for="{{projectListData}}" wx:for-item="item" wx:if="{{userInfo.role_id == '3'}}">
+  <block wx:for="{{projectListData}}" wx:for-item="item" wx:if="{{userInfo.role_id == '4'}}">
     <view class="regionItme">
       <view class="regionName">
         <view>{{item.name}}</view>

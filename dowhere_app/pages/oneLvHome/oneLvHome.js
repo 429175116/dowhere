@@ -101,7 +101,7 @@ Page({
   goComponentsList(e) {
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/oneLvSon1/oneLvSon1?prodcutid=${id}`
+      url: `/pages/oneLvSon1/oneLvSon1?id=${id}`
     })
   },
   getProjectList() {

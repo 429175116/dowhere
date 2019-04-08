@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458351',
+    userName: '18700458353',
     userPaw: '123',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'

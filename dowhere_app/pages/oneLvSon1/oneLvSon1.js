@@ -8,7 +8,8 @@ Page({
    */
   data: {
     userInfo: null,
-    listData: []
+    listData: [],
+    projectId: ''
   },
 
   /**
@@ -19,9 +20,10 @@ Page({
     var date = new Date();
     let month = date.getMonth()
     this.setData({
-      userInfo: app.globalData.userInfo
+      userInfo: app.globalData.userInfo,
+      projectId: options.id
     })
-    this.getListData(options.prodcutid)
+    this.getListData(options.id)
   },
   goComponents(e) {
     let id = e.currentTarget.dataset.id
@@ -31,26 +33,11 @@ Page({
     })
   },
   getListData(id) {
-    console.log(id)
-    let data = [
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-      { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 }
-    ]
-    this.setData({
-      listData: data
-    })
-    return ''
     wx.request({
       url: `${app.globalData.requestUrl}/api/parts_list`,
       method: 'POST',
       data: {
-        uid: this.userInfo.id,
+        uid: this.data.userInfo.id,
         goods_id: id,
         type: 1
       },

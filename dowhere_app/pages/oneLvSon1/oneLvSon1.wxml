@@ -15,20 +15,20 @@
     <view class="item">
       <view>{{item.name}}</view>
       <view>
-        <view class="complete" style="width:{{(item.yearSchedule/item.yearPlan)*100}}%"></view>
-        {{item.yearSchedule}}
+        <view class="complete" style="width:{{(item.month_fulfil/item.month_plan)*100}}%"></view>
+        {{item.month_plan}}
       </view>
       <view>
-        <view class="undone" style="width:{{((item.yearPlan-item.yearSchedule)/item.yearPlan)*100}}%"></view>
-        {{item.yearPlan - item.yearSchedule}}
+        <view class="undone" style="width:{{((item.month_plan-item.month_fulfil)/item.month_plan)*100}}%"></view>
+        {{item.month_fulfil}}
       </view>
       <view>
-        <view class="complete" style="width:{{(item.monthSchedule/item.monthPlan)*100}}%"></view>
-        {{item.monthSchedule}}
+        <view class="complete" style="width:{{(item.year_fulfil/item.year_plan_num)*100}}%"></view>
+        {{item.year_plan_num}}
       </view>
       <view>
-        <view class="undone" style="width:{{((item.monthPlan-item.monthSchedule)/item.monthPlan)*100}}%"></view>
-        {{item.monthPlan - item.monthSchedule}}
+        <view class="undone" style="width:{{((item.year_plan_num-item.year_fulfil)/item.year_plan_num)*100}}%"></view>
+        {{item.year_fulfil}}
       </view>
       <view>
         <view class="info" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goComponents">详情</view>
