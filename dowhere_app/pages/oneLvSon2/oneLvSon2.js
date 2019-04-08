@@ -46,6 +46,10 @@ Page({
           this.setData({
             productInfo: data.data.data
           })
+          // 获取零件的完成情况--饼图
+          this.getOptionPlanPie(this.data.productInfo.id)
+          // 显示柱状图
+          this.HistogramData(this.data.productInfo.id)
         } else {
           wx.showModal({
             title: '',
@@ -59,18 +63,93 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    this.planPie = this.selectComponent('#plan-pie');
-    this.init()
-    this.setOptionMonthPlanBar()
+
   },
-  selMonth(e) {
-    if (this.data.time === e.currentTarget.dataset.month) {
-      return ''
-    }
-    this.setData({
-      time: e.currentTarget.dataset.month
+  // 获取零件的全年完成情况--饼图
+  getOptionPlanPie(id) {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/circle`,
+      method: 'POST',
+      data: {
+        parts_id: id
+      },
+      success: data => {
+        if (data.data.code === '1') {
+          data = data.data.data
+          let remaining = parseInt(data.year_plan_num) - parseInt(data.year_fulfil)
+          let chartData = [
+            { "name": "完成", "value": parseInt(data.year_fulfil) },
+            { "name": "剩余", "value": parseInt(remaining) }
+          ]
+          // 计划完成度--饼
+          this.setOptionPlanPie(chartData)
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
+          })
+        }
+      }
+    })
+  },
+  HistogramData(id) {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/one_Histogram`,
+      method: 'POST',
+      data: {
+        parts_id: id,
+        month: this.data.time
+      },
+      success: data => {
+        if (data.data.code === '1') {
+          let day = data.data.data2
+          this.grandTotal = day
+          let chartData = [
+            { "name": "计划", "schedule": data.data.data1 },
+            { "name": "累积", "schedule": 0 }
+          ]
+          let addUp = 0
+          let i = 0
+          for (i in day) {
+            chartData[1]['schedule'] += day[i].num
+            chartData.push({ "name": `${day[i].day}号`, "schedule": day[i].num })
+          }
+          // 各月完成--柱
+          this.setOptionMonthPlanBar(chartData)
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
+          })
+        }
+      }
     })
     this.setOptionMonthPlanBar()
+  },
+  // 计划完成度--饼
+  setOptionPlanPie(chartData) {
+    let data = new Object();
+    data.chartData = chartData;
+    data.chartName = '完成情况';
+    // 图表渲染
+    this.planPie = this.selectComponent('#plan-pie');
+    this.planPie.init((canvas, width, height) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      app.pieShow(data, chart)
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+  },
+  selMonth(e) {
+    this.setData({
+      // 初始化图表容器高度
+      monthPlanBarHeight: 'auto',
+      time: e.currentTarget.dataset.month
+    })
+    this.HistogramData(this.data.productInfo.id)
   },
   /**
    * 生命周期函数--监听页面显示
@@ -113,28 +192,7 @@ Page({
   onShareAppMessage() {
 
   },
-  init(time) {
-    this.planPie.init((canvas, width, height) => {
-      // 获取组件的 canvas、width、height 后的回调函数
-      // 在这里初始化图表
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
-      });
-      setOptionPlanPie(chart);
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-  },
-  setOptionMonthPlanBar() {
-    let chartData = [
-      { "name": "计划", "schedule": 100 },
-      { "name": "累积", "schedule": 80 },
-      { "name": "1号", "schedule": 20 },
-      { "name": "2号", "schedule": 20 },
-      { "name": "3号", "schedule": 20 },
-      { "name": "4号", "schedule": 20 },
-    ]
+  setOptionMonthPlanBar(chartData) {
     let namelist = []
     let schedulelist = []
     let remainderlist = []
@@ -167,27 +225,6 @@ Page({
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
-    // 图表渲染
-
-    // wx.request({
-    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-    //   method: 'POST',
-    //   data: {
-    //     userName: this.userName,
-    //     userPaw: this.userPaw
-    //   },
-    //   success: data => {
-    //     if (data.data.success) {
-    //       // data = data.data.novels
-
-    //     } else {
-    //       wx.showModal({
-    //         title: '',
-    //         content: data.data.errmsg
-    //       })
-    //     }
-    //   }
-    // })
   }
 })
 // 获取月份列表
@@ -202,74 +239,4 @@ function getMonthList() {
     monthList.push({ "monthName": `${i + 1}月`, "month": i + 1 })
   }
   return monthList
-}
-// // 加载列表，数据展示
-// function getListData() {
-//   // name--产品名
-//   // id--产品ID
-//   // yearPlan--年计划
-//   // yearSchedule--年进度
-//   // monthPlan--月计划
-//   // monthSchedule--月进度
-//   let data = [
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 },
-//     { "name": "零件1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50 }
-//   ]
-//   return data
-//   // wx.request({
-//   //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-//   //   method: 'POST',
-//   //   data: {
-//   //     userName: this.userName,
-//   //     userPaw: this.userPaw
-//   //   },
-//   //   success: data => {
-//   //     if (data.data.success) {
-//   //       // data = data.data.novels
-
-//   //     } else {
-//   //       wx.showModal({
-//   //         title: '',
-//   //         content: data.data.errmsg
-//   //       })
-//   //     }
-//   //   }
-//   // })
-// }
-// 计划完成度--饼
-function setOptionPlanPie(chart) {
-  let chartData = [
-    { "name": "完成", "value": 100 },
-    { "name": "剩余", "value": 30 }
-  ]
-  let data = new Object();
-  data.chartData = chartData;
-  data.chartName = '完成情况';
-  // 图表渲染
-  app.pieShow(data, chart)
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
-
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
 }
