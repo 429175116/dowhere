@@ -39,13 +39,17 @@ Page({
     // yearSchedule--年进度
     // monthPlan--月计划
     // monthSchedule--月进度
+    let thisTimeDate = new Date();
+    let thisTime = `${thisTimeDate.getFullYear()}/${thisTimeDate.getMonth()}/${thisTimeDate.getDate()}`
+    thisTimeDate = thisTimeDate.getMonth() + 1
     wx.request({
       url: `${app.globalData.requestUrl}/api/client_parts_list`,
       method: 'POST',
       data: {
         branch_id: app.globalData.userInfo.branch_id,
         uid: app.globalData.userInfo.id,
-        goods_id: id
+        goods_id: id,
+        month: thisTimeDate
       },
       success: data => {
         console.log(data)
