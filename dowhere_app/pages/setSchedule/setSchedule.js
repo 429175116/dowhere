@@ -12,7 +12,8 @@ Page({
     userInfo: '',
     componentsId: '',
     componentsName: '',
-    productName: ''
+    productName: '',
+    grandTotalTime: ''
   },
 
   /**
@@ -26,7 +27,8 @@ Page({
       userInfo: app.globalData.userInfo,
       componentsId: options.componentsid,
       componentsName: options.componentsname,
-      productName: options.prodcutname
+      productName: options.prodcutname,
+      grandTotalTime: options.grandtotaltime
     })
   },
   setPlanData(e) {
@@ -68,6 +70,14 @@ Page({
       wx.showModal({
         title: '',
         content: '不可输入未来的进度'
+      })
+      return ''
+    }
+    let grandTotalTime = this.data.grandTotalTime
+    if (grandTotalTime.indexOf(createTime) == -1) {
+      wx.showModal({
+        title: '',
+        content: '不可修改不存在的历史数据'
       })
       return ''
     }

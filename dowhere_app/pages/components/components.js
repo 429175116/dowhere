@@ -18,6 +18,7 @@ Page({
     mark: '',
     annotationInfo: '',
     partsInfo: null,
+    grandTotal: null,
     randomNum: '',
     randomNum1: '', // 随机数
     randomNum2: '', // 随机数
@@ -226,9 +227,15 @@ Page({
     })
   },
   goSchedule(e) {
+    let grandTotal = this.grandTotal
+    let grandTotalTime = new Array()
+    let i = 0
+    for (i in grandTotal) {
+      grandTotalTime.push(parseInt(grandTotal[i].createTime))
+    }
     // 进入进度录入页
     wx.navigateTo({
-      url: `/pages/setSchedule/setSchedule?componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
+      url: `/pages/setSchedule/setSchedule?grandtotaltime=${grandTotalTime}&componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
     })
   },
   selMonth(e) {
@@ -253,6 +260,7 @@ Page({
       success: data => {
         if (data.data.code === '1') {
           let day = data.data.data2
+          this.grandTotal = day
           let chartData = [
             { "name": "计划", "schedule": data.data.data1 },
             { "name": "累积", "schedule": 0 }
