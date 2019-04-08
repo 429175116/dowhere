@@ -26,10 +26,8 @@ Page({
     this.getListData(options.id)
   },
   goComponents(e) {
-    let id = e.currentTarget.dataset.id
-    let name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: `/pages/oneLvSon2/oneLvSon2`
+      url: `/pages/oneLvSon2/oneLvSon2?id=${e.currentTarget.dataset.id}`
     })
   },
   getListData(id) {

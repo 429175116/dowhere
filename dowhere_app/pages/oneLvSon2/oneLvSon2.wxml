@@ -4,17 +4,17 @@
 <view class="productInfoTable">
   <view class="item productTitle">
     <view class="name">名称</view>
-    <view class="con">1好</view>
+    <view class="con">{{productInfo.name}}</view>
   </view>
   <view class="item">
-    <view class="name">名称</view>
+    <view class="name">模型</view>
     <view class="con">
-      <image class="img" src="../../img/logo.jpg" />
+      <image class="img" src="{{productInfo.img}}" />
     </view>
   </view>
   <view class="item">
-    <view class="name">名称</view>
-    <view class="con">描述描述描述描述</view>
+    <view class="name">特性</view>
+    <view class="con">{{productInfo.feature}}</view>
   </view>
 </view>
 <view class="charts">

@@ -14,7 +14,8 @@ Page({
     planBarHeight: 0,
     productId: '',
     productName: '',
-    mark: ''
+    mark: '',
+    productInfo: null
   },
 
   /**
@@ -25,20 +26,34 @@ Page({
     let month = date.getMonth()
     this.setData({
       // 产品ID
-      productId: options.prodcutid,
-      // 产品ID
-      productName: options.prodcutname,
-      // 获取全部零件或部分零件标记{part：部分；all：全部}
-      mark: options.getTypt,
-      // listData: getListData(),
+      productId: options.id,
       // 获取当前时间，用于月份显示，只显示已经存在的月份
       monthList: getMonthList(),
       time: month + 1
     })
+    this.getPartsInfo(options.id)
   },
   // 获取零件详情信息
-  getPartsInfo() {
-
+  getPartsInfo(id) {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/one_parts`,
+      method: 'POST',
+      data: {
+        parts_id: id
+      },
+      success: data => {
+        if (data.data.code == 1) {
+          this.setData({
+            productInfo: data.data.data
+          })
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
+          })
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
