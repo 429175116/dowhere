@@ -25,7 +25,7 @@
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goProduct">{{itemSon.projectName}}</view>
   </block>
 </view>
-<view class="annotation">
+<view class="annotation" wx:if="{{userInfo.role_id == 3 || userInfo.role_id == 2}}">
   <view class="name">批注:</view>
   <textarea bindinput="setInputAnnotation" value="{{annotationInfo}}"></textarea> 
   <view class="sub">

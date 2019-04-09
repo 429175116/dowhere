@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: null,
     listData: [],
     planBarHeight: 0,
     time: 'month',
@@ -28,6 +29,7 @@ Page({
     // })
     this.setData({
       lv: options.lv,
+      userInfo: app.globalData.userInfo,
       projectListData: projectListData,
       listData: getListData()
     })

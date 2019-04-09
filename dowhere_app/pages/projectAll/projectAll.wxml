@@ -38,7 +38,7 @@
     </view>
   </block>
 </view>
-<view class="annotation">
+<view class="annotation" wx:if="{{userInfo.role_id == 7}}">
   <view class="name">批注:</view>
   <textarea bindinput="setInputAnnotation" value="{{annotationInfo}}"></textarea> 
   <view class="sub">

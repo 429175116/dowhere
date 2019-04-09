@@ -3,7 +3,7 @@ import * as echarts from '../../ec-canvas/echarts';
 const app = getApp();
 Page({
   data: {
-    userId: null,
+    userInfo: null,
     projectListData: [],
     time: 'month',
     planBarHeight: 0,
@@ -17,7 +17,7 @@ Page({
     
     this.setData({
       lv: options.lv,
-      userId: app.globalData.userId
+      userInfo: app.globalData.userInfo
     })
     console.log(this.data.userId)
     // 此处加载项目及区域数据 
