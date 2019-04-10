@@ -7,7 +7,7 @@ Page({
     projectListData: [],
     time: '1',
     planBarHeight: 0,
-    lv: '',
+    thisTimeDate: '',
     annotationInfo: ''
   },
   /**
@@ -24,6 +24,9 @@ Page({
   getDataThree(){
     let thisTimeDate = new Date();
     thisTimeDate = thisTimeDate.getMonth() + 1
+    this.setData({
+      thisTimeDate: thisTimeDate
+    })
     wx.request({
       url: `${app.globalData.requestUrl}/api/three`,
       method: 'POST',
@@ -45,6 +48,9 @@ Page({
           for (let i = 0; i < area.length; i++) {
             projectListData.push({"name": area[i].name, "id": area[i].id, "branch": area[i].branch})
           }
+          this.setData({
+            projectListData: projectListData
+          })
           if (this.data.time == 1) {
             // 月
             for (let i = 0; i < area.length; i++) {
@@ -188,7 +194,7 @@ Page({
   // 查看产品列表页
   goProduct(e) {
     wx.navigateTo({
-      url: `/pages/product/product?area_id=4&time=1&month=4`
+      url: `/pages/product/product?areaid=${e.currentTarget.dataset.fatid}&uid=${e.currentTarget.dataset.uid}&time=${this.data.time}&month=${this.data.thisTimeDate}`
     })
   },
   // 获取缓存在本地的批注信息

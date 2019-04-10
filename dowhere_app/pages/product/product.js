@@ -10,7 +10,7 @@ Page({
     userInfo: null,
     listData: [],
     planBarHeight: 0,
-    time: 'month',
+    time: '1',
     projectListData: [],
     annotationInfo: ''
   },
@@ -19,20 +19,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options)
-    let projectListData = [
-      {"projectName": "加一","id": "1"},
-      {"projectName": "加二","id": "2"},
-      {"projectName": "加三","id": "3"}
-    ]
-    // this.setData({
-    //   projectListData: projectListData
-    // })
     this.setData({
-      // lv: options.lv,
-      userInfo: app.globalData.userInfo,
-      projectListData: projectListData,
-      listData: getListData()
+      userInfo: app.globalData.userInfo
     })
     if (Object.keys(options).length > 0) {
       this.getDataThree_to_two(options)
@@ -49,17 +37,64 @@ Page({
       method: 'POST',
       data: {
         // time: 1-月份，2-年
-        time: options.time,
-        month: options.month,
-        area_id: options.area_id,
-        uid: this.data.userInfo.id
+        time: parseInt(options.time),
+        month: parseInt(options.month),
+        area_id: options.areaid,
+        uid: options.uid
       },
       success: data => {
         console.log(data)
-        if (data.data.code === '1') {
-          data = data.data.data
-          this.area = data.area
-
+        if (data.data.code === '1'){
+          let getData = data.data.data
+          // var area = data.area
+          // 区域和部门列表
+          var projectListData = []
+          var completePid = []
+          var completeAllPid = []
+          var completeAllHis = []
+          for (let i = 0; i < getData.length; i++) {
+            projectListData.push({"name": getData[i].name, "id": getData[i].id, "count": getData[i].count})
+          }
+          this.setData({
+            projectListData: projectListData
+          })
+          if (this.data.time == '1') {
+            // 月
+            for (let i = 0; i < getData.length; i++) {
+              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil})
+            }
+            console.log(completeAllPid)
+            let month_plan = 0
+            let month_fulfil = 0
+            for (let i = 0; i < completeAllPid.length; i++) {
+              month_plan += completeAllPid[i].month_plan // 月计划
+              month_fulfil += completeAllPid[i].month_fulfil // 月完成
+            }
+            completePid['month_plan'] = month_plan // 月计划
+            completePid['month_fulfil'] = month_fulfil // 月完成
+          } else {
+            // 年
+            for (let i = 0; i < getData.length; i++) {
+              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil})
+            }
+            let year_plan = 0
+            let year_fulfil = 0
+            for (let i = 0; i < completeAllPid.length; i++) {
+              year_plan += completeAllPid[i].month_plan // 月计划
+              year_fulfil += completeAllPid[i].month_fulfil // 月完成
+            }
+            completePid['month_plan'] = year_plan // 月计划
+            completePid['month_fulfil'] = year_fulfil // 月完成
+          }
+          console.log(completePid)
+          console.log(completeAllPid)
+          console.log(completeAllPid)
+          // 完成与未完成饼状图
+          this.setOptionPlanPie(completePid)
+          // 完成与未完成饼状图
+          this.setOptionAllPlanPie(completeAllPid)
+          // 完成与未完成柱状图
+          this.setOptionAllPlanBar(completeAllPid)
         }
       }
     })
@@ -92,43 +127,93 @@ Page({
       }
     })
   },
-  // 获取缓存在本地的批注信息
-  getAnnotation() {
-    wx.getStorage({
-      key: 'annotation',
-      success: res => {
-        console.log(res)
-        if (res.data) {
-          // let annotationInfo = res.data
-          this.setData({
-            annotationInfo: res.data
-          })
-        }
-      }
-    })
+  // 计划完成度--饼
+  setOptionPlanPie(getData) {
+    let remaining = getData.month_plan - getData.month_fulfil
+    // let remaining = getData.month_fulfil - getData.month_plan
+    let chartData = [
+      { "name": "完成", "value": getData.month_fulfil },
+      { "name": "剩余", "value": remaining }
+    ]
+    let data = new Object();
+    data.chartData = chartData;
+    data.chartName = '完成情况';
+    // 图表渲染
+    this.planPie = this.selectComponent('#quantity-pie');
+    this.planPie.init((canvas, width, height) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      app.pieShow(data, chart)
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
   },
-  setAnnotation(annotationList) {
-    wx.setStorageSync('annotation', annotationList)
-    this.getAnnotation()
+  setOptionAllPlanPie(getData) {
+    let chartData = []
+    for (let i = 0;i < getData.length; i++) {
+      chartData.push({ "name": getData[i].name, "value": getData[i].month_fulfil })
+    }
+    let data = new Object();
+    data.chartData = chartData;
+    data.chartName = '各区完成情况';
+    // 图表渲染
+    this.planPie = this.selectComponent('#plan-pie');
+    this.planPie.init((canvas, width, height) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      app.pieShow(data, chart)
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
   },
-  setInputAnnotation(e) {
-    // 获取输入的批注的信息
+  setOptionAllPlanBar(chartData) {
+    let namelist = []
+    let planlist = []
+    let schedulelist = []
+    let remainderlist = []
+    let i = 0;
+    for (i in chartData) {
+      namelist.push(chartData[i].name)
+      planlist.push(chartData[i].month_plan)
+      schedulelist.push(chartData[i].month_fulfil)
+      remainderlist.push(chartData[i].month_fulfil - chartData[i].month_plan)
+    }
+    let data = new Object();
+    data.namelist = namelist;
+    data.planlist = planlist;
+    data.schedulelist = schedulelist;
+    data.remainderlist = remainderlist;
+    data.chartName = `月进度`;
+    // 计算图表显示高度
+    let k = 100
+    if (chartData.length < 10) {
+      k = 150
+    } else if (chartData.length < 5) {
+      k = 200
+    }
     this.setData({
-      annotationInfo: e.detail.value
+      planBarHeight: k * chartData.length + 100
     })
-  },
-  upDataAnnotation() {
-    this.setAnnotation(this.data.annotationInfo)
+    this.monthPlanBar = this.selectComponent('#plan-bar');
+    this.monthPlanBar.init((canvas, width, height) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      app.barShow(data, chart)
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    this.quantityPie = this.selectComponent('#quantity-pie');
-    this.planPie = this.selectComponent('#plan-pie');
-    // this.planBar = this.selectComponent('#plan-bar');
-    this.init()
-    this.setOptionPlanBar()
+
   },
   goProduct() {
     wx.navigateTo({
@@ -160,303 +245,32 @@ Page({
     this.init(this.data.time)
     this.setOptionPlanBar()
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  },
-  // 点击按钮后初始化图表
-  init(time) {
-    // if (this.data.lv == "1" || this.data.lv == "3") {
-      this.planPie.init((canvas, width, height) => {
-        // 获取组件的 canvas、width、height 后的回调函数
-        // 在这里初始化图表
-        const chart = echarts.init(canvas, null, {
-          width: width,
-          height: height
-        });
-        setOptionPlanPie(chart, time);
-        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-        return chart;
-      });
-    // }
-    
-    // if (this.data.lv == "1" || this.data.lv == "2") {
-      this.quantityPie.init((canvas, width, height) => {
-        // 获取组件的 canvas、width、height 后的回调函数
-        // 在这里初始化图表
-        const chart = echarts.init(canvas, null, {
-          width: width,
-          height: height
-        });
-        setQuantityPie(chart, time);
-        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-        return chart;
-      });
-    // }
-  },
-  setOptionPlanBar() {
-    let chartData = [
-      {"name": "加一", "plan": 100, "schedule": 50},
-      {"name": "加二", "plan": 100, "schedule": 50},
-      {"name": "加三", "plan": 100, "schedule": 50}
-    ]
-    
-    let namelist = []
-    let planlist = []
-    let schedulelist = []
-    let remainderlist = []
-    let i = 0;
-    for (i in chartData) {
-      namelist.push(chartData[i].name)
-      planlist.push(chartData[i].plan)
-      schedulelist.push(chartData[i].schedule)
-      remainderlist.push(chartData[i].schedule - chartData[i].plan)
-    }
-    let data = new Object();
-    data.namelist = namelist;
-    data.planlist = planlist;
-    data.schedulelist = schedulelist;
-    data.remainderlist = remainderlist;
-    data.chartName = '产品进度';
-    // 计算图表显示高度
-    let k = 100
-    if (chartData.length < 10) {
-      k = 150
-    } else if (chartData.length < 5) {
-      k = 200
-    }
-    this.setData({
-      planBarHeight: k * chartData.length
-    })
-    this.planBar = this.selectComponent('#plan-bar');
-    this.planBar.init((canvas, width, height) => {
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
-      });
-      app.barShow(data, chart)
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-    // 图表渲染
-    
-    // wx.request({
-    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-    //   method: 'POST',
-    //   data: {
-    //     userName: this.userName,
-    //     userPaw: this.userPaw
-    //   },
-    //   success: data => {
-    //     if (data.data.success) {
-    //       // data = data.data.novels
-          
-    //     } else {
-    //       wx.showModal({
-    //         title: '',
-    //         content: data.data.errmsg
-    //       })
-    //     }
-    //   }
-    // })
-  }
+    // 获取缓存在本地的批注信息
+    getAnnotation() {
+      wx.getStorage({
+        key: 'annotation',
+        success: res => {
+          console.log(res)
+          if (res.data) {
+            // let annotationInfo = res.data
+            this.setData({
+              annotationInfo: res.data
+            })
+          }
+        }
+      })
+    },
+    setAnnotation(annotationList) {
+      wx.setStorageSync('annotation', annotationList)
+      this.getAnnotation()
+    },
+    setInputAnnotation(e) {
+      // 获取输入的批注的信息
+      this.setData({
+        annotationInfo: e.detail.value
+      })
+    },
+    upDataAnnotation() {
+      this.setAnnotation(this.data.annotationInfo)
+    },
 })
-// 加载列表，数据展示
-function getListData() {
-  // name--产品名
-  // id--产品ID
-  // yearPlan--年计划
-  // yearSchedule--年进度
-  // monthPlan--月计划
-  // monthSchedule--月进度
-  let data = [
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50},
-    {"name": "产品1", "id": "1", "yearPlan": 150, "yearSchedule": 50, "monthPlan": 150, "monthSchedule": 50}
-  ]
-  return data
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
-        
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
-}
-// 计划完成度--饼
-function setOptionPlanPie(chart) {
-  let chartData = [
-    {"name": "加一", "value": 100},
-    {"name": "加二", "value": 30},
-    {"name": "加三", "value": 80},
-  ]
-  let data = new Object();
-  data.chartData = chartData;
-  data.chartName = '各部门完成情况';
-  // 图表渲染
-  app.pieShow(data, chart)
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
-        
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
-}
-// 部门完成--饼
-function setQuantityPie(chart) {
-  let chartData = [
-    {"name": "完成", "value": 100},
-    {"name": "剩余", "value": 30}
-  ]
-  let data = new Object();
-  data.chartData = chartData;
-  data.chartName = '完成情况';
-  // 图表渲染
-  app.pieShow(data, chart)
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
-        
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
-}
-
-
-
-// 无用代码
-// // 完成数据详情--柱
-// function setOptionPlanBar(chart) {
-//   let chartData = [
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50},
-//     {"name": "产品1", "plan": 100, "schedule": 50}
-//   ]
-//   let namelist = []
-//   let planlist = []
-//   let schedulelist = []
-//   let remainderlist = []
-//   let i = 0;
-//   for (i in chartData) {
-//     namelist.push(chartData[i].name)
-//     planlist.push(chartData[i].plan)
-//     schedulelist.push(chartData[i].schedule)
-//     remainderlist.push(chartData[i].schedule - chartData[i].plan)
-//   }
-//   let data = new Object();
-//   data.namelist = namelist;
-//   data.planlist = planlist;
-//   data.schedulelist = schedulelist;
-//   data.remainderlist = remainderlist;
-//   // 图表渲染
-//   app.barShow(data, chart)
-//   // wx.request({
-//   //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-//   //   method: 'POST',
-//   //   data: {
-//   //     userName: this.userName,
-//   //     userPaw: this.userPaw
-//   //   },
-//   //   success: data => {
-//   //     if (data.data.success) {
-//   //       // data = data.data.novels
-        
-//   //     } else {
-//   //       wx.showModal({
-//   //         title: '',
-//   //         content: data.data.errmsg
-//   //       })
-//   //     }
-//   //   }
-//   // })
-// }

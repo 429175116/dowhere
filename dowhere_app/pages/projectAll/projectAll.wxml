@@ -28,11 +28,11 @@
   <block wx:for="{{projectListData}}" wx:for-item="item">
     <view class="regionItme">
       <view class="regionName">
-        <view>{{item.name}}</view>
+        <view data-id="{{item.id}}">{{item.name}}</view>
       </view>
       <view class="projectList">
-        <block wx:for="{{item.project}}" wx:for-item="itemSon">
-          <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goProduct">{{itemSon.projectName}}</view>
+        <block wx:for="{{item.branch}}" wx:for-item="itemSon">
+          <view id="project{{itemSon.branch_id}}"data-uid="{{itemSon.uid.uid}}" data-fatid="{{item.id}}" data-id="{{itemSon.branch_id}}" bindtap="goProduct">{{itemSon.branch_name}}</view>
         </block>
       </view>
     </view>
