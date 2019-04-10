@@ -12,7 +12,8 @@ Page({
     planBarHeight: 0,
     time: '1',
     projectListData: [],
-    annotationInfo: ''
+    annotationInfo: '',
+    optionsData: null
   },
 
   /**
@@ -23,6 +24,9 @@ Page({
       userInfo: app.globalData.userInfo
     })
     if (Object.keys(options).length > 0) {
+      this.setData({
+        time: options.time,
+      })
       this.getDataThree_to_two(options)
     } else {
       this.getDataTwoData()
@@ -32,19 +36,22 @@ Page({
     
   },
   getDataThree_to_two(options) {
-    wx.request({
+    this.setData({
+      optionsData: options
+    })
+    wx .request({
       url: `${app.globalData.requestUrl}/api/three_to_two`,
       method: 'POST',
       data: {
         // time: 1-月份，2-年
-        time: parseInt(options.time),
+        time: parseInt(this.data.time),
         month: parseInt(options.month),
         area_id: options.areaid,
         uid: options.uid
       },
       success: data => {
         console.log(data)
-        if (data.data.code === '1'){
+        if (data.data.code === '1') {
           let getData = data.data.data
           // var area = data.area
           // 区域和部门列表
@@ -63,7 +70,6 @@ Page({
             for (let i = 0; i < getData.length; i++) {
               completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil})
             }
-            console.log(completeAllPid)
             let month_plan = 0
             let month_fulfil = 0
             for (let i = 0; i < completeAllPid.length; i++) {
@@ -86,9 +92,6 @@ Page({
             completePid['month_plan'] = year_plan // 月计划
             completePid['month_fulfil'] = year_fulfil // 月完成
           }
-          console.log(completePid)
-          console.log(completeAllPid)
-          console.log(completeAllPid)
           // 完成与未完成饼状图
           this.setOptionPlanPie(completePid)
           // 完成与未完成饼状图
@@ -220,30 +223,38 @@ Page({
       url: `/pages/oneLvHome/oneLvHome`
     })
   },
+  // 点击月或者年刷新数据
+  refreshData() {
+    if (Object.keys(this.data.optionsData).length > 0) {
+      this.getDataThree_to_two(this.data.optionsData)
+    } else {
+      this.getDataTwoData()
+    }
+  },
     // 数据展示时间切换
   // 切换--年
-  yearData(){
-    if (this.data.time === "month") {
+  yearData() {
+    if (this.data.time === "1") {
       this.setData({
-        time: "year"
+        time: "2"
       })
     } else {
       return ''
     }
-    this.init(this.data.time)
-    this.setOptionPlanBar()
+    // 点击月或者年刷新数据
+    this.refreshData()
   },
   // 切换--月
-  monthData(){
-    if (this.data.time === "year") {
+  monthData() {
+    if (this.data.time === "2") {
       this.setData({
-        time: "month"
+        time: "1"
       })
     } else {
       return ''
     }
-    this.init(this.data.time)
-    this.setOptionPlanBar()
+    // 点击月或者年刷新数据
+    this.refreshData()
   },
     // 获取缓存在本地的批注信息
     getAnnotation() {
