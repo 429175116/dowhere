@@ -265,6 +265,13 @@ Page({
 
   },
   goProduct() {
+    if (this.data.userInfo == '7') {
+      wx.showModal({
+        title: '',
+        content: '三级用户不可查看'
+      })
+      return ''
+    }
     wx.navigateTo({
       url: `/pages/oneLvHome/oneLvHome`
     })
