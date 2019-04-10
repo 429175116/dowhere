@@ -9,42 +9,89 @@ Page({
     time: '1',
     planBarHeight: 0,
     planBarHeight2: 0,
-    lv: '',
-    chartDatass: [
-      {"name": "产品1", "id": "1", "value": 100},
-      {"name": "产品2", "id": "1", "value": 30},
-      {"name": "产品3", "id": "1", "value": 80},
-    ],
-    annotationInfo: ''
+    annotationInfo: '',
+    optionsData: {}
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    
     this.setData({
-      lv: options.lv,
       userInfo: app.globalData.userInfo
     })
-    this.getinfo()
+    if (Object.keys(options).length > 0) {
+      this.setData({
+        time: options.time,
+      })
+      this.two_to_one(options)
+    } else {
+      this.getDataOneData()
+    }
     // 获取批注信息
     this.getAnnotation()
   },
-  getinfo() {
-    let chartDatass = [
-      {"name": "产品1", "id": "1", "value": 100},
-      {"name": "产品2", "id": "1", "value": 30},
-      {"name": "产品3", "id": "1", "value": 80},
-    ]
+  two_to_one(options) {
     this.setData({
-      projectListData: chartDatass
+      optionsData: options
     })
-    // return ''
+    wx .request({
+      url: `${app.globalData.requestUrl}/api/two_to_one`,
+      method: 'POST',
+      data: {
+        // time: 1-月份，2-年
+        time: parseInt(this.data.time),
+        month: parseInt(options.month),
+        branch_id: options.id,
+        uid: this.data.userInfo.id
+      },
+      success: data => {
+        if (data.data.code === '1') {
+          let getData = data.data.data
+          // var area = data.area
+          // 区域和部门列表
+          var projectListData = []
+          var completePid = []
+          var completeAllPid = []
+          var completeAllHis = []
+          if (this.data.time == '1') {
+            // 月
+            for (let i = 0; i < getData.length; i++) {
+              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil})
+            }
+            let month_plan = 0
+            let month_fulfil = 0
+            for (let i = 0; i < completeAllPid.length; i++) {
+              month_plan += completeAllPid[i].month_plan // 月计划
+              month_fulfil += completeAllPid[i].month_fulfil // 月完成
+            }
+            completePid['month_plan'] = month_plan // 月计划
+            completePid['month_fulfil'] = month_fulfil // 月完成
+          } else {
+            // 年
+            for (let i = 0; i < getData.length; i++) {
+              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil})
+            }
+            let year_plan = 0
+            let year_fulfil = 0
+            for (let i = 0; i < completeAllPid.length; i++) {
+              year_plan += completeAllPid[i].month_plan // 月计划
+              year_fulfil += completeAllPid[i].month_fulfil // 月完成
+            }
+            completePid['month_plan'] = year_plan // 月计划
+            completePid['month_fulfil'] = year_fulfil // 月完成
+          }
+          // 完成与未完成饼状图
+          this.setOptionPlanPie(completePid)
+          // 完成与未完成饼状图
+          this.setOptionAllPlanPie(completePid)
+          // 完成与未完成柱状图
+          this.setOptionAllPlanBar(completeAllPid)
+        }
+      }
+    })
+  },
+  getDataOneData(){
     let serverUrl = ''
-    let month = new Date().getMonth() + 1
-    // time--1--月份
-    // time--2--全年
-    let data = {"uid": this.data.userInfo.id, "month": month, "time": this.data.time}
     if (this.data.userInfo.role_id == 3) {
       // 产品权限
       serverUrl = "one"
@@ -52,136 +99,116 @@ Page({
       // 部门权限
       serverUrl = "one_branch"
     }
-    wx.request({
-      url: `${app.globalData.requestUrl}/api/${serverUrl}`,
-      method: 'POST',
-      data: data,
-      success: data => {
-        console.log(data)
-        if (data.data.code == 1) {
-          this.setData({
-            projectListData: data.data.data
-          })
-        } else {
-          wx.showModal({
-            title: '',
-            content: data.data.msg
-          })
-        }
-      }
-    })
+    // wx .request({
+    //   url: `${app.globalData.requestUrl}/api/${serverUrl}`,
+    //   method: 'POST',
+    //   data: {
+    //     // time: 1-月份，2-年
+    //     time: parseInt(this.data.time),
+    //     month: parseInt(options.month),
+    //     branch_id: options.id,
+    //     uid: this.data.userInfo.id
+    //   },
+    //   success: data => {
+    //     if (data.data.code === '1') {
+    //       let getData = data.data.data
+    //       // var area = data.area
+    //       // 区域和部门列表
+    //       var projectListData = []
+    //       var completePid = []
+    //       var completeAllPid = []
+    //       var completeAllHis = []
+    //       if (this.data.time == '1') {
+    //         // 月
+    //         for (let i = 0; i < getData.length; i++) {
+    //           completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil})
+    //         }
+    //         let month_plan = 0
+    //         let month_fulfil = 0
+    //         for (let i = 0; i < completeAllPid.length; i++) {
+    //           month_plan += completeAllPid[i].month_plan // 月计划
+    //           month_fulfil += completeAllPid[i].month_fulfil // 月完成
+    //         }
+    //         completePid['month_plan'] = month_plan // 月计划
+    //         completePid['month_fulfil'] = month_fulfil // 月完成
+    //       } else {
+    //         // 年
+    //         for (let i = 0; i < getData.length; i++) {
+    //           completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil})
+    //         }
+    //         let year_plan = 0
+    //         let year_fulfil = 0
+    //         for (let i = 0; i < completeAllPid.length; i++) {
+    //           year_plan += completeAllPid[i].month_plan // 月计划
+    //           year_fulfil += completeAllPid[i].month_fulfil // 月完成
+    //         }
+    //         completePid['month_plan'] = year_plan // 月计划
+    //         completePid['month_fulfil'] = year_fulfil // 月完成
+    //       }
+    //       // 完成与未完成饼状图
+    //       this.setOptionPlanPie(completePid)
+    //       // 完成与未完成饼状图
+    //       this.setOptionAllPlanPie(completePid)
+    //       // 完成与未完成柱状图
+    //       this.setOptionAllPlanBar(completeAllPid)
+    //     }
+    //   }
+    // })
   },
-  onReady() {
-    // 获取组件
-    this.quantityPie = this.selectComponent('#quantity-pie');
-    // this.planPie = this.selectComponent('#plan-pie');
-    // this.planBar = this.selectComponent('#plan-bar');
-    this.init(this.data.time)
-    this.setOptionPlanBar()
-    this.setOptionPlanPie()
-  },
-  // 数据展示时间切换
-  // 年--月--切换
-  timeSel(){
-    if (this.data.time === "1") {
-      this.setData({
-        time: "2"
-      })
-    } else {
-      this.setData({
-        time: "1"
-      })
-    }
-    // this.init(this.data.time)
-    // this.setOptionPlanBar()
-    // this.setOptionPlanPie()
-    this.getinfo()
-  },
-  // 查看产品列表页
-  goComponentsList(e) {
-    let id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: `/pages/oneLvSon1/oneLvSon1?id=${id}`
-    })
-  },
-  getProjectList() {
-    console.log(this.data.userId)
-    return ''
-    wx.request({
-      url: `${this.$parent.globalData.requestUrl}/api/logo`,
-      method: 'POST',
-      data: {
-        userName: this.userName,
-        userPaw: this.userPaw
-      },
-      success: data => {
-        if (data.data.success) {
-          // data = data.data.novels
-          this.$apply()
-        } else {
-          wx.showModal({
-            title: '',
-            content: data.data.errmsg
-          })
-        }
-      }
-    })
-  },
-  // 点击按钮后初始化图表
-  init(time) {
-    // if (this.data.lv == "1" || this.data.lv == "3") {
-      this.quantityPie.init((canvas, width, height) => {
-        // 获取组件的 canvas、width、height 后的回调函数
-        // 在这里初始化图表
-        const chart = echarts.init(canvas, null, {
-          width: width,
-          height: height
-        });
-        setOptionQuantityPie(chart, time);
-        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-        return chart;
-      });
-    // }
-    
-    // if (this.data.lv == "1" || this.data.lv == "2") {
-      // this.planPie.init((canvas, width, height) => {
-      //   // 获取组件的 canvas、width、height 后的回调函数
-      //   // 在这里初始化图表
-      //   const chart = echarts.init(canvas, null, {
-      //     width: width,
-      //     height: height
-      //   });
-      //   setOptionPlanPie(chart, time);
-      //   // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      //   return chart;
-      // });
-    // }
-    
-    // this.planBar.init((canvas, width, height) => {
-    //   // 获取组件的 canvas、width、height 后的回调函数
-    //   // 在这里初始化图表
-    //   const chart = echarts.init(canvas, null, {
-    //     width: width,
-    //     height: height
-    //   });
-    //   setOptionPlanBar(chart, time);
-    //   // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-    //   return chart;
-    // });
-  },
-  setOptionPlanBar() {
-    if (this.data.time == "month") {
-      //加载月份数据---此处修改参数
-    } else {
-      // 加载年份数据---此处修改参数
-    }
+  // 计划完成度--饼
+  setOptionPlanPie(getData) {
+    let remaining = getData.month_plan - getData.month_fulfil
+    // let remaining = getData.month_fulfil - getData.month_plan
     let chartData = [
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50},
-      {"name": "产品1", "plan": 100, "schedule": 50}
+      { "name": "完成", "value": getData.month_fulfil },
+      { "name": "剩余", "value": remaining }
     ]
+    let data = new Object();
+    data.chartData = chartData;
+    data.chartName = '完成情况';
+    // 图表渲染
+    this.planPie = this.selectComponent('#quantity-pie');
+    this.planPie.init((canvas, width, height) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      app.pieShow(data, chart)
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+  },
+  setOptionAllPlanPie(chartData) {
+    let namelist = []
+    let planlist = []
+    let schedulelist = []
+    let remainderlist = []
+    let i = 0;
+    namelist.push('总进度')
+    planlist.push(chartData.month_plan)
+    schedulelist.push(chartData.month_fulfil)
+    remainderlist.push(chartData.month_fulfil - chartData.month_plan)
+    let data = new Object();
+    data.namelist = namelist;
+    data.planlist = planlist;
+    data.schedulelist = schedulelist;
+    data.remainderlist = remainderlist;
+    data.chartName = `总进度`;
+    this.setData({
+      planBarHeight2: 300
+    })
+    this.monthPlanBar = this.selectComponent('#plan-pie');
+    this.monthPlanBar.init((canvas, width, height) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      app.barShow(data, chart)
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+  },
+  setOptionAllPlanBar(chartData) {
     let namelist = []
     let planlist = []
     let schedulelist = []
@@ -189,16 +216,16 @@ Page({
     let i = 0;
     for (i in chartData) {
       namelist.push(chartData[i].name)
-      planlist.push(chartData[i].plan)
-      schedulelist.push(chartData[i].schedule)
-      remainderlist.push(chartData[i].schedule - chartData[i].plan)
+      planlist.push(chartData[i].month_plan)
+      schedulelist.push(chartData[i].month_fulfil)
+      remainderlist.push(chartData[i].month_fulfil - chartData[i].month_plan)
     }
     let data = new Object();
     data.namelist = namelist;
     data.planlist = planlist;
     data.schedulelist = schedulelist;
     data.remainderlist = remainderlist;
-    data.chartName = '各产品计划及完成';
+    data.chartName = `各产品进度`;
     // 计算图表显示高度
     let k = 100
     if (chartData.length < 10) {
@@ -207,10 +234,10 @@ Page({
       k = 200
     }
     this.setData({
-      planBarHeight: k * chartData.length
+      planBarHeight: k * chartData.length + 100
     })
-    this.planBar = this.selectComponent('#plan-bar');
-    this.planBar.init((canvas, width, height) => {
+    this.monthPlanBar = this.selectComponent('#plan-bar');
+    this.monthPlanBar.init((canvas, width, height) => {
       const chart = echarts.init(canvas, null, {
         width: width,
         height: height
@@ -219,89 +246,42 @@ Page({
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
-    // 图表渲染
-    
-    // wx.request({
-    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-    //   method: 'POST',
-    //   data: {
-    //     userName: this.userName,
-    //     userPaw: this.userPaw
-    //   },
-    //   success: data => {
-    //     if (data.data.success) {
-    //       // data = data.data.novels
-          
-    //     } else {
-    //       wx.showModal({
-    //         title: '',
-    //         content: data.data.errmsg
-    //       })
-    //     }
-    //   }
-    // })
   },
-  setOptionPlanPie() {
-    if (this.data.time == "month") {
-      //加载月份数据---此处修改参数
-    } else {
-      // 加载年份数据---此处修改参数
-    }
-    let chartData = [
-      {"name": "产品1", "plan": 100, "schedule": 50}
-    ]
-    let namelist = []
-    let planlist = []
-    let schedulelist = []
-    let remainderlist = []
-    let i = 0;
-    for (i in chartData) {
-      namelist.push(chartData[i].name)
-      planlist.push(chartData[i].plan)
-      schedulelist.push(chartData[i].schedule)
-      remainderlist.push(chartData[i].schedule - chartData[i].plan)
-    }
-    let data = new Object();
-    data.namelist = namelist;
-    data.planlist = planlist;
-    data.schedulelist = schedulelist;
-    data.remainderlist = remainderlist;
-    data.chartName = '完成情况';
-    // 计算图表显示高度
-    this.setData({
-      planBarHeight2: 300 * chartData.length
-    })
-    this.planBar = this.selectComponent('#plan-pie');
-    this.planBar.init((canvas, width, height) => {
-      const chart = echarts.init(canvas, null, {
-        width: width,
-        height: height
-      });
-      app.barShow(data, chart)
-      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-      return chart;
-    });
-    // 图表渲染
+  onReady() {
     
-    // wx.request({
-    //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-    //   method: 'POST',
-    //   data: {
-    //     userName: this.userName,
-    //     userPaw: this.userPaw
-    //   },
-    //   success: data => {
-    //     if (data.data.success) {
-    //       // data = data.data.novels
-          
-    //     } else {
-    //       wx.showModal({
-    //         title: '',
-    //         content: data.data.errmsg
-    //       })
-    //     }
-    //   }
-    // })
+  },
+  // 点击月或者年刷新数据
+  refreshData() {
+    if (Object.keys(this.data.optionsData).length > 0) {
+      this.two_to_one(this.data.optionsData)
+    } else {
+      this.getDataOneData()
+    }
+  },
+    // 数据展示时间切换
+  // 切换--年
+  yearData() {
+    if (this.data.time === "1") {
+      this.setData({
+        time: "2"
+      })
+    } else {
+      return ''
+    }
+    // 点击月或者年刷新数据
+    this.refreshData()
+  },
+  // 切换--月
+  monthData() {
+    if (this.data.time === "2") {
+      this.setData({
+        time: "1"
+      })
+    } else {
+      return ''
+    }
+    // 点击月或者年刷新数据
+    this.refreshData()
   },
   // 获取缓存在本地的批注信息
   getAnnotation() {
@@ -333,40 +313,3 @@ Page({
   }
 });
 
-// 各区金额占比--饼
-function setOptionQuantityPie(chart, time) {
-  if (time == "month") {
-    //加载月份数据---此处修改参数
-  } else {
-    // 加载年份数据---此处修改参数
-  }
-  let chartData = [
-    {"name": "产品1", "value": 100},
-    {"name": "产品2", "value": 30},
-    {"name": "产品3", "value": 80},
-  ]
-  let data = new Object();
-  data.chartData = chartData;
-  data.chartName = '各产品销售数量';
-  // 图表渲染
-  app.pieShow(data, chart)
-  // wx.request({
-  //   url: `${this.$parent.globalData.requestUrl}/api/getData`,
-  //   method: 'POST',
-  //   data: {
-  //     userName: this.userName,
-  //     userPaw: this.userPaw
-  //   },
-  //   success: data => {
-  //     if (data.data.success) {
-  //       // data = data.data.novels
-        
-  //     } else {
-  //       wx.showModal({
-  //         title: '',
-  //         content: data.data.errmsg
-  //       })
-  //     }
-  //   }
-  // })
-}

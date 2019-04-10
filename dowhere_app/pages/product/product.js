@@ -13,7 +13,8 @@ Page({
     time: '1',
     projectListData: [],
     annotationInfo: '',
-    optionsData: {}
+    optionsData: {},
+    thisTimeDate: 0
   },
 
   /**
@@ -113,6 +114,9 @@ Page({
     }
     let thisTimeDate = new Date();
     thisTimeDate = thisTimeDate.getMonth() + 1
+    this.setData({
+      thisTimeDate: thisTimeDate
+    })
     wx.request({
       url: `${app.globalData.requestUrl}/api/${getUrl}`,
       method: 'POST',
@@ -264,7 +268,7 @@ Page({
   onReady() {
 
   },
-  goProduct() {
+  goProduct(e) {
     if (this.data.userInfo == '7') {
       wx.showModal({
         title: '',
@@ -273,7 +277,7 @@ Page({
       return ''
     }
     wx.navigateTo({
-      url: `/pages/oneLvHome/oneLvHome`
+      url: `/pages/oneLvHome/oneLvHome?id=${e.currentTarget.dataset.id}&time=${this.data.time}&month=${this.data.thisTimeDate}`
     })
   },
   // 点击月或者年刷新数据

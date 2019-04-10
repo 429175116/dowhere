@@ -4,8 +4,8 @@
   <image src="../../img/logo.jpg" />
 </view>
 <view class="timeSel">
-  <view bindtap="timeSel" class="{{time=='1'?'action':''}}">当月计划与完成</view>
-  <view bindtap="timeSel" class="{{time=='2'?'action':''}}">全年计划与完成</view>
+  <view bindtap="monthData" class="{{time=='1'?'action':''}}">当月计划与完成</view>
+  <view bindtap="yearData" class="{{time=='2'?'action':''}}">全年计划与完成</view>
 </view>
 <view class="charts">
   <!-- 总数量-饼 -->
