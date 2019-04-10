@@ -46,6 +46,27 @@ Page({
     })
     // 获取批注内容
     this.getAnnotation()
+    this.getData()
+  },
+  getData(){
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/three`,
+      method: 'POST',
+      data: {
+        // time: 1-月份，2-年
+        time: 1,
+        month: 4,
+        uid: this.data.userInfo.id
+      },
+      success: data => {
+        console.log(data)
+        if (data.data.code === '1') {
+          data = data.data.data
+          this.area = data.area
+
+        }
+      }
+    })
   },
   // 获取缓存在本地的批注信息
   getAnnotation() {
@@ -232,7 +253,7 @@ Page({
   // 查看产品列表页
   goProduct(e) {
     wx.navigateTo({
-      url: `/pages/product/product?projectid=${e.currentTarget.dataset.id}&lv=${this.data.lv}`
+      url: `/pages/product/product?area_id=4&time=1&month=4`
     })
   },
   getProjectList() {

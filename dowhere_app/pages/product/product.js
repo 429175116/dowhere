@@ -19,6 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    console.log(options)
     let projectListData = [
       {"projectName": "加一","id": "1"},
       {"projectName": "加二","id": "2"},
@@ -28,13 +29,68 @@ Page({
     //   projectListData: projectListData
     // })
     this.setData({
-      lv: options.lv,
+      // lv: options.lv,
       userInfo: app.globalData.userInfo,
       projectListData: projectListData,
       listData: getListData()
     })
+    if (Object.keys(options).length > 0) {
+      this.getDataThree_to_two(options)
+    } else {
+      this.getDataTwoData()
+    }
     // 获取批注内容
     this.getAnnotation()
+    
+  },
+  getDataThree_to_two(options) {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/three_to_two`,
+      method: 'POST',
+      data: {
+        // time: 1-月份，2-年
+        time: options.time,
+        month: options.month,
+        area_id: options.area_id,
+        uid: this.data.userInfo.id
+      },
+      success: data => {
+        console.log(data)
+        if (data.data.code === '1') {
+          data = data.data.data
+          this.area = data.area
+
+        }
+      }
+    })
+  },
+  getDataTwoData() {
+    let getUrl = ''
+    if (this.data.userInfo.id == '6') {
+      // 产品
+      getUrl = 'two'
+    } else if (this.data.userInfo.id == '5') {
+      // 部门
+      getUrl = 'two_branch'
+    }
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/${getUrl}`,
+      method: 'POST',
+      data: {
+        // time: 1-月份，2-年
+        time: 1,
+        month: 4,
+        branch_id: this.data.userInfo.branch_id,
+        uid: this.data.userInfo.id
+      },
+      success: data => {
+        console.log(data)
+        if (data.data.code === '1') {
+          data = data.data.data
+          this.area = data.area
+        }
+      }
+    })
   },
   // 获取缓存在本地的批注信息
   getAnnotation() {

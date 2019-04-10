@@ -55,7 +55,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    requestUrl: 'http://192.168.1.173' //线下
+    requestUrl: 'http://192.168.1.102' //线下
     // requestUrl: 'http://192.168.1.125/' //线上
   },
   // 生成固定范围内的随机数
