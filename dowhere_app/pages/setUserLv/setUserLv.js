@@ -9,6 +9,7 @@ Page({
   data: {
     listData: [],
     userInfo: null,
+    branchInfo: null,
     img: '',
     imgUrl: ''
   },
@@ -27,6 +28,20 @@ Page({
       url: `/pages/setUserProductInfo/setUserProductInfo?prodcutid=${id}&prodcutname=${name}`
     })
   },
+  // 增加添加产品按钮
+  newProduct() {
+    // 增加产品
+    wx.navigateTo({
+      url: `/pages/newProduct/newProduct?prodcutid=${this.data.branchInfo.id}`
+    })
+  },
+  // 增加添加产品按钮
+  newComponents() {
+    // 增加产品
+    wx.navigateTo({
+      url: `/pages/newComponents/newComponents?prodcutid=${this.data.branchInfo.id}`
+    })
+  },
   // 加载列表，数据展示
   getListData() {
     // 获取该用户权限下的设备列表
@@ -38,14 +53,11 @@ Page({
         uid: app.globalData.userInfo.id
       },
       success: data => {
-        console.log(data)
         if (data.data.code == 1) {
           data = data.data.data
-          let data1 = this.sortData(data)
-
           this.setData({
-            img: data1[0].img,
-            listData: data1
+            branchInfo: data.branch,
+            listData: data.goods
           })
         } else {
           wx.showModal({

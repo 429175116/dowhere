@@ -1,7 +1,7 @@
 <!--pages/setUserLv/setUserLv.wxml-->
 <!-- 部门 -->
 <view class="img">
-  <image src="{{imgUrl+img}}" />
+  <image src="{{imgUrl+branchInfo.img}}" />
 </view>
 <view class="listCons">
   <block wx:for="{{listData}}" wx:for-item="item" index="index">
@@ -10,4 +10,9 @@
       <icon class="iconfont icon-jiantou" />
     </view>
   </block>
+  <view class="new">
+    <view bindtap="newProduct">新增产品</view>
+    <view bindtap="newComponents">新增零件</view>
+  </view>
+  
 </view>

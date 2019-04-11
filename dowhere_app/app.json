@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/login/login",
     "pages/setSchedule/setSchedule",
     "pages/setPlan/setPlan",
@@ -13,7 +12,9 @@
     "pages/setUserProductInfo/setUserProductInfo",
     "pages/oneLvHome/oneLvHome",
     "pages/oneLvSon1/oneLvSon1",
-    "pages/oneLvSon2/oneLvSon2"
+    "pages/oneLvSon2/oneLvSon2",
+    "pages/newProduct/newProduct",
+    "pages/newComponents/newComponents"
   ],
   "window": {
     "backgroundTextStyle": "light",

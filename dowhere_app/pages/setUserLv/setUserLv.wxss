@@ -25,4 +25,23 @@
   height: 300rpx;
 }
 
+.new{
+  width: 690rpx;
+  padding:30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.new view{
+  width: 300rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #78ac47;
+  font-size: 30rpx;
+  color: #fff;
+}
+
   
