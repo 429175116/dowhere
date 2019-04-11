@@ -7,6 +7,11 @@
   <view bindtap="monthData" class="{{time=='1'?'action':''}}">当月计划与完成</view>
   <view bindtap="yearData" class="{{time=='2'?'action':''}}">全年计划与完成</view>
 </view>
+<view class="quantityList">
+  <block wx:for="{{departmentList}}" wx:for-item="item">
+  <view id="departmentList{{item.id}}" data-id="{{item.id}}" data-index="{{index}}" class="{{thisDepartmentId == item.id?'action':''}}" bindtap="selDepartment">{{item.name}}</view>
+  </block>
+</view>
 <view class="charts">
   <!-- 总数量-饼 -->
   <view>
