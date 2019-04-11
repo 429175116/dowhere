@@ -212,7 +212,7 @@ Page({
     }
     let data = new Object();
     data.chartData = chartData;
-    data.chartName = '各区完成情况';
+    data.chartName = '部门完成情况';
     // 图表渲染
     this.planPie = this.selectComponent('#plan-pie');
     this.planPie.init((canvas, width, height) => {
@@ -242,7 +242,7 @@ Page({
     data.planlist = planlist;
     data.schedulelist = schedulelist;
     data.remainderlist = remainderlist;
-    data.chartName = `月进度`;
+    data.chartName = `部门进度`;
     // 计算图表显示高度
     let k = 100
     if (chartData.length < 10) {
