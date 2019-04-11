@@ -13,13 +13,15 @@ Page({
     optionsData: {},
     thisTimeDate: 0,
     departmentList: [],
-    thisDepartmentId: ''
+    thisDepartmentId: '',
+    imgUrl: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
     this.setData({
+      imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo
     })
     if (Object.keys(options).length > 0) {
@@ -143,7 +145,8 @@ Page({
           }
           this.setData({
             projectListData: projectListData,
-            thisDepartmentId: departmentList[0].id
+            thisDepartmentId: departmentList[0].id,
+            img: departmentList[0].img
           })
           
           if (this.data.time == '1') {
@@ -296,7 +299,8 @@ Page({
     }
     this.setData({
       projectListData: projectListData,
-      thisDepartmentId: this.data.departmentList[index].id
+      thisDepartmentId: this.data.departmentList[index].id,
+      img: departmentList[index].img
     })
     
     if (this.data.time == '1') {
@@ -336,9 +340,9 @@ Page({
     this.setOptionAllPlanBar(completeAllPid)
   },
   // 产品跳转
-  goComponentsList() {
+  goComponentsList(e) {
     wx.navigateTo({
-      url: `/pages/oneLvSon/oneLvSon?id=${e.currentTarget.dataset.id}&time=${this.data.time}&month=${this.data.thisTimeDate}`
+      url: `/pages/oneLvSon1/oneLvSon1?id=${e.currentTarget.dataset.id}&month=${this.data.thisTimeDate}`
     })
   },
   // 点击月或者年刷新数据

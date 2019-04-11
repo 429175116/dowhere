@@ -16,28 +16,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    
     var date = new Date();
     let month = date.getMonth()
     this.setData({
       userInfo: app.globalData.userInfo,
       projectId: options.id
     })
-    this.getListData(options.id)
+    this.getListData(options)
   },
   goComponents(e) {
     wx.navigateTo({
       url: `/pages/oneLvSon2/oneLvSon2?id=${e.currentTarget.dataset.id}`
     })
   },
-  getListData(id) {
+  getListData(options) {
     wx.request({
       url: `${app.globalData.requestUrl}/api/parts_list`,
       method: 'POST',
       data: {
         uid: this.data.userInfo.id,
-        goods_id: id,
-        type: 1
+        goods_id: options.id,
+        type: 1,
+        month: options.month
       },
       success: data => {
         console.log(data)

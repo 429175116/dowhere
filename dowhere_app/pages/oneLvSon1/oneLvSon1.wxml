@@ -23,11 +23,11 @@
         {{item.month_fulfil}}
       </view>
       <view>
-        <view class="complete" style="width:{{(item.year_fulfil/item.year_plan_num)*100}}%"></view>
-        {{item.year_plan_num}}
+        <view class="complete" style="width:{{(item.year_fulfil/item.year_plan)*100}}%"></view>
+        {{item.year_plan}}
       </view>
       <view>
-        <view class="undone" style="width:{{((item.year_plan_num-item.year_fulfil)/item.year_plan_num)*100}}%"></view>
+        <view class="undone" style="width:{{((item.year_plan-item.year_fulfil)/item.year_plan)*100}}%"></view>
         {{item.year_fulfil}}
       </view>
       <view>
