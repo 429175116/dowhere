@@ -271,7 +271,7 @@ Page({
 
   },
   goProduct(e) {
-    if (this.data.userInfo == '7') {
+    if (this.data.userInfo.role_id == '7') {
       wx.showModal({
         title: '',
         content: '三级用户不可查看'

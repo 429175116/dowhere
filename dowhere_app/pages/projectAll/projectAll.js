@@ -158,7 +158,12 @@ Page({
     data.planlist = planlist;
     data.schedulelist = schedulelist;
     data.remainderlist = remainderlist;
-    data.chartName = `月进度`;
+    if (this.data.time == '1') {
+      data.chartName = `当月进度`;
+    } else {
+      data.chartName = `全年进度`;
+    }
+    
     // 计算图表显示高度
     let k = 100
     if (chartData.length < 10) {
