@@ -82,7 +82,7 @@ Page({
           data = data.data.data
           let remaining = parseInt(data.year_plan_bout) - parseInt(data.year_fulfil_bout)
           let chartData = [
-            { "name": "完成", "value": parseInt(data.year_fulfil) },
+            { "name": "完成", "value": parseInt(data.year_fulfil_bout) },
             { "name": "剩余", "value": parseInt(remaining) }
           ]
           // 计划完成度--饼

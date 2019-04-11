@@ -74,6 +74,7 @@ Page({
       return ''
     }
     let grandTotalTime = this.data.grandTotalTime
+    grandTotalTime += `,${thisTimeDate}`
     if (grandTotalTime.indexOf(createTime) == -1) {
       wx.showModal({
         title: '',
@@ -92,7 +93,7 @@ Page({
     }
     let maonth = time.split('-')[1]
     wx.request({
-      url: `${app.globalData.requestUrl}/api/month_fulfil`,
+      url: `${app.globalData.requestUrl}/api/${url}`,
       method: 'POST',
       data: {
         uid: this.data.userInfo.id,
