@@ -107,10 +107,10 @@ Page({
   },
   getDataTwoData() {
     let getUrl = ''
-    if (this.data.userInfo.id == '6') {
+    if (this.data.userInfo.id == '5') {
       // 产品
       getUrl = 'two'
-    } else if (this.data.userInfo.id == '5') {
+    } else if (this.data.userInfo.id == '6') {
       // 部门
       getUrl = 'two_branch'
     }
