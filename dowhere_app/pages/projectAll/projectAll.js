@@ -8,13 +8,15 @@ Page({
     time: '1',
     planBarHeight: 0,
     thisTimeDate: '',
-    annotationInfo: ''
+    annotationInfo: '',
+    imgUrl: ''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
     this.setData({
+      imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo
     })
     // 获取批注内容

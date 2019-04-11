@@ -3,7 +3,6 @@
 <!-- 零件详情 -->
 <view class="productInfoTable">
   <view class="item productTitle">
-    <view class="name">名称</view>
     <view class="con">{{productInfo.name}}</view>
   </view>
   <view class="item">

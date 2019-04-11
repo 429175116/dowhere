@@ -300,7 +300,7 @@ Page({
     this.setData({
       projectListData: projectListData,
       thisDepartmentId: this.data.departmentList[index].id,
-      img: departmentList[index].img
+      img: this.data.departmentList[index].img
     })
     
     if (this.data.time == '1') {

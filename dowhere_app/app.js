@@ -56,7 +56,7 @@ App({
   globalData: {
     userInfo: null,
     requestUrl: 'http://192.168.1.102', //线下
-    imgUrl: 'http://192.168.1.102/static/upload/'
+    imgUrl: 'http://192.168.1.102/uploads/'
     // requestUrl: 'http://192.168.1.125/' //线上
   },
   // 生成固定范围内的随机数

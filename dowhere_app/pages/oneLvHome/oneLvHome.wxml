@@ -1,6 +1,5 @@
 <!--pages/oneLvHome/oneLvHome.wxml-->
 <view class="img">
-  门店图标
   <image src="{{imgUrl+img}}" />
 </view>
 <view class="timeSel">

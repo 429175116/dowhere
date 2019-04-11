@@ -14,7 +14,8 @@ Page({
     projectListData: [],
     annotationInfo: '',
     optionsData: {},
-    thisTimeDate: 0
+    thisTimeDate: 0,
+    imgUrl: ''
   },
 
   /**
@@ -22,6 +23,7 @@ Page({
    */
   onLoad(options) {
     this.setData({
+      imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo
     })
     if (Object.keys(options).length > 0) {

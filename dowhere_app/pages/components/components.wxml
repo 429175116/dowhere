@@ -8,7 +8,7 @@
   <view class="item">
     <view class="name">图形</view>
     <view class="con">
-      <image class="img" src="{{partsInfo.img}}" />
+      <image class="img" src="{{imgUrl + partsInfo.img}}" />
     </view>
   </view>
   <view class="item">

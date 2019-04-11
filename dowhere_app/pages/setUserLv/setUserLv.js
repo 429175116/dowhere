@@ -8,10 +8,12 @@ Page({
    */
   data: {
     listData: [],
-    userInfo: null
+    userInfo: null,
+    imgUrl: ''
   },
   onLoad(options) {
     this.setData({
+      imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo
     })
     this.getListData()
