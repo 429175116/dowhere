@@ -14,7 +14,8 @@ Page({
     thisTimeDate: 0,
     departmentList: [],
     thisDepartmentId: '',
-    imgUrl: ''
+    imgUrl: '',
+    img: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -27,6 +28,7 @@ Page({
     if (Object.keys(options).length > 0) {
       this.setData({
         time: options.time,
+        img: options.img
       })
       this.two_to_one(options)
     } else {

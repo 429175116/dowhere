@@ -63,7 +63,7 @@ Page({
           var completeAllPid = []
           var completeAllHis = []
           for (let i = 0; i < getData.length; i++) {
-            projectListData.push({"name": getData[i].name, "id": getData[i].id, "count": getData[i].count})
+            projectListData.push({"name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "count": getData[i].count})
           }
           this.setData({
             projectListData: projectListData
@@ -140,7 +140,7 @@ Page({
           var completeAllPid = []
           var completeAllHis = []
           for (let i = 0; i < getData.length; i++) {
-            projectListData.push({"name": getData[i].name, "id": getData[i].id, "count": getData[i].count})
+            projectListData.push({"name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "count": getData[i].count})
           }
           this.setData({
             projectListData: projectListData
@@ -279,7 +279,7 @@ Page({
       return ''
     }
     wx.navigateTo({
-      url: `/pages/oneLvHome/oneLvHome?id=${e.currentTarget.dataset.id}&time=${this.data.time}&month=${this.data.thisTimeDate}`
+      url: `/pages/oneLvHome/oneLvHome?id=${e.currentTarget.dataset.id}&time=${this.data.time}&month=${this.data.thisTimeDate}&img=${e.currentTarget.dataset.img}`
     })
   },
   // 点击月或者年刷新数据
