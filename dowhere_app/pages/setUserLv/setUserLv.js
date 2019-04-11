@@ -9,6 +9,7 @@ Page({
   data: {
     listData: [],
     userInfo: null,
+    img: '',
     imgUrl: ''
   },
   onLoad(options) {
@@ -41,7 +42,9 @@ Page({
         if (data.data.code == 1) {
           data = data.data.data
           let data1 = this.sortData(data)
+
           this.setData({
+            img: data1[0].img,
             listData: data1
           })
         } else {

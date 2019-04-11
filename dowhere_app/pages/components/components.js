@@ -26,7 +26,8 @@ Page({
     randomNum4: '', // 随机数
     planNumber: 0,
     planBout: 0,
-    fulfilBout: 0
+    fulfilBout: 0,
+    imgUrl: ''
   },
 
   /**
@@ -37,6 +38,9 @@ Page({
     var date = new Date();
     let month = date.getMonth()
     this.setData({
+      // 是否随机数
+      sham: options.sham,
+      imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo,
       // 零件ID
       componentsId: options.componentsid,
@@ -65,7 +69,7 @@ Page({
       success: data => {
         if (data.data.code === '1') {
           data = data.data.data
-          if (data.is_k) {
+          if (this.data.sham) {
             let randomNum = app.RandomNumBoth(10,100)
             this.setData({
               randomNum: randomNum,
@@ -194,9 +198,9 @@ Page({
       success: data => {
         if (data.data.code === '1') {
           data = data.data.data
-          let remaining = parseInt(data.year_plan_num) - parseInt(data.year_fulfil)
+          let remaining = parseInt(data.year_plan_bout) - parseInt(data.year_fulfil_bout)
           let chartData = [
-            { "name": "完成", "value": parseInt(data.year_fulfil) },
+            { "name": "完成", "value": parseInt(data.year_fulfil_bout) },
             { "name": "剩余", "value": remaining }
           ]
           console.log(chartData)

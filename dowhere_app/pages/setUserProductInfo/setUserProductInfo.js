@@ -27,8 +27,9 @@ Page({
   goComponents(e) {
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
+    let sham = e.currentTarget.dataset.sham
     wx.navigateTo({
-      url: `/pages/components/components?componentsid=${id}&componentsname=${name}&prodcutname=${this.data.prodcutInfo.prodcutname}`
+      url: `/pages/components/components?sham=${sham}&componentsid=${id}&componentsname=${name}&prodcutname=${this.data.prodcutInfo.prodcutname}`
     })
   },
   // 加载列表，数据展示

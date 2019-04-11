@@ -35,7 +35,7 @@
         {{item.year_fulfil}}
       </view>
       <view>
-        <view class="info" data-id="{{item.parts_id}}" data-name="{{item.parts_name}}" bindtap="goComponents">详情</view>
+        <view class="info" data-id="{{item.parts_id}}" data-sham="{{item.is_sham}}" data-name="{{item.parts_name}}" bindtap="goComponents">详情</view>
       </view>
     </view>
   </block>
