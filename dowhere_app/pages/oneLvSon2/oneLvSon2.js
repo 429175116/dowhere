@@ -15,13 +15,17 @@ Page({
     productId: '',
     productName: '',
     mark: '',
-    productInfo: null
+    productInfo: null,
+    imgUrl: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    this.setData({
+      imgUrl: app.globalData.imgUrl
+    })
     var date = new Date();
     let month = date.getMonth()
     this.setData({
@@ -76,7 +80,7 @@ Page({
       success: data => {
         if (data.data.code === '1') {
           data = data.data.data
-          let remaining = parseInt(data.year_plan_num) - parseInt(data.year_fulfil)
+          let remaining = parseInt(data.year_plan_bout) - parseInt(data.year_fulfil_bout)
           let chartData = [
             { "name": "完成", "value": parseInt(data.year_fulfil) },
             { "name": "剩余", "value": parseInt(remaining) }
@@ -102,17 +106,16 @@ Page({
       },
       success: data => {
         if (data.data.code === '1') {
-          let day = data.data.data2
-          this.grandTotal = day
+          let day = data.data.data
           let chartData = [
-            { "name": "计划", "schedule": data.data.data1 },
+            { "name": "计划", "schedule": data.data.data.month_plan },
             { "name": "累积", "schedule": 0 }
           ]
-          let addUp = 0
+          day = day.month_fulfil
           let i = 0
           for (i in day) {
-            chartData[1]['schedule'] += day[i].num
-            chartData.push({ "name": `${day[i].day}号`, "schedule": day[i].num })
+            chartData[1]['schedule'] += day[i].month_fulfil
+            chartData.push({ "name": `${day[i].day}号`, "schedule": day[i].month_fulfil })
           }
           // 各月完成--柱
           this.setOptionMonthPlanBar(chartData)

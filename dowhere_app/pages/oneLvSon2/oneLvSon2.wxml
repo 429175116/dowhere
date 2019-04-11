@@ -9,7 +9,7 @@
   <view class="item">
     <view class="name">模型</view>
     <view class="con">
-      <image class="img" src="{{productInfo.img}}" />
+      <image class="img" src="{{imgUrl + productInfo.img}}" />
     </view>
   </view>
   <view class="item">
