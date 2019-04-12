@@ -19,7 +19,7 @@
   </view>
   <ec-canvas id="plan-bar" canvas-id="plan-bar" style="height:{{planBarHeight}}rpx"></ec-canvas>
 </view>
-<view class="projectList">
+<view class="projectList" wx:if="{{userInfo.role_id != 7}}">
   <block wx:for="{{projectListData}}" wx:for-item="itemSon">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" data-img="{{itemSon.img}}" bindtap="goProduct">{{itemSon.name}}</view>
   </block>
