@@ -20,7 +20,9 @@ Page({
     })
     this.getListData()
   },
-  
+  onShow() {
+    this.getListData()
+  },
   goProdcutInfo(e) {
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
