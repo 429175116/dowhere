@@ -6,19 +6,40 @@ Page({
    * 页面的初始数据
    */
   data: {
+    prodcutid: '',
     userInfo: null,
     code: '',
     image: '',
     imgSize: 0,
     title: '',
     adImage: '',
+    goodsNameList: [],
+    goodsList: [],
+    index: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad(options) {
+    let goodsNameList = []
+    let goodsList = app.globalData.goodsList
+    let i = 0
+    for (i in goodsList) {
+      goodsNameList.push(goodsList[i].name)
+    }
+    this.setData({
+      goodsList: goodsList,
+      goodsNameList: goodsNameList,
+      prodcutid: options.prodcutid,
+      userInfo: app.globalData.userInfo
+    })
+  },
+  //普通选择器：
+  bindPickerChange(e) {
+    this.setData({
+      index: e.detail.value
+    })
   },
   previewImage(e) {
     var current = e.target.dataset.src
@@ -60,19 +81,30 @@ Page({
     })
   },
   setAdvertising(event) {
-    // 产品名称
-    
-    let newAdvertisingName = event.detail.value.name
+    let name = event.detail.value.name
+    let year_plan_num = event.detail.value.year_plan_num
+    let year_plan_bout = event.detail.value.year_plan_bout
+    let year_fulfil_bout = event.detail.value.year_fulfil_bout
     let newImage = this.data.image
-    console.log(newAdvertisingName)
-    console.log(newImage)
-    if (newAdvertisingName == '') {
+    let feature = event.detail.value.feature
+    // console.log(name)
+    // console.log(newImage)
+    if (name == '') {
       wepy.showModal({
         title: '',
         content: '请输入零件名称',
         showCancel: false
       })
       return
+    }
+    if (year_plan_num == '') {
+      year_plan_num = 0
+    }
+    if (year_plan_bout == '') {
+      year_plan_bout = 0
+    }
+    if (year_fulfil_bout == '') {
+      year_fulfil_bout = 0
     }
     if (newImage == '') {
       wepy.showModal({
@@ -82,9 +114,20 @@ Page({
       })
       return
     }
+    // console.log(newImage)
+    // console.log(year_plan_num)
+    // console.log(year_plan_bout)
+    // console.log(year_fulfil_bout)
+    // console.log(this.data.userInfo.area_id)
+    // console.log(this.data.userInfo.branch_id)
+    // console.log(this.data.userInfo.id)
+    // console.log(this.data.goodsList[this.data.index].id)
+    // console.log(name)
+    // console.log(feature)
+    // return
     // 发送请求,发布广告
     wx.uploadFile({
-      url: `${app.globalData.requestUrl}/api/add_goods`,
+      url: `${app.globalData.requestUrl}/api/add_parts`,
       method: 'POST',
       header: {
         "Content-Type": "multipart/form-data"
@@ -92,19 +135,24 @@ Page({
       filePath: newImage,
       name: 'image',
       formData: {
-        title: newAdvertisingName // 广告名称
+        year_plan_num: year_plan_num,
+        year_plan_bout: year_plan_bout,
+        year_fulfil_bout: year_fulfil_bout,
+        area_id: this.data.userInfo.area_id,
+        branch_id: this.data.userInfo.branch_id,
+        uid: this.data.userInfo.id,
+        goods_id: this.data.goodsList[this.data.index].id,
+        name: name,
+        feature: feature
       },
       success: data => {
-        if (data.statusCode === 201) {
-          
-          return
-        }
-        if (data.statusCode === 400) {
-          data = data.data
-          wepy.showModal({
+        if (data.data.code == "1") {
+          wx.showModal({
             title: '',
-            content: data.message,
-            showCancel: false
+            content: '新增零件成功'
+          })
+          wx.navigateBack({
+            delta: 1
           })
         }
       }

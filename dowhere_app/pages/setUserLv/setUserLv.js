@@ -18,7 +18,7 @@ Page({
       imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo
     })
-    this.getListData()
+    // this.getListData()
   },
   onShow() {
     this.getListData()
@@ -61,6 +61,7 @@ Page({
             branchInfo: data.branch,
             listData: data.goods
           })
+          app.globalData.goodsList = this.data.listData
         } else {
           wx.showModal({
             title: '',

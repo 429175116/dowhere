@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    prodcutid: '',
     userInfo: null,
     code: '',
     image: '',
@@ -18,7 +19,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      prodcutid: options.prodcutid,
+      userInfo: app.globalData.userInfo
+    })
   },
   previewImage(e) {
     var current = e.target.dataset.src
@@ -75,6 +79,9 @@ Page({
       url: `${app.globalData.requestUrl}/api/add_goods`,
       method: 'POST',
       data: {
+        area_id: this.data.userInfo.area_id,
+        branch_id: this.data.userInfo.branch_id,
+        uid: this.data.userInfo.id,
         title: newAdvertisingName
       },
       success: data => {

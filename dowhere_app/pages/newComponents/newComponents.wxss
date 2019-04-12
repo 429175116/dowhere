@@ -32,6 +32,7 @@
     padding: 0 40rpx;
     margin: auto;
     color: #333;
+    margin-bottom: 30rpx;
   }
   
   .appointment_img {
@@ -144,5 +145,36 @@
   button[type=primary] {
     color:#FFFFFF;
     background-color: #f97008;
+  }
+  picker{
+    border: 1rpx #ccc solid;
+    border-radius: 20rpx;
+    width: 690rpx;
+    height: 80rpx;
+    box-sizing: border-box;
+    padding: 0 40rpx;
+    margin: auto;
+    color: #333;
+    margin-bottom: 30rpx;
+  }
+  textarea{
+    margin: auto;
+    color: #333;
+    margin-bottom: 30rpx;
+    border: 1rpx #ccc solid;
+    border-radius: 20rpx;
+    width: 690rpx;
+    box-sizing: border-box;
+    padding:30rpx;
+  }
+  picker view{
+    width: 690rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 25rpx;
+    /* color: #999; */
+    box-sizing: border-box;
+    margin: auto;
+    color: #333;
   }
   
