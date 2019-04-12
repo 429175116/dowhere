@@ -55,6 +55,7 @@ App({
   },
   globalData: {
     userInfo: null,
+    // http://192.168.1.106/uploads/wx17c64a6baaad8efd.o6zAJsyffNAHcme2oEzGg2GvV1W8.K0PBo0c93eLl7b70e22f78876879ddb073c0199cb83f.jpg
     requestUrl: 'http://192.168.1.106', //线下
     imgUrl: 'http://192.168.1.106/uploads/'
     // requestUrl: 'http://192.168.1.125/' //线上

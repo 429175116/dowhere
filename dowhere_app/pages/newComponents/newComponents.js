@@ -69,7 +69,7 @@ Page({
     if (newAdvertisingName == '') {
       wepy.showModal({
         title: '',
-        content: '请输入产品名称',
+        content: '请输入零件名称',
         showCancel: false
       })
       return

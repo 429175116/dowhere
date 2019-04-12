@@ -63,9 +63,6 @@ Page({
     // 产品名称
     
     let newAdvertisingName = event.detail.value.name
-    let newImage = this.data.image
-    console.log(newAdvertisingName)
-    console.log(newImage)
     if (newAdvertisingName == '') {
       wepy.showModal({
         title: '',
@@ -74,37 +71,28 @@ Page({
       })
       return
     }
-    if (newImage == '') {
-      wepy.showModal({
-        title: '',
-        content: '请选择图片',
-        showCancel: false
-      })
-      return
-    }
-    // 发送请求,发布广告
-    wx.uploadFile({
+    wx.request({
       url: `${app.globalData.requestUrl}/api/add_goods`,
       method: 'POST',
-      header: {
-        "Content-Type": "multipart/form-data"
-      },
-      filePath: newImage,
-      name: 'image',
-      formData: {
-        title: newAdvertisingName // 广告名称
+      data: {
+        title: newAdvertisingName
       },
       success: data => {
-        if (data.statusCode === 201) {
-          
-          return
-        }
-        if (data.statusCode === 400) {
-          data = data.data
-          wepy.showModal({
+        console.log(data)
+        if (data.data.code == "1") {
+          let id = data.data.data
+
+          wx.showModal({
             title: '',
-            content: data.message,
-            showCancel: false
+            content: '新增产品成功'
+          })
+          wx.navigateBack({
+            delta: 1
+          })
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
           })
         }
       }
