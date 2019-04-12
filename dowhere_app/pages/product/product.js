@@ -15,7 +15,8 @@ Page({
     annotationInfo: '',
     optionsData: {},
     thisTimeDate: 0,
-    imgUrl: ''
+    imgUrl: '',
+    titleImg: ''
   },
 
   /**
@@ -127,12 +128,15 @@ Page({
         time: parseInt(this.data.time),
         month: thisTimeDate,
         branch_id: this.data.userInfo.branch_id,
-        uid: this.data.userInfo.id
+        uid: this.data.userInfo.id,
+        area_id: this.data.userInfo.area_id
       },
       success: data => {
-        console.log(data)
         if (data.data.code === '1') {
-          let getData = data.data.data
+          let getData = data.data.data.branch_power
+          this.setData({
+            titleImg: data.data.data.area_img.img
+          })
           // var area = data.area
           // 区域和部门列表
           var projectListData = []

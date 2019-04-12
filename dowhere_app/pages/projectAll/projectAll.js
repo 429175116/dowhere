@@ -19,6 +19,10 @@ Page({
       imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo
     })
+    // 显示默认图表，无数据
+    this.setOptionPlanPie({'month_plan': 0, 'month_fulfil': 0})
+    this.setOptionAllPlanPie([{'month_plan': 0, 'month_fulfil': 0, 'name': '暂无数据'}])
+    this.setOptionAllPlanBar([])
     // 获取批注内容
     this.getAnnotation()
     this.getDataThree()
@@ -165,15 +169,20 @@ Page({
     }
     
     // 计算图表显示高度
+    this.setData({
+      planBarHeight: 200
+    })
     let k = 100
     if (chartData.length < 10) {
       k = 200
     } else if (chartData.length < 5) {
       k = 200
     }
-    this.setData({
-      planBarHeight: k * chartData.length + 100
-    })
+    if (chartData.length > 0) {
+      this.setData({
+        planBarHeight: k * chartData.length + 100
+      })
+    }
     this.monthPlanBar = this.selectComponent('#plan-bar');
     this.monthPlanBar.init((canvas, width, height) => {
       const chart = echarts.init(canvas, null, {
