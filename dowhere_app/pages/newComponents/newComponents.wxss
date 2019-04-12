@@ -1,1 +1,148 @@
-/* pages/newComponents/newComponents.wxss */
+/* pages/newProduct/newProduct.wxss */
+
+.appointment {
+    position: absolute;
+    background: linear-gradient(to right, #f86e09, #f29200, #f86e09);
+    color: #fff;
+    font-size: 24rpx;
+    width: 100%;
+    height: 100%;
+    padding: 0 60rpx;
+    box-sizing: border-box;
+  }
+  .title,.appointment_form{
+      width: 690rpx;
+      padding: 0 30rpx;
+  }
+  .title {
+    margin-top: 20rpx;
+    font-weight: bold;
+  }
+  .appointment_form {
+    color: #fff;
+    font-size: 24rpx;
+  }
+  
+  .appointment_input {
+    border: 1rpx #ccc solid;
+    border-radius: 20rpx;
+    width: 690rpx;
+    height: 80rpx;
+    box-sizing: border-box;
+    padding: 0 40rpx;
+    margin: auto;
+    color: #333;
+  }
+  
+  .appointment_img {
+    position: relative;
+    top: -80rpx;
+    left: 120rpx;
+    width: 230rpx;
+    height: 124rpx;
+  }
+  
+  .appointment_img1 {
+    position: relative;
+    top: -120rpx;
+    left: 200rpx;
+    width: 60rpx;
+    height: 100rpx;
+  }
+  
+  .mod_btn {
+    margin: auto;
+    border-radius: 20rpx;
+    border: 1rpx solid #ccc;
+    background-color: #78ac47;
+    width: 300rpx;
+    height: 80rpx;
+    color: #fff;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    font-weight: bold;
+  }
+
+  .weui-uploader__title{
+  clear: both;
+  font-size: 12px;
+  color:#999;
+  }
+  .weui-uploader__file{
+  margin-left: 80px;
+  }
+  .weui-uploader__img {
+  width: 70px;
+  height: 70px;
+  float:left;
+  }
+  .weui-uploader__input-box {
+  position: relative;
+  margin-right: 9px;
+  margin-bottom: 9px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid #d9d9d9;
+  }
+  .weui-uploader__input-box:before, .weui-uploader__input-box:after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d9d9d9;
+  }
+  .weui-uploader__input-box:before {
+  width: 2px;
+  height: 39.5px;
+  }
+  .weui-uploader__input-box:after {
+  width: 39.5px;
+  height: 2px;
+  }
+  .weui-uploader__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  }
+  
+  .mask{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(242,142,2,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:10;
+  }
+  .prompt{
+    width: 500rpx;
+    height: 368rpx;
+    background-color: #fff;
+    border-radius: 30rpx;
+    position: relative;
+  }
+  .promptInfo{
+    height: 250rpx;
+    line-height: 250rpx;
+    text-align: center;
+    color: #333;
+  }
+  .prompt .button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button-hover[type=primary] {
+  background-color: #f97008;
+  }
+  button[type=primary] {
+    color:#FFFFFF;
+    background-color: #f97008;
+  }
+  

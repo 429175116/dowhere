@@ -1,2 +1,29 @@
-<!--pages/newProduct/newProduct.wxml-->
-<text>pages/newProduct/newProduct.wxml</text>
+<!-- <view class="appointment"> -->
+<view class="title">
+    <view>新增产品</view>
+</view>
+<form class="appointment_form" bindsubmit='setAdvertising'>
+    <input type="text" placeholder='产品名称' class="appointment_input" name="name" value="{{name}}"/>
+    <view class="street_detail" id="adinfoP">
+    <text class="tit">添加照片：</text>
+        <view class="weui-cell">
+        <view class="weui-cell__bd">
+            <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+            <view class="weui-uploader__title"></view>
+            </view>
+            <view class="weui-uploader__bd" style="margin-left:20px">
+                <view class="weui-uploader__file">
+                <image class="weui-uploader__img" name="image" src="{{image}}" data-image="{{image}}" bindtap="previewImage" />
+                </view>
+                <!-- isShow 这个是判断是否进行触发点隐藏操作-->
+                <view class="weui-uploader__input-box {{isShow?'true':'hideTrue'}}">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+                </view>
+            </view>
+            </view>
+        </view>
+        </view>
+    </view>
+    <button class="mod_btn" formType="submit">提交</button>
+</form>
