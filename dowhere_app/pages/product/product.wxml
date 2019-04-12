@@ -1,6 +1,6 @@
 <!--pages/product/product.wxml-->
 <view class="img">
-  <image src="{{imgUrl+img}}" />
+  <image src="{{imgUrl+projectListData[0].img}}" />
 </view>
 <view class="timeSel">
   <view bindtap="monthData" class="{{time=='1'?'action':''}}">当月计划与完成</view>

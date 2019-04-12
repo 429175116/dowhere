@@ -107,10 +107,10 @@ Page({
   },
   getDataTwoData() {
     let getUrl = ''
-    if (this.data.userInfo.id == '5') {
+    if (this.data.userInfo.role_id == '5') {
       // 产品
       getUrl = 'two'
-    } else if (this.data.userInfo.id == '6') {
+    } else if (this.data.userInfo.role_id == '6') {
       // 部门
       getUrl = 'two_branch'
     }
@@ -246,7 +246,7 @@ Page({
     // 计算图表显示高度
     let k = 100
     if (chartData.length < 10) {
-      k = 150
+      k = 200
     } else if (chartData.length < 5) {
       k = 200
     }
