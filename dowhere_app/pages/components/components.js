@@ -59,6 +59,15 @@ Page({
     // 获取零件的基本信息
     this.gitPartsInfo(options.componentsid)
   },
+    /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow() {
+    // 获取零件的全年完成情况--饼图
+    this.getOptionPlanPie(this.data.componentsId)
+    // 显示柱状图
+    this.HistogramData(this.data.componentsId)
+  },
   gitPartsInfo(id) {
     wx.request({
       url: `${app.globalData.requestUrl}/api/parts`,
@@ -69,7 +78,7 @@ Page({
       success: data => {
         if (data.data.code === '1') {
           data = data.data.data
-          if (this.data.sham) {
+          if (this.data.sham == 1) {
             let randomNum = app.RandomNumBoth(10,100)
             this.setData({
               randomNum: randomNum,
@@ -89,6 +98,10 @@ Page({
             // 获取全年完成批次数据--初始化
             fulfilBout: data.year_fulfil_bout
           })
+          // 获取零件的全年完成情况--饼图
+          this.getOptionPlanPie(this.data.componentsId)
+          // 显示柱状图
+          this.HistogramData(this.data.componentsId)
         } else {
           wx.showModal({
             title: '',
@@ -219,10 +232,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    // 获取零件的全年完成情况--饼图
-    this.getOptionPlanPie(this.data.componentsId)
-    // 显示柱状图
-    this.HistogramData(this.data.componentsId)
+    
   },
   goPlan(e) {
     // 进入计划页
@@ -287,12 +297,7 @@ Page({
     })
     this.setOptionMonthPlanBar()
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
 
-  },
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -146,6 +146,7 @@ Page({
         feature: feature
       },
       success: data => {
+        data.data = JSON.parse( data.data );
         if (data.data.code == "1") {
           wx.showModal({
             title: '',

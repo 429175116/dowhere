@@ -5,7 +5,7 @@
 </view>
 <view class="listCons">
   <block wx:for="{{listData}}" wx:for-item="item" index="index">
-    <view class="items {{item.goods_name.length > 6 ? 'maxWidth':''}}" data-id="{{item.goods_id}}" data-name="{{item.goods_name}}" bindtap="goProdcutInfo">
+    <view class="items {{item.goods_name.length > 6 ? 'maxWidth':''}}" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="goProdcutInfo">
       <view>{{item.name}}</view>
       <icon class="iconfont icon-jiantou" />
     </view>

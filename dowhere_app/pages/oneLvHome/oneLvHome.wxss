@@ -23,7 +23,7 @@
   }
   .action{
     background-color: #78ac47 !important;
-    color: #fff;
+    color: #fff !important;
   }
   /* 图表显示块 */
   .charts{
