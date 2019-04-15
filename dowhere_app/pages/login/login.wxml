@@ -1,6 +1,7 @@
 <!--pages/login/login.wxml-->
 <!-- 登录 -->
 <view class="login">
+  <image class='header-bg' src = 'https://dowhere.beaconway.cn/uploads/abc.jpg' />
   <view class="logo">
     <!-- logo图片 -->
     <image class="img" src="../../img/logo.jpg" />
