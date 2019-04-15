@@ -4,7 +4,7 @@
 </view>
 <view class="listCon">
   <view class="item title">
-    <view class="neme">产品名称</view>
+    <view class="neme">零件名称</view>
     <view class="neme">当月完成</view>
     <view class="neme">当月未完</view>
     <view class="neme">年度完成</view>

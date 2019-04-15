@@ -8,7 +8,7 @@
 </view>
 <view class="listCon" wx:if="{{listData.length > 0}}">
   <view class="item title">
-    <view class="neme">产品名称</view>
+    <view class="neme">零件名称</view>
     <view class="neme">当月计划</view>
     <view class="neme">当月完成</view>
     <view class="neme">年度计划</view>
