@@ -55,8 +55,8 @@ App({
   },
   globalData: {
     userInfo: null,
-    requestUrl: 'http://192.168.1.106', //线下
-    imgUrl: 'http://192.168.1.106'
+    requestUrl: 'https://dowhere.beaconway.cn', //线下
+    imgUrl: 'https://dowhere.beaconway.cn'
     // requestUrl: 'http://192.168.1.125/' //线上
   },
   // 生成固定范围内的随机数
