@@ -16,7 +16,6 @@ Page({
     componentsName: '',
     prodcutname: '',
     mark: '',
-    annotationInfo: '',
     partsInfo: null,
     grandTotal: null,
     randomNum: '',
@@ -54,8 +53,7 @@ Page({
       monthList: getMonthList(),
       time: month + 1
     })
-    // 获取本地存储的批注信息
-    this.getAnnotation()
+    
     // 获取零件的基本信息
     this.gitPartsInfo(options.componentsid)
   },
@@ -384,34 +382,7 @@ Page({
       return chart;
     });
   },
-  // 获取缓存在本地的批注信息
-  getAnnotation() {
-    wx.getStorage({
-      key: 'annotation',
-      success: res => {
-        console.log(res)
-        if (res.data) {
-          // let annotationInfo = res.data
-          this.setData({
-            annotationInfo: res.data
-          })
-        }
-      }
-    })
-  },
-  setAnnotation(annotationList) {
-    wx.setStorageSync('annotation', annotationList)
-    this.getAnnotation()
-  },
-  setInputAnnotation(e) {
-    // 获取输入的批注的信息
-    this.setData({
-      annotationInfo: e.detail.value
-    })
-  },
-  upDataAnnotation() {
-    this.setAnnotation(this.data.annotationInfo)
-  },
+
 })
 // 获取月份列表
 function getMonthList() {

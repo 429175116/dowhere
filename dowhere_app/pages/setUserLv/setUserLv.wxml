@@ -16,3 +16,10 @@
   </view>
   
 </view>
+<view class="annotation">
+  <view class="name">批注:</view>
+  <textarea bindinput="setInputAnnotation" value="{{annotationInfo}}"></textarea> 
+  <view class="sub">
+    <view bindtap="upDataAnnotation">提交</view>
+  </view>
+</view>
