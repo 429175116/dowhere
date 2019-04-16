@@ -56,6 +56,7 @@ App({
   globalData: {
     userInfo: null,
     requestUrl: 'https://dowhere.beaconway.cn', //线下
+    // requestUrl: 'http://192.168.1.106', //线下
     imgUrl: 'https://dowhere.beaconway.cn'
     // requestUrl: 'http://192.168.1.125/' //线上
   },
