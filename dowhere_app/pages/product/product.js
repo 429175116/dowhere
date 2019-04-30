@@ -239,7 +239,11 @@ Page({
       namelist.push(chartData[i].name)
       planlist.push(chartData[i].month_plan)
       schedulelist.push(chartData[i].month_fulfil)
-      remainderlist.push(chartData[i].month_fulfil - chartData[i].month_plan)
+      if (chartData[i].month_fulfil <= chartData[i].month_plan) {
+        remainderlist.push(chartData[i].month_fulfil - chartData[i].month_plan)
+      } else {
+        remainderlist.push(0)
+      }
     }
     let data = new Object();
     data.namelist = namelist;
@@ -254,9 +258,16 @@ Page({
     } else if (chartData.length < 5) {
       k = 200
     }
-    this.setData({
-      planBarHeight: k * chartData.length + 100
-    })
+    if (chartData.length > 1) {
+      this.setData({
+        planBarHeight: k * chartData.length + 100
+      })
+    } else {
+      this.setData({
+        planBarHeight: 300
+      })
+    }
+    
     this.monthPlanBar = this.selectComponent('#plan-bar');
     this.monthPlanBar.init((canvas, width, height) => {
       const chart = echarts.init(canvas, null, {
