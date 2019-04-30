@@ -296,7 +296,7 @@
   line-height: 40rpx;
 }
 .annotation .sub{
-  width: 100%;
+  width: 670rpx;
   height: auto;
   display: flex;
   align-items: center;
@@ -324,4 +324,19 @@
 .noneCar .iconfont{
   font-size: 140rpx;
   text-align: center;
+}
+.returnLogo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.returnLogo view{
+  width: 300rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  color: #fff;
+  background-color: #d43f3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

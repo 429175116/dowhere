@@ -274,6 +274,12 @@ Page({
   onReady() {
 
   },
+  returnLogoRun() {
+    // 返回登录
+    wx.redirectTo({
+      url: '/pages/login/login'
+    })
+  },
   goProduct(e) {
     if (this.data.userInfo.role_id == '7') {
       wx.showModal({

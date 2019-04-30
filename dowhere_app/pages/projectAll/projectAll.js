@@ -207,6 +207,12 @@ Page({
     }
     this.getDataThree()
   },
+  returnLogoRun() {
+    // 返回登录
+    wx.redirectTo({
+      url: '/pages/login/login'
+    })
+  },
   // 查看产品列表页
   goProduct(e) {
     wx.navigateTo({

@@ -23,7 +23,7 @@
     </view>
     <view class="registered">
       <text class="alter" bindtap="alterPassword">忘记密码</text>
-      <!-- <text bindtap="registerd">注册</text> -->
+      <text bindtap="registerd">注册</text>
     </view>
   </view>
 </view>

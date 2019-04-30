@@ -26,6 +26,12 @@ Page({
   onShow() {
     this.getListData()
   },
+  returnLogoRun() {
+    // 返回登录
+    wx.redirectTo({
+      url: '/pages/login/login'
+    })
+  },
   goProdcutInfo(e) {
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name

@@ -1,4 +1,4 @@
-<!--pages/registered/registered.wxml-->
+<!--pages/alterPassword/alterPassword.wxml-->
 <!-- 注册 -->
 <view class="login">
   <view class="logo">
@@ -33,3 +33,4 @@
     </view>
   </view>
 </view>
+

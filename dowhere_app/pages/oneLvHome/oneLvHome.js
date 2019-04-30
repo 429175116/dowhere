@@ -341,6 +341,12 @@ Page({
     // 完成与未完成柱状图
     this.setOptionAllPlanBar(completeAllPid)
   },
+  returnLogoRun() {
+    // 返回登录
+    wx.redirectTo({
+      url: '/pages/login/login'
+    })
+  },
   // 产品跳转
   goComponentsList(e) {
     wx.navigateTo({

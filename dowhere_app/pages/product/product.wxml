@@ -31,3 +31,6 @@
     <view bindtap="upDataAnnotation">提交</view>
   </view>
 </view>
+<view class="returnLogo" wx:if="{{userInfo.role_id != 7}}">
+  <view bindtap="returnLogoRun">返回登录</view>
+</view>
