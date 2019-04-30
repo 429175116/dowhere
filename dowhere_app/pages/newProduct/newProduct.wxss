@@ -61,6 +61,7 @@
     font-size: 30rpx;
     line-height: 80rpx;
     font-weight: bold;
+    margin-top: 100rpx;
   }
 
   .weui-uploader__title{

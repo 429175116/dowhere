@@ -275,13 +275,17 @@ Page({
           this.grandTotal = day
           let chartData = [
             { "name": "计划", "schedule": data.data.data1 },
+            { "name": "剩余", "schedule": 0 },
             { "name": "累积", "schedule": 0 }
           ]
           let addUp = 0
           let i = 0
           for (i in day) {
-            chartData[1]['schedule'] += day[i].num
+            chartData[2]['schedule'] += day[i].num
             chartData.push({ "name": `${day[i].day}号`, "schedule": day[i].num })
+          }
+          if (chartData[0].schedule >= chartData[2].schedule) {
+            chartData[1]['schedule'] = chartData[0].schedule - chartData[2].schedule
           }
           // 各月完成--柱
           this.setOptionMonthPlanBar(chartData)
