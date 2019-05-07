@@ -33,7 +33,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options)
     var date = new Date();
     let month = date.getMonth()
     this.setData({
@@ -214,7 +213,6 @@ Page({
             { "name": "完成", "value": parseInt(data.year_fulfil_bout) },
             { "name": "剩余", "value": remaining }
           ]
-          console.log(chartData)
           // 计划完成度--饼
           this.setOptionPlanPie(chartData)
         } else {
@@ -271,21 +269,24 @@ Page({
       },
       success: data => {
         if (data.data.code === '1') {
-          let day = data.data.data2
-          this.grandTotal = day
-          let chartData = [
-            { "name": "计划", "schedule": data.data.data1 },
-            { "name": "剩余", "schedule": 0 },
-            { "name": "累积", "schedule": 0 }
-          ]
-          let addUp = 0
-          let i = 0
-          for (i in day) {
-            chartData[2]['schedule'] += day[i].num
-            chartData.push({ "name": `${day[i].day}号`, "schedule": day[i].num })
+          var dayData = data.data.data2
+          this.grandTotal = dayData
+          // plan 计划
+          // remaining 剩余
+          // complete 完成
+          var chartData = {
+            "plan": data.data.data1,
+            "remaining": 0,
+            "complete": 0,
+            "day": []
           }
-          if (chartData[0].schedule >= chartData[2].schedule) {
-            chartData[1]['schedule'] = chartData[0].schedule - chartData[2].schedule
+          var i = 0
+          for (i in dayData) {
+            chartData.complete += dayData[i].num
+            chartData['day'].push({ "name": `${dayData[i].day}号`, "schedule": dayData[i].num })
+          }
+          if (chartData.plan >= chartData.complete) {
+            chartData.remaining = chartData.plan - chartData.complete
           }
           // 各月完成--柱
           this.setOptionMonthPlanBar(chartData)
@@ -297,7 +298,7 @@ Page({
         }
       }
     })
-    this.setOptionMonthPlanBar()
+    // this.setOptionMonthPlanBar()
   },
 
 
@@ -340,23 +341,27 @@ Page({
     let schedulelist = []
     let remainderlist = []
     let i = 0;
-    for (i in chartData) {
-      namelist.push(chartData[i].name)
-      schedulelist.push(chartData[i].schedule)
+    let dayData = chartData.day
+    for (i in dayData) {
+      namelist.push(dayData[i].name)
+      schedulelist.push(dayData[i].schedule)
     }
     let data = new Object();
+    data.plan = chartData.plan
+    data.remaining = chartData.remaining
+    data.complete = chartData.complete
     data.namelist = namelist;
     data.schedulelist = schedulelist;
     data.chartName = `${this.data.time}月进度`;
     // 计算图表显示高度
     let k = 100
-    if (chartData.length < 10) {
+    if (chartData.day.length < 10) {
       k = 150
-    } else if (chartData.length < 5) {
+    } else if (chartData.day.length < 5) {
       k = 200
     }
     this.setData({
-      monthPlanBarHeight: k * chartData.length + 100
+      monthPlanBarHeight: k * chartData.day.length + 500
     })
     this.monthPlanBar = this.selectComponent('#monthPlan-bar');
     this.monthPlanBar.init((canvas, width, height) => {

@@ -3,7 +3,7 @@
 <view class="pageTitle">{{productName}}<text>></text>{{componentsName}}<text>></text>计划录入</view>
 <view class="setPlanform">
   <label>计划录入：</label>
-  <input type="number" value="{{planData}}" placeholder="录入计划" bindinput="setPlanData" />
+  <input type="digit" value="{{planData}}" placeholder="录入计划" bindinput="setPlanData" />
 </view>
 <view class="setPlanform">
   <label>日期:</label>

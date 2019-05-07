@@ -85,8 +85,8 @@ App({
         formatter: "    {b}    \n    {c} ({d}%)    ",
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
-          fontSize: '16px',
-          color: '#000'  // 设置文本颜色 默认#FFF
+          fontSize: 40,
+          color: '#fff'  // 设置文本颜色 默认#FFF
         }
       },
       backgroundColor: "#ffffff",
@@ -146,13 +146,13 @@ App({
       // 控制浮动框的显示
       tooltip: {
         trigger: 'axis',
-        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-          type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        },
+        // axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+        //   type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        // },
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
-          fontSize: '16px',
-          color: '#000'  // 设置文本颜色 默认#FFF
+          fontSize: 40,
+          color: '#fff'  // 设置文本颜色 默认#FFF
         }
       },
       legend: {
@@ -266,8 +266,8 @@ App({
         },
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
-          fontSize: '16px',
-          color: '#000'  // 设置文本颜色 默认#FFF
+          fontSize: 40,
+          color: '#fff'  // 设置文本颜色 默认#FFF
         }
       },
       legend: {
@@ -342,15 +342,20 @@ App({
     chart.setOption(option);
   },
   monthBarShow(data, chart) {
+    console.log(data)
     // 产品名，计划，进度，剩余
+    let name = ['计划', '剩余', '总完成']
     let namelist = data.namelist
-    // let planlist = data.planlist
+    namelist = name.concat(namelist)
     let schedulelist = data.schedulelist
     let chartName = data.chartName
-    // let chartSubtext = data.chartSubtext
+    console.log(namelist)
+    console.log(schedulelist)
+    console.log(chartName)
     const option = {
       title:{
         text: chartName,
+        // subtext: "副标题",
         x: "center",
         textStyle: {
           fontSize: 20
@@ -366,14 +371,14 @@ App({
         },
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
-          fontSize: '16px',
-          color: '#000'  // 设置文本颜色 默认#FFF
+          fontSize: 40,
+          color: '#fff'  // 设置文本颜色 默认#FFF
         }
       },
-      // legend: {
-      //   top: 40,
-      //   data: ['计划']
-      // },
+      legend: {
+        top: 40,
+        data: ['计划', '完成']
+      },
       grid: {
         left: 10,
         right: 10,
@@ -414,6 +419,42 @@ App({
       ],
       series: [
         {
+          name: '计划',
+          type: 'bar',
+          label: {
+            normal: {
+              // show: true,
+              position: 'inside'
+            }
+          },
+          //此处写入图表展示的数据--计划
+          data: data.plan
+        },
+        {
+          name: '剩余',
+          type: 'bar',
+          label: {
+            normal: {
+              // show: true,
+              position: 'inside'
+            }
+          },
+          //此处写入图表展示的数据--计划
+          data: data.remaining
+        },
+        {
+          name: '完成',
+          type: 'bar',
+          label: {
+            normal: {
+              // show: true,
+              position: 'inside'
+            }
+          },
+          //此处写入图表展示的数据--计划
+          data: data.complete
+        },
+        {
           name: '完成',
           type: 'bar',
           stack: '总量',
@@ -429,4 +470,95 @@ App({
     };
     chart.setOption(option);
   }
+  // monthBarShow(data, chart) {
+  //   console.log(data)
+  //   // 产品名，计划，进度，剩余
+  //   let namelist = data.namelist
+  //   let schedulelist = data.schedulelist
+  //   let chartName = data.chartName
+  //   console.log(chart)
+  //   console.log(namelist)
+  //   console.log(schedulelist)
+  //   console.log(chartName)
+  //   const option = {
+  //     title:{
+  //       text: chartName,
+  //       x: "center",
+  //       textStyle: {
+  //         fontSize: 20
+  //       },
+  //     },
+  //     // color: ['#37a2da', '#32c5e9', '#67e0e3'],
+  //     color: ['#ED8C24', '#78AA47', '#F56041'],
+  //     // 控制浮动框的显示
+  //     tooltip: {
+  //       trigger: 'axis',
+  //       axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+  //         type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+  //       },
+  //       backgroundColor: 'rgba(255,0,0,0.7)',
+  //       textStyle: {
+  //         fontSize: '16px',
+  //         color: '#000'  // 设置文本颜色 默认#FFF
+  //       }
+  //     },
+  //     // legend: {
+  //     //   top: 40,
+  //     //   data: ['计划']
+  //     // },
+  //     grid: {
+  //       left: 10,
+  //       right: 10,
+  //       bottom: 10,
+  //       top: 70,
+  //       containLabel: true
+  //     },
+  //     xAxis: [
+  //       {
+  //         type: 'value',
+  //         axisLine: {
+  //           lineStyle: {
+  //             color: '#999'
+  //           }
+  //         },
+  //         axisLabel: {
+  //           color: '#666',
+  //           fontSize: 14
+  //         }
+  //       }
+  //     ],
+  //     yAxis: [
+  //       {
+  //         type: 'category',
+  //         axisTick: { show: false },
+  //         //此处写入图表展示的数据--名称
+  //         data: namelist,
+  //         axisLine: {
+  //           lineStyle: {
+  //             color: '#999'
+  //           }
+  //         },
+  //         axisLabel: {
+  //           color: '#666',
+  //           fontSize: 14
+  //         }
+  //       }
+  //     ],
+  //     series: [
+  //       {
+  //         name: '完成',
+  //         type: 'bar',
+  //         stack: '总量',
+  //         label: {
+  //           normal: {
+  //             // show: true
+  //           }
+  //         },
+  //         //此处写入图表展示的数据--进度
+  //         data: schedulelist
+  //       },
+  //     ]
+  //   };
+  //   chart.setOption(option);
+  // }
 })

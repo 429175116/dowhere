@@ -83,6 +83,28 @@
   counter-reset: #999;
   margin-top: 20rpx;
 }
+.con{
+  display: flex;
+  align-items: center;
+  /* justify-content: flex-start !important; */
+}
 .con input{
   text-align: center;
+  width: 400rpx;
+}
+.con button{
+  width: 100rpx;
+  background-color: #78ac47;
+  color: white;
+  font-size: 25rpx;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.con button::after {
+  border-radius: 98rpx;
+  border: 0; 
 }

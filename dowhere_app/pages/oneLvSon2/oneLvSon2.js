@@ -109,7 +109,7 @@ Page({
           let day = data.data.data
           let chartData = [
             { "name": "计划", "schedule": data.data.data.month_plan },
-            { "name": "累积", "schedule": 0 }
+            { "name": "总完成", "schedule": 0 }
           ]
           day = day.month_fulfil
           let i = 0
