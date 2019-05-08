@@ -106,16 +106,24 @@ Page({
       },
       success: data => {
         if (data.data.code === '1') {
-          let day = data.data.data
-          let chartData = [
-            { "name": "计划", "schedule": data.data.data.month_plan },
-            { "name": "总完成", "schedule": 0 }
-          ]
-          day = day.month_fulfil
+          let dayData = data.data.data
+          // plan 计划
+          // remaining 剩余
+          // complete 完成
+          var chartData = {
+            "plan": data.data.data.month_plan,
+            "remaining": 0,
+            "complete": 0,
+            "day": []
+          }
+          dayData = dayData.month_fulfil
           let i = 0
-          for (i in day) {
-            chartData[1]['schedule'] += day[i].month_fulfil
-            chartData.push({ "name": `${day[i].day}号`, "schedule": day[i].month_fulfil })
+          for (i in dayData) {
+            chartData.complete += dayData[i].month_fulfil
+            chartData['day'].push({ "name": `${dayData[i].day}号`, "schedule": dayData[i].month_fulfil })
+          }
+          if (chartData.plan >= chartData.complete) {
+            chartData.remaining = chartData.plan - chartData.complete
           }
           // 各月完成--柱
           this.setOptionMonthPlanBar(chartData)
@@ -200,11 +208,15 @@ Page({
     let schedulelist = []
     let remainderlist = []
     let i = 0;
-    for (i in chartData) {
-      namelist.push(chartData[i].name)
-      schedulelist.push(chartData[i].schedule)
+    let dayData = chartData.day
+    for (i in dayData) {
+      namelist.push(dayData[i].name)
+      schedulelist.push(dayData[i].schedule)
     }
     let data = new Object();
+    data.plan = chartData.plan
+    data.remaining = chartData.remaining
+    data.complete = chartData.complete
     data.namelist = namelist;
     data.schedulelist = schedulelist;
     data.chartName = `${this.data.time}月进度`;
@@ -216,7 +228,7 @@ Page({
       k = 200
     }
     this.setData({
-      monthPlanBarHeight: k * chartData.length + 100
+      monthPlanBarHeight: k * chartData.length + 500
     })
     this.monthPlanBar = this.selectComponent('#monthPlan-bar');
     this.monthPlanBar.init((canvas, width, height) => {

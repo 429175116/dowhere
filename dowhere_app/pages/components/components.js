@@ -298,7 +298,7 @@ Page({
         }
       }
     })
-    // this.setOptionMonthPlanBar()
+    this.setOptionMonthPlanBar()
   },
 
 
