@@ -73,7 +73,7 @@ App({
     const option = {
       title:{
         text: chartName,
-        // subtext: chartSubtext,
+        // subtext: '',
         x: "center",
         textStyle: {
           fontSize: 20
@@ -86,7 +86,7 @@ App({
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
           fontSize: 40,
-          color: '#fff'  // 设置文本颜色 默认#FFF
+          color: '#000'  // 设置文本颜色 默认#FFF
         }
       },
       backgroundColor: "#ffffff",
@@ -102,7 +102,7 @@ App({
           }
         },
         type: 'pie',
-        center: ['50%', '50%'],
+        center: ['50%', '55%'],
         radius: [0, '70%'],
         //此处写入图表展示的数据
         data: data,
@@ -152,7 +152,7 @@ App({
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
           fontSize: 40,
-          color: '#fff'  // 设置文本颜色 默认#FFF
+          color: '#000'  // 设置文本颜色 默认#FFF
         }
       },
       legend: {
@@ -228,6 +228,7 @@ App({
           stack: '总量',
           label: {
             normal: {
+              // position: 'inside'
               // show: true,
               position: 'left'
             }
@@ -267,7 +268,7 @@ App({
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
           fontSize: 40,
-          color: '#fff'  // 设置文本颜色 默认#FFF
+          color: '#000'  // 设置文本颜色 默认#FFF
         }
       },
       legend: {
@@ -367,7 +368,7 @@ App({
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
           fontSize: 40,
-          color: '#fff'  // 设置文本颜色 默认#FFF
+          color: '#000'  // 设置文本颜色 默认#FFF
         },
         formatter: function (namelist, ticket, callback) {
           var showHtm="";
@@ -376,7 +377,7 @@ App({
               var name = namelist[i].axisValue;
               //值
               var value = namelist[i].value;
-              showHtm+= name + '：' + value
+              showHtm+= '     '+ name + '     \n     ' + value + '     '
           }
           return showHtm;
         }
