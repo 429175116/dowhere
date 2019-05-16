@@ -4,7 +4,7 @@
   /* display: inline-block; */
   height: auto !important;
   border-radius: 20rpx !important;
-  margin: 20rpx;
+  margin: 25rpx;
   padding: 10rpx;
   background-color: #78ac47;
   display: flex;
@@ -26,14 +26,14 @@
 }
 
 .new{
-  width: 690rpx;
-  padding:30rpx;
+  width: 710rpx;
+  padding:20rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .new view{
-  width: 300rpx;
+  width: 330rpx;
   height: 80rpx;
   border-radius: 20rpx;
   display: flex;

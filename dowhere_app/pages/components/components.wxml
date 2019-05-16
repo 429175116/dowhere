@@ -36,12 +36,12 @@
       <button data-type="fulfilBout" bindtap="getPartsData">确定</button>
     </view>
   </view>
-  <view class="item">
+  <!-- <view class="item">
     <view class="name">全年剩余</view>
     <view class="con" style="justify-content: flex-start">
       <input type="text" value="{{planBout - fulfilBout + '' + randomNum4}}" disabled  />
     </view>
-  </view>
+  </view> -->
 </view>
 <view class="charts">
   <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>

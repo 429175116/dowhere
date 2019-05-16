@@ -235,7 +235,7 @@ Page({
     data.remainderlist = remainderlist;
     data.chartName = `总进度`;
     this.setData({
-      planBarHeight2: 300
+      planBarHeight2: 500
     })
     this.monthPlanBar = this.selectComponent('#plan-pie');
     this.monthPlanBar.init((canvas, width, height) => {
@@ -271,11 +271,11 @@ Page({
     data.remainderlist = remainderlist;
     data.chartName = `各产品进度`;
     // 计算图表显示高度
-    let k = 100
+    let k = 300
     if (chartData.length < 10) {
-      k = 150
+      k = 300
     } else if (chartData.length < 5) {
-      k = 200
+      k = 300
     }
     if (chartData.length > 1) {
       this.setData({

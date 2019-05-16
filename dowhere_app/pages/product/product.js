@@ -252,11 +252,11 @@ Page({
     data.remainderlist = remainderlist;
     data.chartName = `部门进度`;
     // 计算图表显示高度
-    let k = 100
+    let k = 300
     if (chartData.length < 10) {
-      k = 200
+      k = 300
     } else if (chartData.length < 5) {
-      k = 200
+      k = 300
     }
     if (chartData.length > 1) {
       this.setData({

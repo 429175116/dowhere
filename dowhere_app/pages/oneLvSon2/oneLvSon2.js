@@ -221,11 +221,11 @@ Page({
     data.schedulelist = schedulelist;
     data.chartName = `${this.data.time}月进度`;
     // 计算图表显示高度
-    let k = 100
+    let k = 300
     if (chartData.length < 10) {
-      k = 150
+      k = 300
     } else if (chartData.length < 5) {
-      k = 200
+      k = 300
     }
     this.setData({
       monthPlanBarHeight: k * chartData.length + 500
