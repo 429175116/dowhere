@@ -14,7 +14,8 @@ Page({
     passwordInputType: 'password',
     passwordIcon: 'zhengyan',
     passwordInputType2: 'password',
-    passwordIcon2: 'zhengyan'
+    passwordIcon2: 'zhengyan',
+    time: 0
   },
 
   /**
@@ -43,7 +44,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide() {
-
+    clearInterval(this.data.timeShow);
   },
 
   /**
@@ -74,6 +75,7 @@ Page({
 
   },
   getVerificationCode() {
+    
     if (this.check.isPhone(this.data.userName)) {
       wx.showModal({
         title: '',
@@ -81,8 +83,42 @@ Page({
       })
       return ''
     }
+    if (this.data.time > 0) {
+      return ''
+    }
+    
+    
     // 获取验证码
-    console.log('获取验证码')
+    // console.log('获取验证码')
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/sms`,
+      method: 'POST',
+      data: {
+        mobile: this.data.userName
+      },
+      success: data => {
+        if (data.data.code == '1') {
+          var that = this
+          this.setData({
+            time: 60
+          })
+          this.data.timeShow = setInterval(function() {
+            that.data.time -= 1
+            that.setData({
+              time: that.data.time
+            })
+            if (that.data.time <= 0) {
+              clearInterval(that.data.timeShow);
+            }
+          }, 1000);
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.data.msg
+          })
+        }
+      }
+    })
   },
   getUserName(e) {
     this.setData({
