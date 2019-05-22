@@ -120,7 +120,7 @@ Page({
           let i = 0
           for (i in dayData) {
             chartData.complete += dayData[i].month_fulfil
-            chartData['day'].push({ "name": `${dayData[i].day}号`, "schedule": dayData[i].month_fulfil })
+            chartData['day'].push({ "name": `${dayData[i].day}号${dayData[i].note}`, "schedule": dayData[i].month_fulfil })
           }
           if (chartData.plan >= chartData.complete) {
             chartData.remaining = chartData.plan - chartData.complete

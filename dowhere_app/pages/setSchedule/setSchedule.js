@@ -8,6 +8,7 @@ Page({
    */
   data: {
     planData: '',
+    note: '',
     dates: '',
     userInfo: '',
     componentsId: '',
@@ -41,6 +42,12 @@ Page({
     // 获取时间
     this.setData({
       dates: e.detail.value
+    })
+  },
+  setNote(e) {
+    // 获取备注
+    this.setData({
+      note: e.detail.value
     })
   },
   submit(){
@@ -99,6 +106,7 @@ Page({
         uid: this.data.userInfo.id,
         month: parseInt(maonth),
         num: parseInt(this.data.planData),
+        note: this.data.note,
         type: 2,
         parts_id: parseInt(this.data.componentsId),
         createTime: createTime

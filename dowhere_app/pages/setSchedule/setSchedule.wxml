@@ -12,6 +12,10 @@
   <input type="number" value="{{dates}}" disabled="disabled" placeholder="选择日期" />
   </picker>
 </view>
+<view class="setPlanform">
+  <label>标注：</label>
+  <input type="text" value="{{note}}" placeholder="录入标注" bindinput="setNote" />
+</view>
 <!-- <view class="setPlanform">
   <label>备注：</label>
   <textarea class="weui-textarea" value="{{remarks}}" placeholder="备注" style="height: 3.3em" bindinput="setRemarks" />

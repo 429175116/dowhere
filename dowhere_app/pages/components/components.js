@@ -283,7 +283,7 @@ Page({
           var i = 0
           for (i in dayData) {
             chartData.complete += dayData[i].num
-            chartData['day'].push({ "name": `${dayData[i].day}号`, "schedule": dayData[i].num })
+            chartData['day'].push({ "name": `${dayData[i].day}号${dayData[i].note}`, "schedule": dayData[i].num })
           }
           if (chartData.plan >= chartData.complete) {
             chartData.remaining = chartData.plan - chartData.complete
