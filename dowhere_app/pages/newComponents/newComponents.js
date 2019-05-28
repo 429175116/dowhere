@@ -83,6 +83,8 @@ Page({
   setAdvertising(event) {
     let name = event.detail.value.name
     let year_plan_num = event.detail.value.year_plan_num
+    // let year_plan_bout = event.detail.value.year_plan_bout
+    // let year_fulfil_bout = event.detail.value.year_fulfil_bout
     let newImage = this.data.image
     let feature = event.detail.value.feature
     if (name == '') {
@@ -96,6 +98,12 @@ Page({
     if (year_plan_num == '') {
       year_plan_num = 0
     }
+    // if (year_plan_bout == '') {
+    //   year_plan_bout = 0
+    // }
+    // if (year_fulfil_bout == '') {
+    //   year_fulfil_bout = 0
+    // }
     if (newImage == '') {
       wepy.showModal({
         title: '',
@@ -115,6 +123,8 @@ Page({
       name: 'image',
       formData: {
         year_plan_num: year_plan_num,
+        // year_plan_bout: year_plan_bout,
+        // year_fulfil_bout: year_fulfil_bout,
         area_id: this.data.userInfo.area_id,
         branch_id: this.data.userInfo.branch_id,
         uid: this.data.userInfo.id,
