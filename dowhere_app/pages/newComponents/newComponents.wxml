@@ -11,8 +11,8 @@
     </picker>
     
     <input type="text" placeholder='年计划数量' class="appointment_input" name="year_plan_num" value=""/>
-    <input type="text" placeholder='年计划批次' class="appointment_input" name="year_plan_bout" value=""/>
-    <input type="text" placeholder='年完成批次' class="appointment_input" name="year_fulfil_bout" value=""/>
+    <!-- <input type="text" placeholder='年计划批次' class="appointment_input" name="year_plan_bout" value=""/>
+    <input type="text" placeholder='年完成批次' class="appointment_input" name="year_fulfil_bout" value=""/> -->
     
     <!-- <input type="text" placeholder='特性' class="appointment_input" name="feature" value=""/> -->
     <textarea  placeholder='特性' name="feature"></textarea>
