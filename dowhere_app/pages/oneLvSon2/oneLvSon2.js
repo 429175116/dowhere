@@ -47,8 +47,10 @@ Page({
       },
       success: data => {
         if (data.data.code == 1) {
+          data = data.data.data
+          data.feature = data.feature.replace(/、/g,"\n")
           this.setData({
-            productInfo: data.data.data
+            productInfo: data
           })
           // 获取零件的完成情况--饼图
           this.getOptionPlanPie(this.data.productInfo.id)

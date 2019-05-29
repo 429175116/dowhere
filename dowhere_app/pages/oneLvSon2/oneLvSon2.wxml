@@ -13,7 +13,9 @@
   </view>
   <view class="item">
     <view class="name">特性</view>
-    <view class="con">{{productInfo.feature}}</view>
+    <view class="con">
+      <text>{{partsInfo.feature}}</text>
+    </view>
   </view>
 </view>
 <view class="charts">
