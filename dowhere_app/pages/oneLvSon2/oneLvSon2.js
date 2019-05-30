@@ -48,7 +48,7 @@ Page({
       success: data => {
         if (data.data.code == 1) {
           data = data.data.data
-          data.feature = data.feature.replace(/、/g,"\n")
+          data.feature = data.feature.replace(/】/g,"\n")
           this.setData({
             productInfo: data
           })

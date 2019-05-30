@@ -85,7 +85,7 @@ Page({
               randomNum4: randomNum
             })
           }
-          data.feature = data.feature.replace(/、/g,"\n")
+          data.feature = data.feature.replace(/】/g,"\n")
           this.setData({
             partsInfo: data,
             // 获取全年数量数据--初始化
