@@ -307,7 +307,8 @@
   width: 200rpx;
   height: 80rpx;
   border-radius: 80rpx;
-  background-color: #ccc;
+  background-color: #78ac47;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;

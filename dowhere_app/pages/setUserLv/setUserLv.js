@@ -104,6 +104,12 @@ Page({
   },
   setAnnotation(annotationList) {
     wx.setStorageSync('annotation', annotationList)
+    wx.showToast({
+      title: "保存成功！",
+      icon: 'success',
+      duration: 800,
+      mask:true
+    });
     this.getAnnotation()
   },
   setInputAnnotation(e) {
