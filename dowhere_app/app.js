@@ -201,6 +201,7 @@ App({
         {
           name: '计划',
           type: 'bar',
+          barGap: '0',//柱图间距
           label: {
             normal: {
               // show: true,
@@ -214,6 +215,7 @@ App({
           name: '完成',
           type: 'bar',
           stack: '总量',
+          barGap: '0',//柱图间距
           label: {
             normal: {
               // show: true
@@ -226,6 +228,7 @@ App({
           name: '剩余',
           type: 'bar',
           stack: '总量',
+          barGap: '0',//柱图间距
           label: {
             normal: {
               // position: 'inside'
