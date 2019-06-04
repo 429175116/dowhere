@@ -86,7 +86,7 @@ App({
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
           fontSize: 40,
-          color: '#000'  // 设置文本颜色 默认#FFF
+          color: '#fff'  // 设置文本颜色 默认#FFF
         }
       },
       backgroundColor: "#ffffff",
@@ -152,7 +152,7 @@ App({
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
           fontSize: 40,
-          color: '#000'  // 设置文本颜色 默认#FFF
+          color: '#fff'  // 设置文本颜色 默认#FFF
         }
       },
       legend: {
@@ -271,7 +271,7 @@ App({
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
           fontSize: 40,
-          color: '#000'  // 设置文本颜色 默认#FFF
+          color: '#fff'  // 设置文本颜色 默认#FFF
         }
       },
       legend: {
@@ -371,7 +371,7 @@ App({
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
           fontSize: 40,
-          color: '#000'  // 设置文本颜色 默认#FFF
+          color: '#fff'  // 设置文本颜色 默认#FFF
         },
         formatter: function (namelist, ticket, callback) {
           var showHtm="";

@@ -28,14 +28,14 @@
     <view class="name">全年计划</view>
     <view class="con">
       <input type="text" value="{{planBout + '' + randomNum2}}" bindtap="delPlanBoutData" bindinput="getPlanBout" />
-      <button data-type="planBout" bindtap="getPartsData">确定</button>
+      <!-- <button data-type="planBout" bindtap="getPartsData">确定</button> -->
     </view>
   </view>
   <view class="item">
     <view class="name">全年完成</view>
     <view class="con">
       <input type="text" value="{{fulfilBout + '' + randomNum3}}" bindtap="delFulfilBoutData" bindinput="getFulfilBout" />
-      <button data-type="fulfilBout" bindtap="getPartsData">确定</button>
+      <!-- <button data-type="fulfilBout" bindtap="getPartsData">确定</button> -->
     </view>
   </view>
   <!-- <view class="item">

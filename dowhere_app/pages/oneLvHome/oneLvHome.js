@@ -271,11 +271,11 @@ Page({
     data.remainderlist = remainderlist;
     data.chartName = `各产品进度`;
     // 计算图表显示高度
-    let k = 300
+    let k = 250
     if (chartData.length < 10) {
-      k = 300
+      k = 250
     } else if (chartData.length < 5) {
-      k = 300
+      k = 250
     }
     if (chartData.length > 1) {
       this.setData({
@@ -283,7 +283,7 @@ Page({
       })
     } else {
       this.setData({
-        planBarHeight: 300
+        planBarHeight: 250
       })
     }
     

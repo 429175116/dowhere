@@ -176,11 +176,11 @@ Page({
     this.setData({
       planBarHeight: 350
     })
-    let k = 300
+    let k = 250
     if (chartData.length < 10) {
-      k = 300
+      k = 250
     } else if (chartData.length < 5) {
-      k = 300
+      k = 250
     }
     if (chartData.length > 1) {
       this.setData({
@@ -188,7 +188,7 @@ Page({
       })
     } else {
       this.setData({
-        planBarHeight: 300
+        planBarHeight: 250
       })
     }
     this.monthPlanBar = this.selectComponent('#plan-bar');
