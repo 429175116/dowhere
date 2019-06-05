@@ -347,12 +347,13 @@ App({
   },
   monthBarShow(data, chart) {
     // 产品名，计划，进度，剩余
-    let name = ['计划', '剩余', '总完成']
+    let name = ['', '计划', '剩余', '总完成']
     let namelist = data.namelist
     namelist = name.concat(namelist)
     let schedulelist = data.schedulelist
     let chartsData = [data.plan, data.remaining, data.complete]
     schedulelist = chartsData.concat(schedulelist)
+    schedulelist.unshift(0)
     let chartName = data.chartName
     const option = {
       title: {
