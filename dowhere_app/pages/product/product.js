@@ -54,7 +54,6 @@ Page({
         uid: options.uid
       },
       success: data => {
-        console.log(data)
         if (data.data.code === '1') {
           let getData = data.data.data
           // var area = data.area
@@ -252,19 +251,19 @@ Page({
     data.remainderlist = remainderlist;
     data.chartName = `部门进度`;
     // 计算图表显示高度
-    let k = 250
-    if (chartData.length < 10) {
-      k = 250
-    } else if (chartData.length < 5) {
-      k = 250
-    }
+    let k = 100
+    // if (chartData.length < 10) {
+    //   k = 200
+    // } else if (chartData.length < 5) {
+    //   k = 200
+    // }
     if (chartData.length > 1) {
       this.setData({
-        planBarHeight: k * chartData.length + 100
+        planBarHeight: k * chartData.length + 300
       })
     } else {
       this.setData({
-        planBarHeight: 250
+        planBarHeight: 400
       })
     }
     

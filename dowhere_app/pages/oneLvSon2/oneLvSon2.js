@@ -230,7 +230,7 @@ Page({
     //   k = 200
     // }
     this.setData({
-      monthPlanBarHeight: k * chartData.day.length + 400
+      monthPlanBarHeight: k * chartData.day.length + 300
     })
     this.monthPlanBar = this.selectComponent('#monthPlan-bar');
     this.monthPlanBar.init((canvas, width, height) => {

@@ -131,6 +131,10 @@ App({
     let schedulelist = data.schedulelist
     let remainderlist = data.remainderlist
     let chartName = data.chartName
+    namelist.unshift('')
+    planlist.unshift(0)
+    schedulelist.unshift(0)
+    remainderlist.unshift(0)
     // let chartSubtext = data.chartSubtext
     const option = {
       title:{
@@ -249,6 +253,10 @@ App({
     let planlist = data.planlist
     let schedulelist = data.schedulelist
     let remainderlist = data.remainderlist
+    namelist.unshift('')
+    planlist.unshift(0)
+    schedulelist.unshift(0)
+    remainderlist.unshift(0)
     let chartName = data.chartName
     // let chartSubtext = data.chartSubtext
     const option = {
