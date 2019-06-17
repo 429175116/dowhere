@@ -16,7 +16,7 @@
     <view class="neme">当月计划</view>
     <view class="neme">当月完成</view>
     <view class="neme">年度计划</view>
-    <view class="neme">年度未完</view>
+    <view class="neme">年度完成</view>
     <view class="neme">操作</view>
   </view>
   <block wx:for="{{listData}}" wx:for-item="item" index="index">

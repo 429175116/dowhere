@@ -223,14 +223,14 @@ Page({
     data.schedulelist = schedulelist;
     data.chartName = `${this.data.time}月进度`;
     // 计算图表显示高度
-    let k = 100
+    let k = 200
     // if (chartData.day.length < 10) {
     //   k = 200
     // } else if (chartData.day.length < 5) {
     //   k = 200
     // }
     this.setData({
-      monthPlanBarHeight: k * chartData.day.length + 300
+      monthPlanBarHeight: k * chartData.day.length + 500
     })
     this.monthPlanBar = this.selectComponent('#monthPlan-bar');
     this.monthPlanBar.init((canvas, width, height) => {

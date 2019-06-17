@@ -26,13 +26,14 @@
   </view>
 </view>
 <view class="quantityList">
-  <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '4'}}">
+  <!-- <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '4'}}"> -->
+  <block wx:for="{{projectListData}}" wx:for-item="itemSon">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
   </block>
   <!-- <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '4'}}">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
   </block> -->
-  <block wx:for="{{projectListData}}" wx:for-item="item" wx:if="{{userInfo.role_id == '3'}}">
+  <!-- <block wx:for="{{projectListData}}" wx:for-item="item" wx:if="{{userInfo.role_id == '3'}}">
     <view class="regionItme">
       <view class="regionName">
         <view>{{item.name}}</view>
@@ -43,7 +44,7 @@
         </block>
       </view>
     </view>
-  </block>
+  </block> -->
 </view>
 <view class="annotation" wx:if="{{userInfo.role_id == 4 || userInfo.role_id == 3}}">
   <view class="name">批注:</view>

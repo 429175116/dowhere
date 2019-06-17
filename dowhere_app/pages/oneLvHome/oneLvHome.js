@@ -304,7 +304,6 @@ Page({
   // 选择部门
   selDepartment(e) {
     let index = e.currentTarget.dataset.index
-    console
     var projectListData = []
     var completePid = []
     var completeAllPid = []

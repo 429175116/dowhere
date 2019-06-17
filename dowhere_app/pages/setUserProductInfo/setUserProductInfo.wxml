@@ -1,4 +1,4 @@
-<!--pages/setUserProductInfo/setUserProductInfo.wxml-->
+<!-- pages/setUserProductInfo/setUserProductInfo.wxml -->
 <view class="listName">
   <view>零件列表</view>
 </view>
@@ -35,9 +35,10 @@
         {{item.year_fulfil}}
       </view>
       <view>
-        <view class="info" data-id="{{item.parts_id}}" data-sham="{{item.is_sham}}" data-name="{{item.parts_name}}" bindtap="goComponents">详情</view>
+        <view class="info" data-id="{{item.parts_id}}" data-sham="{{item.is_sham}}" data-name="{{item.parts_name}}" bindtap="goComponents">
+          详情
+        </view>
       </view>
     </view>
   </block>
 </view>
-
