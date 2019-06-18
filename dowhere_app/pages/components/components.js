@@ -199,18 +199,21 @@ Page({
   },
   // 获取零件的全年完成情况--饼图
   getOptionPlanPie(id) {
+    let thisTimeDate = new Date();
+    let year = thisTimeDate.getFullYear()
     wx.request({
-      url: `${app.globalData.requestUrl}/api/circle`,
+      url: `${app.globalData.requestUrl}/api/client_circle`,
       method: 'POST',
       data: {
-        parts_id: id
+        parts_id: id,
+        year: year
       },
       success: data => {
         if (data.data.code === '1') {
           data = data.data.data
-          let remaining = parseInt(data.year_plan_bout) - parseInt(data.year_fulfil_bout)
+          let remaining = parseInt(data.year_plan) - parseInt(data.year_fulfil)
           let chartData = [
-            { "name": "完成", "value": parseInt(data.year_fulfil_bout) },
+            { "name": "完成", "value": parseInt(data.year_fulfil) },
             { "name": "剩余", "value": remaining }
           ]
           // 计划完成度--饼
@@ -260,34 +263,46 @@ Page({
     this.HistogramData(this.data.componentsId)
   },
   HistogramData(id) {
+    let thisTimeDate = new Date();
+    let year = thisTimeDate.getFullYear()
     wx.request({
       url: `${app.globalData.requestUrl}/api/Histogram`,
       method: 'POST',
       data: {
         parts_id: id,
-        month: this.data.time
+        month: this.data.time,
+        year: year
       },
       success: data => {
         if (data.data.code === '1') {
-          var dayData = data.data.data2
-          this.grandTotal = dayData
+          var dayFulfil = data.data.data.partsFulfil
+          var dayPlan = data.data.data.partsPlan
+          this.grandTotal = dayFulfil
           // plan 计划
           // remaining 剩余
           // complete 完成
           var chartData = {
-            "plan": data.data.data1,
+            "planday": [],
+            "plan": 0,
             "remaining": 0,
             "complete": 0,
             "day": []
           }
+          console.log(dayFulfil)
+          console.log(dayPlan)
           var i = 0
-          for (i in dayData) {
-            chartData.complete += dayData[i].num
-            chartData['day'].push({ "name": `${dayData[i].day}号${dayData[i].note}`, "schedule": dayData[i].num })
+          for (i in dayFulfil) {
+            chartData.complete += dayFulfil[i].num
+            chartData['day'].push({ "name": `${dayFulfil[i].day}号${dayFulfil[i].note}`, "schedule": dayFulfil[i].num })
+          }
+          for (i in dayPlan) {
+            chartData.plan += dayPlan[i].num
+            chartData['planday'].push({ "name": `${dayPlan[i].day}号${dayPlan[i].note}`, "schedule": dayPlan[i].num })
           }
           if (chartData.plan >= chartData.complete) {
             chartData.remaining = chartData.plan - chartData.complete
           }
+          console.log(chartData)
           // 各月完成--柱
           this.setOptionMonthPlanBar(chartData)
         } else {
@@ -347,6 +362,7 @@ Page({
       schedulelist.push(dayData[i].schedule)
     }
     let data = new Object();
+    data.planday = chartData.planday
     data.plan = chartData.plan
     data.remaining = chartData.remaining
     data.complete = chartData.complete

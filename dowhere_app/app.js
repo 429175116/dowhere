@@ -55,10 +55,10 @@ App({
   },
   globalData: {
     userInfo: null,
-    requestUrl: 'https://dowhere.beaconway.cn', //线下
-    // requestUrl: 'http://192.168.1.106', //线下
-    imgUrl: 'https://dowhere.beaconway.cn'
-    // requestUrl: 'http://192.168.1.125/' //线上
+    // requestUrl: 'https://dowhere.beaconway.cn', //线下
+    requestUrl: 'http://192.168.1.168', //线下
+    // imgUrl: 'https://dowhere.beaconway.cn',
+    imgUrl: 'http://192.168.1.168'
   },
   // 生成固定范围内的随机数
   RandomNumBoth(Min,Max){

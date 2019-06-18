@@ -39,16 +39,16 @@ Page({
       url: `/pages/setUserProductInfo/setUserProductInfo?prodcutid=${id}&prodcutname=${name}`
     })
   },
-  // 增加添加产品按钮
+  // 增加添加产品
   newProduct() {
     // 增加产品
     wx.navigateTo({
       url: `/pages/newProduct/newProduct?prodcutid=${this.data.branchInfo.id}`
     })
   },
-  // 增加添加产品按钮
+  // 增加添加零件
   newComponents() {
-    // 增加产品
+    // 增加零件
     wx.navigateTo({
       url: `/pages/newComponents/newComponents?prodcutid=${this.data.branchInfo.id}`
     })
@@ -66,6 +66,9 @@ Page({
       success: data => {
         if (data.data.code == 1) {
           data = data.data.data
+          wx.setNavigationBarTitle({
+            title: data.branch.name
+          })
           this.setData({
             branchInfo: data.branch,
             listData: data.goods

@@ -41,8 +41,8 @@ Page({
     // monthPlan--月计划
     // monthSchedule--月进度
     let thisTimeDate = new Date();
-    let thisTime = `${thisTimeDate.getFullYear()}/${thisTimeDate.getMonth()}/${thisTimeDate.getDate()}`
-    thisTimeDate = thisTimeDate.getMonth() + 1
+    let month = thisTimeDate.getMonth() + 1
+    let year = thisTimeDate.getFullYear()
     wx.request({
       url: `${app.globalData.requestUrl}/api/client_parts_list`,
       method: 'POST',
@@ -50,7 +50,8 @@ Page({
         branch_id: app.globalData.userInfo.branch_id,
         uid: app.globalData.userInfo.id,
         goods_id: id,
-        month: thisTimeDate
+        year: year,
+        month: month
       },
       success: data => {
         console.log(data)

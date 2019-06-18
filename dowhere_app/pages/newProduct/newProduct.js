@@ -87,7 +87,6 @@ Page({
       success: data => {
         console.log(data)
         if (data.data.code == "1") {
-          let id = data.data.data
           wx.showModal({
             title: '',
             content: '新增产品成功'
