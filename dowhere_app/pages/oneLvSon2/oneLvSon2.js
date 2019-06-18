@@ -99,30 +99,41 @@ Page({
     })
   },
   HistogramData(id) {
+    let thisTimeDate = new Date();
+    let year = thisTimeDate.getFullYear()
     wx.request({
       url: `${app.globalData.requestUrl}/api/one_Histogram`,
       method: 'POST',
       data: {
         parts_id: id,
-        month: this.data.time
+        month: this.data.time,
+        year: year
       },
       success: data => {
         if (data.data.code === '1') {
-          let dayData = data.data.data
+          var dayFulfil = data.data.data.partsFulfil
+          var dayPlan = data.data.data.partsPlan
+          this.grandTotal = dayFulfil
           // plan 计划
           // remaining 剩余
           // complete 完成
           var chartData = {
-            "plan": data.data.data.month_plan,
+            "planday": [],
+            "plan": 0,
             "remaining": 0,
             "complete": 0,
             "day": []
           }
-          dayData = dayData.month_fulfil
-          let i = 0
-          for (i in dayData) {
-            chartData.complete += dayData[i].month_fulfil
-            chartData['day'].push({ "name": `${dayData[i].day}号${dayData[i].note}`, "schedule": dayData[i].month_fulfil })
+          console.log(dayFulfil)
+          console.log(dayPlan)
+          var i = 0
+          for (i in dayFulfil) {
+            chartData.complete += dayFulfil[i].num
+            chartData['day'].push({ "name": `${dayFulfil[i].day}号${dayFulfil[i].note}`, "schedule": dayFulfil[i].num })
+          }
+          for (i in dayPlan) {
+            chartData.plan += dayPlan[i].num
+            chartData['planday'].push({ "name": `${dayPlan[i].day}号${dayPlan[i].note}`, "schedule": dayPlan[i].num })
           }
           if (chartData.plan >= chartData.complete) {
             chartData.remaining = chartData.plan - chartData.complete
@@ -207,20 +218,28 @@ Page({
   },
   setOptionMonthPlanBar(chartData) {
     let namelist = []
+    let namePlanlist = []
     let schedulelist = []
+    let schedulePlanlist = []
     let remainderlist = []
     let i = 0;
     let dayData = chartData.day
+    for (i in chartData.planday) {
+      namePlanlist.push(chartData.planday[i].name)
+      schedulePlanlist.push(chartData.planday[i].schedule)
+    }
     for (i in dayData) {
       namelist.push(dayData[i].name)
       schedulelist.push(dayData[i].schedule)
     }
     let data = new Object();
     data.plan = chartData.plan
+    data.namePlanlist = namePlanlist
     data.remaining = chartData.remaining
     data.complete = chartData.complete
     data.namelist = namelist;
     data.schedulelist = schedulelist;
+    data.schedulePlanlist = schedulePlanlist
     data.chartName = `${this.data.time}月进度`;
     // 计算图表显示高度
     let k = 200
@@ -238,11 +257,50 @@ Page({
         width: width,
         height: height
       });
+      console.log(data)
       app.monthBarShow(data, chart)
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
     });
-  }
+  },
+  // setOptionMonthPlanBar(chartData) {
+  //   let namelist = []
+  //   let schedulelist = []
+  //   let remainderlist = []
+  //   let i = 0;
+  //   let dayData = chartData.day
+  //   for (i in dayData) {
+  //     namelist.push(dayData[i].name)
+  //     schedulelist.push(dayData[i].schedule)
+  //   }
+  //   let data = new Object();
+  //   data.plan = chartData.plan
+  //   data.remaining = chartData.remaining
+  //   data.complete = chartData.complete
+  //   data.namelist = namelist;
+  //   data.schedulelist = schedulelist;
+  //   data.chartName = `${this.data.time}月进度`;
+  //   // 计算图表显示高度
+  //   let k = 200
+  //   // if (chartData.day.length < 10) {
+  //   //   k = 200
+  //   // } else if (chartData.day.length < 5) {
+  //   //   k = 200
+  //   // }
+  //   this.setData({
+  //     monthPlanBarHeight: k * chartData.day.length + 500
+  //   })
+  //   this.monthPlanBar = this.selectComponent('#monthPlan-bar');
+  //   this.monthPlanBar.init((canvas, width, height) => {
+  //     const chart = echarts.init(canvas, null, {
+  //       width: width,
+  //       height: height
+  //     });
+  //     app.monthBarShow(data, chart)
+  //     // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+  //     return chart;
+  //   });
+  // }
 })
 // 获取月份列表
 function getMonthList() {

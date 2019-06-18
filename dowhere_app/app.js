@@ -354,14 +354,39 @@ App({
     chart.setOption(option);
   },
   monthBarShow(data, chart) {
+    console.clear()
+    console.log(data.namePlanlist + "============================================")
     // 产品名，计划，进度，剩余
-    let name = ['', '计划', '剩余', '总完成']
-    let namelist = data.namelist
-    namelist = name.concat(namelist)
-    let schedulelist = data.schedulelist
+    let name = ['计划', '剩余', '总完成']
+    let namelist = ['']
+    let namePlanlist = data.namePlanlist
+    for (let i in namePlanlist) {
+      namelist.push(namePlanlist[i])
+    }
+    for (let i in name) {
+      namelist.push(name[i])
+    }
+    for (let i in data.namelist) {
+      namelist.push(data.namelist[i])
+    }
+    // concat()数组合并
+    // unshift()输首位添加
+    let schedulelist = [0]
+    let schedulePlanlist = data.schedulePlanlist
     let chartsData = [data.plan, data.remaining, data.complete]
-    schedulelist = chartsData.concat(schedulelist)
-    schedulelist.unshift(0)
+    for (let i in schedulePlanlist) {
+      schedulelist.push(schedulePlanlist[i])
+    }
+    for (let i in chartsData) {
+      schedulelist.push(chartsData[i])
+    }
+    for (let i in data.schedulelist) {
+      schedulelist.push(data.schedulelist[i])
+    }
+    // data.schedulelist
+    // schedulelist = chartsData.concat(schedulelist)
+    // schedulelist = schedulelist.concat(schedulelist)
+    // schedulelist.unshift(0)
     let chartName = data.chartName
     const option = {
       title: {

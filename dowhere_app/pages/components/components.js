@@ -353,21 +353,28 @@ Page({
   },
   setOptionMonthPlanBar(chartData) {
     let namelist = []
+    let namePlanlist = []
     let schedulelist = []
+    let schedulePlanlist = []
     let remainderlist = []
     let i = 0;
     let dayData = chartData.day
+    for (i in chartData.planday) {
+      namePlanlist.push(chartData.planday[i].name)
+      schedulePlanlist.push(chartData.planday[i].schedule)
+    }
     for (i in dayData) {
       namelist.push(dayData[i].name)
       schedulelist.push(dayData[i].schedule)
     }
     let data = new Object();
-    data.planday = chartData.planday
     data.plan = chartData.plan
+    data.namePlanlist = namePlanlist
     data.remaining = chartData.remaining
     data.complete = chartData.complete
     data.namelist = namelist;
     data.schedulelist = schedulelist;
+    data.schedulePlanlist = schedulePlanlist
     data.chartName = `${this.data.time}月进度`;
     // 计算图表显示高度
     let k = 200
@@ -385,6 +392,7 @@ Page({
         width: width,
         height: height
       });
+      console.log(data)
       app.monthBarShow(data, chart)
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;
