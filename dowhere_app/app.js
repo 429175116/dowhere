@@ -61,7 +61,7 @@ App({
     imgUrl: 'http://192.168.1.168'
   },
   // 生成固定范围内的随机数
-  RandomNumBoth(Min,Max){
+  RandomNumBoth(Min, Max) {
     var Range = Max - Min;
     var Rand = Math.random();
     var num = Min + Math.round(Rand * Range); //四舍五入
@@ -71,7 +71,7 @@ App({
     let chartName = data.chartName
     data = data.chartData
     const option = {
-      title:{
+      title: {
         text: chartName,
         // subtext: '',
         x: "center",
@@ -80,7 +80,7 @@ App({
         },
       },
       // 显示的提示信息
-      tooltip : {
+      tooltip: {
         trigger: 'item',
         formatter: "    {b}    \n    {c} ({d}%)    ",
         backgroundColor: 'rgba(255,0,0,0.7)',
@@ -95,7 +95,7 @@ App({
         label: {
           normal: {
             fontSize: 14,
-            formatter:'{b}'
+            formatter: '{b}'
             // textStyle: {
             //   fontSize: 30
             // }
@@ -137,7 +137,7 @@ App({
     remainderlist.unshift(0)
     // let chartSubtext = data.chartSubtext
     const option = {
-      title:{
+      title: {
         text: chartName,
         // subtext: "副标题",
         x: "center",
@@ -260,7 +260,7 @@ App({
     let chartName = data.chartName
     // let chartSubtext = data.chartSubtext
     const option = {
-      title:{
+      title: {
         text: chartName,
         // subtext: "副标题",
         x: "center",
@@ -397,10 +397,10 @@ App({
         },
       },
       color: ['#ED8C24'],
-      tooltip : {
+      tooltip: {
         trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'line'        // 默认为直线，可选为：'line' | 'shadow'
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+          type: 'line'        // 默认为直线，可选为：'line' | 'shadow'
         },
         backgroundColor: 'rgba(255,0,0,0.7)',
         textStyle: {
@@ -408,13 +408,13 @@ App({
           color: '#fff'  // 设置文本颜色 默认#FFF
         },
         formatter: function (namelist, ticket, callback) {
-          var showHtm="";
-          for(var i=0;i<namelist.length;i++){
-              //x轴名称
-              var name = namelist[i].axisValue;
-              //值
-              var value = namelist[i].value;
-              showHtm+= '     '+ name + '     \n     ' + value + '     '
+          var showHtm = "";
+          for (var i = 0; i < namelist.length; i++) {
+            //x轴名称
+            var name = namelist[i].axisValue;
+            //值
+            var value = namelist[i].value;
+            showHtm += '     ' + name + '     \n     ' + value + '     '
           }
           return showHtm;
         }
@@ -425,33 +425,53 @@ App({
         bottom: '3%',
         containLabel: true
       },
-      xAxis : [
+      xAxis: [
         {
-          type : 'value'
-        } 
+          type: 'value'
+        }
       ],
-      yAxis : [
+      yAxis: [
         {
-          type : 'category',
-          data : namelist,
+          type: 'category',
+          data: namelist,
           // data : ['Mon', 'Tue', 'Wed', 'Thu'],
           axisLabel: {
             interval: 0
           },
           axisTick: {
-              alignWithLabel: true
+            alignWithLabel: true
           }
         }
       ],
-      series : [
+      series: [
         {
-          name:'',
-          type:'bar',
+          name: '',
+          type: 'bar',
           barWidth: '60%',
-          data:schedulelist
+          data: schedulelist
         }
       ]
     };
     chart.setOption(option);
-  }
+  },
+  setAnnotation(annotationInfo) {
+    wx.request({
+      url: `${this.globalData.requestUrl}/api/annotation`,
+      method: 'POST',
+      data: {
+        annotation: annotationInfo,
+        id: this.globalData.userInfo.id
+      },
+      success: data => {
+        if (data.data.code === '1') {
+          wx.showToast({
+            title: "批注添加成功！",
+            icon: 'success',
+            duration: 1000,
+            mask: true
+          });
+        }
+      }
+    })
+  },
 })

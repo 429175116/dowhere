@@ -26,7 +26,7 @@
 </view>
 <view class="annotation" wx:if="{{userInfo.role_id != 7}}">
   <view class="name">批注:</view>
-  <textarea bindinput="setInputAnnotation" value="{{annotationInfo}}"></textarea> 
+  <textarea bindinput="setInputAnnotation" value="{{userInfo.annotation}}"></textarea> 
   <view class="sub">
     <view bindtap="upDataAnnotation">提交</view>
   </view>

@@ -23,8 +23,6 @@ Page({
     this.setOptionPlanPie({'month_plan': 0, 'month_fulfil': 0})
     this.setOptionAllPlanPie([{'month_plan': 0, 'month_fulfil': 0, 'name': '暂无数据'}])
     this.setOptionAllPlanBar([])
-    // 获取批注内容
-    this.getAnnotation()
     this.getDataThree()
   },
   getDataThree(){
@@ -227,31 +225,6 @@ Page({
       url: `/pages/product/product?areaid=${e.currentTarget.dataset.fatid}&uid=${e.currentTarget.dataset.uid}&time=${this.data.time}&month=${this.data.thisTimeDate}`
     })
   },
-  // 获取缓存在本地的批注信息
-  getAnnotation() {
-    wx.getStorage({
-      key: 'annotation',
-      success: res => {
-        console.log(res)
-        if (res.data) {
-          // let annotationInfo = res.data
-          this.setData({
-            annotationInfo: res.data
-          })
-        }
-      }
-    })
-  },
-  setAnnotation(annotationList) {
-    wx.setStorageSync('annotation', annotationList)
-    wx.showToast({
-      title: "保存成功！",
-      icon: 'success',
-      duration: 800,
-      mask:true
-    });
-    this.getAnnotation()
-  },
   setInputAnnotation(e) {
     // 获取输入的批注的信息
     this.setData({
@@ -259,6 +232,6 @@ Page({
     })
   },
   upDataAnnotation() {
-    this.setAnnotation(this.data.annotationInfo)
+    app.setAnnotation(this.data.annotationInfo)
   }
 });

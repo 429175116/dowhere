@@ -34,8 +34,6 @@ Page({
     } else {
       this.getDataOneData()
     }
-    // 获取批注信息
-    this.getAnnotation()
   },
   two_to_one(options) {
     this.setData({
@@ -401,31 +399,6 @@ Page({
     // 点击月或者年刷新数据
     this.refreshData()
   },
-  // 获取缓存在本地的批注信息
-  getAnnotation() {
-    wx.getStorage({
-      key: 'annotation',
-      success: res => {
-        console.log(res)
-        if (res.data) {
-          // let annotationInfo = res.data
-          this.setData({
-            annotationInfo: res.data
-          })
-        }
-      }
-    })
-  },
-  setAnnotation(annotationList) {
-    wx.setStorageSync('annotation', annotationList)
-    wx.showToast({
-      title: "保存成功！",
-      icon: 'success',
-      duration: 800,
-      mask:true
-    });
-    this.getAnnotation()
-  },
   setInputAnnotation(e) {
     // 获取输入的批注的信息
     this.setData({
@@ -433,7 +406,7 @@ Page({
     })
   },
   upDataAnnotation() {
-    this.setAnnotation(this.data.annotationInfo)
+    app.setAnnotation(this.data.annotationInfo)
   }
 });
 

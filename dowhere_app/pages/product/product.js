@@ -35,15 +35,13 @@ Page({
     } else {
       this.getDataTwoData()
     }
-    // 获取批注内容
-    this.getAnnotation()
-    
+
   },
   getDataThree_to_two(options) {
     this.setData({
       optionsData: options
     })
-    wx .request({
+    wx.request({
       url: `${app.globalData.requestUrl}/api/three_to_two`,
       method: 'POST',
       data: {
@@ -63,7 +61,7 @@ Page({
           var completeAllPid = []
           var completeAllHis = []
           for (let i = 0; i < getData.length; i++) {
-            projectListData.push({"name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "count": getData[i].count})
+            projectListData.push({ "name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "count": getData[i].count })
           }
           this.setData({
             projectListData: projectListData
@@ -71,7 +69,7 @@ Page({
           if (this.data.time == '1') {
             // 月
             for (let i = 0; i < getData.length; i++) {
-              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil})
+              completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil })
             }
             let month_plan = 0
             let month_fulfil = 0
@@ -84,7 +82,7 @@ Page({
           } else {
             // 年
             for (let i = 0; i < getData.length; i++) {
-              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil})
+              completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil })
             }
             let year_plan = 0
             let year_fulfil = 0
@@ -143,7 +141,7 @@ Page({
           var completeAllPid = []
           var completeAllHis = []
           for (let i = 0; i < getData.length; i++) {
-            projectListData.push({"name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "count": getData[i].count})
+            projectListData.push({ "name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "count": getData[i].count })
           }
           this.setData({
             projectListData: projectListData
@@ -151,7 +149,7 @@ Page({
           if (this.data.time == '1') {
             // 月
             for (let i = 0; i < getData.length; i++) {
-              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil})
+              completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil })
             }
             let month_plan = 0
             let month_fulfil = 0
@@ -164,7 +162,7 @@ Page({
           } else {
             // 年
             for (let i = 0; i < getData.length; i++) {
-              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil})
+              completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil })
             }
             let year_plan = 0
             let year_fulfil = 0
@@ -210,7 +208,7 @@ Page({
   },
   setOptionAllPlanPie(getData) {
     let chartData = []
-    for (let i = 0;i < getData.length; i++) {
+    for (let i = 0; i < getData.length; i++) {
       chartData.push({ "name": getData[i].name, "value": getData[i].month_fulfil })
     }
     let data = new Object();
@@ -266,7 +264,7 @@ Page({
         planBarHeight: 400
       })
     }
-    
+
     this.monthPlanBar = this.selectComponent('#plan-bar');
     this.monthPlanBar.init((canvas, width, height) => {
       const chart = echarts.init(canvas, null, {
@@ -310,7 +308,7 @@ Page({
       this.getDataTwoData()
     }
   },
-    // 数据展示时间切换
+  // 数据展示时间切换
   // 切换--年
   yearData() {
     if (this.data.time === "1") {
@@ -335,38 +333,13 @@ Page({
     // 点击月或者年刷新数据
     this.refreshData()
   },
-    // 获取缓存在本地的批注信息
-    getAnnotation() {
-      wx.getStorage({
-        key: 'annotation',
-        success: res => {
-          console.log(res)
-          if (res.data) {
-            // let annotationInfo = res.data
-            this.setData({
-              annotationInfo: res.data
-            })
-          }
-        }
-      })
-    },
-    setAnnotation(annotationList) {
-      wx.setStorageSync('annotation', annotationList)
-      wx.showToast({
-        title: "保存成功！",
-        icon: 'success',
-        duration: 800,
-        mask:true
-      });
-      this.getAnnotation()
-    },
-    setInputAnnotation(e) {
-      // 获取输入的批注的信息
-      this.setData({
-        annotationInfo: e.detail.value
-      })
-    },
-    upDataAnnotation() {
-      this.setAnnotation(this.data.annotationInfo)
-    },
+  setInputAnnotation(e) {
+    // 获取输入的批注的信息
+    this.setData({
+      annotationInfo: e.detail.value
+    })
+  },
+  upDataAnnotation() {
+    app.setAnnotation(this.data.annotationInfo)
+  },
 })
