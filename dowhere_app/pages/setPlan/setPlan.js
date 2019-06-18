@@ -59,6 +59,8 @@ Page({
     let time = this.data.dates
     let maonth = time.split('-')[1]
     let createTime = new Date(time.replace(/-/g,"/")).getTime()/1000
+    let thisTimeDate = new Date();
+    let year = thisTimeDate.getFullYear()
     wx.request({
       url: `${app.globalData.requestUrl}/api/month_plan`,
       method: 'POST',
@@ -68,7 +70,8 @@ Page({
         num: this.data.planData,
         type: 1,
         parts_id: parseInt(this.data.componentsId),
-        createTime: createTime
+        createTime: createTime,
+        year: year
       },
       success: data => {
         if (data.data.code == 1) {

@@ -64,7 +64,7 @@ class check{
   }
   // 是否为整数
   isInt(num) {
-    var reg = /^\d+$/
+    var reg = /^\\d+$/
     if (reg.test(num)) {
       return false
     } else {

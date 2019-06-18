@@ -1,5 +1,6 @@
 // pages/components/components.js
 import * as echarts from '../../ec-canvas/echarts';
+import check from '../../utils/check'
 const app = getApp();
 Page({
 
@@ -23,9 +24,8 @@ Page({
     randomNum2: '', // 随机数
     randomNum3: '', // 随机数
     randomNum4: '', // 随机数
-    planNumber: 0,
-    planBout: 0,
-    fulfilBout: 0,
+    yearPlanNumber: 0,
+    yearFulfilNumber: 0,
     imgUrl: ''
   },
 
@@ -35,6 +35,7 @@ Page({
   onLoad(options) {
     var date = new Date();
     let month = date.getMonth()
+    this.check = new check()
     this.setData({
       // 是否随机数
       sham: options.sham,
@@ -89,11 +90,9 @@ Page({
           this.setData({
             partsInfo: data,
             // 获取全年数量数据--初始化
-            planNumber: data.year_plan_num,
+            yearPlanNumber: data.year_plan_num,
             // 获取全年计划批次数据--初始化
-            planBout: data.year_plan_bout,
-            // 获取全年完成批次数据--初始化
-            fulfilBout: data.year_fulfil_bout
+            yearFulfilNumber: data.year_fulfil_num
           })
           // 获取零件的全年完成情况--饼图
           this.getOptionPlanPie(this.data.componentsId)
@@ -108,16 +107,11 @@ Page({
       }
     })
   },
-  getPlanNumber(e) {
+  getYearPlanNumber(e) {
     // 获取全年数量数据
+    console.log(e.detail.value)
     this.setData({
-      planNumber: e.detail.value
-    })
-  },
-  getPlanBout(e) {
-    // 获取全年计划批次数据
-    this.setData({
-      planBout: e.detail.value
+      yearPlanNumber: e.detail.value
     })
   },
   getFulfilBout(e) {
@@ -142,44 +136,24 @@ Page({
     })
   },
   getPartsData(e) {
-    // 请求数据拼装
-    let type = e.currentTarget.dataset.type
-    var serverUrl = ''
-    let setData = {
-      "uid": this.data.userInfo.id,
-      "parts_id": this.data.componentsId
+    // isInt
+    if (this.check.isMoney(this.data.yearPlanNumber)) {
+      wx.showModal({
+        title: '',
+        content: '请输入整数'
+      })
+      return ''
     }
-    switch(type){
-      case 'planNumber':
-        // 全年计划数量
-        setData['year_plan_num'] = this.data.planNumber
-        serverUrl = 'plan_number'
-        break;
-      case 'planBout':
-        // 全年计划批次
-        setData['year_plan_bout'] = this.data.planBout
-        serverUrl = 'plan_bout'
-        break;
-      case 'fulfilBout':
-        // 全年完成批次
-        setData['year_fulfil_bout'] = this.data.fulfilBout
-        serverUrl = 'fulfil_bout'
-        break;
-      default:
-        // wx.showModal({
-        //   title: '',
-        //   content: '用户未分配权限'
-        // })
-        break;
-    }
-    // 数据提交（请求数据，请求接口）
-    this.setPartsData(setData, serverUrl)
-  },
-  setPartsData(setData, serverUrl) {
+    let yearPlanNumber = parseInt(this.data.yearPlanNumber)
+    // // 数据提交（请求数据，请求接口）
     wx.request({
-      url: `${app.globalData.requestUrl}/api/${serverUrl}`,
+      url: `${app.globalData.requestUrl}/api/plan_number`,
       method: 'POST',
-      data: setData,
+      data: {
+        "uid": this.data.userInfo.id,
+        "year_plan_num": yearPlanNumber,
+        "parts_id": this.data.componentsId
+      },
       success: data => {
         if (data.data.code === '1') {
           wx.showModal({
@@ -233,7 +207,7 @@ Page({
   onReady() {
     
   },
-  goPlan(e) {
+  goPlan() {
     // 进入计划页
     wx.navigateTo({
       url: `/pages/setPlan/setPlan?componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
