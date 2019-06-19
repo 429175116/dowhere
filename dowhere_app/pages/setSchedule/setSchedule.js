@@ -14,7 +14,8 @@ Page({
     componentsId: '',
     componentsName: '',
     productName: '',
-    grandTotalTime: ''
+    grandTotalTime: '',
+    dayFulfil: []
   },
 
   /**
@@ -25,12 +26,14 @@ Page({
     this.check = new check()
     app.globalData.userId = 10
     this.setData({
+      dayFulfil: app.globalData.dayFulfil,
       userInfo: app.globalData.userInfo,
       componentsId: options.componentsid,
       componentsName: options.componentsname,
       productName: options.prodcutname,
       grandTotalTime: options.grandtotaltime
     })
+    console.log(this.data.dayFulfil)
   },
   setPlanData(e) {
     // 获取计划

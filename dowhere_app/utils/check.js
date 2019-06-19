@@ -71,6 +71,15 @@ class check{
       return true
     }
   }
+  // 是否为整数(正负数)
+  _isInt(num) {
+    var reg = /^(-)?[1-9][0-9]*$/
+    if (reg.test(num)) {
+      return false
+    } else {
+      return true
+    }
+  }
   // 是否为时间格式
   isDate(date) {
     var reg = /^(\d{4})-(\d{2})-(\d{2})$/

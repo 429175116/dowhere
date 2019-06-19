@@ -12,7 +12,11 @@ Page({
     userInfo: null,
     componentsId: '',
     componentsName: '',
-    productName: ''
+    productName: '',
+    dayPlan: [],
+    objectIndex: -1,
+    month: 0,
+    note: ''
   },
 
   /**
@@ -28,6 +32,22 @@ Page({
       componentsName: options.componentsname,
       productName: options.prodcutname
     })
+    
+    let dayPlan = app.globalData.dayPlan
+    let i = 0
+    for (i in dayPlan) {
+      dayPlan[i]["name"] = `${dayPlan[i].day}号-${dayPlan[i].num}-${dayPlan[i].note}`
+    }
+    this.setData({
+      dayPlan: dayPlan
+    })
+    console.log(this.data.dayPlan)
+  },
+  setNote(e) {
+    // 获取备注
+    this.setData({
+      note: e.detail.value
+    })
   },
   setPlanData(e) {
     // 获取计划
@@ -35,22 +55,31 @@ Page({
       planData: parseInt(e.detail.value)
     })
   },
-  bindPickerChange: function (e) {
-    // 获取时间
+  bindPickerChangeDay(e) {
     console.log(e.detail.value)
     this.setData({
-      dates: e.detail.value
+      objectIndex: e.detail.value
+    })
+  },
+  bindPickerChange(e) {
+    // 获取时间
+    let time = e.detail.value.split("-").pop()
+    let thisTimeDate = new Date();
+    let year = thisTimeDate.getFullYear()
+    time = `${year}-${this.data.month}-${time}`
+    this.setData({
+      dates: time
     })
   },
   submit(){
-    if (this.check.isInt(this.data.planData)) {
+    if (this.check._isInt(this.data.planData)) {
       wx.showModal({
         title: '',
         content: '请输入进度'
       })
       return ''
     }
-    if (this.check.isDate(this.data.dates)) {
+    if (this.data.dates == '') {
       wx.showModal({
         title: '',
         content: '请选择时间'
@@ -59,21 +88,25 @@ Page({
     }
     let time = this.data.dates
     let maonth = time.split('-')[1]
-    let createTime = new Date(time.replace(/-/g,"/")).getTime()/1000
+    // let createTime = new Date(time.replace(/-/g,"/")).getTime()/1000
     let thisTimeDate = new Date();
     let year = thisTimeDate.getFullYear()
+    var data = {
+      uid: this.data.userInfo.id,
+      month: this.data.month,
+      num: this.data.planData,
+      parts_id: parseInt(this.data.componentsId),
+      // createTime: createTime,
+      year: year,
+      note: this.data.note,
+    }
+    if (this.data.objectIndex != -1) {
+      data["id"] = this.data.dayPlan[this.data.objectIndex].id
+    }
     wx.request({
       url: `${app.globalData.requestUrl}/api/month_plan`,
       method: 'POST',
-      data: {
-        uid: this.data.userInfo.id,
-        month: parseInt(maonth),
-        num: this.data.planData,
-        type: 1,
-        parts_id: parseInt(this.data.componentsId),
-        createTime: createTime,
-        year: year
-      },
+      data: data,
       success: data => {
         if (data.data.code == 1) {
           wx.showModal({
