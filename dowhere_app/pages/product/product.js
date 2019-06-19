@@ -34,18 +34,7 @@ Page({
         time: options.time,
         jump: '1'
       })
-      this.getDataThree_to_two(options)
-    } else {
-      this.getDataTwoData()
     }
-    // if (Object.keys(options).length > 0) {
-    //   this.setData({
-    //     time: options.time
-    //   })
-    //   this.getDataThree_to_two(options)
-    // } else {
-    //   this.getDataTwoData()
-    // }
     this.getDataTwoData()
   },
   getDataThree_to_two(options) {

@@ -31,7 +31,7 @@
       </view>
       <view class="projectList">
         <block wx:for="{{item.branch}}" wx:for-item="itemSon">
-          <view id="project{{itemSon.branch_id}}"data-uid="{{itemSon.uid.uid}}" data-fatid="{{item.id}}" data-id="{{itemSon.branch_id}}" bindtap="goProduct">{{itemSon.branch_name}}</view>
+          <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goProduct">{{itemSon.name}}</view>
         </block>
       </view>
     </view>
