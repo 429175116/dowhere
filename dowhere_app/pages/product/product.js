@@ -32,12 +32,21 @@ Page({
     if (Object.keys(options).length > 0) {
       this.setData({
         time: options.time,
+        jump: '1'
       })
       this.getDataThree_to_two(options)
     } else {
       this.getDataTwoData()
     }
-
+    // if (Object.keys(options).length > 0) {
+    //   this.setData({
+    //     time: options.time
+    //   })
+    //   this.getDataThree_to_two(options)
+    // } else {
+    //   this.getDataTwoData()
+    // }
+    this.getDataTwoData()
   },
   getDataThree_to_two(options) {
     this.setData({
@@ -395,7 +404,7 @@ Page({
       return ''
     }
     wx.navigateTo({
-      url: `/pages/oneLvHome/oneLvHome?id=${e.currentTarget.dataset.id}&time=${this.data.time}&month=${this.data.thisTimeDate}&img=${e.currentTarget.dataset.img}`
+      url: `/pages/oneLvHome/oneLvHome?id=${e.currentTarget.dataset.id}&time=${this.data.time}&month=${this.data.month}&img=${e.currentTarget.dataset.img}`
     })
   },
   // 点击月或者年刷新数据
