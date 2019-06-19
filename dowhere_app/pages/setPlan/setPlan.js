@@ -41,7 +41,6 @@ Page({
     this.setData({
       dayPlan: dayPlan
     })
-    console.log(this.data.dayPlan)
   },
   setNote(e) {
     // 获取备注
@@ -86,15 +85,13 @@ Page({
       })
       return ''
     }
-    let time = this.data.dates
-    let maonth = time.split('-')[1]
     // let createTime = new Date(time.replace(/-/g,"/")).getTime()/1000
     let thisTimeDate = new Date();
     let year = thisTimeDate.getFullYear()
     var data = {
       uid: this.data.userInfo.id,
       month: this.data.month,
-      num: this.data.planData,
+      num: parseInt(this.data.planData),
       parts_id: parseInt(this.data.componentsId),
       // createTime: createTime,
       year: year,

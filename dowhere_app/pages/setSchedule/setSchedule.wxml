@@ -16,6 +16,13 @@
   <label>标注：</label>
   <input type="text" value="{{note}}" placeholder="录入标注" bindinput="setNote" />
 </view>
+<view class="setPlanform">
+  <label>选择修改项:</label>
+  <!-- <picker mode="date" value="{{dates}}" start="1978-01-01" end="2017-1-23" bindchange="bindPickerChange">   -->
+  <picker value="{{dayFulfil[objectIndex].day}}" data-selecthx="{{dayFulfil[objectIndex].day}}" range="{{dayFulfil}}" range-key="{{'name'}}" bindchange="bindPickerChangeDay">  
+    <input type="number" value="{{dayFulfil[objectIndex].day}}-{{dayFulfil[objectIndex].num}}-{{dayFulfil[objectIndex].note}}" disabled="disabled" placeholder="选择日期" />
+  </picker>
+</view>
 <!-- <view class="setPlanform">
   <label>备注：</label>
   <textarea class="weui-textarea" value="{{remarks}}" placeholder="备注" style="height: 3.3em" bindinput="setRemarks" />
