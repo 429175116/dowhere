@@ -1,5 +1,5 @@
 // pages/oneLvSon1/oneLvSon1.js
-import * as echarts from '../../ec-canvas/echarts';
+// import * as echarts from '../../ec-canvas/echarts';
 const app = getApp();
 Page({
 
@@ -26,18 +26,24 @@ Page({
   },
   goComponents(e) {
     wx.navigateTo({
-      url: `/pages/oneLvSon2/oneLvSon2?id=${e.currentTarget.dataset.id}`
+      url: `/pages/components/components?componentsid=${e.currentTarget.dataset.id}`
     })
   },
   getListData(options) {
+    let thisTimeDate = new Date();
+    let year = thisTimeDate.getFullYear()
+    let month = thisTimeDate.getMonth() + 1
     wx.request({
-      url: `${app.globalData.requestUrl}/api/parts_list`,
+      url: `${app.globalData.requestUrl}/api/client_parts_list`,
       method: 'POST',
       data: {
         uid: this.data.userInfo.id,
+        branch_id: options.branchid,
         goods_id: options.id,
         type: 1,
-        month: options.month
+        year: year,
+        month: month,
+        time: 1
       },
       success: data => {
         console.log(data)

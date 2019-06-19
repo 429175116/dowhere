@@ -293,9 +293,9 @@ Page({
       },
       success: data => {
         if (data.data.code === '1') {
-          // this.setData({
-          //   projectListData: data.data.data
-          // })
+          this.setData({
+            img: data.data.data.img.img
+          })
         }
       }
     })
@@ -488,7 +488,7 @@ Page({
   // 产品跳转
   goComponentsList(e) {
     wx.navigateTo({
-      url: `/pages/oneLvSon1/oneLvSon1?id=${e.currentTarget.dataset.id}&month=${this.data.thisTimeDate}`
+      url: `/pages/oneLvSon1/oneLvSon1?branchid=${this.data.thisDepartmentId}&id=${e.currentTarget.dataset.id}&month=${this.data.thisTimeDate}`
     })
   },
   // 点击月或者年刷新数据
