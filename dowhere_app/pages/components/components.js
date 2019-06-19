@@ -210,7 +210,7 @@ Page({
   goPlan() {
     // 进入计划页
     wx.navigateTo({
-      url: `/pages/setPlan/setPlan?componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
+      url: `/pages/setPlan/setPlan?month=${time}&componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
     })
   },
   goSchedule(e) {
@@ -222,7 +222,8 @@ Page({
     }
     // 进入进度录入页
     wx.navigateTo({
-      url: `/pages/setSchedule/setSchedule?grandtotaltime=${grandTotalTime}&componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
+      url: `/pages/setSchedule/setSchedule?month=${time}&componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
+      // url: `/pages/setSchedule/setSchedule?grandtotaltime=${grandTotalTime}&componentsid=${this.data.componentsId}&componentsname=${this.data.componentsName}&prodcutname=${this.data.prodcutname}`
     })
   },
   selMonth(e) {

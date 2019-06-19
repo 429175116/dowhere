@@ -39,7 +39,7 @@ Page({
     this.setData({
       optionsData: options
     })
-    wx .request({
+    wx.request({
       url: `${app.globalData.requestUrl}/api/two_to_one`,
       method: 'POST',
       data: {
@@ -61,7 +61,7 @@ Page({
           if (this.data.time == '1') {
             // 月
             for (let i = 0; i < getData.length; i++) {
-              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil})
+              completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil })
             }
             let month_plan = 0
             let month_fulfil = 0
@@ -74,7 +74,7 @@ Page({
           } else {
             // 年
             for (let i = 0; i < getData.length; i++) {
-              completeAllPid.push({"name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil})
+              completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil })
             }
             let year_plan = 0
             let year_fulfil = 0
@@ -95,95 +95,207 @@ Page({
       }
     })
   },
-  getDataOneData(){
-    let serverUrl = ''
-    if (this.data.userInfo.role_id == 3) {
-      // 产品权限
-      serverUrl = "one"
-    } else if (this.data.userInfo.role_id == 4) {
-      // 部门权限
-      serverUrl = "one_branch"
-    }
+  getDataOneData() {
+    // let serverUrl = ''
+    // if (this.data.userInfo.role_id == 3) {
+    //   // 产品权限
+    //   serverUrl = "one"
+    // } else if (this.data.userInfo.role_id == 4) {
+    //   // 部门权限
+    //   serverUrl = "one_branch"
+    // }
     let thisTimeDate = new Date();
-    thisTimeDate = thisTimeDate.getMonth() + 1
+    let month = thisTimeDate.getMonth() + 1
+    let year = thisTimeDate.getFullYear()
     this.setData({
-      thisTimeDate: thisTimeDate
+      month: month,
+      year: year
     })
-    wx .request({
-      url: `${app.globalData.requestUrl}/api/${serverUrl}`,
+    // 获取部门
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/user_branch`,
+      method: 'POST',
+      data: {
+        uid: this.data.userInfo.id
+      },
+      success: data => {
+        if (data.data.code === '1') {
+          this.setData({
+            departmentList: data.data.data,
+            thisDepartmentId: data.data.data[0].id
+          })
+          // 各产品完成情况
+          this.various(data.data.data[0].id)
+          // 产品总完成情况柱状图
+          this.getFulfil(data.data.data[0].id)
+          // 一级用户产品饼状图
+          this.getOneCirclel(data.data.data[0].id)
+        }
+      }
+    })
+
+
+
+
+    // wx .request({
+    //   url: `${app.globalData.requestUrl}/api/${serverUrl}`,
+    //   method: 'POST',
+    //   data: {
+    //     // time: 1-月份，2-年
+    //     jump: '0',
+    //     time: parseInt(this.data.time),
+    //     month: month,
+    //     year: year,
+    //     branch_id: this.data.userInfo.branch_id,
+    //     uid: this.data.userInfo.id
+    //   },
+    //   success: data => {
+    //     if (data.data.code === '1') {
+    //       let getData = data.data.data
+    //       // var area = data.area
+    //       // 区域和部门列表
+    //       var projectListData = []
+    //       var completePid = []
+    //       var completeAllPid = []
+    //       var completeAllHis = []
+    //       let departmentList = []
+    //       // 获取部门列表
+    //       for (let i = 0; i < getData.length; i++) {
+    //         departmentList.push({"name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "goods": getData[i].goods})
+    //       }
+    //       this.setData({
+    //         departmentList: departmentList
+    //       })
+    //       // 将第一个部门作为当前的默认展示对象
+    //       let thisProductNode = departmentList[0].goods
+
+    //       // 获取部门下产品列表
+    //       for (let i = 0; i < thisProductNode.length; i++) {
+    //         projectListData.push({"name": thisProductNode[i].name, "id": thisProductNode[i].id})
+    //       }
+    //       this.setData({
+    //         projectListData: projectListData,
+    //         thisDepartmentId: departmentList[0].id,
+    //         img: departmentList[0].img
+    //       })
+
+    //       if (this.data.time == '1') {
+    //         // 月
+    //         // 获取并生成--当月--的图表数据
+    //         for (let i = 0; i < thisProductNode.length; i++) {
+    //           completeAllPid.push({"name": thisProductNode[i].name, "month_plan": thisProductNode[i].month_plan, "month_fulfil": thisProductNode[i].month_fulfil})
+    //         }
+    //         let month_plan = 0
+    //         let month_fulfil = 0
+    //         for (let i = 0; i < completeAllPid.length; i++) {
+    //           month_plan += completeAllPid[i].month_plan // 月计划
+    //           month_fulfil += completeAllPid[i].month_fulfil // 月完成
+    //         }
+    //         completePid['month_plan'] = month_plan // 月计划
+    //         completePid['month_fulfil'] = month_fulfil // 月完成
+    //       } else {
+    //         // 年
+    //         // 获取并生成--全年--的图表数据
+    //         for (let i = 0; i < thisProductNode.length; i++) {
+    //           completeAllPid.push({"name": thisProductNode[i].name, "month_plan": thisProductNode[i].year_plan, "month_fulfil": thisProductNode[i].year_fulfil})
+    //         }
+    //         let year_plan = 0
+    //         let year_fulfil = 0
+    //         for (let i = 0; i < completeAllPid.length; i++) {
+    //           year_plan += completeAllPid[i].month_plan // 月计划
+    //           year_fulfil += completeAllPid[i].month_fulfil // 月完成
+    //         }
+    //         completePid['month_plan'] = year_plan // 月计划
+    //         completePid['month_fulfil'] = year_fulfil // 月完成
+    //       }
+    //       // 完成与未完成饼状图
+    //       this.setOptionPlanPie(completePid)
+    //       // 完成与未完成饼状图
+    //       this.setOptionAllPlanPie(completePid)
+    //       // 完成与未完成柱状图
+    //       this.setOptionAllPlanBar(completeAllPid)
+    //     }
+    //   }
+    // })
+  },
+  // 各产品完成情况
+  various() {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/various`,
       method: 'POST',
       data: {
         // time: 1-月份，2-年
+        jump: '0',
         time: parseInt(this.data.time),
-        month: thisTimeDate,
+        month: this.data.month,
+        year: this.data.year,
         branch_id: this.data.userInfo.branch_id,
         uid: this.data.userInfo.id
       },
       success: data => {
         if (data.data.code === '1') {
-          let getData = data.data.data
-          // var area = data.area
-          // 区域和部门列表
-          var projectListData = []
-          var completePid = []
-          var completeAllPid = []
-          var completeAllHis = []
-          let departmentList = []
-          // 获取部门列表
-          for (let i = 0; i < getData.length; i++) {
-            departmentList.push({"name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "goods": getData[i].goods})
-          }
+          let projectListData = data.data.data
           this.setData({
-            departmentList: departmentList
+            projectListData: projectListData
           })
-          // 将第一个部门作为当前的默认展示对象
-          let thisProductNode = departmentList[0].goods
-          
-          // 获取部门下产品列表
-          for (let i = 0; i < thisProductNode.length; i++) {
-            projectListData.push({"name": thisProductNode[i].name, "id": thisProductNode[i].id})
+          let completeAllPid = []
+          let i = 0 
+          for (i in projectListData) {
+            completeAllPid.push({ "name": projectListData[i].name, "month_plan": projectListData[i].plan, "month_fulfil": projectListData[i].fulfil })
           }
-          this.setData({
-            projectListData: projectListData,
-            thisDepartmentId: departmentList[0].id,
-            img: departmentList[0].img
-          })
-          
-          if (this.data.time == '1') {
-            // 月
-            // 获取并生成--当月--的图表数据
-            for (let i = 0; i < thisProductNode.length; i++) {
-              completeAllPid.push({"name": thisProductNode[i].name, "month_plan": thisProductNode[i].month_plan, "month_fulfil": thisProductNode[i].month_fulfil})
-            }
-            let month_plan = 0
-            let month_fulfil = 0
-            for (let i = 0; i < completeAllPid.length; i++) {
-              month_plan += completeAllPid[i].month_plan // 月计划
-              month_fulfil += completeAllPid[i].month_fulfil // 月完成
-            }
-            completePid['month_plan'] = month_plan // 月计划
-            completePid['month_fulfil'] = month_fulfil // 月完成
-          } else {
-            // 年
-            // 获取并生成--全年--的图表数据
-            for (let i = 0; i < thisProductNode.length; i++) {
-              completeAllPid.push({"name": thisProductNode[i].name, "month_plan": thisProductNode[i].year_plan, "month_fulfil": thisProductNode[i].year_fulfil})
-            }
-            let year_plan = 0
-            let year_fulfil = 0
-            for (let i = 0; i < completeAllPid.length; i++) {
-              year_plan += completeAllPid[i].month_plan // 月计划
-              year_fulfil += completeAllPid[i].month_fulfil // 月完成
-            }
-            completePid['month_plan'] = year_plan // 月计划
-            completePid['month_fulfil'] = year_fulfil // 月完成
-          }
-          // 完成与未完成饼状图
+          // 完成与未完成柱状图
+          this.setOptionAllPlanBar(completeAllPid)
+        }
+      }
+    })
+  },
+  // 产品总完成情况柱状图
+  getFulfil(id) {
+    wx.request({
+      // url: `${app.globalData.requestUrl}/api/${serverUrl}`,
+      url: `${app.globalData.requestUrl}/api/fulfil`,
+      method: 'POST',
+      data: {
+        // time: 1-月份，2-年
+        jump: '0',
+        time: parseInt(this.data.time),
+        month: this.data.month,
+        year: this.data.year,
+        uid: this.data.userInfo.id,
+        branch_id: id
+      },
+      success: data => {
+        if (data.data.code === '1') {
+          let completePid = {}
+          completePid['month_plan'] = data.data.data.plan // 月计划
+          completePid['month_fulfil'] = data.data.data.fulfil // 月完成
           this.setOptionPlanPie(completePid)
           // 完成与未完成饼状图
           this.setOptionAllPlanPie(completePid)
-          // 完成与未完成柱状图
-          this.setOptionAllPlanBar(completeAllPid)
+        }
+      }
+    })
+  },
+  // 一级用户产品饼状图
+  getOneCirclel(id) {
+    wx.request({
+      // url: `${app.globalData.requestUrl}/api/${serverUrl}`,
+      url: `${app.globalData.requestUrl}/api/one_circle`,
+      method: 'POST',
+      data: {
+        // time: 1-月份，2-年
+        jump: '0',
+        time: parseInt(this.data.time),
+        month: this.data.month,
+        year: this.data.year,
+        uid: this.data.userInfo.id,
+        branch_id: id
+      },
+      success: data => {
+        if (data.data.code === '1') {
+          // this.setData({
+          //   projectListData: data.data.data
+          // })
         }
       }
     })
@@ -225,7 +337,7 @@ Page({
     } else {
       remainderlist.push(0)
     }
-    
+
     let data = new Object();
     data.namelist = namelist;
     data.planlist = planlist;
@@ -284,7 +396,7 @@ Page({
         planBarHeight: 400
       })
     }
-    
+
     this.monthPlanBar = this.selectComponent('#plan-bar');
     this.monthPlanBar.init((canvas, width, height) => {
       const chart = echarts.init(canvas, null, {
@@ -297,62 +409,75 @@ Page({
     });
   },
   onReady() {
-    
+
   },
   // 选择部门
   selDepartment(e) {
-    let index = e.currentTarget.dataset.index
-    var projectListData = []
-    var completePid = []
-    var completeAllPid = []
-    // 将第一个部门作为当前的默认展示对象
-    let thisProductNode = this.data.departmentList[index].goods
-          
-    // 获取部门下产品列表
-    for (let i = 0; i < thisProductNode.length; i++) {
-      projectListData.push({"name": thisProductNode[i].name, "id": thisProductNode[i].id})
+    // let index = e.currentTarget.dataset.index
+    let thisDepartmentId = e.currentTarget.dataset.id
+    if (this.data.thisDepartmentId == thisDepartmentId) {
+      return ''
     }
     this.setData({
-      projectListData: projectListData,
-      thisDepartmentId: this.data.departmentList[index].id,
-      img: this.data.departmentList[index].img
+      thisDepartmentId: thisDepartmentId
     })
-    
-    if (this.data.time == '1') {
-      // 月
-      // 获取并生成--当月--的图表数据
-      for (let i = 0; i < thisProductNode.length; i++) {
-        completeAllPid.push({"name": thisProductNode[i].name, "month_plan": thisProductNode[i].month_plan, "month_fulfil": thisProductNode[i].month_fulfil})
-      }
-      let month_plan = 0
-      let month_fulfil = 0
-      for (let i = 0; i < completeAllPid.length; i++) {
-        month_plan += completeAllPid[i].month_plan // 月计划
-        month_fulfil += completeAllPid[i].month_fulfil // 月完成
-      }
-      completePid['month_plan'] = month_plan // 月计划
-      completePid['month_fulfil'] = month_fulfil // 月完成
-    } else {
-      // 年
-      // 获取并生成--全年--的图表数据
-      for (let i = 0; i < thisProductNode.length; i++) {
-        completeAllPid.push({"name": thisProductNode[i].name, "month_plan": thisProductNode[i].year_plan, "month_fulfil": thisProductNode[i].year_fulfil})
-      }
-      let year_plan = 0
-      let year_fulfil = 0
-      for (let i = 0; i < completeAllPid.length; i++) {
-        year_plan += completeAllPid[i].month_plan // 月计划
-        year_fulfil += completeAllPid[i].month_fulfil // 月完成
-      }
-      completePid['month_plan'] = year_plan // 月计划
-      completePid['month_fulfil'] = year_fulfil // 月完成
-    }
-    // 完成与未完成饼状图
-    this.setOptionPlanPie(completePid)
-    // 完成与未完成饼状图
-    this.setOptionAllPlanPie(completePid)
-    // 完成与未完成柱状图
-    this.setOptionAllPlanBar(completeAllPid)
+    // 各产品完成情况
+    this.various(thisDepartmentId)
+    // 产品总完成情况柱状图
+    this.getFulfil(thisDepartmentId)
+    // 一级用户产品饼状图
+    this.getOneCirclel(thisDepartmentId)
+    // var projectListData = []
+    // var completePid = []
+    // var completeAllPid = []
+    // // 将第一个部门作为当前的默认展示对象
+    // let thisProductNode = this.data.departmentList[index].goods
+
+    // // 获取部门下产品列表
+    // for (let i = 0; i < thisProductNode.length; i++) {
+    //   projectListData.push({ "name": thisProductNode[i].name, "id": thisProductNode[i].id })
+    // }
+    // this.setData({
+    //   projectListData: projectListData,
+    //   thisDepartmentId: this.data.departmentList[index].id,
+    //   img: this.data.departmentList[index].img
+    // })
+
+    // if (this.data.time == '1') {
+    //   // 月
+    //   // 获取并生成--当月--的图表数据
+    //   for (let i = 0; i < thisProductNode.length; i++) {
+    //     completeAllPid.push({ "name": thisProductNode[i].name, "month_plan": thisProductNode[i].month_plan, "month_fulfil": thisProductNode[i].month_fulfil })
+    //   }
+    //   let month_plan = 0
+    //   let month_fulfil = 0
+    //   for (let i = 0; i < completeAllPid.length; i++) {
+    //     month_plan += completeAllPid[i].month_plan // 月计划
+    //     month_fulfil += completeAllPid[i].month_fulfil // 月完成
+    //   }
+    //   completePid['month_plan'] = month_plan // 月计划
+    //   completePid['month_fulfil'] = month_fulfil // 月完成
+    // } else {
+    //   // 年
+    //   // 获取并生成--全年--的图表数据
+    //   for (let i = 0; i < thisProductNode.length; i++) {
+    //     completeAllPid.push({ "name": thisProductNode[i].name, "month_plan": thisProductNode[i].year_plan, "month_fulfil": thisProductNode[i].year_fulfil })
+    //   }
+    //   let year_plan = 0
+    //   let year_fulfil = 0
+    //   for (let i = 0; i < completeAllPid.length; i++) {
+    //     year_plan += completeAllPid[i].month_plan // 月计划
+    //     year_fulfil += completeAllPid[i].month_fulfil // 月完成
+    //   }
+    //   completePid['month_plan'] = year_plan // 月计划
+    //   completePid['month_fulfil'] = year_fulfil // 月完成
+    // }
+    // // 完成与未完成饼状图
+    // this.setOptionPlanPie(completePid)
+    // // 完成与未完成饼状图
+    // this.setOptionAllPlanPie(completePid)
+    // // 完成与未完成柱状图
+    // this.setOptionAllPlanBar(completeAllPid)
   },
   returnLogoRun() {
     // 返回登录
@@ -374,7 +499,7 @@ Page({
       this.getDataOneData()
     }
   },
-    // 数据展示时间切换
+  // 数据展示时间切换
   // 切换--年
   yearData() {
     if (this.data.time === "1") {

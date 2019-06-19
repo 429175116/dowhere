@@ -1,4 +1,4 @@
-<!--pages/oneLvHome/oneLvHome.wxml-->
+<!-- pages/oneLvHome/oneLvHome.wxml -->
 <view class="img">
   <image src="{{imgUrl+img}}" />
 </view>
@@ -8,17 +8,19 @@
 </view>
 <view class="quantityList">
   <block wx:for="{{departmentList}}" wx:for-item="item">
-  <view id="departmentList{{item.id}}" data-id="{{item.id}}" data-index="{{index}}" class="{{thisDepartmentId == item.id?'action':''}}" bindtap="selDepartment">{{item.name}}</view>
+    <view id="departmentList{{item.id}}" data-id="{{item.id}}" data-index="{{index}}" class="{{thisDepartmentId == item.id?'action':''}}" bindtap="selDepartment">
+      {{item.name}}
+    </view>
   </block>
 </view>
 <view class="charts">
   <!-- 总数量-饼 -->
   <view>
-      <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
+    <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
   </view>
   <view>
-      <!-- 计划及完成-柱 -->
-      <ec-canvas id="plan-pie" style="height:{{planBarHeight2}}rpx" canvas-id="plan-pie"></ec-canvas>
+    <!-- 计划及完成-柱 -->
+    <ec-canvas id="plan-pie" style="height:{{planBarHeight2}}rpx" canvas-id="plan-pie"></ec-canvas>
   </view>
   <view>
     <!-- 各个项目完成-柱 -->
@@ -28,7 +30,9 @@
 <view class="quantityList">
   <!-- <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '4'}}"> -->
   <block wx:for="{{projectListData}}" wx:for-item="itemSon">
-    <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
+    <view id="project{{itemSon.id}}" data-plan="{{itemSon.plan}}" data-fulfil="{{itemSon.fulfil}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">
+      {{itemSon.name}}
+    </view>
   </block>
   <!-- <block wx:for="{{projectListData}}" wx:for-item="itemSon" wx:if="{{userInfo.role_id == '4'}}">
     <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" bindtap="goComponentsList">{{itemSon.name}}</view>
@@ -48,7 +52,7 @@
 </view>
 <view class="annotation" wx:if="{{userInfo.role_id == 4 || userInfo.role_id == 3}}">
   <view class="name">批注:</view>
-  <textarea bindinput="setInputAnnotation" value="{{userInfo.annotation}}"></textarea> 
+  <textarea bindinput="setInputAnnotation" value="{{userInfo.annotation}}"></textarea>
   <view class="sub">
     <view bindtap="upDataAnnotation">提交</view>
   </view>
@@ -56,5 +60,3 @@
 <view class="returnLogo" wx:if="{{userInfo.role_id == 4 || userInfo.role_id == 3}}">
   <view bindtap="returnLogoRun">返回登录</view>
 </view>
-
-

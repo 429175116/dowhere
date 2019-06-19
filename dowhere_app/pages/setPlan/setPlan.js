@@ -23,6 +23,7 @@ Page({
     this.check = new check()
     this.setData({
       userInfo: app.globalData.userInfo,
+      month: options.month,
       componentsId: options.componentsid,
       componentsName: options.componentsname,
       productName: options.prodcutname
