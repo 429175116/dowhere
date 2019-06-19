@@ -15,7 +15,8 @@ Page({
     departmentList: [],
     thisDepartmentId: '',
     imgUrl: '',
-    img: ''
+    img: '',
+    jump: '0'
   },
   /**
    * 生命周期函数--监听页面加载
@@ -25,15 +26,24 @@ Page({
       imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo
     })
+    // if (Object.keys(options).length > 0) {
+    //   this.setData({
+    //     time: options.time,
+    //     img: options.img
+    //   })
+    //   this.two_to_one(options)
+    // } else {
+    //   this.getDataOneData()
+    // }
     if (Object.keys(options).length > 0) {
       this.setData({
         time: options.time,
-        img: options.img
+        img: options.img,
+        jump: '1'
       })
-      this.two_to_one(options)
-    } else {
-      this.getDataOneData()
+      
     }
+    this.getDataOneData()
   },
   two_to_one(options) {
     this.setData({
@@ -225,7 +235,7 @@ Page({
       method: 'POST',
       data: {
         // time: 1-月份，2-年
-        jump: '0',
+        jump: this.data.jump,
         time: parseInt(this.data.time),
         month: this.data.month,
         year: this.data.year,
@@ -257,7 +267,7 @@ Page({
       method: 'POST',
       data: {
         // time: 1-月份，2-年
-        jump: '0',
+        jump: this.data.jump,
         time: parseInt(this.data.time),
         month: this.data.month,
         year: this.data.year,
@@ -284,7 +294,7 @@ Page({
       method: 'POST',
       data: {
         // time: 1-月份，2-年
-        jump: '0',
+        jump: this.data.jump,
         time: parseInt(this.data.time),
         month: this.data.month,
         year: this.data.year,
