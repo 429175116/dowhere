@@ -10,7 +10,7 @@ Page({
     userInfo: null,
     listData: [],
     planBarHeight: 0,
-    time: '1',
+    time: '0',
     projectListData: [],
     annotationInfo: '',
     optionsData: {},
@@ -37,81 +37,7 @@ Page({
     }
     this.getDataTwoData()
   },
-  getDataThree_to_two(options) {
-    this.setData({
-      optionsData: options
-    })
-    wx.request({
-      url: `${app.globalData.requestUrl}/api/three_to_two`,
-      method: 'POST',
-      data: {
-        // time: 1-月份，2-年
-        time: parseInt(this.data.time),
-        month: parseInt(options.month),
-        area_id: options.areaid,
-        uid: options.uid
-      },
-      success: data => {
-        if (data.data.code === '1') {
-          let getData = data.data.data
-          // var area = data.area
-          // 区域和部门列表
-          var projectListData = []
-          var completePid = []
-          var completeAllPid = []
-          var completeAllHis = []
-          for (let i = 0; i < getData.length; i++) {
-            projectListData.push({ "name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "count": getData[i].count })
-          }
-          this.setData({
-            projectListData: projectListData
-          })
-          if (this.data.time == '1') {
-            // 月
-            for (let i = 0; i < getData.length; i++) {
-              completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil })
-            }
-            let month_plan = 0
-            let month_fulfil = 0
-            for (let i = 0; i < completeAllPid.length; i++) {
-              month_plan += completeAllPid[i].month_plan // 月计划
-              month_fulfil += completeAllPid[i].month_fulfil // 月完成
-            }
-            completePid['month_plan'] = month_plan // 月计划
-            completePid['month_fulfil'] = month_fulfil // 月完成
-          } else {
-            // 年
-            for (let i = 0; i < getData.length; i++) {
-              completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil })
-            }
-            let year_plan = 0
-            let year_fulfil = 0
-            for (let i = 0; i < completeAllPid.length; i++) {
-              year_plan += completeAllPid[i].month_plan // 月计划
-              year_fulfil += completeAllPid[i].month_fulfil // 月完成
-            }
-            completePid['month_plan'] = year_plan // 月计划
-            completePid['month_fulfil'] = year_fulfil // 月完成
-          }
-          // 完成与未完成饼状图
-          this.setOptionPlanPie(completePid)
-          // 完成与未完成饼状图
-          this.setOptionAllPlanPie(completeAllPid)
-          // 完成与未完成柱状图
-          this.setOptionAllPlanBar(completeAllPid)
-        }
-      }
-    })
-  },
   getDataTwoData() {
-    // let getUrl = ''
-    // if (this.data.userInfo.role_id == '5') {
-    //   // 产品
-    //   getUrl = 'two'
-    // } else if (this.data.userInfo.role_id == '6') {
-    //   // 部门
-    //   getUrl = 'two_branch'
-    // }
     let thisTimeDate = new Date();
     let month = thisTimeDate.getMonth() + 1
     let year = thisTimeDate.getFullYear()
@@ -119,12 +45,11 @@ Page({
       month: month,
       year: year
     })
-    // 
     wx.request({
       url: `${app.globalData.requestUrl}/api/two_various`,
       method: 'POST',
       data: {
-        // time: 1-月份，2-年
+        // time: 0-月份，1-年
         time: parseInt(this.data.time),
         month: month,
         year: year,
@@ -164,30 +89,6 @@ Page({
         }
       }
     })
-    // wx.request({
-    //   url: `${app.globalData.requestUrl}/api/two_fulfil`,
-    //   method: 'POST',
-    //   data: {
-    //     // time: 1-月份，2-年
-    //     time: parseInt(this.data.time),
-    //     month: month,
-    //     year: year,
-    //     branch_id: this.data.userInfo.branch_id,
-    //     uid: this.data.userInfo.id,
-    //     area_id: this.data.userInfo.area_id,
-    //     jump: this.data.jump
-    //   },
-    //   success: data => {
-    //     if (data.data.code === '1') {
-    //       data = data.data.data
-    //       let completePid = {}
-    //       completePid['month_plan'] = data.plan // 月计划
-    //       completePid['month_fulfil'] = data.fulfil // 月完成
-    //       // 完成与未完成饼状图
-    //       this.setOptionPlanPie(completePid)
-    //     }
-    //   }
-    // })
     wx.request({
       url: `${app.globalData.requestUrl}/api/two_circle`,
       method: 'POST',
@@ -212,72 +113,6 @@ Page({
         }
       }
     })
-    // wx.request({
-    //   // url: `${app.globalData.requestUrl}/api/${getUrl}`,
-    //   url: `${app.globalData.requestUrl}/api/${getUrl}`,
-    //   method: 'POST',
-    //   data: {
-    //     // time: 1-月份，2-年
-    //     time: parseInt(this.data.time),
-    //     month: thisTimeDate,
-    //     branch_id: this.data.userInfo.branch_id,
-    //     uid: this.data.userInfo.id,
-    //     area_id: this.data.userInfo.area_id
-    //   },
-    //   success: data => {
-    //     if (data.data.code === '1') {
-    //       let getData = data.data.data.branch_power
-    //       this.setData({
-    //         titleImg: data.data.data.area_img.img
-    //       })
-    //       // var area = data.area
-    //       // 区域和部门列表
-    //       var projectListData = []
-    //       var completePid = []
-    //       var completeAllPid = []
-    //       var completeAllHis = []
-    //       for (let i = 0; i < getData.length; i++) {
-    //         projectListData.push({ "name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "count": getData[i].count })
-    //       }
-    //       this.setData({
-    //         projectListData: projectListData
-    //       })
-    //       if (this.data.time == '1') {
-    //         // 月
-    //         for (let i = 0; i < getData.length; i++) {
-    //           completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].month_plan, "month_fulfil": getData[i].month_fulfil })
-    //         }
-    //         let month_plan = 0
-    //         let month_fulfil = 0
-    //         for (let i = 0; i < completeAllPid.length; i++) {
-    //           month_plan += completeAllPid[i].month_plan // 月计划
-    //           month_fulfil += completeAllPid[i].month_fulfil // 月完成
-    //         }
-    //         completePid['month_plan'] = month_plan // 月计划
-    //         completePid['month_fulfil'] = month_fulfil // 月完成
-    //       } else {
-    //         // 年
-    //         for (let i = 0; i < getData.length; i++) {
-    //           completeAllPid.push({ "name": getData[i].name, "month_plan": getData[i].year_plan, "month_fulfil": getData[i].year_fulfil })
-    //         }
-    //         let year_plan = 0
-    //         let year_fulfil = 0
-    //         for (let i = 0; i < completeAllPid.length; i++) {
-    //           year_plan += completeAllPid[i].month_plan // 月计划
-    //           year_fulfil += completeAllPid[i].month_fulfil // 月完成
-    //         }
-    //         completePid['month_plan'] = year_plan // 月计划
-    //         completePid['month_fulfil'] = year_fulfil // 月完成
-    //       }
-    //       // 完成与未完成饼状图
-    //       this.setOptionPlanPie(completePid)
-    //       // 完成与未完成饼状图
-    //       this.setOptionAllPlanPie(completeAllPid)
-    //       // 完成与未完成柱状图
-    //       this.setOptionAllPlanBar(completeAllPid)
-    //     }
-    //   }
-    // })
   },
   // 计划完成度--饼
   setOptionPlanPie(getData) {
@@ -396,20 +231,12 @@ Page({
       url: `/pages/oneLvHome/oneLvHome?id=${e.currentTarget.dataset.id}&time=${this.data.time}&month=${this.data.month}&img=${e.currentTarget.dataset.img}`
     })
   },
-  // 点击月或者年刷新数据
-  refreshData() {
-    if (Object.keys(this.data.optionsData).length > 0) {
-      this.getDataThree_to_two(this.data.optionsData)
-    } else {
-      this.getDataTwoData()
-    }
-  },
   // 数据展示时间切换
   // 切换--年
   yearData() {
-    if (this.data.time === "1") {
+    if (this.data.time === "0") {
       this.setData({
-        time: "2"
+        time: "1"
       })
     } else {
       return ''
@@ -419,9 +246,9 @@ Page({
   },
   // 切换--月
   monthData() {
-    if (this.data.time === "2") {
+    if (this.data.time === "1") {
       this.setData({
-        time: "1"
+        time: "0"
       })
     } else {
       return ''

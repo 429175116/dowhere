@@ -3,8 +3,8 @@
   <image src="{{imgUrl + titleImg}}" />
 </view>
 <view class="timeSel">
-  <view bindtap="monthData" class="{{time=='1'?'action':''}}">当月计划与完成</view>
-  <view bindtap="yearData" class="{{time=='2'?'action':''}}">全年计划与完成</view>
+  <view bindtap="monthData" class="{{time=='0'?'action':''}}">当月计划与完成</view>
+  <view bindtap="yearData" class="{{time=='1'?'action':''}}">全年计划与完成</view>
 </view>
 
 <!-- 产品列表 -->
