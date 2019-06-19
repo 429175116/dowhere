@@ -5,7 +5,7 @@ Page({
   data: {
     userInfo: null,
     projectListData: [],
-    time: '1',
+    time: '0',
     planBarHeight: 0,
     month: '',
     annotationInfo: '',
@@ -39,7 +39,7 @@ Page({
       url: `${app.globalData.requestUrl}/api/three_various`,
       method: 'POST',
       data: {
-        // time: 1-月份，2-年
+        // time: 0-月份，1-年
         time: parseInt(this.data.time),
         month: month,
         year: year,
@@ -76,66 +76,6 @@ Page({
         }
       }
     })
-    // wx.request({
-    //   url: `${app.globalData.requestUrl}/api/three`,
-    //   method: 'POST',
-    //   data: {
-    //     // time: 1-月份，2-年
-    //     time: parseInt(this.data.time),
-    //     month: thisTimeDate,
-    //     uid: this.data.userInfo.id
-    //   },
-    //   success: data => {
-    //     if (data.data.code === '1') {
-    //       data = data.data.data
-    //       var area = data.area
-    //       // 区域和部门列表
-    //       var projectListData = []
-    //       var completePid = []
-    //       var completeAllPid = []
-    //       var completeAllHis = []
-    //       for (let i = 0; i < area.length; i++) {
-    //         projectListData.push({"name": area[i].name, "id": area[i].id, "branch": area[i].branch})
-    //       }
-    //       this.setData({
-    //         projectListData: projectListData
-    //       })
-    //       if (this.data.time == 1) {
-    //         // 月
-    //         for (let i = 0; i < area.length; i++) {
-    //           completeAllPid.push({"name": area[i].name, "month_plan": area[i].month_plan, "month_fulfil": area[i].month_fulfil})
-    //         }
-    //         let month_plan = 0
-    //         let month_fulfil = 0
-    //         for (let i = 0; i < completeAllPid.length; i++) {
-    //           month_plan += completeAllPid[i].month_plan // 月计划
-    //           month_fulfil += completeAllPid[i].month_fulfil // 月完成
-    //         }
-    //         completePid['month_plan'] = month_plan // 月计划
-    //         completePid['month_fulfil'] = month_fulfil // 月完成
-    //       } else {
-    //         // 年
-    //         for (let i = 0; i < area.length; i++) {
-    //           completeAllPid.push({"name": area[i].name, "month_plan": area[i].year_plan, "month_fulfil": area[i].year_fulfil})
-    //         }
-    //         let year_plan = 0
-    //         let year_fulfil = 0
-    //         for (let i = 0; i < completeAllPid.length; i++) {
-    //           year_plan += completeAllPid[i].month_plan // 月计划
-    //           year_fulfil += completeAllPid[i].month_fulfil // 月完成
-    //         }
-    //         completePid['month_plan'] = year_plan // 月计划
-    //         completePid['month_fulfil'] = year_fulfil // 月完成
-    //       }
-    //       // 完成与未完成饼状图
-    //       this.setOptionPlanPie(completePid)
-    //       // 完成与未完成饼状图
-    //       this.setOptionAllPlanPie(completeAllPid)
-    //       // 完成与未完成柱状图
-    //       this.setOptionAllPlanBar(completeAllPid)
-    //     }
-    //   }
-    // })
   },
 
 
@@ -247,13 +187,13 @@ Page({
   },
   // 数据展示时间切换
   setTime(){
-    if (this.data.time === "1") {
+    if (this.data.time === "0") {
       this.setData({
-        time: "2"
+        time: "1"
       })
     } else {
       this.setData({
-        time: "1"
+        time: "0"
       })
     }
     this.getDataThree()
