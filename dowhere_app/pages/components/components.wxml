@@ -58,7 +58,7 @@
         <view class="month" data-month="{{item.month}}" bindtap="selMonth">{{item.monthName}}</view>
         <view class="monthChart {{time==item.month?'':'hideMonthChart'}}" style="height:{{monthPlanBarHeight}}rpx">
           <ec-canvas id="monthPlan-bar" wx:if="{{time==item.month}}" canvas-id="monthPlan-bar" ec="{{ ec }}" style="height:{{monthPlanBarHeight-100}}rpx"></ec-canvas>
-          <view class="selData">
+          <view class="selData" wx:if="{{userInfo.role_id == 1 || userInfo.role_id == 2}}">
             <view class="info" bindtap="goPlan">计划</view>
             <view class="info" bindtap="goSchedule">完成</view>
           </view>
