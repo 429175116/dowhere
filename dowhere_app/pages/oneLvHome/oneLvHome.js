@@ -6,7 +6,7 @@ Page({
   data: {
     userInfo: null,
     projectListData: [],
-    time: '1',
+    time: '0',
     planBarHeight: 0,
     planBarHeight2: 0,
     annotationInfo: '',
@@ -26,22 +26,12 @@ Page({
       imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo
     })
-    // if (Object.keys(options).length > 0) {
-    //   this.setData({
-    //     time: options.time,
-    //     img: options.img
-    //   })
-    //   this.two_to_one(options)
-    // } else {
-    //   this.getDataOneData()
-    // }
     if (Object.keys(options).length > 0) {
       this.setData({
         time: options.time,
         img: options.img,
         jump: '1'
       })
-      
     }
     this.getDataOneData()
   },
@@ -106,14 +96,6 @@ Page({
     })
   },
   getDataOneData() {
-    // let serverUrl = ''
-    // if (this.data.userInfo.role_id == 3) {
-    //   // 产品权限
-    //   serverUrl = "one"
-    // } else if (this.data.userInfo.role_id == 4) {
-    //   // 部门权限
-    //   serverUrl = "one_branch"
-    // }
     let thisTimeDate = new Date();
     let month = thisTimeDate.getMonth() + 1
     let year = thisTimeDate.getFullYear()
@@ -143,90 +125,6 @@ Page({
         }
       }
     })
-
-
-
-
-    // wx .request({
-    //   url: `${app.globalData.requestUrl}/api/${serverUrl}`,
-    //   method: 'POST',
-    //   data: {
-    //     // time: 1-月份，2-年
-    //     jump: '0',
-    //     time: parseInt(this.data.time),
-    //     month: month,
-    //     year: year,
-    //     branch_id: this.data.userInfo.branch_id,
-    //     uid: this.data.userInfo.id
-    //   },
-    //   success: data => {
-    //     if (data.data.code === '1') {
-    //       let getData = data.data.data
-    //       // var area = data.area
-    //       // 区域和部门列表
-    //       var projectListData = []
-    //       var completePid = []
-    //       var completeAllPid = []
-    //       var completeAllHis = []
-    //       let departmentList = []
-    //       // 获取部门列表
-    //       for (let i = 0; i < getData.length; i++) {
-    //         departmentList.push({"name": getData[i].name, "id": getData[i].id, "img": getData[i].img, "goods": getData[i].goods})
-    //       }
-    //       this.setData({
-    //         departmentList: departmentList
-    //       })
-    //       // 将第一个部门作为当前的默认展示对象
-    //       let thisProductNode = departmentList[0].goods
-
-    //       // 获取部门下产品列表
-    //       for (let i = 0; i < thisProductNode.length; i++) {
-    //         projectListData.push({"name": thisProductNode[i].name, "id": thisProductNode[i].id})
-    //       }
-    //       this.setData({
-    //         projectListData: projectListData,
-    //         thisDepartmentId: departmentList[0].id,
-    //         img: departmentList[0].img
-    //       })
-
-    //       if (this.data.time == '1') {
-    //         // 月
-    //         // 获取并生成--当月--的图表数据
-    //         for (let i = 0; i < thisProductNode.length; i++) {
-    //           completeAllPid.push({"name": thisProductNode[i].name, "month_plan": thisProductNode[i].month_plan, "month_fulfil": thisProductNode[i].month_fulfil})
-    //         }
-    //         let month_plan = 0
-    //         let month_fulfil = 0
-    //         for (let i = 0; i < completeAllPid.length; i++) {
-    //           month_plan += completeAllPid[i].month_plan // 月计划
-    //           month_fulfil += completeAllPid[i].month_fulfil // 月完成
-    //         }
-    //         completePid['month_plan'] = month_plan // 月计划
-    //         completePid['month_fulfil'] = month_fulfil // 月完成
-    //       } else {
-    //         // 年
-    //         // 获取并生成--全年--的图表数据
-    //         for (let i = 0; i < thisProductNode.length; i++) {
-    //           completeAllPid.push({"name": thisProductNode[i].name, "month_plan": thisProductNode[i].year_plan, "month_fulfil": thisProductNode[i].year_fulfil})
-    //         }
-    //         let year_plan = 0
-    //         let year_fulfil = 0
-    //         for (let i = 0; i < completeAllPid.length; i++) {
-    //           year_plan += completeAllPid[i].month_plan // 月计划
-    //           year_fulfil += completeAllPid[i].month_fulfil // 月完成
-    //         }
-    //         completePid['month_plan'] = year_plan // 月计划
-    //         completePid['month_fulfil'] = year_fulfil // 月完成
-    //       }
-    //       // 完成与未完成饼状图
-    //       this.setOptionPlanPie(completePid)
-    //       // 完成与未完成饼状图
-    //       this.setOptionAllPlanPie(completePid)
-    //       // 完成与未完成柱状图
-    //       this.setOptionAllPlanBar(completeAllPid)
-    //     }
-    //   }
-    // })
   },
   // 各产品完成情况
   various() {
@@ -437,57 +335,6 @@ Page({
     this.getFulfil(thisDepartmentId)
     // 一级用户产品饼状图
     this.getOneCirclel(thisDepartmentId)
-    // var projectListData = []
-    // var completePid = []
-    // var completeAllPid = []
-    // // 将第一个部门作为当前的默认展示对象
-    // let thisProductNode = this.data.departmentList[index].goods
-
-    // // 获取部门下产品列表
-    // for (let i = 0; i < thisProductNode.length; i++) {
-    //   projectListData.push({ "name": thisProductNode[i].name, "id": thisProductNode[i].id })
-    // }
-    // this.setData({
-    //   projectListData: projectListData,
-    //   thisDepartmentId: this.data.departmentList[index].id,
-    //   img: this.data.departmentList[index].img
-    // })
-
-    // if (this.data.time == '1') {
-    //   // 月
-    //   // 获取并生成--当月--的图表数据
-    //   for (let i = 0; i < thisProductNode.length; i++) {
-    //     completeAllPid.push({ "name": thisProductNode[i].name, "month_plan": thisProductNode[i].month_plan, "month_fulfil": thisProductNode[i].month_fulfil })
-    //   }
-    //   let month_plan = 0
-    //   let month_fulfil = 0
-    //   for (let i = 0; i < completeAllPid.length; i++) {
-    //     month_plan += completeAllPid[i].month_plan // 月计划
-    //     month_fulfil += completeAllPid[i].month_fulfil // 月完成
-    //   }
-    //   completePid['month_plan'] = month_plan // 月计划
-    //   completePid['month_fulfil'] = month_fulfil // 月完成
-    // } else {
-    //   // 年
-    //   // 获取并生成--全年--的图表数据
-    //   for (let i = 0; i < thisProductNode.length; i++) {
-    //     completeAllPid.push({ "name": thisProductNode[i].name, "month_plan": thisProductNode[i].year_plan, "month_fulfil": thisProductNode[i].year_fulfil })
-    //   }
-    //   let year_plan = 0
-    //   let year_fulfil = 0
-    //   for (let i = 0; i < completeAllPid.length; i++) {
-    //     year_plan += completeAllPid[i].month_plan // 月计划
-    //     year_fulfil += completeAllPid[i].month_fulfil // 月完成
-    //   }
-    //   completePid['month_plan'] = year_plan // 月计划
-    //   completePid['month_fulfil'] = year_fulfil // 月完成
-    // }
-    // // 完成与未完成饼状图
-    // this.setOptionPlanPie(completePid)
-    // // 完成与未完成饼状图
-    // this.setOptionAllPlanPie(completePid)
-    // // 完成与未完成柱状图
-    // this.setOptionAllPlanBar(completeAllPid)
   },
   returnLogoRun() {
     // 返回登录
@@ -501,30 +348,10 @@ Page({
       url: `/pages/oneLvSon1/oneLvSon1?branchid=${this.data.thisDepartmentId}&id=${e.currentTarget.dataset.id}&month=${this.data.thisTimeDate}`
     })
   },
-  // 点击月或者年刷新数据
-  refreshData() {
-    if (Object.keys(this.data.optionsData).length > 0) {
-      this.two_to_one(this.data.optionsData)
-    } else {
-      this.getDataOneData()
-    }
-  },
   // 数据展示时间切换
   // 切换--年
   yearData() {
-    if (this.data.time === "1") {
-      this.setData({
-        time: "2"
-      })
-    } else {
-      return ''
-    }
-    // 点击月或者年刷新数据
-    this.refreshData()
-  },
-  // 切换--月
-  monthData() {
-    if (this.data.time === "2") {
+    if (this.data.time === "0") {
       this.setData({
         time: "1"
       })
@@ -532,7 +359,19 @@ Page({
       return ''
     }
     // 点击月或者年刷新数据
-    this.refreshData()
+    this.getDataOneData()
+  },
+  // 切换--月
+  monthData() {
+    if (this.data.time === "1") {
+      this.setData({
+        time: "0"
+      })
+    } else {
+      return ''
+    }
+    // 点击月或者年刷新数据
+    this.getDataOneData()
   },
   setInputAnnotation(e) {
     // 获取输入的批注的信息
