@@ -73,7 +73,13 @@ Page({
     })
   },
   submit(){
-    if (this.check._isInt(this.data.planData)) {
+    let planData = this.data.planData
+    planData = parseInt(planData)
+    this.setData({
+      planData: planData
+    })
+    if (this.data.planData == '') {
+    // if (this.check._isInt(this.data.planData)) {
       wx.showModal({
         title: '',
         content: '请输入计划'

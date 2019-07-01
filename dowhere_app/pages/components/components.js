@@ -109,7 +109,6 @@ Page({
   },
   getYearPlanNumber(e) {
     // 获取全年数量数据
-    console.log(e.detail.value)
     this.setData({
       yearPlanNumber: e.detail.value
     })
@@ -265,8 +264,6 @@ Page({
             "complete": 0,
             "day": []
           }
-          console.log(dayFulfil)
-          console.log(dayPlan)
           var i = 0
           for (i in dayFulfil) {
             chartData.complete += dayFulfil[i].num
@@ -279,7 +276,6 @@ Page({
           if (chartData.plan >= chartData.complete) {
             chartData.remaining = chartData.plan - chartData.complete
           }
-          console.log(chartData)
           // 各月完成--柱
           this.setOptionMonthPlanBar(chartData)
         } else {
@@ -354,7 +350,7 @@ Page({
     data.schedulePlanlist = schedulePlanlist
     data.chartName = `${this.data.time}月进度`;
     // 计算图表显示高度
-    let k = 200
+    let k = 50
     // if (chartData.day.length < 10) {
     //   k = 200
     // } else if (chartData.day.length < 5) {
@@ -369,7 +365,6 @@ Page({
         width: width,
         height: height
       });
-      console.log(data)
       app.monthBarShow(data, chart)
       // 注意这里一定要返回 chart 实例，否则会影响事件处理等
       return chart;

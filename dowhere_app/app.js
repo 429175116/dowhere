@@ -354,8 +354,8 @@ App({
     chart.setOption(option);
   },
   monthBarShow(data, chart) {
-    console.clear()
-    console.log(data.namePlanlist + "============================================")
+    // console.clear()
+    // console.log(data.namePlanlist + "============================================")
     // 产品名，计划，进度，剩余
     let name = ['计划', '剩余', '总完成']
     let namelist = ['']

@@ -64,13 +64,15 @@ Page({
       success: data => {
         if (data.data.code == 1) {
           data = data.data.data
-          wx.setNavigationBarTitle({
-            title: data.branch.name
-          })
+          // console.log(data.branch.hasOwnProperty('name'))
+          // wx.setNavigationBarTitle({
+          //   title: data.branch.name
+          // })
           this.setData({
             branchInfo: data.branch,
             listData: data.goods
           })
+          console.log()
           app.globalData.goodsList = this.data.listData
         } else {
           wx.showModal({

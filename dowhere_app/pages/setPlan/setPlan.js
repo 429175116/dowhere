@@ -49,9 +49,9 @@ Page({
     })
   },
   setPlanData(e) {
-    // 获取计划
+    // // 获取计划
     this.setData({
-      planData: parseInt(e.detail.value)
+      planData: e.detail.value
     })
   },
   bindPickerChangeDay(e) {
@@ -71,7 +71,12 @@ Page({
     })
   },
   submit(){
-    if (this.check._isInt(this.data.planData)) {
+    let planData = this.data.planData
+    planData = parseInt(planData)
+    this.setData({
+      planData: planData
+    })
+    if (this.data.planData == '') {
       wx.showModal({
         title: '',
         content: '请输入进度'
