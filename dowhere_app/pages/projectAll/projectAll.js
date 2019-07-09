@@ -49,7 +49,8 @@ Page({
         if (data.data.code === '1') {
           let projectListData = data.data.data
           this.setData({
-            projectListData: projectListData
+            projectListData: projectListData,
+            img: data.data.img
           })
           
           let completeAllPid = []
@@ -207,7 +208,7 @@ Page({
   // 查看产品列表页
   goProduct(e) {
     wx.navigateTo({
-      url: `/pages/product/product?areaid=${e.currentTarget.dataset.fatid}&uid=${e.currentTarget.dataset.uid}&time=${this.data.time}&month=${this.data.month}`
+      url: `/pages/product/product?id=${e.currentTarget.dataset.id}&uid=${e.currentTarget.dataset.uid}&time=${this.data.time}&month=${this.data.month}`
     })
   },
   setInputAnnotation(e) {

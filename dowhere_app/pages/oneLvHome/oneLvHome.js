@@ -127,7 +127,7 @@ Page({
     })
   },
   // 各产品完成情况
-  various() {
+  various(branch_id) {
     wx.request({
       url: `${app.globalData.requestUrl}/api/various`,
       method: 'POST',
@@ -137,7 +137,7 @@ Page({
         time: parseInt(this.data.time),
         month: this.data.month,
         year: this.data.year,
-        branch_id: this.data.userInfo.branch_id,
+        branch_id: branch_id,
         uid: this.data.userInfo.id
       },
       success: data => {
@@ -329,6 +329,7 @@ Page({
     this.setData({
       thisDepartmentId: thisDepartmentId
     })
+    console.log(thisDepartmentId)
     // 各产品完成情况
     this.various(thisDepartmentId)
     // 产品总完成情况柱状图

@@ -32,6 +32,7 @@ Page({
     if (Object.keys(options).length > 0) {
       this.setData({
         time: options.time,
+        branch_id: options.id,
         jump: '1'
       })
     }
@@ -53,7 +54,7 @@ Page({
         time: parseInt(this.data.time),
         month: month,
         year: year,
-        branch_id: this.data.userInfo.branch_id,
+        branch_id: this.data.branch_id,
         uid: this.data.userInfo.id,
         area_id: this.data.userInfo.area_id,
         jump: this.data.jump

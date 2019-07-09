@@ -38,7 +38,7 @@ Page({
     this.check = new check()
     this.setData({
       // 是否随机数
-      sham: options.sham,
+      random: options.random,
       imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo,
       // 零件ID
@@ -53,7 +53,6 @@ Page({
       monthList: getMonthList(),
       time: month + 1
     })
-    
     // 获取零件的基本信息
     this.gitPartsInfo(options.componentsid)
   },
@@ -76,7 +75,7 @@ Page({
       success: data => {
         if (data.data.code === '1') {
           data = data.data.data
-          if (this.data.sham == 1) {
+          if (this.data.userInfo.random == 1) {
             let randomNum = app.RandomNumBoth(10,100)
             this.setData({
               randomNum: randomNum,
