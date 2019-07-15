@@ -64,7 +64,6 @@ Page({
               index = i
             }
           }
-          console.log(index)
           this.setData({
             thisDepartmentId: data[index].id
           })
