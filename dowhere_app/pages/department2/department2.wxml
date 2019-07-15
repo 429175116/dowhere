@@ -1,0 +1,36 @@
+<!--pages/product/product.wxml-->
+<view class="img">
+  <image src="{{imgUrl + titleImg}}" />
+</view>
+<view class="timeSel">
+  <view bindtap="monthData" class="{{time=='0'?'action':''}}">当月计划与完成</view>
+  <view bindtap="yearData" class="{{time=='1'?'action':''}}">全年计划与完成</view>
+</view>
+
+<!-- 产品列表 -->
+<view class="charts">
+  <view>
+    <!-- 各部门完成情况 -->
+    <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
+  </view>
+  <view>
+    <!-- 完成未完情况 -->
+    <ec-canvas id="plan-pie" canvas-id="plan-pie"></ec-canvas>
+  </view>
+  <ec-canvas id="plan-bar" canvas-id="plan-bar" style="height:{{planBarHeight}}rpx"></ec-canvas>
+</view>
+<view class="projectList" wx:if="{{userInfo.role_id != 7}}">
+  <block wx:for="{{projectListData}}" wx:for-item="itemSon">
+    <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" data-img="{{itemSon.img}}" bindtap="goProduct">{{itemSon.name}}</view>
+  </block>
+</view>
+<view class="annotation" wx:if="{{userInfo.role_id != 7}}">
+  <view class="name">批注:</view>
+  <textarea bindinput="setInputAnnotation" value="{{userInfo.annotation}}"></textarea> 
+  <view class="sub">
+    <view bindtap="upDataAnnotation">提交</view>
+  </view>
+</view>
+<view class="returnLogo" wx:if="{{userInfo.role_id != 7}}">
+  <view bindtap="returnLogoRun">返回登录</view>
+</view>

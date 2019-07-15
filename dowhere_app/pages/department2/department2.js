@@ -1,18 +1,26 @@
-// // pages/projectAll/projectAll.js
+// pages/product/product.js
 import * as echarts from '../../ec-canvas/echarts';
 const app = getApp();
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
     userInfo: null,
-    projectListData: [],
-    time: '0',
+    listData: [],
     planBarHeight: 0,
-    month: '',
+    time: '0',
+    projectListData: [],
     annotationInfo: '',
+    optionsData: {},
+    year: 0,
+    month: 0,
     imgUrl: '',
-    jump: '0',
-    groupLogo: ''
+    titleImg: '',
+    jump: '0'
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -21,28 +29,16 @@ Page({
       imgUrl: app.globalData.imgUrl,
       userInfo: app.globalData.userInfo
     })
-    // 显示默认图表，无数据
-    this.setOptionPlanPie({'month_plan': 0, 'month_fulfil': 0})
-    this.setOptionAllPlanPie([{'month_plan': 0, 'month_fulfil': 0, 'name': '暂无数据'}])
-    this.setOptionAllPlanBar([])
-    this.getGroupLogo()
-    this.getDataThree()
+    if (Object.keys(options).length > 0) {
+      this.setData({
+        time: options.time,
+        branch_id: options.id,
+        jump: '1'
+      })
+    }
+    this.getDataTwoData()
   },
-  getGroupLogo() {
-    wx.request({
-      url: `${app.globalData.requestUrl}/api/getImg`,
-      method: 'POST',
-      data: {},
-      success: data => {
-        if (data.data.code == '1') {
-          this.setData({
-            groupLogo: data.data.data.img
-          })
-        }
-      }
-    })
-  },
-  getDataThree(){
+  getDataTwoData() {
     let thisTimeDate = new Date();
     let month = thisTimeDate.getMonth() + 1
     let year = thisTimeDate.getFullYear()
@@ -50,25 +46,27 @@ Page({
       month: month,
       year: year
     })
-    // 
     wx.request({
-      url: `${app.globalData.requestUrl}/api/three_various`,
+      url: `${app.globalData.requestUrl}/api/twoGood`,
       method: 'POST',
       data: {
         // time: 0-月份，1-年
         time: parseInt(this.data.time),
         month: month,
         year: year,
-        uid: this.data.userInfo.id
+        branch_id: this.data.branch_id,
+        uid: this.data.userInfo.id,
+        area_id: this.data.userInfo.area_id,
+        jump: this.data.jump
       },
       success: data => {
+        console.log(data)
         if (data.data.code == '1') {
           let projectListData = data.data.data
           this.setData({
-            projectListData: projectListData,
-            img: data.data.img
+            projectListData: projectListData
           })
-          
+          console.log(projectListData)
           let completeAllPid = []
           let completePid = {}
           let month_plan = 0
@@ -93,14 +91,30 @@ Page({
         }
       }
     })
-  },
-
-
-  onShow() {
-
-  },
-  onReady() {
-
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/two_circle`,
+      method: 'POST',
+      data: {
+        // time: 1-月份，2-年
+        time: parseInt(this.data.time),
+        month: month,
+        year: year,
+        branch_id: this.data.userInfo.branch_id,
+        uid: this.data.userInfo.id,
+        area_id: this.data.userInfo.area_id,
+        jump: this.data.jump
+      },
+      success: data => {
+        if (data.data.code == '1') {
+          // data = data.data.data
+          // titleImg
+          console.log(data.data.data.area.img)
+          this.setData({
+            titleImg: data.data.data.area.img
+          })
+        }
+      }
+    })
   },
   // 计划完成度--饼
   setOptionPlanPie(getData) {
@@ -127,12 +141,12 @@ Page({
   },
   setOptionAllPlanPie(getData) {
     let chartData = []
-    for (let i = 0;i < getData.length; i++) {
+    for (let i = 0; i < getData.length; i++) {
       chartData.push({ "name": getData[i].name, "value": getData[i].month_fulfil })
     }
     let data = new Object();
     data.chartData = chartData;
-    data.chartName = '各区完成情况';
+    data.chartName = '部门完成情况';
     // 图表渲染
     this.planPie = this.selectComponent('#plan-pie');
     this.planPie.init((canvas, width, height) => {
@@ -166,21 +180,13 @@ Page({
     data.planlist = planlist;
     data.schedulelist = schedulelist;
     data.remainderlist = remainderlist;
-    if (this.data.time == '1') {
-      data.chartName = `当月进度`;
-    } else {
-      data.chartName = `全年进度`;
-    }
-    
+    data.chartName = `部门进度`;
     // 计算图表显示高度
-    this.setData({
-      planBarHeight: 350
-    })
     let k = 100
     // if (chartData.length < 10) {
-    //   k = 250
+    //   k = 200
     // } else if (chartData.length < 5) {
-    //   k = 250
+    //   k = 200
     // }
     if (chartData.length > 1) {
       this.setData({
@@ -191,6 +197,7 @@ Page({
         planBarHeight: 400
       })
     }
+
     this.monthPlanBar = this.selectComponent('#plan-bar');
     this.monthPlanBar.init((canvas, width, height) => {
       const chart = echarts.init(canvas, null, {
@@ -202,18 +209,11 @@ Page({
       return chart;
     });
   },
-  // 数据展示时间切换
-  setTime(){
-    if (this.data.time == "0") {
-      this.setData({
-        time: "1"
-      })
-    } else {
-      this.setData({
-        time: "0"
-      })
-    }
-    this.getDataThree()
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+
   },
   returnLogoRun() {
     // 返回登录
@@ -221,11 +221,42 @@ Page({
       url: '/pages/login/login'
     })
   },
-  // 查看产品列表页
   goProduct(e) {
+    if (this.data.userInfo.role_id == '7') {
+      wx.showModal({
+        title: '',
+        content: '三级用户不可查看'
+      })
+      return ''
+    }
     wx.navigateTo({
-      url: `/pages/product/product?id=${e.currentTarget.dataset.id}&uid=${e.currentTarget.dataset.uid}&time=${this.data.time}&month=${this.data.month}`
+      url: `/pages/oneLvHome/oneLvHome?id=${e.currentTarget.dataset.id}&time=${this.data.time}&month=${this.data.month}&img=${e.currentTarget.dataset.img}`
     })
+  },
+  // 数据展示时间切换
+  // 切换--年
+  yearData() {
+    if (this.data.time == "0") {
+      this.setData({
+        time: "1"
+      })
+    } else {
+      return ''
+    }
+    // 点击月或者年刷新数据
+    this.getDataTwoData()
+  },
+  // 切换--月
+  monthData() {
+    if (this.data.time == "1") {
+      this.setData({
+        time: "0"
+      })
+    } else {
+      return ''
+    }
+    // 点击月或者年刷新数据
+    this.getDataTwoData()
   },
   setInputAnnotation(e) {
     // 获取输入的批注的信息
@@ -235,5 +266,5 @@ Page({
   },
   upDataAnnotation() {
     app.setAnnotation(this.data.annotationInfo)
-  }
-});
+  },
+})

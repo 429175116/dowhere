@@ -55,7 +55,7 @@ Page({
       },
       success: data => {
         console.log(data)
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           // 随机生产两位随机数，增加在数据前面--虚拟数据
           // is_k--1 显示随机数
           // is_k--0 不显示随机数

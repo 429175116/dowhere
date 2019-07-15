@@ -73,7 +73,7 @@ Page({
         parts_id: id
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           data = data.data.data
           if (this.data.userInfo.random == 1) {
             let randomNum = app.RandomNumBoth(10,100)
@@ -153,7 +153,7 @@ Page({
         "parts_id": this.data.componentsId
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           wx.showModal({
             title: '',
             content: data.data.msg
@@ -181,7 +181,7 @@ Page({
         year: year
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           data = data.data.data
           let remaining = parseInt(data.year_plan) - parseInt(data.year_fulfil)
           let chartData = [
@@ -225,7 +225,7 @@ Page({
     })
   },
   selMonth(e) {
-    // if (this.data.time === e.currentTarget.dataset.month) {
+    // if (this.data.time == e.currentTarget.dataset.month) {
     //   return ''
     // }
     this.setData({
@@ -247,7 +247,7 @@ Page({
         year: year
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           var dayFulfil = data.data.data.partsFulfil
           var dayPlan = data.data.data.partsPlan
           app.globalData.dayFulfil = dayFulfil

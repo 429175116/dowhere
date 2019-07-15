@@ -13,7 +13,8 @@
     "pages/oneLvHome/oneLvHome",
     "pages/oneLvSon1/oneLvSon1",
     "pages/newProduct/newProduct",
-    "pages/newComponents/newComponents"
+    "pages/newComponents/newComponents",
+    "pages/department2/department2"
   ],
   "window": {
     "backgroundTextStyle": "light",

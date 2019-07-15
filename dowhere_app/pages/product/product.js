@@ -60,7 +60,7 @@ Page({
         jump: this.data.jump
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           let projectListData = data.data.data
           this.setData({
             projectListData: projectListData
@@ -104,7 +104,7 @@ Page({
         jump: this.data.jump
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           // data = data.data.data
           // titleImg
           console.log(data.data.data.area.img)
@@ -235,7 +235,7 @@ Page({
   // 数据展示时间切换
   // 切换--年
   yearData() {
-    if (this.data.time === "0") {
+    if (this.data.time == "0") {
       this.setData({
         time: "1"
       })
@@ -247,7 +247,7 @@ Page({
   },
   // 切换--月
   monthData() {
-    if (this.data.time === "1") {
+    if (this.data.time == "1") {
       this.setData({
         time: "0"
       })

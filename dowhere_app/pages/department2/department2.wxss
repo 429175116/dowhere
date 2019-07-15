@@ -1,0 +1,69 @@
+/* pages/product/product.wxss */
+.img image{
+  width: 750rpx;
+  height: 300rpx;
+}
+.timeSel{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  width: 750rpx;
+}
+
+.timeSel view{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  height: 100rpx;
+  width: 375rpx;
+  background-color: #eee;
+}
+.action{
+  background-color: #78ac47 !important;
+  color: #fff;
+}
+/* 图表显示块 */
+.charts{
+  height: auto;
+}
+/* 图表样式 */
+#plan-pie,
+#quantity-pie,
+#plan-bar{
+  width: 750rpx;
+  height: 500rpx;
+  display:block;
+  border-bottom: 5rpx solid #999;
+  padding: 20rpx 0;
+}
+
+.item .info {
+  width: 80rpx !important;
+  height: 40rpx !important;
+  border: 0 !important;
+  color: #fff;
+  border-radius: 5rpx;
+}
+
+/* 项目列表 */
+.projectList{
+  width:680rpx;
+  margin:0 33rpx;
+}
+/* 项目名称 */
+.projectList view{
+  width: auto;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding:0 20rpx;
+  display:inline-block;
+  margin:20rpx;
+  /* background-color:#e5ecf2; */
+  color:#444;
+  border: 1rpx solid #78ac47;
+  border-radius:30rpx;
+  font-size:30rpx;
+}
+  

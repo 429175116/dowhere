@@ -50,7 +50,7 @@ Page({
         uid: this.data.userInfo.id
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           let getData = data.data.data
           // var area = data.area
           // 区域和部门列表
@@ -111,7 +111,7 @@ Page({
         uid: this.data.userInfo.id
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           this.setData({
             departmentList: data.data.data,
             thisDepartmentId: data.data.data[0].id
@@ -141,7 +141,7 @@ Page({
         uid: this.data.userInfo.id
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           let projectListData = data.data.data
           this.setData({
             projectListData: projectListData
@@ -173,7 +173,7 @@ Page({
         branch_id: id
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           let completePid = {}
           completePid['month_plan'] = data.data.data.plan // 月计划
           completePid['month_fulfil'] = data.data.data.fulfil // 月完成
@@ -200,7 +200,7 @@ Page({
         branch_id: id
       },
       success: data => {
-        if (data.data.code === '1') {
+        if (data.data.code == '1') {
           this.setData({
             img: data.data.data.img.img
           })
@@ -352,7 +352,7 @@ Page({
   // 数据展示时间切换
   // 切换--年
   yearData() {
-    if (this.data.time === "0") {
+    if (this.data.time == "0") {
       this.setData({
         time: "1"
       })
@@ -364,7 +364,7 @@ Page({
   },
   // 切换--月
   monthData() {
-    if (this.data.time === "1") {
+    if (this.data.time == "1") {
       this.setData({
         time: "0"
       })

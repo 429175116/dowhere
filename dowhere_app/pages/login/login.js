@@ -7,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userName: '18700458359',
-    userPaw: '123123',
+    userName: '15664952505',
+    userPaw: '123',
     passwordInputType: 'password',
     passwordIcon: 'zhengyan'
   },
@@ -108,14 +108,15 @@ Page({
           // 登陆信息存入本地
           // this.setUserLoginInfo(this.data.userName, this.data.userPaw)
           let gourl = ''
+          console.log(`role_id-------------${data.role_id}`)
           switch(data.role_id){
             case 7:
               // 最高权限，三级级权限---产品,设备
               gourl = '/pages/projectAll/projectAll'
               break;
             case 6:
-              // 二级权限--仅有产品
-              gourl = '/pages/product/product'
+              // 二级权限--部门
+              gourl = '/pages/department2/department2'
               break;
             case 5:
               // 二级--产品--权限
@@ -144,6 +145,7 @@ Page({
               // })
               // break;
             }
+          console.log(`gourl-------------${gourl}`)
           wx.redirectTo({
             url: gourl
           })
