@@ -1,0 +1,63 @@
+/* pages/oneLvHome/oneLvHome.wxss */
+.img image{
+    width: 750rpx;
+    height: 300rpx;
+  }
+  
+.timeSel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100rpx;
+    width: 750rpx;
+  }
+  
+  .timeSel view{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30rpx;
+    height: 100rpx;
+    width: 375rpx;
+    background-color: #eee;
+  }
+  .action{
+    background-color: #78ac47 !important;
+    color: #fff !important;
+  }
+  /* 图表显示块 */
+  .charts{
+    height: auto;
+  }
+  /* 图表样式 */
+  #quantity-pie,
+  #quantity-pie2,
+  #plan-bar,
+  #plan-pie{
+    width: 750rpx;
+    height: 500rpx;
+    display:block;
+    border-bottom: 5rpx solid #999;
+    padding: 20rpx 0;
+  }
+  .quantityList{
+    width: 710rpx;
+    height: auto;
+    padding: 20rpx;
+
+  }
+  .quantityList view{
+
+    width: auto;
+    height: 60rpx;
+    line-height: 60rpx;
+    padding:0 20rpx;
+    display:inline-block;
+    margin:20rpx;
+    /* background-color:#e5ecf2; */
+    color:#444;
+    border: 1rpx solid #78ac47;
+    border-radius:30rpx;
+    font-size:30rpx;
+  }
+  

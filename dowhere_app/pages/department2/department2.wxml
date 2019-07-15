@@ -21,7 +21,7 @@
 </view>
 <view class="projectList" wx:if="{{userInfo.role_id != 7}}">
   <block wx:for="{{projectListData}}" wx:for-item="itemSon">
-    <view id="project{{itemSon.id}}" data-id="{{itemSon.id}}" data-img="{{itemSon.img}}" bindtap="goProduct">{{itemSon.name}}</view>
+    <view id="project{{itemSon.id}}" data-name="{{itemSon.name}}" data-id="{{itemSon.id}}" data-img="{{itemSon.img}}" bindtap="goProduct">{{itemSon.name}}</view>
   </block>
 </view>
 <view class="annotation" wx:if="{{userInfo.role_id != 7}}">
