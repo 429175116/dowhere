@@ -8,7 +8,7 @@
   </view>
 </view> -->
 <view class="img">
-  <image src="{{imgUrl+img}}" />
+  <image src="{{imgUrl+groupLogo}}" />
 </view>
 <view class="timeSel">
   <view bindtap="setTime" class="{{time=='0'?'action':''}}">当月计划与完成</view>

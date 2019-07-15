@@ -10,7 +10,8 @@ Page({
     month: '',
     annotationInfo: '',
     imgUrl: '',
-    jump: '0'
+    jump: '0',
+    groupLogo: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -24,7 +25,22 @@ Page({
     this.setOptionPlanPie({'month_plan': 0, 'month_fulfil': 0})
     this.setOptionAllPlanPie([{'month_plan': 0, 'month_fulfil': 0, 'name': '暂无数据'}])
     this.setOptionAllPlanBar([])
+    this.getGroupLogo()
     this.getDataThree()
+  },
+  getGroupLogo() {
+    wx.request({
+      url: `${app.globalData.requestUrl}/api/getImg`,
+      method: 'POST',
+      data: {},
+      success: data => {
+        if (data.data.code === '1') {
+          this.setData({
+            groupLogo: data.data.data.img
+          })
+        }
+      }
+    })
   },
   getDataThree(){
     let thisTimeDate = new Date();
