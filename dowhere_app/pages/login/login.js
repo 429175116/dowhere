@@ -116,11 +116,11 @@ Page({
               break;
             case 6:
               // 二级权限--部门
-              gourl = '/pages/department2/department2'
+              gourl = '/pages/product/product'
               break;
             case 5:
               // 二级--产品--权限
-              gourl = '/pages/product/product'
+              gourl = '/pages/department2/department2'
               break;
             case 4:
               // 一级--部门--权限
@@ -128,7 +128,7 @@ Page({
               break;
             case 3:
               // 一级--产品--权限
-              gourl = '/pages/oneLvHome/oneLvHome'
+              gourl = '/pages/department1/department1'
               break;
             case 2:
               // 特殊用户--权限
