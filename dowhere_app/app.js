@@ -180,7 +180,9 @@ App({
           },
           axisLabel: {
             color: '#666',
-            fontSize: 14
+            fontSize: 14,
+            interval: 0,
+            rotate: 20,
           }
         }
       ],
@@ -303,7 +305,9 @@ App({
           },
           axisLabel: {
             color: '#666',
-            fontSize: 14
+            fontSize: 14,
+            interval: 0,
+            rotate: 20,
           }
         }
       ],
@@ -427,7 +431,11 @@ App({
       },
       xAxis: [
         {
-          type: 'value'
+          type: 'value',
+          axisLabel: {
+            interval: 0,
+            rotate: 20,
+          }
         }
       ],
       yAxis: [
