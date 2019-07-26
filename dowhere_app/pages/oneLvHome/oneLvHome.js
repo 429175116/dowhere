@@ -87,6 +87,7 @@ Page({
           }
           // 完成与未完成饼状图
           this.setOptionPlanPie(completePid)
+          this.setOptionDepartment(completeAllPid)
           // 完成与未完成饼状图
           this.setOptionAllPlanPie(completePid)
           // 完成与未完成柱状图
@@ -153,6 +154,7 @@ Page({
           }
           // 完成与未完成柱状图
           this.setOptionAllPlanBar(completeAllPid)
+          this.setOptionDepartment(completeAllPid)
         }
       }
     })
@@ -207,6 +209,28 @@ Page({
         }
       }
     })
+  },
+  // 部门计划完成度--饼
+  setOptionDepartment(getData) {
+    let chartData = []
+    let i = 0
+    for (i in getData) {
+      chartData.push({ "name": getData[i].name, "value": getData[i].month_fulfil })
+    }
+    let data = new Object();
+    data.chartData = chartData;
+    data.chartName = '各产品完成情况';
+    // 图表渲染
+    this.planPie = this.selectComponent('#department-pie');
+    this.planPie.init((canvas, width, height) => {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+      app.pieShow(data, chart)
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
   },
   // 计划完成度--饼
   setOptionPlanPie(getData) {

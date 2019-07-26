@@ -18,6 +18,10 @@
   <view>
     <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
   </view>
+  <!-- 各产品-饼 -->
+  <view>
+    <ec-canvas id="department-pie" canvas-id="department-pie"></ec-canvas>
+  </view>
   <view>
     <!-- 计划及完成-柱 -->
     <ec-canvas id="plan-pie" style="height:{{planBarHeight2}}rpx" canvas-id="plan-pie"></ec-canvas>
