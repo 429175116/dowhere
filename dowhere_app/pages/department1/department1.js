@@ -114,7 +114,7 @@ Page({
     }
     let data = new Object();
     data.chartData = chartData;
-    data.chartName = '产品完成情况';
+    data.chartName = '部门完成情况';
     // 图表渲染
     this.planPie = this.selectComponent('#quantity-pie');
     this.planPie.init((canvas, width, height) => {

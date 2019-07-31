@@ -14,13 +14,14 @@
   </block>
 </view>
 <view class="charts">
-  <!-- 总数量-饼 -->
-  <view>
-    <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
-  </view>
+  
   <view>
     <!-- 计划及完成-柱 -->
     <ec-canvas id="quantity-pie2" canvas-id="quantity-pie2"></ec-canvas>
+  </view>
+  <!-- 总数量-饼 -->
+  <view>
+    <ec-canvas id="quantity-pie" canvas-id="quantity-pie"></ec-canvas>
   </view>
   <view>
     <!-- 各个项目完成-柱 -->

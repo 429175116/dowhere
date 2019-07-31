@@ -28,6 +28,7 @@ Page({
     })
     if (Object.keys(options).length > 0) {
       this.setData({
+        bmId: options.id,
         time: options.time,
         img: options.img,
         jump: '1'
@@ -115,14 +116,24 @@ Page({
         if (data.data.code == '1') {
           this.setData({
             departmentList: data.data.data,
-            thisDepartmentId: data.data.data[0].id
+            thisDepartmentId: this.data.bmId
           })
           // 各产品完成情况
-          this.various(data.data.data[0].id)
+          this.various(this.data.bmId)
           // 产品总完成情况柱状图
-          this.getFulfil(data.data.data[0].id)
+          this.getFulfil(this.data.bmId)
           // 一级用户产品饼状图
-          this.getOneCirclel(data.data.data[0].id)
+          this.getOneCirclel(this.data.bmId)
+          // this.setData({
+          //   departmentList: data.data.data,
+          //   thisDepartmentId: data.data.data[0].id
+          // })
+          // // 各产品完成情况
+          // this.various(data.data.data[0].id)
+          // // 产品总完成情况柱状图
+          // this.getFulfil(data.data.data[0].id)
+          // // 一级用户产品饼状图
+          // this.getOneCirclel(data.data.data[0].id)
         }
       }
     })
