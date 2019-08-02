@@ -16,7 +16,8 @@ Page({
     thisDepartmentId: '',
     imgUrl: '',
     img: '',
-    jump: '0'
+    jump: '0',
+    bmId: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -118,6 +119,11 @@ Page({
             departmentList: data.data.data,
             thisDepartmentId: this.data.bmId
           })
+          if (this.data.bmId == '') {
+            this.setData({
+              bmId: data.data.data[0].id
+            })
+          }
           // 各产品完成情况
           this.various(this.data.bmId)
           // 产品总完成情况柱状图
