@@ -361,7 +361,7 @@ App({
     // console.clear()
     // console.log(data.namePlanlist + "============================================")
     // 产品名，计划，进度，剩余
-    let name = ['计划', '剩余', '总完成']
+    let name = ['总计划', '总剩余', '总完成']
     let namelist = ['']
     let namePlanlist = data.namePlanlist
     for (let i in namePlanlist) {
